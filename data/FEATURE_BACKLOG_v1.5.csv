@@ -1,0 +1,31 @@
+﻿ID,Feature,Priority,Inspiration,Effort_estimate_qualitative,Main_Risk,Status
+FR-001,Libreria snippet,P0,Beeftext; PhraseExpress; Raycast,Bassa-media,"UX, persistenza",Proposto
+FR-002,Gruppi e azioni sicure,P0,Beeftext; Alfred,Bassa,eliminazione non distruttiva,Proposto
+FR-003,Matching deterministico,P0,AutoHotkey; Raycast; Espanso,Alta,"Unicode, conflitti, IME",Proposto
+FR-004,Unicode storage/roundtrip,P0,Beeftext; Espanso; .NET,Media,grapheme/normalizzazione,Confermato obiettivo
+FR-005,Inserimento in app terze,P0,Espanso; PhraseExpress,Molto alta,focus/OS/clipboard,Confermato obiettivo
+FR-006,Metodi di inserimento,P0,Espanso; PhraseExpress; Keyboard Maestro,Alta,OS specifici,Proposto
+FR-007,Esclusioni/campi sensibili,P0,Alfred; PhraseExpress,Alta,security field detection,Proposto
+FR-008,Import/export,P0,Beeftext; Raycast,Media,safety/executable payload,Proposto
+FR-009,Backup/restore,P0,Beeftext; PhraseExpress,Media,atomicity,Proposto
+FR-010,GUI compatta,P0,Beeftext; Typinator; Alfred,Media,responsive DPI,Confermato obiettivo
+FR-011,Tema chiaro/scuro/sistema,P0,Avalonia,Bassa,contrast/theming,Confermato obiettivo
+FR-012,Multilingua UI,P0,Avalonia,Media,hot reload/RTL,Confermato obiettivo
+FR-013,Diagnostica,P0,Espanso; Karabiner,Media,no sensitive logs,Proposto
+FR-014,Pausa motore/tray,P0,Beeftext; Alfred,Bassa,tray availability,Proposto
+FR-015,Picker globale,P1,Beeftext; Alfred; Raycast,Alta,target focus,Proposto
+FR-016,Delimiter activation,P1,Raycast; AutoHotkey; Espanso,Media,word boundaries/IME,Proposto
+FR-017,Variabili built-in,P1,Alfred; Espanso,Media,security/locale,Proposto
+FR-018,Forms,P1,Espanso; Text Blaze; TypeIt4Me,Media-alta,cancel and target,Proposto
+FR-019,Regole app,P1,Espanso; PhraseExpress; Alfred,Media,target recognition,Proposto
+FR-020,Cestino/Undo,P1,PhraseExpress,Media,cannot always undo external paste,Proposto
+FR-021,Tag/favoriti,P1,Raycast,Bassa,search complexity,Proposto
+FR-022,Import concorrenti,P1,Raycast,Media,format stability,Proposto
+FR-023,Locale payload indipendente,P1,Alfred; Avalonia,Bassa-media,format choices,Proposto
+FR-024,Autocorrezione/emoji,P2,Typinator; Espanso,Media,false triggers,Idea
+FR-025,Rich text,P2,PhraseExpress; aText,Molto alta,format interoperability,Idea
+FR-026,File sync,P2,Espanso; PhraseExpress,Alta,conflicts,Idea
+FR-027,Statistiche locali,P2,Commercial tools,Media,privacy,Idea
+FR-028,Regex triggers,P3,Espanso; PhraseExpress,Alta,ReDoS,Idea
+FR-029,Script extensibility,P3,AutoHotkey; Hammerspoon; Espanso,Molto alta,sandbox/security,Idea
+FR-030,Team libraries,P3,TextExpander; Raycast,Molto alta,auth/conflict/privacy,Idea

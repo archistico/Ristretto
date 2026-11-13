@@ -1,0 +1,81 @@
+{
+  "schema": "ristretto/enter-insert-validation/1",
+  "source_version": "3.9.0-alpha.20.4",
+  "date": "2026-11-13",
+  "release_builds": {
+    "solution": "PASS",
+    "windows_lab": "PASS",
+    "core_benchmark": "PASS",
+    "replacement_lab": "PASS",
+    "ui_review": "PASS_COMPILED_NOT_RUN"
+  },
+  "xunit": {
+    "passed": 558,
+    "failed": 0,
+    "skipped": 0,
+    "viewmodel_cases": 50,
+    "new_enter_cases": 8
+  },
+  "checks": {
+    "source_audit": "PASS",
+    "static_audit": "PASS",
+    "python_unit_tests_passed": 7,
+    "localized_instructions": [
+      "en",
+      "it",
+      "fr",
+      "de",
+      "es"
+    ]
+  },
+  "behavior": {
+    "enter": "first currently filtered result, irrespective of selection",
+    "insert_button": "selected result",
+    "copy_button": "explicit copy",
+    "enter_dispatch": "on unmodified Enter release",
+    "picker_close": "existing App insert path hides picker; native refusal or uncertain outcome restores error UI",
+    "duplicates": "single-use Insert permission and shared clipboard gate"
+  },
+  "restore": "local NuGet cache; online vulnerability audit not run; no TLS or signature verification disabled",
+  "not_run": [
+    "physical keyboard routing/IME",
+    "actual clipboard provider",
+    "external editor paste and picker visibility on desktop",
+    "native laboratory scenarios in this increment",
+    "VS Code host",
+    "Node tests in this increment"
+  ],
+  "gui_processes_started_for_validation": false,
+  "contains_user_text": false,
+  "source_sha256": {
+    "VERSION.txt": "1aaf26e3dc97842f7818155498b8e571ada27eb035268103d0e071dc4aa03c94",
+    "scripts/package.py": "adc716ecf9a3a8b4460153f8c4ad60a37d795d0f80d0b9589bea374b6eb75b62",
+    "scripts/validate-native.cmd": "a3a40ada64e40c1b99a25a1a37d704dfb62e33e57c707eb183f937b01e7fbcf1",
+    "scripts/validate.cmd": "4b1dcd563de703c00baedd2334f56ca2521d059051085df98a967c26cbf47c43",
+    "scripts/validate.sh": "1977c26a71e1379f845558f192ac62a13fea4410f93823767083c97f887f6aaa",
+    "scripts/verify-release.ps1": "0d2ea14524fa4b26199b434fd58935a9e281677a8a0ec54a5addc02473ad35e2",
+    "scripts/verify_static.py": "864ed2a247a65525ef4c270468de8c0c24e385a4dba5a2bacaaab80e20dde2b0",
+    "src/TextExpander.Desktop/Localization/Strings.de.resx": "a2b9cc98e76b8b43cc788182708c6d12ea9b7c3bf24023e501f12451488f1e9e",
+    "src/TextExpander.Desktop/Localization/Strings.es.resx": "f3aa0146e75124d2798248db27c95dc0a6d54078da4195ae46d683981e77fe23",
+    "src/TextExpander.Desktop/Localization/Strings.fr.resx": "08bc60b433385cc4d7729c423768eb6d14d2ebc33904f5a92ce8b043bd950f74",
+    "src/TextExpander.Desktop/Localization/Strings.it.resx": "19f774ffce6d26dd3895b5a9732b3a982c4e48d1b23cec11d827395df7cb46b2",
+    "src/TextExpander.Desktop/Localization/Strings.resx": "76b86b2492f26c35129f707f807987eb8dbd4d3e0cf7479350e07e76f4f9b2a1",
+    "src/TextExpander.Desktop/PickerWindow.axaml.cs": "a6dca9697e0612af5034be3dafa3f83191aba58716c6c3c69e2f10f81cf7805a",
+    "src/TextExpander.Desktop/TextExpander.Desktop.csproj": "bd482fa1c6560e06631c975a7e210b842639be1d2673597e532590aaaf10fb17",
+    "src/TextExpander.Desktop/ViewModels/PickerViewModel.cs": "f645cec2abe722b0651369356a1e3fa684096f1b6d9408f0a25ae7b8a319b362",
+    "tests/TextExpander.Tests/PickerViewModelTests.cs": "0686f86a8a0b6f993ebf351edfee7268cc7cad22538299756600f8341672aada",
+    "tools/Ristretto.CoreBenchmark/Ristretto.CoreBenchmark.csproj": "f4df57e02e3c9f9ba78eee03f4fa00044e030c707eac3fb32164a98d982120b4",
+    "tools/Ristretto.ReplacementLab/Ristretto.ReplacementLab.csproj": "f255d4ea8d75ffce9604f6ac8295356f5d6747999c084444024fa3cf964d1ecd",
+    "tools/Ristretto.UiReview/Ristretto.UiReview.csproj": "5a7fee4a1776a11ac92d76670e0ce34387e3e6008b2f4492549a2ca8c5c5a9d3",
+    "tools/Ristretto.WindowsOutputLab/Ristretto.WindowsOutputLab.csproj": "6eb98c7de01dba2b94b98c26c8ec60938ee8229637e6184081571e807f9d528f"
+  },
+  "previous_baseline": "PICKER_CLIPBOARD_VALIDATION.json",
+  "qualification": "ViewModel tests with synthetic callbacks. Keyboard tunnel/release handlers compiled and wiring checked; real Avalonia event delivery, focus and editor paste still require desktop validation.",
+  "fresh_extraction": {
+    "manifest": "PASS",
+    "initial_bin_obj_absent": true,
+    "solution_and_four_tools": "PASS",
+    "xunit_passed": 558,
+    "compiled_sources_and_versions_match_delivery": true
+  }
+}

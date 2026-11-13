@@ -1,0 +1,24 @@
+{
+  "version": "3.9.0-alpha.11",
+  "historical_windows_baseline": "alpha.7: 180/180 xUnit, 21/21 native scenarios",
+  "current_dotnet_build": "NOT_RUN",
+  "current_xunit": "NOT_RUN",
+  "current_native_tests": "NOT_RUN",
+  "current_manual_editor_test": "NOT_RUN",
+  "gui_preview9_identical_to_alpha10": true,
+  "core_identical_to_alpha10": true,
+  "sqlite_unchanged": true,
+  "new_sources": [
+    "src/TextExpander.Infrastructure/Platform/Windows/WindowsClassicEditSelectionProbe.cs",
+    "tools/Ristretto.WindowsOutputLab/ExternalClassicEditSelectionCommand.cs",
+    "tests/TextExpander.Tests/WindowsClassicEditSelectionProbeTests.cs",
+    "docs/ALPHA11_CLASSIC_EDIT_SELECTION.md"
+  ],
+  "unchanged_capabilities": [
+    "No global hook",
+    "No external text read",
+    "No external replacement permission",
+    "Manual picker still available"
+  ],
+  "notes": "File identity checks and static validation only. They do not establish C# build, Win32 behavior, or test pass."
+}

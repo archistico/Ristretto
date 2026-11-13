@@ -1,0 +1,28 @@
+{
+  "version": "3.9.0-alpha.20.2",
+  "date": "2026-11-13",
+  "issue": "CS0117 CommittedInputSession.IsValidText: internal static inaccessible to Application",
+  "fix": "public static IsValidText; no logic change; cross-assembly static audit",
+  "tests_executed": {
+    "python_audit": {
+      "passed": 7,
+      "total": 7
+    },
+    "node_vscode": {
+      "passed": 32,
+      "total": 32
+    },
+    "python_static": "pass",
+    "old_alpha20_1_regression_detected": true
+  },
+  "tests_not_executed": [
+    "dotnet restore/build",
+    "xUnit",
+    "Windows native tests",
+    "VS Code real Extension Host",
+    "dotnet-to-node export contract"
+  ],
+  "visual_ui_unchanged": true,
+  "hotkey_unchanged": true,
+  "sqlite_unchanged": true
+}

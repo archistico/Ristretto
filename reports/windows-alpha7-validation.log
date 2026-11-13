@@ -1,0 +1,268 @@
+======================================================
+Ristretto v3.9-alpha.7 - sorgenti: C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto
+======================================================
+SORGENTI RISTRETTO 3.9.0-alpha.7 VERIFICATI: C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto
+  Individuazione dei progetti da ripristinare...
+  C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Core\TextExpander.Core.csproj ripristinato (in 74 ms).
+  C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Application\TextExpander.Application.csproj ripristinato (in 88 ms).
+  C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Infrastructure\TextExpander.Infrastructure.csproj ripristinato (in 97 ms).
+  C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Desktop\TextExpander.Desktop.csproj ripristinato (in 145 ms).
+  1 di 5 progetti sono aggiornati per il ripristino.
+  TextExpander.Core -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Core\bin\Release\net10.0\TextExpander.Core.dll
+  TextExpander.Application -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Application\bin\Release\net10.0\TextExpander.Application.dll
+  TextExpander.Infrastructure -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Infrastructure\bin\Release\net10.0\TextExpander.Infrastructure.dll
+  TextExpander.Tests -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tests\TextExpander.Tests\bin\Release\net10.0\TextExpander.Tests.dll
+  TextExpander.Desktop -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Desktop\bin\Release\net10.0\Ristretto.dll
+
+Compilazione completata.
+    Avvisi: 0
+    Errori: 0
+
+Tempo trascorso 00:00:02.70
+Esecuzione dei test per C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tests\TextExpander.Tests\bin\Release\net10.0\TextExpander.Tests.dll (.NETCoreApp,Version=v10.0)
+Un totale di 1 file di test corrisponde al criterio specificato.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.4+50e68bbb8b (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.10]   Discovering: TextExpander.Tests
+[xUnit.net 00:00:00.14]   Discovered:  TextExpander.Tests
+[xUnit.net 00:00:00.17]   Starting:    TextExpander.Tests
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.UnknownEditorClassIsRejected [6 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnpairedLowSurrogateIsRejected [6 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UnqualifiedFieldsAreRejectedBeforeTextInspection(field: Disabled) [10 ms]
+  Superato TextExpander.Tests.TriggerMatcherTests.Disabled_Group_Does_Not_Produce_Matches [10 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UnqualifiedFieldsAreRejectedBeforeTextInspection(field: Protected) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UnqualifiedFieldsAreRejectedBeforeTextInspection(field: ReadOnly) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UnqualifiedFieldsAreRejectedBeforeTextInspection(field: 999) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UnqualifiedFieldsAreRejectedBeforeTextInspection(field: Composing) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UnqualifiedFieldsAreRejectedBeforeTextInspection(field: Unknown) [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.MissingHandleFailsClosed [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.ReadOnlyControlIsRejected [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.CompositionUnknownIsRejected [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UncommittedOrNonterminalDelimiterIsRejected(delimiter: "\r\n") [1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UncommittedOrNonterminalDelimiterIsRejected(delimiter: " ") [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.InvisibleOrDisabledControlIsRejected(invisible: True, disabled: False) [< 1 ms]
+  Superato TextExpander.Tests.PickerSearchTests.Queries_can_match_trigger_title_description_and_text(query: "firma") [12 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UncommittedOrNonterminalDelimiterIsRejected(delimiter: "  ") [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.InvisibleOrDisabledControlIsRejected(invisible: False, disabled: True) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UncommittedOrNonterminalDelimiterIsRejected(delimiter: "ab") [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UncommittedOrNonterminalDelimiterIsRejected(delimiter: "\t") [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UncommittedOrNonterminalDelimiterIsRejected(delimiter: "_") [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.ExplicitKnownPlainEditCanPassPreflight [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ConditionalReplacementMustBeQualified(capability: 999) [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.PasswordControlIsRejected [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ConditionalReplacementMustBeQualified(capability: Unsupported) [< 1 ms]
+  Superato TextExpander.Tests.PickerSearchTests.Queries_can_match_trigger_title_description_and_text(query: "مرحبا") [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ConditionalReplacementMustBeQualified(capability: Unknown) [< 1 ms]
+  Superato TextExpander.Tests.PickerSearchTests.Queries_can_match_trigger_title_description_and_text(query: ";firma") [< 1 ms]
+  Superato TextExpander.Tests.PickerSearchTests.Queries_can_match_trigger_title_description_and_text(query: "E-mail") [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.ChangedForegroundIsRejected [< 1 ms]
+  Superato TextExpander.Tests.TriggerMatcherTests.Nfc_Equates_Precomposed_And_Decomposed_Accents [2 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.MissingEvidenceFailsClosed [< 1 ms]
+  Superato TextExpander.Tests.TriggerMatcherTests.Different_Emoji_Modifiers_Are_Not_Equivalent [< 1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.ChangedProcessIsRejected [< 1 ms]
+  Superato TextExpander.Tests.PickerSearchTests.Exact_trigger_has_priority_over_title [1 ms]
+  Superato TextExpander.Tests.WindowsExplicitTestTargetGateTests.FocusOnDifferentControlIsRejected [< 1 ms]
+  Superato TextExpander.Tests.PickerSearchTests.Result_limit_is_enforced [1 ms]
+  Superato TextExpander.Tests.TriggerMatcherTests.Duplicates_Are_Ambiguous_Not_Random [3 ms]
+  Superato TextExpander.Tests.TriggerMatcherTests.Longest_Trigger_Wins_For_Suffix [< 1 ms]
+  Superato TextExpander.Tests.TriggerMatcherTests.Unicode_Emoji_Family_Is_Matched_As_Original_Sequence [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.PartialOrBlockedWindowsInputIsNeverReportedAsSuccess(accepted: 5) [6 ms]
+  Superato TextExpander.Tests.PickerSearchTests.Empty_query_shows_only_enabled_snippets_in_enabled_groups [1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.PartialOrBlockedWindowsInputIsNeverReportedAsSuccess(accepted: 0) [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.PartialOrBlockedWindowsInputIsNeverReportedAsSuccess(accepted: 1) [< 1 ms]
+  Superato TextExpander.Tests.PickerSearchTests.Canonically_equivalent_accents_match_without_changing_content [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnicodeIsPreservedExactly(original: "مرحبا שלום Привет") [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UnknownEffectsNeverBecomeSuccess(status: 999) [4 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnicodeIsPreservedExactly(original: "àéü 漢字 👨‍👩‍👧‍👦") [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnicodeIsPreservedExactly(original: "café 👍🏽 🧑🏽‍💻") [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.UnknownEffectsNeverBecomeSuccess(status: PartialOrUnknown) [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.OwnApplicationCannotBeCapturedOrTargeted [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.OversizedTextIsRejectedWithoutTruncation [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.TargetEpochChangeForbidsCrossWindowMatch [18 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnicodeReplacementCharacterRemainsValidText [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnpairedHighSurrogateIsRejected [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnsafeOrUnsupportedInputIsRejected(original: "line break") [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnsafeOrUnsupportedInputIsRejected(original: "line break") [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnsafeOrUnsupportedInputIsRejected(original: "text\r\nother") [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnsafeOrUnsupportedInputIsRejected(original: "a\tb") [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnsafeOrUnsupportedInputIsRejected(original: "") [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.UnsupportedPlatformNeverUsesNativeApi [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.MaximumLengthUnicodePrefixResolvesAfterLongUnmatchedHistory [1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.SurrogatesAreRejectedWhenEmbeddedInOtherwiseValidText [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ImmediateWordStartModeDoesNotDeferItsOwnCompletedTrigger [20 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.PausingAndResumingDiscardTypedContext [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.WrongForegroundWindowRejectsWithoutAnyEffect [< 1 ms]
+  Superato TextExpander.Tests.WindowsOutputContractTests.PressedModifiersRejectWithoutAnyEffect [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.UnpairedSurrogatesCannotEnterTheTypingBuffer [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ConnectorPunctuationIsNotADelimiterInsideAnIdentifier [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.OverlappingTriggersAreSelectedByWhatWasActuallyCommitted [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.DisabledSnippetAndGroupNeverMatch [1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.BrokenDeferredPrefixNeverRetroactivelyDeletesText [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.UnsafeFieldClearsPreviousSuffix(safety: Protected) [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.UnsafeFieldClearsPreviousSuffix(safety: Unknown) [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.MatchingIsCaseSensitiveAndDoesNotConflateUnicodeCharacters [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ExactRawRangeIsReplacedAndDelimiterAndSurroundingsArePreserved(trigger: ";sig", raw: ";sig", delimiter: "", body: "one\ttwo\nthree") [4 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.UntrustedObservationClearsPreviousSuffix(kind: Synthetic) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ExactRawRangeIsReplacedAndDelimiterAndSurroundingsArePreserved(trigger: ";漢字", raw: ";漢字", delimiter: "。", body: "العربية") [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ExactRawRangeIsReplacedAndDelimiterAndSurroundingsArePreserved(trigger: ";café", raw: ";café", delimiter: " ", body: "مرحبا 👨‍👩‍👧‍👦\r\n漢字") [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ExactRawRangeIsReplacedAndDelimiterAndSurroundingsArePreserved(trigger: "👩🏽‍💻", raw: "👩🏽‍💻", delimiter: " ", body: "café") [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.UntrustedObservationClearsPreviousSuffix(kind: Composing) [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.UntrustedObservationClearsPreviousSuffix(kind: NavigationOrSelectionChange) [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.UntrustedObservationClearsPreviousSuffix(kind: Unknown) [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.SingleCharacterCommitsCompleteAnNfcUnicodeTrigger [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.LongerPotentialPrefixPreventsPrematureShortSuffix [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.InvalidOrControlObservationsFailClosed(text: " ") [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.TextAndResultSizesAreBounded [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.InvalidOrControlObservationsFailClosed(text: "\n") [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.InvalidOrControlObservationsFailClosed(text: "\t") [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.UnknownEpochNeverMatches [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.DuplicateCanonicalTriggersAreAmbiguousEvenIfInsertedInDifferentOrder [2 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.ShortTriggerIsDeferredWhileLongerTriggerCanStillComplete [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.EmojiZwjAndNonLatinScriptsRemainExact [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.LargeObservationIsRejectedButLongTypingHistoryRemainsBounded [1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.LongestCompletedTriggerWinsOverShorterSuffix [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.OnePlanCanEnterBackendOnlyOnceUnderConcurrentCalls [6 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.OnlyOneReadyCandidateCanBePrepared(status: WaitingForMoreInput) [6 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.OnlyOneReadyCandidateCanBePrepared(status: Ambiguous) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.OnlyOneReadyCandidateCanBePrepared(status: None) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.OnlyOneReadyCandidateCanBePrepared(status: Suppressed) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.OnlyOneReadyCandidateCanBePrepared(status: WaitingForDelimiter) [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.AResultCaretInsideNewZwjSequenceIsRejectedBeforeEffects [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.CancelledOrStaleLibraryPlansNeverEnterBackendAndCannotBeReplayed [2 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.AllVerificationMetadataMustMatchThePreparedResult [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ATriggerInsideAnExistingGraphemeCannotBeRemoved [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.ActiveSelectionAndMalformedTextAreRejected [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.RealRecognitionCanPrepareAndExecuteSyntheticReplacement [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.CanonicallyEquivalentSourceIsNotSubstitutedForOriginalRawEvidence [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.AcceptedWithoutReceiptIsUnverifiedAndNeverRetried [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.WrongTextCaretIdentityOrRevisionCannotBeReportedAsVerified [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.DiagnosticsDoNotPrintSourceOrSnippetContent [7 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.BackendExceptionAfterAnEditDoesNotTriggerReplayOrRollback [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.IndexFindsOneTriggerAmongTenThousandWithoutScanningTheirContent [21 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.MissingAndStaleIdentityCannotProduceAPlan [< 1 ms]
+  Superato TextExpander.Tests.CommittedInputSessionTests.PublishingNewRevisionClearsSuffixAndReplacesCatalog [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.TextCaretFocusRevisionAndProtectionAreRecheckedInTheAtomicTarget [2 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.InvalidPayloadAndRawMatchAreRejectedWithoutPreparingAnEffect [< 1 ms]
+  Superato TextExpander.Tests.TriggerReplacementTests.SeparatePlansForTheSameRevisionCannotApplyTwice [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.LargeCatalogUsesSameCompiledIndexAsFirstRecognitionStage [46 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.IdlingClearsOldPrefixEvenWhenNextEventIsVerified [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ImmediateDeferredPrefixCanResolveAtWhitespaceWithoutRewritingHistory [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.WordStartRuleRejectsUnanchoredAlphabeticTrigger [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.SameMonotonicTimestampIsValidButReversalFailsClosed [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.UnverifiedOrNonTypingObservationsInvalidatePrefix(kind: Synthetic) [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.UnverifiedOrNonTypingObservationsInvalidatePrefix(kind: NavigationOrSelectionChange) [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.UnverifiedOrNonTypingObservationsInvalidatePrefix(kind: Unknown) [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.UnverifiedOrNonTypingObservationsInvalidatePrefix(kind: Composing) [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ImmediateEqualLengthPrefixOfLongerTriggerStillDefers [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ProtectedOrUnknownFieldNeverActivates(safety: Unknown) [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ProtectedOrUnknownFieldNeverActivates(safety: Protected) [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ImmediateAnywhereModeCanMatchInsideWordWhenExplicitlySelected [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.HistoryTrimmingCannotInventAnInitialWordBoundary [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.UnicodeWhitespaceSupportsNonBreakingSpace [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ExactCanonicalDuplicatesStayAmbiguousEvenWithDelimiter [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.OptInUnicodePunctuationDelimitersAreSupported [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.MultiCharacterChunkCannotActivateMatchBeforeTheLastGrapheme [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.InvalidPolicyIsRejectedBeforeAnyEvents [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.InvalidUnicodeAndControlChunksCannotActivateOrRetainContext [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.PauseResumeAndSnapshotPublicationDiscardTypingContext [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.DefaultDelimiterSetDoesNotTreatPunctuationAsTermination [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.DefaultPolicyWaitsForWhitespaceBeforeActivating [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.UnicodeLettersAndCombiningMarksDoNotBecomeFalseWordBoundaries [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.IneligibleLongWordTriggerDoesNotMaskEligiblePunctuationTrigger [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.LeadingVerifiedSpaceProvidesBoundaryButPreviousWordDoesNot [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.PendingTriggerIsNotCompletedAcrossAnUnsafeBulkObservation [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ImmediateModeDefersShorterPrefixAndDoesNotRetroactivelyFire [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.FocusEpochChangeCannotCompletePreviousTrigger [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.LongestEligibleSuffixIsChosenOverShorterOne [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.VerifiedInitialWordBoundaryAllowsAlphabeticTrigger [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.EmojiZwjTriggerWorksWithDelimiter [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.ImmediateCompletedTriggerIsNotMaskedByUnrelatedShorterPrefix [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.DisabledSnippetsAndGroupsAreNotActivated [< 1 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.LongUnicodePrefixDoesNotMaskCompletedShortTrigger [5 ms]
+  Superato TextExpander.Tests.TriggerActivationSessionTests.CanonicalDecompositionAcrossSeparateEventsMatchesAtDelimiter [< 1 ms]
+  Superato TextExpander.Tests.PortableLibraryTests.Invalid_Reference_Is_Rejected_Before_Transaction [102 ms]
+  Superato TextExpander.Tests.ImportReviewTests.Selected_Import_Only_Adds_Chosen_Snippets_And_Their_Groups [140 ms]
+  Superato TextExpander.Tests.GroupManagementTests.Rename_And_Toggle_Are_Persistent_And_Do_Not_Modify_Snippets [146 ms]
+  Superato TextExpander.Tests.PortableLibraryTests.Export_Does_Not_Overwrite_Existing_File [46 ms]
+  Superato TextExpander.Tests.ExternalImportTests.BeeftextV10_Previews_And_Imports_Disabled_Without_Losing_Unicode [160 ms]
+  Superato TextExpander.Tests.SqliteLibraryStoreTests.Stale_Revision_Is_Rejected_Without_Modification [181 ms]
+  Superato TextExpander.Tests.ExternalImportTests.Preview_Finds_Collisions_Against_Existing_And_Within_Import [49 ms]
+  Superato TextExpander.Tests.ImportReviewTests.Preview_Identifies_All_Duplicates_And_Collisions_With_Existing_Triggers [69 ms]
+  Superato TextExpander.Tests.SqliteLibraryStoreTests.Theme_And_Language_Stored_In_Sqlite [30 ms]
+  Superato TextExpander.Tests.PortableLibraryTests.Export_Import_Unicode_Preserves_Data_And_Creates_New_Identifiers [81 ms]
+  Superato TextExpander.Tests.ImportReviewTests.Library_Changes_Between_Preview_And_Commit_Reject_Stale_Selection [32 ms]
+  Superato TextExpander.Tests.ExternalImportTests.Import_Does_Not_Overwrite_Existing_Entries [52 ms]
+  Superato TextExpander.Tests.ImportReviewTests.Preview_Risks_Of_Espanso_Dynamic_And_Unsupported_Are_Visible [32 ms]
+  Superato TextExpander.Tests.SqliteLibraryStoreTests.Invalid_Backup_Is_Rejected_Without_Touching_Current_Data [72 ms]
+  Superato TextExpander.Tests.ExternalImportTests.Unsupported_Yaml_With_No_Convertible_Matches_Cannot_Commit [48 ms]
+  Superato TextExpander.Tests.GroupManagementTests.Delete_Only_Empty_Group [165 ms]
+  Superato TextExpander.Tests.PortableLibraryTests.Bad_Json_Is_Rejected_Without_Changing_The_Library [79 ms]
+  Superato TextExpander.Tests.ImportReviewTests.Commit_Of_The_Same_Preview_Twice_Is_Not_Allowed [48 ms]
+  Superato TextExpander.Tests.ExternalImportTests.Beeftext_Unknown_Version_Is_Rejected_And_Db_Unchanged [22 ms]
+  Superato TextExpander.Tests.ImportReviewTests.Invalid_Or_Empty_Selections_Do_Not_Modify_The_Database [20 ms]
+  Superato TextExpander.Tests.ExternalImportTests.Invalid_Utf8_Is_Rejected_Instead_Of_Replacing_Characters [18 ms]
+  Superato TextExpander.Tests.SqliteLibraryStoreTests.Sqlite_Online_Backup_And_Restore_Preserves_Old_Library [80 ms]
+  Superato TextExpander.Tests.ExternalImportTests.Espanso_Safe_And_Dynamic_Rules_Are_Previewed_But_Never_Executed [26 ms]
+[xUnit.net 00:00:00.62]   Finished:    TextExpander.Tests
+  Superato TextExpander.Tests.ExternalImportTests.Utf8_Bom_Is_Accepted [17 ms]
+  Superato TextExpander.Tests.SqliteLibraryStoreTests.Create_Read_Update_Delete_Roundtrip_Unicode [37 ms]
+  Superato TextExpander.Tests.ExternalImportTests.Beeftext_Export_Without_Groups_Uses_Default_Group [13 ms]
+
+L'esecuzione dei test è riuscita.
+Totale test: 180
+     Superati: 180
+ Tempo totale: 1,0116 Secondi
+  Individuazione dei progetti da ripristinare...
+  C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tools\Ristretto.WindowsOutputLab\Ristretto.WindowsOutputLab.csproj ripristinato (in 142 ms).
+  3 di 4 progetti sono aggiornati per il ripristino.
+  TextExpander.Core -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Core\bin\Release\net10.0\TextExpander.Core.dll
+  TextExpander.Application -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Application\bin\Release\net10.0\TextExpander.Application.dll
+  TextExpander.Infrastructure -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Infrastructure\bin\Release\net10.0\TextExpander.Infrastructure.dll
+  Ristretto.WindowsOutputLab -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tools\Ristretto.WindowsOutputLab\bin\Release\net10.0\Ristretto.WindowsOutputLab.dll
+
+Compilazione completata.
+    Avvisi: 0
+    Errori: 0
+
+Tempo trascorso 00:00:00.90
+Laboratorio Windows F2a/F2b compilato ma NON eseguito (modalita' di prova esplicite).
+  Individuazione dei progetti da ripristinare...
+  C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tools\Ristretto.CoreBenchmark\Ristretto.CoreBenchmark.csproj ripristinato (in 86 ms).
+  1 di 2 progetti sono aggiornati per il ripristino.
+  TextExpander.Core -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Core\bin\Release\net10.0\TextExpander.Core.dll
+  Ristretto.CoreBenchmark -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tools\Ristretto.CoreBenchmark\bin\Release\net10.0\Ristretto.CoreBenchmark.dll
+
+Compilazione completata.
+    Avvisi: 0
+    Errori: 0
+
+Tempo trascorso 00:00:00.74
+Benchmark Core compilato ma NON eseguito (richiede --output esplicito).
+  Individuazione dei progetti da ripristinare...
+  C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tools\Ristretto.ReplacementLab\Ristretto.ReplacementLab.csproj ripristinato (in 127 ms).
+  3 di 4 progetti sono aggiornati per il ripristino.
+  TextExpander.Core -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Core\bin\Release\net10.0\TextExpander.Core.dll
+  TextExpander.Application -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Application\bin\Release\net10.0\TextExpander.Application.dll
+  TextExpander.Infrastructure -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Infrastructure\bin\Release\net10.0\TextExpander.Infrastructure.dll
+  Ristretto.ReplacementLab -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tools\Ristretto.ReplacementLab\bin\Release\net10.0\Ristretto.ReplacementLab.dll
+
+Compilazione completata.
+    Avvisi: 0
+    Errori: 0
+
+Tempo trascorso 00:00:00.85
+Laboratorio F2b simulato compilato ma NON eseguito (richiede --self-test esplicito).
+  Individuazione dei progetti da ripristinare...
+  C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tools\Ristretto.UiReview\Ristretto.UiReview.csproj ripristinato (in 160 ms).
+  4 di 5 progetti sono aggiornati per il ripristino.
+  TextExpander.Core -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Core\bin\Release\net10.0\TextExpander.Core.dll
+  TextExpander.Application -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Application\bin\Release\net10.0\TextExpander.Application.dll
+  TextExpander.Infrastructure -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Infrastructure\bin\Release\net10.0\TextExpander.Infrastructure.dll
+  TextExpander.Desktop -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\src\TextExpander.Desktop\bin\Release\net10.0\Ristretto.dll
+  Ristretto.UiReview -> C:\Users\rollandine\Downloads\2026 Ristretto\Ristretto\tools\Ristretto.UiReview\bin\Release\net10.0\Ristretto.UiReview.dll
+
+Compilazione completata.
+    Avvisi: 0
+    Errori: 0
+
+Tempo trascorso 00:00:01.10
+Revisione UI compilata ma NON eseguita (richiede --output esplicito).

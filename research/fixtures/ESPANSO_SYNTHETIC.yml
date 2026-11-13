@@ -1,0 +1,15 @@
+# Fixture sintetica e INERTE: non eseguire il contenuto dinamico.
+matches:
+  - trigger: ":ciao"
+    replace: "Caffè 👨‍👩‍👧‍👦 Καλημέρα مرحبا"
+  - trigger: ":modello"
+    form: |
+      Gentile [[name]],
+      ti scriviamo per confermare.
+  - trigger: ":non-eseguire"
+    replace: "{{valore}}"
+    vars:
+      - name: valore
+        type: shell
+        params:
+          cmd: "echo NON_ESEGUIRE"

@@ -1,0 +1,9 @@
+{
+  "format": "text-expander-studio/snippets",
+  "version": 1,
+  "groups": [{"id":"00000000-0000-4000-8000-000000000001","name":"Demo","isEnabled":true}],
+  "snippets": [
+    {"id":"00000000-0000-4000-8000-000000000002","groupId":"00000000-0000-4000-8000-000000000001","title":"Firma sintetica","trigger":";firma","content":"Caffè ☕ 漢字","description":"","isEnabled":true},
+    {"id":"00000000-0000-4000-8000-000000000003","groupId":"00000000-0000-4000-8000-000000000001","title":"Café NFD","trigger":";café","content":"Ok NFC/NFD","description":"","isEnabled":true}
+  ]
+}

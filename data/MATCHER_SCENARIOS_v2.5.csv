@@ -1,0 +1,116 @@
+﻿id,category,trigger,typed,mode,policy,expected,priority,verification,platform,reason,status
+UM-001,Normalization,café,café,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,NFC equivalenza canonica,NOT_RUN
+UM-002,Normalization,café,café,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,NFC in verso opposto,NOT_RUN
+UM-003,Normalization,café,cafe,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,non rimuovere accenti,NOT_RUN
+UM-004,Normalization,é,e,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,accenti significativi,NOT_RUN
+UM-005,Normalization,Å,Å,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,composizione canonica,NOT_RUN
+UM-006,Normalization,ñ,ñ,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,segno combinante,NOT_RUN
+UM-007,Normalization,ö,ö,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,diacritico,NOT_RUN
+UM-008,Normalization,ﬀ,ff,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,NFKC non predefinito,NOT_RUN
+UM-009,Normalization,①,1,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,compatibility non predefinita,NOT_RUN
+UM-010,Normalization,²,2,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,superscript diverso,NOT_RUN
+UM-011,Normalization,Å,Å,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,normalizzazione Unicode canonica da confermare con conformance,NOT_RUN
+UM-012,Normalization,①,①,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,stesso simbolo,NOT_RUN
+UM-013,Normalization,Á̧,Á̧,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,ordine combinanti canonico,NOT_RUN
+UM-014,Normalization,क,क,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Devanagari base,NOT_RUN
+UM-015,Normalization,が,が,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,kana combining dakuten,NOT_RUN
+UM-016,Case,Firma,firma,Sensitive,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,case default,NOT_RUN
+UM-017,Case,Firma,Firma,Sensitive,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,exact,NOT_RUN
+UM-018,Case,Firma,firma,Insensitive,NFC;Insensitive;Anywhere,Unique,P0,Unit,Core,ASCII ignore case,NOT_RUN
+UM-019,Case,Σ,σ,Sensitive,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,greco case,NOT_RUN
+UM-020,Case,Σ,σ,Insensitive,NFC;Insensitive;Anywhere,ReviewCulture,P0,Unit,Core,invariant ignorecase runtime e sua conformance,NOT_RUN
+UM-021,Case,σ,ς,Insensitive,NFC;Insensitive;Anywhere,ReviewCulture,P0,Unit,Core,sigma finale confronto candidato da verificare,NOT_RUN
+UM-022,Case,I,ı,Insensitive,NFC;Insensitive;Anywhere,ReviewCulture,P0,Unit,Core,turco dotless non assumere equivalenza,NOT_RUN
+UM-023,Case,I,İ,Insensitive,NFC;Insensitive;Anywhere,ReviewCulture,P0,Unit,Core,turco dotted non assumere equivalenza,NOT_RUN
+UM-024,Case,Straße,STRASSE,Insensitive,NFC;Insensitive;Anywhere,ReviewCulture,P0,Unit,Core,ß SS full fold differisce da ordinal,NOT_RUN
+UM-025,Case,E,é,Insensitive,NFC;Insensitive;Anywhere,NoMatch,P0,Unit,Core,ignorecase non e accent insensitive,NOT_RUN
+UM-026,Case,А,A,Insensitive,NFC;Insensitive;Anywhere,NoMatch,P0,Unit,Core,cirillico A vs latino,NOT_RUN
+UM-027,Case,а,a,Insensitive,NFC;Insensitive;Anywhere,NoMatch,P0,Unit,Core,cirillico a vs latino,NOT_RUN
+UM-028,Emoji,😀,😀,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,"emoji fuori BMP: singolo scalar, due unità UTF-16",NOT_RUN
+UM-029,Emoji,😀,😃,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,emoji diverse,NOT_RUN
+UM-030,Emoji,👍,👍🏽,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,tone significante,NOT_RUN
+UM-031,Emoji,👍🏽,👍🏽,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,tono preservato,NOT_RUN
+UM-032,Emoji,❤,❤️,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,VS16 significante,NOT_RUN
+UM-033,Emoji,❤️,❤️,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,variation selector,NOT_RUN
+UM-034,Emoji,👨‍👩‍👧‍👦,👨‍👩‍👧‍👦,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,ZWJ multi-scalar,NOT_RUN
+UM-035,Emoji,👨‍👩‍👧‍👦,👨👩👧👦,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,ZWJ non scartati,NOT_RUN
+UM-036,Emoji,🇮🇹,🇮🇹,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,regional indicator pair,NOT_RUN
+UM-037,Emoji,🇮🇹,🇮🇪,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,flag diversi,NOT_RUN
+UM-038,Emoji,👩🏽‍💻,👩🏽‍💻,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,emoji professione con tono,NOT_RUN
+UM-039,Emoji,👩🏽‍💻,👩‍💻,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,tone preserved,NOT_RUN
+UM-040,Emoji,🧑‍🦽,🧑‍🦽,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,emoji mobility,NOT_RUN
+UM-041,Emoji,1️⃣,1️⃣,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,keycap sequence,NOT_RUN
+UM-042,Emoji,1️⃣,1,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,keycap non uguale al numero,NOT_RUN
+UM-043,Scripts,привет,привет,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Cyrillic,NOT_RUN
+UM-044,Scripts,привет,privet,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,no transliteration,NOT_RUN
+UM-045,Scripts,مرحبا,مرحبا,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Arabic,NOT_RUN
+UM-046,Scripts,שלום,שלום,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Hebrew,NOT_RUN
+UM-047,Scripts,漢字,漢字,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Han,NOT_RUN
+UM-048,Scripts,日本語,日本語,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Japanese,NOT_RUN
+UM-049,Scripts,한국어,한국어,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Hangul,NOT_RUN
+UM-050,Scripts,नमस्ते,नमस्ते,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Devanagari,NOT_RUN
+UM-051,Scripts,สวัสดี,สวัสดี,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Thai,NOT_RUN
+UM-052,Scripts,ສະບາຍດີ,ສະບາຍດີ,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Lao,NOT_RUN
+UM-053,Scripts,Αθήνα,Αθήνα,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Greek,NOT_RUN
+UM-054,Scripts,أ,ا,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,hamza differs,NOT_RUN
+UM-055,Scripts,سلام,سلا‌م,Immediate,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,ZWNJ semantico,NOT_RUN
+UM-056,ActivationBoundary,;mail,;mail,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,prefisso,NOT_RUN
+UM-057,ActivationBoundary,;mail,x;mail,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,Anywhere suffix,NOT_RUN
+UM-058,ActivationBoundary,;mail,;mail ,AfterDelimiterKeep,NFC;Sensitive;Anywhere,UniqueKeep,P0,Unit,Core,space conservato,NOT_RUN
+UM-059,ActivationBoundary,;mail,;mail ,AfterDelimiterDrop,NFC;Sensitive;Anywhere,UniqueDrop,P0,Unit,Core,space eliminato,NOT_RUN
+UM-060,ActivationBoundary,;mail,;mail.,AfterDelimiterKeep,NFC;Sensitive;Anywhere,UniqueKeep,P0,Unit,Core,punto conservato,NOT_RUN
+UM-061,ActivationBoundary,;mail,";mail,",AfterDelimiterDrop,NFC;Sensitive;Anywhere,UniqueDrop,P0,Unit,Core,virgola eliminata,NOT_RUN
+UM-062,ActivationBoundary,;mail,;mail,AfterDelimiterKeep,NFC;Sensitive;Anywhere,Pending,P0,Unit,Core,nessun delimitatore,NOT_RUN
+UM-063,ActivationBoundary,;mail,";mail
+",AfterDelimiterKeep,NFC;Sensitive;Anywhere,RequiresNativeCapability,P0,Unit,Core,Enter non automaticamente delimitatore,NOT_RUN
+UM-064,ActivationBoundary,;mail,;mail	,AfterDelimiterKeep,NFC;Sensitive;Anywhere,RequiresNativeCapability,P0,Unit,Core,Tab navigazione,NOT_RUN
+UM-065,ActivationBoundary,mail,xmail ,WholeWord,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,bordo sinistro assente,NOT_RUN
+UM-066,ActivationBoundary,mail,mailbox ,WholeWord,NFC;Sensitive;Anywhere,NoMatch,P0,Unit,Core,bordo destro oltre trigger,NOT_RUN
+UM-067,ActivationBoundary,mail,mail ,WholeWord,NFC;Sensitive;Anywhere,UniqueKeep,P0,Unit,Core,bordi confermati,NOT_RUN
+UM-068,ActivationBoundary,mail,mail,WholeWord,NFC;Sensitive;Anywhere,Pending,P0,Unit,Core,destro non ancora osservato,NOT_RUN
+UM-069,ActivationBoundary,mail,(mail) ,WholeWord,NFC;Sensitive;Anywhere,UniqueKeep,P0,Unit,Core,parentesi vicino parola,NOT_RUN
+UM-070,ActivationBoundary,漢字,漢字,WholeWord,NFC;Sensitive;Anywhere,PendingOrTailored,P0,Unit,Core,CJK senza tokenizzazione affidabile,NOT_RUN
+UM-071,ActivationBoundary,;漢字,;漢字,Immediate,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,prefisso CJK esplicito,NOT_RUN
+UM-072,ActivationBoundary,xx,xxxxx,Anywhere,NFC;Sensitive;Anywhere,UniqueSuffix,P0,Unit,Core,"corrispondenza suffisso, non nuova digitazione",NOT_RUN
+UM-073,ActivationBoundary,a,á,Immediate,NFC;Sensitive;Anywhere,PendingOrNoMatch,P0,Unit,Core,combining mark post base non anticipare,NOT_RUN
+UM-074,ActivationBoundary,🧑,🧑‍💻,Immediate,NFC;Sensitive;Anywhere,PendingOrNoMatch,P0,Unit,Core,ZWJ composition in progress,NOT_RUN
+UM-075,Conflicts,;sig|;sig,;sig,Collision,NFC;Sensitive;Anywhere,Ambiguous,P0,Unit,Core,due trigger identici nello stesso scope,NOT_RUN
+UM-076,Conflicts,café|café,café,Collision,NFC;Sensitive;Anywhere,Ambiguous,P0,Unit,Core,NFC duplicate,NOT_RUN
+UM-077,Conflicts,Firma|firma,firma,CollisionInsensitive,NFC;Sensitive;Anywhere,Ambiguous,P0,Unit,Core,case folding collision only when active,NOT_RUN
+UM-078,Conflicts,;a|;ab,;ab,Overlap,NFC;Sensitive;Anywhere,UniqueLongestAtCommit,P0,Unit,Core,prefix overlap with delimiter policy,NOT_RUN
+UM-079,Conflicts,;a|;ab,;a,OverlapImmediate,NFC;Sensitive;Anywhere,ReviewPrefixPolicy,P0,Unit,Core,immediate already fired before later b,NOT_RUN
+UM-080,Conflicts,;sig global|;sig app,;sig,Scope,NFC;Sensitive;Anywhere,ReviewScopePrecedence,P0,Unit,Core,nessuna priorità implicita,NOT_RUN
+UM-081,Conflicts,;sig enabled|;sig disabled,;sig,Scope,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,disabled filtered,NOT_RUN
+UM-082,Conflicts,;sig group enabled|;sig group disabled,;sig,Scope,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,group disabled filtered,NOT_RUN
+UM-083,Conflicts,;sig outscope|;sig inscope,;sig,Scope,NFC;Sensitive;Anywhere,Unique,P0,Unit,Core,scope active,NOT_RUN
+UM-084,Conflicts,;sig x2,;sig,OrderReversal,NFC;Sensitive;Anywhere,Ambiguous,P0,Unit,Core,ordine irrilevante,NOT_RUN
+UM-085,IMEAndSafety,nihongo,nihongo,Preedit,NFC;Sensitive;Anywhere,Suppressed,P0,Native,Windows/macOS/X11/Wayland,IME provisional,NOT_RUN
+UM-086,IMEAndSafety,日本語,日本語,IMECommit,NFC;Sensitive;Anywhere,Unique,P0,Native,Windows/macOS/X11/Wayland,only committed text,NOT_RUN
+UM-087,IMEAndSafety,;mail,;mail,FocusChanged,NFC;Sensitive;Anywhere,Suppressed,P0,Native,Windows/macOS/X11/Wayland,reset,NOT_RUN
+UM-088,IMEAndSafety,;mail,;mail,CaretMoved,NFC;Sensitive;Anywhere,Suppressed,P0,Native,Windows/macOS/X11/Wayland,reset,NOT_RUN
+UM-089,IMEAndSafety,;mail,;mail,UnknownCaret,NFC;Sensitive;Anywhere,Unsupported,P0,Native,Windows/macOS/X11/Wayland,no destructive deletion,NOT_RUN
+UM-090,IMEAndSafety,;mail,;mail,SecureField,NFC;Sensitive;Anywhere,Suppressed,P0,Native,Windows/macOS/X11/Wayland,do not capture credentials,NOT_RUN
+UM-091,IMEAndSafety,;mail,;mail,ClipboardBusy,NFC;Sensitive;Anywhere,NoSideEffects,P0,Native,Windows/macOS/X11/Wayland,preflight unavailable,NOT_RUN
+UM-092,IMEAndSafety,;mail,;mail,PermissionRevoked,NFC;Sensitive;Anywhere,Suppressed,P0,Native,Windows/macOS/X11/Wayland,no native permissions,NOT_RUN
+UM-093,IMEAndSafety,;mail,;mail,InjectedText,NFC;Sensitive;Anywhere,Suppressed,P0,Native,Windows/macOS/X11/Wayland,prevent recursive expansion,NOT_RUN
+UM-094,IMEAndSafety,;mail,;mail,KeyboardLayoutChanged,NFC;Sensitive;Anywhere,Reset,P0,Native,Windows/macOS/X11/Wayland,event source mapping unknown,NOT_RUN
+UM-095,IMEAndSafety,;mail,;mail,CompositionCancelled,NFC;Sensitive;Anywhere,Suppressed,P0,Native,Windows/macOS/X11/Wayland,IME reset,NOT_RUN
+UM-096,IMEAndSafety,;mail,;mail,UnknownIMEStatus,NFC;Sensitive;Anywhere,ManualOnly,P0,Native,Windows/macOS/X11/Wayland,fail-safe,NOT_RUN
+UM-097,IMEAndSafety,;mail,;mail,BackspaceAmbiguous,NFC;Sensitive;Anywhere,Reset,P0,Native,Windows/macOS/X11/Wayland,unknown caret after external edit,NOT_RUN
+UM-098,IMEAndSafety,👩🏽‍💻,👩🏽‍💻,NativeErase,NFC;Sensitive;Anywhere,UnsupportedUntilVerified,P0,Native,Windows/macOS/X11/Wayland,no fixed number of Backspace,NOT_RUN
+UM-099,IMEAndSafety,café,café,NativeErase,NFC;Sensitive;Anywhere,UnsupportedUntilVerified,P0,Native,Windows/macOS/X11/Wayland,normalized key length differs from raw deletion,NOT_RUN
+UM-100,Robustness,A\ud800,A\ud800,Import,NFC;Sensitive;Anywhere,RejectInvalidUnicode,P0,Unit/Integration/Native,Core,unpaired surrogate,NOT_RUN
+UM-101,Robustness,;mail,;mail,MaxBufferReached,NFC;Sensitive;Anywhere,ResetOrPending,P0,Unit/Integration/Native,Core,bounded memory,NOT_RUN
+UM-102,Robustness,;mail,;mail,Timeout,NFC;Sensitive;Anywhere,Reset,P0,Unit/Integration/Native,Core,expiration,NOT_RUN
+UM-103,Robustness,;mail,;mail,NoTrackingPermission,NFC;Sensitive;Anywhere,ManualOnly,P0,Unit/Integration/Native,Core,Wayland possible,NOT_RUN
+UM-104,Robustness,;mail,;mail,SelectionChanged,NFC;Sensitive;Anywhere,Suppressed,P0,Unit/Integration/Native,Core,different caret context,NOT_RUN
+UM-105,Robustness,;mail,;mail,MultiKeyMacro,NFC;Sensitive;Anywhere,NoMatch,P0,Unit/Integration/Native,Core,non-text event,NOT_RUN
+UM-106,Robustness,;mail,;mail,RTLControls,NFC;Sensitive;Anywhere,PreserveExactly,P0,Unit/Integration/Native,Core,bidi marks not stripped,NOT_RUN
+UM-107,Robustness,pаypаl,paypal,VisualConfusable,NFC;Sensitive;Anywhere,NoMatch,P0,Unit/Integration/Native,Core,Cyrillic а vs Latin a,NOT_RUN
+UM-108,Robustness,;mail,;mail,Logging,NFC;Sensitive;Anywhere,NoInputLogging,P0,Unit/Integration/Native,Core,privacy,NOT_RUN
+UM-109,Robustness,;mail,;mail,ImportNormalizationCollision,NFC;Sensitive;Anywhere,AmbiguousInPreview,P0,Unit/Integration/Native,Core,no data loss,NOT_RUN
+UM-110,Robustness,;mail,;mail,SnapshotBeforeCommit,NFC;Sensitive;Anywhere,NoNewMatch,P0,Unit/Integration/Native,Core,matcher snapshot after commit only,NOT_RUN
+UM-111,Robustness,;mail,;mail,SnapshotAfterCommit,NFC;Sensitive;Anywhere,Unique,P0,Unit/Integration/Native,Core,updated snapshot version,NOT_RUN
+UM-112,Robustness,👨‍👩‍👧‍👦,👨‍👩‍👧‍👦,Display,NFC;Sensitive;Anywhere,PreserveExactly,P0,Unit/Integration/Native,Core,font fallback does not change data,NOT_RUN
+UM-113,Robustness,á,á,RepeatNFC,NFC;Sensitive;Anywhere,Unique,P0,Unit/Integration/Native,Core,idempotent,NOT_RUN
+UM-114,Robustness,;mail,;mail,AfterInsertionUnverified,NFC;Sensitive;Anywhere,SubmittedUnverified,P0,Unit/Integration/Native,Core,input API accepted not target verified,NOT_RUN

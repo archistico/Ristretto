@@ -1,0 +1,89 @@
+ID,Area,Priority,TestLevel,Platform,Scenario,ExpectedResult,Dataset,Status
+PERF-001,Matcher,P0,Core,Cross-platform,Exact hit on 10k unique triggers,Correct id with P99 PB-01,D10,NOT_RUN
+PERF-002,Matcher,P0,Core,Cross-platform,Common 3-char prefix 10k triggers,No false matches and bounded work,DAdversarial,NOT_RUN
+PERF-003,Matcher,P0,Core,Cross-platform,Longest allowed trigger,No unbounded retained buffer or latency spike,DAdversarial,NOT_RUN
+PERF-004,Matcher,P0,Core,Cross-platform,Rapid synthetic Unicode sequences,No normalization errors; latency recorded,D10,NOT_RUN
+PERF-005,Matcher,P0,Core,Cross-platform,Alternating hit and miss,Accurate result with stable latency,D10,NOT_RUN
+PERF-006,Matcher,P0,Core,Cross-platform,Repeated Backspace and retype,"Deterministic state, no accidental match",D10,NOT_RUN
+PERF-007,Matcher,P0,Core,Cross-platform,Focus break event during prefix,Reset state; never match across contexts,D10,NOT_RUN
+PERF-008,Matcher,P0,Core,Cross-platform,10k disabled snippets,"Disabled never match, no unreasonable overhead",D10,NOT_RUN
+PERF-009,Matcher,P0,Core,Cross-platform,50k matcher exploratory,Correct output and p99 measured vs PB-02,D50,NOT_RUN
+PERF-010,Matcher,P0,Core,Cross-platform,Multi-group trigger scope changes,No stale disabled group match after snapshot publish,D10,NOT_RUN
+PERF-011,Matcher,P0,Core,Cross-platform,Collision precedence on identical trigger,Ambiguity reported and no random expansion,DAdversarial,NOT_RUN
+PERF-012,Matcher,P0,Core,Cross-platform,NFC equivalent trigger forms,"Correct match, original text preserved",D10,NOT_RUN
+PERF-013,Callback & backpressure,P0,Application fake,Cross-platform,Bounded queue fills after slow consumer,"Session becomes untrusted, no false expansion",D10,NOT_RUN
+PERF-014,Callback & backpressure,P0,Application fake,Cross-platform,Event lost during input sequence,No subsequent auto expansion until resync,D10,NOT_RUN
+PERF-015,Callback & backpressure,P0,Application fake,Cross-platform,Focus event during queued keystrokes,Previous session invalidated in order,D10,NOT_RUN
+PERF-016,Callback & backpressure,P0,Application fake,Cross-platform,IME composition noncommitted events,No expansion while composition ongoing,D10,NOT_RUN
+PERF-017,Callback & backpressure,P0,Application fake,Cross-platform,Batch 10000 synthetic text events,Order preserved and queue bounded,D10,NOT_RUN
+PERF-018,Callback & backpressure,P0,Application fake,Cross-platform,Input flood while import running,Input remains responsive or conservatively suppresses,D10,NOT_RUN
+PERF-019,Callback & backpressure,P0,Application fake,Cross-platform,Duplicate focus notifications,"Idempotent session reset, bounded work",D1,NOT_RUN
+PERF-020,Callback & backpressure,P0,Application fake,Cross-platform,UI message flood while engine idle,"Engine not starved, no busy polling",D1,NOT_RUN
+PERF-021,Callback & backpressure,P0,Application fake,Cross-platform,Pause requested mid-prefix,"No match after pause, buffer cleared",D1,NOT_RUN
+PERF-022,Callback & backpressure,P0,Application fake,Cross-platform,Resume after pause,No stale prefix used,D1,NOT_RUN
+PERF-023,Callback & backpressure,P0,Application fake,Cross-platform,Overflow plus Backspace,State reset; no deletion in target,DAdversarial,NOT_RUN
+PERF-024,Callback & backpressure,P0,Application fake,Cross-platform,Very long held key repeats,"Capacity bounded, no false match",DAdversarial,NOT_RUN
+PERF-025,Snapshots & consistency,P0,Integration fake,Cross-platform,Rebuild index while typing,Old snapshot coherent until atomic swap,D10,NOT_RUN
+PERF-026,Snapshots & consistency,P0,Integration fake,Cross-platform,Fast two successive library edits,Only newest committed revision active,D10,NOT_RUN
+PERF-027,Snapshots & consistency,P0,Integration fake,Cross-platform,Invalid trigger compilation,No invalid snapshot publication,DAdversarial,NOT_RUN
+PERF-028,Snapshots & consistency,P0,Integration fake,Cross-platform,Commit fails after index prepared,Active revision unchanged,D10,NOT_RUN
+PERF-029,Snapshots & consistency,P0,Integration fake,Cross-platform,Crash between commit and publish,Next start recovers persisted revision,D10,NOT_RUN
+PERF-030,Snapshots & consistency,P0,Integration fake,Cross-platform,Snapshot swap with active expansion,Current operation retains stable revision,D10,NOT_RUN
+PERF-031,Snapshots & consistency,P0,Integration fake,Cross-platform,Group disable during prefix,"Session invalidated, no stale expansion",D10,NOT_RUN
+PERF-032,Snapshots & consistency,P0,Integration fake,Cross-platform,Parallel picker search and snapshot rebuild,No cross-thread mutation or index corruption,D10,NOT_RUN
+PERF-033,Snapshots & consistency,P0,Integration fake,Cross-platform,Memory held after repeated rebuild,No unbounded old snapshots retained,D10,NOT_RUN
+PERF-034,Snapshots & consistency,P0,Integration fake,Cross-platform,Cancel rebuild before commit,No publication and no data loss,D10,NOT_RUN
+PERF-035,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Search 10k for one exact snippet,First results P95 PB-04 and correct ranking,D10,NOT_RUN
+PERF-036,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Search no hits,Fast empty result and no stale rows,D10,NOT_RUN
+PERF-037,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Search query sequence a ab abc,Only latest query results shown,D10,NOT_RUN
+PERF-038,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Open picker warm index,P95 PB-05 and search focus ready,D10,NOT_RUN
+PERF-039,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Open picker cold emoji index,"Responsive UI, correct lazy initialization",D10,NOT_RUN
+PERF-040,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Scroll list 10000 rows,Virtualized elements and no UI freeze,D10,NOT_RUN
+PERF-041,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Live theme switch during search,No lost keyboard focus or input stall,D10,NOT_RUN
+PERF-042,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Live language switch during search,No query loss and labels update,D10,NOT_RUN
+PERF-043,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Preview very large snippet,"Preview bounded, full text only on demand",DAdversarial,NOT_RUN
+PERF-044,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Search 50k snippets,Latency and allocation recorded; correct results,D50,NOT_RUN
+PERF-045,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Rapid picker open close 100 times,"No stale windows, timers or focus leak",D10,NOT_RUN
+PERF-046,Picker & GUI,P0,Desktop,Windows;macOS;Linux,Tray window restore under load,UI opens without blocking engine,D10,NOT_RUN
+PERF-047,Storage & memory,P0,Integration,Cross-platform,Cold start 10k on SSD,Time to Ready P95 PB-06 measured,D10,NOT_RUN
+PERF-048,Storage & memory,P0,Integration,Cross-platform,Empty DB startup,No error and quick ready state,D0,NOT_RUN
+PERF-049,Storage & memory,P0,Integration,Cross-platform,Corrupt persisted file at boot,Degraded/recovery; no partial matcher active,DAdversarial,NOT_RUN
+PERF-050,Storage & memory,P0,Integration,Cross-platform,Import 10k while typing,UI no continuous freeze > PB-09,D10,NOT_RUN
+PERF-051,Storage & memory,P0,Integration,Cross-platform,Backup while matcher active,"Consistent backup, no input stall",D10,NOT_RUN
+PERF-052,Storage & memory,P0,Integration,Cross-platform,Cancel import before commit,No partial library publication,D10,NOT_RUN
+PERF-053,Storage & memory,P0,Integration,Cross-platform,Huge snippet within maximum allowed,Memory bound and clear validation,DAdversarial,NOT_RUN
+PERF-054,Storage & memory,P0,Integration,Cross-platform,Repeated index rebuild 100 times,No unbounded cache retention,D10,NOT_RUN
+PERF-055,Storage & memory,P0,Integration,Cross-platform,Emoji catalog load only on demand,No unconditional full processing in hook,D10,NOT_RUN
+PERF-056,Storage & memory,P0,Integration,Cross-platform,Clipboard large formatted payload,"Length/format guard, no persistent sensitive cache",DAdversarial,NOT_RUN
+PERF-057,Storage & memory,P0,Integration,Cross-platform,Memory steady tray 10k,RSS compared to PB-07 with GC/native split,D10,NOT_RUN
+PERF-058,Storage & memory,P0,Integration,Cross-platform,Allocation rate under idle,"Stable after warmup, profiler evidence",D10,NOT_RUN
+PERF-059,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Start duplicate application instance,"Single engine, second request opens GUI",D1,NOT_RUN
+PERF-060,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Close main window with tray available,Engine remains accessible and state explicit,D1,NOT_RUN
+PERF-061,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Close main window with tray unavailable,"Accessible exit/restore path, no invisible orphan",D1,NOT_RUN
+PERF-062,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Explicit Exit while idle,"Hook/hotkey released, shutdown bounded",D1,NOT_RUN
+PERF-063,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Explicit Exit during insertion,No new attempts; uncertain outcome handled safely,D1,NOT_RUN
+PERF-064,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,OS sleep/resume while active,"Input session cleared, capabilities revalidated",D1,NOT_RUN
+PERF-065,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Lock screen/unlock,No stale sequence crosses session,D1,NOT_RUN
+PERF-066,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Layout language switches,Matcher session reset as needed,D1,NOT_RUN
+PERF-067,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Foreground target switches,No text injected into wrong target,D1,NOT_RUN
+PERF-068,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Input permission revoked,Degraded; no privileged bypass,D1,NOT_RUN
+PERF-069,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Secure input activated,No auto expansion until safe again,D1,NOT_RUN
+PERF-070,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Process crash and relaunch,"No corrupt storage, resources recover",D10,NOT_RUN
+PERF-071,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,Open 100 windows over time,No unbounded native handles,D10,NOT_RUN
+PERF-072,Lifecycle & OS,P0,Native manual,Windows;macOS;Linux,24h idle soak,PB-08/PB-12 metrics collected,D10,NOT_RUN
+PERF-073,Output,P0,Native manual,Windows;macOS;Linux,Slow editor plus valid trigger,No overlap; outcome recorded faithfully,D1,NOT_RUN
+PERF-074,Output,P0,Native manual,Windows;macOS;Linux,Two expansions requested concurrently,Single-flight or explicit busy result,D1,NOT_RUN
+PERF-075,Output,P0,Native manual,Windows;macOS;Linux,Clipboard concurrently copied by user,No overwrite of user change,D1,NOT_RUN
+PERF-076,Output,P0,Native manual,Windows;macOS;Linux,Unknown target before commit,No deletion and no unsafe insertion,D1,NOT_RUN
+PERF-077,Output,P0,Native manual,Windows;macOS;Linux,Partial text insertion reports error,No silent replay or destructive rollback,D1,NOT_RUN
+PERF-078,Output,P0,Native manual,Windows;macOS;Linux,30k char snippet expansion,"Duration, memory and behavior measured",DAdversarial,NOT_RUN
+PERF-079,Output,P0,Native manual,Windows;macOS;Linux,Emoji ZWJ snippet output,"Observed exact text, or failure reported",D1,NOT_RUN
+PERF-080,Output,P0,Native manual,Windows;macOS;Linux,IME-sensitive editor,"Capability limits reported, no false success",D1,NOT_RUN
+PERF-081,Soak & instrumentation,P1,Stress,Windows;macOS;Linux,24h tray idle after warmup,No unexplained monotonic growth in RSS/handles/threads,D10,NOT_RUN
+PERF-082,Soak & instrumentation,P1,Stress,Windows;macOS;Linux,Repeated picker show/hide over 8h,No retained views/events/timers,D10,NOT_RUN
+PERF-083,Soak & instrumentation,P1,Stress,Windows;macOS;Linux,Repeated 1000 imports of small changes,"No leaked snapshots, handles or threads",D1,NOT_RUN
+PERF-084,Soak & instrumentation,P1,Stress,Windows;macOS;Linux,Repeated backup failures and recovery,Resources released; valid state retained,D10,NOT_RUN
+PERF-085,Soak & instrumentation,P1,Stress,Windows;macOS;Linux,Tracing enabled vs disabled,Instrumentation overhead measured and controlled,D10,NOT_RUN
+PERF-086,Soak & instrumentation,P1,Stress,Windows;macOS;Linux,Diagnostics export,"No keystrokes, snippet payloads, clipboard data",D10,NOT_RUN
+PERF-087,Soak & instrumentation,P1,Stress,Windows;macOS;Linux,CPU throttling/battery saver,"Correctness retained, lower speed tolerated",D10,NOT_RUN
+PERF-088,Soak & instrumentation,P1,Stress,Windows;macOS;Linux,High OS load during peak typing,"Fail closed on overload, no false match",D10,NOT_RUN

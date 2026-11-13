@@ -1,0 +1,80 @@
+{
+  "schema": "ristretto/startup-profile-validation/1",
+  "source_version": "3.9.0-alpha.20.5",
+  "date": "2026-11-14",
+  "environment": {
+    "os": "Windows",
+    "dotnet_sdk": "10.0.201",
+    "dotnet_runtime": "10.0.5"
+  },
+  "release_builds": {
+    "solution": "PASS",
+    "windows_lab": "PASS_COMPILED_NOT_RUN",
+    "core_benchmark": "PASS_COMPILED_NOT_RUN",
+    "replacement_lab": "PASS_COMPILED_NOT_RUN",
+    "ui_review": "PASS_COMPILED_NOT_RUN"
+  },
+  "xunit": {
+    "passed": 588,
+    "failed": 0,
+    "skipped": 0,
+    "new_profile_cases": 30,
+    "existing_picker_viewmodel_cases": 50
+  },
+  "startup_cli": {
+    "status": "PASS",
+    "passed": 10,
+    "report": "STARTUP_PROFILE_CLI.json",
+    "gui_started": false,
+    "database_opened": false
+  },
+  "checks": {
+    "source_audit": "PASS",
+    "static_audit": "PASS",
+    "python_unit_tests_passed": 7
+  },
+  "roadmap": {
+    "R1.01": "COMPLETE",
+    "R1.02": "PARTIAL: synthetic SQLite/settings/backups and real mutex/pipe/secondary activation passed; physical aliases and real global hotkey conflict pending"
+  },
+  "fix": "Allow picker.hotkey in SQLite settings allowlist; ViewModel save and reopen tested with None and Ctrl+Alt+K",
+  "restore": "Local NuGet package cache; online vulnerability audit not run; no TLS or signature verification disabled",
+  "limitations": [
+    "Preflight checks directory write access only, not database validity or instance availability",
+    "Path-alias lease guard implemented; actual symlink/junction test pending",
+    "Legacy location tested with synthetic user directory; real personal profile not accessed",
+    "Startup diagnostics use stderr; use dotnet Ristretto.dll to capture them for the WinExe build"
+  ],
+  "not_run": [
+    "Avalonia windows/backend",
+    "real global hotkey registration or conflicts",
+    "actual symlink/junction alias",
+    "actual clipboard, keyboard routing, native paste and external editor",
+    "VS Code or its extension host",
+    "Node and native suites from prior baseline",
+    "online NuGet vulnerability audit"
+  ],
+  "source_sha256": {
+    "src/TextExpander.Desktop/Program.cs": "703f5a48eb9e9f545fd9955d86f347bf093ef0c5a83f60246903c8d4431bc1ef",
+    "src/TextExpander.Desktop/App.axaml.cs": "3d9e9b071d4bc0274f7d12a0272f03551594ff0d4a8e8f66e8f4a28a1ba863d9",
+    "src/TextExpander.Desktop/Startup/ApplicationProfile.cs": "3490d796f074a5f1fbcaac505354b90d278b3995a794ad7209b1f054c4ee0095",
+    "src/TextExpander.Desktop/Startup/StartupOptions.cs": "3503a7d6d198ec8c190e9bb39b82e81d1480373a9bb6857ec4f0eedcb10fd128",
+    "src/TextExpander.Desktop/Startup/StartupCommand.cs": "d08d43c66d16efd0adb5682ca6eee5c72cd18862844fb372b6b66c1b0a060daf",
+    "src/TextExpander.Desktop/SingleInstance/SingleInstanceHost.cs": "8a4fbef8c4fca70da9d34c3c83b7982dd1d8836eaacecff70f61d33cd1ae48ef",
+    "src/TextExpander.Infrastructure/Storage/SqliteLibraryStore.cs": "a73e2e03dc4603d529b3b52df82dd5b19091805c867a2a0c66dcc1307da57881",
+    "tests/TextExpander.Tests/StartupProfileTests.cs": "e2129e93096727425f28c58bf8dd871fece9c3b7b419f82a0b685f5c233d2ad9",
+    "scripts/check_startup_profile.py": "3fa81bab694e90b801a0bbc012d2cea21c5dd0a031a06f481bdd2edc6c20db0c"
+  },
+  "fresh_extraction": {
+    "status": "PASS",
+    "initial_bin_obj_present": false,
+    "manifest_sha256_verified": true,
+    "solution_and_four_tools_release": "PASS",
+    "xunit_passed": 588,
+    "cli_passed": 10,
+    "python_unit_tests_passed": 7,
+    "source_audit": "PASS",
+    "static_audit": "PASS",
+    "functional_sources_and_versions_match": true
+  }
+}

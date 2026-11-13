@@ -1,0 +1,80 @@
+id,category,scenario,input,expected,platforms,test_layer,priority,why,status
+TRG-001,Boundaries,Trigger inizio parola,test: sig,Match solo se boundary soddisfatto,all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-002,Boundaries,Trigger dentro altra parola,assign,No match per trigger whole-word sig,all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-003,Boundaries,Nessun spazio prima,abc;sig,Regola anywhere espande; start-of-word decide NO,all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-004,Boundaries,Unicode parola greca,κόσμος,"Boundary linguistico definito, non ASCII",all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-005,Boundaries,Parola CJK,日本語,Nessuna segmentazione ASCII presunta,all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-006,Boundaries,Trattino e underscore,user_name,Boundary conforme alla policy,all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-007,Boundaries,Apostrofo tipografico,l’amico,Boundary conforme alla policy,all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-008,Boundaries,Emoji prima del trigger,😀;sig,"Matching da committed text, nessun input duplicato",all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-009,Boundaries,Start of field,;sig,Trigger attivabile senza precedente spazio,all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-010,Boundaries,Word at end field,ther,Rimandare se necessita delimitatore,all,unit,P0,Semantica boundary stabile,NOT_RUN
+TRG-011,Delimiter,Immediato prefisso,;sig,Espansione sul completamento trigger,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-012,Delimiter,Space keep,sig ,Sostituzione + spazio conservato,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-013,Delimiter,Space drop,sig ,Sostituzione senza spazio,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-014,Delimiter,Punteggiatura keep,sig.,Contenuto + punto,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-015,Delimiter,Punteggiatura drop,"sig,",Contenuto senza virgola,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-016,Delimiter,Tab come action,sig<TAB>,Non trattare automaticamente TAB come stringa,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-017,Delimiter,Enter come action,sig<ENTER>,Policy esplicita per Enter,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-018,Delimiter,Delimitatore Unicode ideografico,sig。,Policy custom applicata,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-019,Delimiter,Ripetizione delimitatore,sig  ,Una sola espansione,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-020,Delimiter,Esc rifiuta suggerimento,sig<ESC>,Nessuna espansione,all,unit+e2e,P0,Delimiter exact keep/drop,NOT_RUN
+TRG-021,Collision,Trigger identici,sig(x2),Collisione interna segnalata,all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-022,Collision,Case-fold collision,SIG/sig,Collisione secondo CaseMode,all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-023,Collision,NFC collision,é / e+◌́,Rilevare collisione solo con NFC matching,all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-024,Collision,Overlapping suffix,hello/llo,Deterministico senza scelta casuale,all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-025,Collision,Applicazione vs globale,sig global+app,"Scope specifico candidato, ADR pending",all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-026,Collision,Gruppo disabilitato,sig disabled,Nessun match dalla regola disabilitata,all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-027,Collision,Import duplicati,sig two imported,"Preview avvisa, non sostituisce silenziosamente",all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-028,Collision,Macro di sistema stesso trigger,sig OS builtin,Nessuna pretesa override universale,all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-029,Collision,Due expander concorrenti,sig competing app,"Diagnostica, nessun output garantito",all,unit+e2e,P0,Conflitti espliciti,NOT_RUN
+TRG-030,Case and normalization,Sensibile,sig/SIG,Differenziare come policy,all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-031,Case and normalization,Insensitive invariant,sig/SIG,Confronto definito e riproducibile,all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-032,Case and normalization,Turkish I,I/ı/İ/i,"Confronti secondo policy, non ToLower casuale",all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-033,Case and normalization,Greek sigma,Σ/σ/ς,Confronti secondo policy,all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-034,Case and normalization,Sharp S,Straße/STRASSE,No equivalenza inattesa,all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-035,Case and normalization,Composed accent,é/e+◌́,"Storage distinto, match secondo policy",all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-036,Case and normalization,Accents vs insensitive,café/cafe,Case folding non rimuove diacritici,all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-037,Case and normalization,Emoji VS16,❤/❤️,No equivalenza silenziosa,all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-038,Case and normalization,Case propagation testo codice,SELECT/Select,Non alterare payload senza richiesta,all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-039,Case and normalization,Unicode boundary no ASCII,مرحبا,Nessun match su frammenti UTF16,all,unit,P0,Unicode sicuro,NOT_RUN
+TRG-040,IME and input,IME composition provisional,にほんご provisional,No match before commit,Windows/macOS/Linux,native,P0,IME committed text,NOT_RUN
+TRG-041,IME and input,IME commit,日本語 committed,Candidate dopo commit se supportato,Windows/macOS/Linux,native,P0,IME committed text,NOT_RUN
+TRG-042,IME and input,IME cancellation,composition cancelled,Buffer invalidato,Windows/macOS/Linux,native,P0,IME committed text,NOT_RUN
+TRG-043,IME and input,Dead key accent,´ + e,"Riconoscere testo committato, non tasti",Windows/macOS/Linux,native,P0,IME committed text,NOT_RUN
+TRG-044,IME and input,AltGr symbol,AltGr+key,Non trattare Ctrl+Alt come shortcut casuale,Windows/macOS/Linux,native,P0,IME committed text,NOT_RUN
+TRG-045,IME and input,Keyboard layout switch,US -> IT,Buffer invalidato se identità testo incerta,Windows/macOS/Linux,native,P0,IME committed text,NOT_RUN
+TRG-046,IME and input,IME Korean composition,ㅎㅏㄴ provisional,Nessuna espansione provvisoria,Windows/macOS/Linux,native,P0,IME committed text,NOT_RUN
+TRG-047,IME and input,CJK paste vs typed,中文,Distinguere input evento/clipboard,Windows/macOS/Linux,native,P0,IME committed text,NOT_RUN
+TRG-048,Focus and navigation,Focus other app,sig -> AltTab,Reset e abort,all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-049,Focus and navigation,Caret moved left,;si<LEFT>g,No match cross-caret,all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-050,Focus and navigation,Text selected mid trigger,;si<SELECT>g,No match cross-selection,all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-051,Focus and navigation,Click mouse outside,;si<CLICK>g,Reset,all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-052,Focus and navigation,Remote desktop disconnect,;sig RDP disconnect,Abort safe,all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-053,Focus and navigation,Window title changes,;sig context changed,Identità target rivalidata,all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-054,Focus and navigation,Picker target gone,picker -> close app,"No insertion, copy-only optional",all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-055,Focus and navigation,Shortcut during trigger,;si<CTRL+C>g,Reset as needed,all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-056,Focus and navigation,Secure input activated,;sig secure field,Fail closed,all,native+e2e,P0,No deletions on target mismatch,NOT_RUN
+TRG-057,Deletion,UTF16 surrogate,👍🏽,Non derivare backspaces da string.Length,all,native+e2e,P0,Cancellazione affidabile,NOT_RUN
+TRG-058,Deletion,ZWJ family,👨‍👩‍👧‍👦,Evitare cancellazione parziale,all,native+e2e,P0,Cancellazione affidabile,NOT_RUN
+TRG-059,Deletion,Combining accent,e+◌́,Strategia per target o Unsupported,all,native+e2e,P0,Cancellazione affidabile,NOT_RUN
+TRG-060,Deletion,RTL caret,עברית,Non confondere visual/logical order,all,native+e2e,P0,Cancellazione affidabile,NOT_RUN
+TRG-061,Deletion,Non text focus,;sig in game,Nessuna cancellazione distruttiva,all,native+e2e,P0,Cancellazione affidabile,NOT_RUN
+TRG-062,Deletion,Deletion failed,trigger remains,No blind insert,all,native+e2e,P0,Cancellazione affidabile,NOT_RUN
+TRG-063,Deletion,Removal ok paste fail,removed then paste fails,"PartialFailure, no false rollback",all,native+e2e,P0,Cancellazione affidabile,NOT_RUN
+TRG-064,"Output, clipboard and diagnostics",Clipboard changed concurrently,copy user during paste,Non ripristinare vecchia copia sopra nuova,all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-065,"Output, clipboard and diagnostics",Clipboard rich formats,image/html/text,Nessuna perdita silenziosa se non supportato,all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-066,"Output, clipboard and diagnostics",Clipboard manager interference,clipboard watcher active,"Stato conflitto, alternative",all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-067,"Output, clipboard and diagnostics",Paste delay app slow,slow editor,"Outcome misurato, no hardcoding claim",all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-068,"Output, clipboard and diagnostics",Log safe,secret payload,Nessun testo o trigger nei log,all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-069,"Output, clipboard and diagnostics",Synthetic recursion,generated trigger,No re-trigger automatico,all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-070,"Output, clipboard and diagnostics",Disable group while typing,;si + disable,No stale match,all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-071,"Output, clipboard and diagnostics",Unicode result RTL,العربية + ABC123,Bytes preservati e output separato,all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-072,"Output, clipboard and diagnostics",Editor browser autocorrect,sig -> Google Docs,Interazione editor documentata,all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-073,"Output, clipboard and diagnostics",Target clipboard unsupported,target no paste,Fallback copy-only,all,native+e2e,P0,Outcome dettagliato,NOT_RUN
+TRG-074,Performance and lifecycle,10k snippets suffix,10k matches,CPU/memory benchmark da misurare,all,unit+native,P0,Concorrenza prestazioni,NOT_RUN
+TRG-075,Performance and lifecycle,Repeated trigger,;sig;sig,Nessuna contaminazione,all,unit+native,P0,Concorrenza prestazioni,NOT_RUN
+TRG-076,Performance and lifecycle,Rapid typing after match,;sigx,Policy di delimitatore rispettata,all,unit+native,P0,Concorrenza prestazioni,NOT_RUN
+TRG-077,Performance and lifecycle,App suspend/resume,sleep/wake,Capability rivalidata,all,unit+native,P0,Concorrenza prestazioni,NOT_RUN
+TRG-078,Performance and lifecycle,Exit while expansion,shutdown mid-flight,Stato noto e no hook residui,all,unit+native,P0,Concorrenza prestazioni,NOT_RUN
+TRG-079,Performance and lifecycle,Permission revoked live,accessibility revoked,Non eseguire output senza permesso,all,unit+native,P0,Concorrenza prestazioni,NOT_RUN

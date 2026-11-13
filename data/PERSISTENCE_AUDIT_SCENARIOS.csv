@@ -1,0 +1,110 @@
+ID,Area,Priority,Scenario,Expected_Contract,Status,Result,Evidence
+DAT-001,BeeftextRoot,P0,JSON v10 con groups e combos validi,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-002,BeeftextRoot,P0,Root JSON non oggetto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-003,BeeftextRoot,P0,Root privo di fileFormatVersion,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-004,BeeftextRoot,P0,fileFormatVersion tipo stringa,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-005,BeeftextRoot,P0,fileFormatVersion maggiore di 10,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-006,BeeftextRoot,P0,combos non array,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-007,BeeftextRoot,P0,groups non array,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-008,BeeftextRoot,P0,combo non oggetto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-009,BeeftextRoot,P0,gruppo non oggetto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-010,BeeftextRoot,P0,JSON troncato a metà,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-011,BeeftextRoot,P0,file vuoto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-012,BeeftextRoot,P0,file con BOM UTF-8,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-013,BeeftextFields,P1,UUID combo mancante,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-014,BeeftextFields,P1,UUID combo duplicato,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-015,BeeftextFields,P1,UUID gruppo duplicato,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-016,BeeftextFields,P1,gruppo referenziato inesistente,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-017,BeeftextFields,P1,nome gruppo vuoto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-018,BeeftextFields,P1,snippet vuoto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-019,BeeftextFields,P1,keyword vuota ma snippet non vuoto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-020,BeeftextFields,P1,timestamp ISO con Z,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-021,BeeftextFields,P1,timestamp con offset positivo,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-022,BeeftextFields,P1,timestamp invalido,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-023,BeeftextFields,P1,matchingMode valore -1,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-024,BeeftextFields,P1,matchingMode valore 9,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-025,BeeftextFields,P1,caseSensitivity valore 9,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-026,BeeftextFields,P1,combo enabled=false,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-027,BeeftextFields,P1,gruppo enabled=false,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-028,BeeftextFields,P1,useHtml=true legacy,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-029,BeeftextLegacy,P1,v1 comboText/substitutionText,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-030,BeeftextLegacy,P1,v2 keyword/snippet,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-031,BeeftextLegacy,P1,v3 created e lastModified rinominati,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-032,BeeftextLegacy,P1,v8 useLooseMatch,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-033,BeeftextLegacy,P1,v9 matchingMode senza descrizione,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-034,BeeftextLegacy,P1,v10 description e caseSensitivity,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-035,BeeftextLegacy,P1,legacy gruppo assente,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-036,BeeftextLegacy,P1,legacy lastUse separato e UUID sconosciuto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-037,BeeftextExport,P1,Backup con gruppi e associazioni,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-038,BeeftextExport,P1,JSON export senza gruppi,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-039,BeeftextExport,P1,CSV tre colonne senza intestazione,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-040,BeeftextExport,P1,CSV multilinea quotato,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-041,BeeftextExport,P1,CSV con virgola e doppi apici,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-042,BeeftextExport,P1,CSV header erroneo,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-043,BeeftextExport,P1,CSV con nome vuoto,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-044,BeeftextExport,P1,CSV con UTF-8 BOM,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-045,BeeftextExport,P1,CSV invalid UTF-8,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-046,BeeftextExport,P1,CSV con più di tre colonne,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-047,BeeftextExport,P1,CSV campo formula =SUM(1+1),Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-048,BeeftextExport,P1,CSV con fullwidth ＝,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-049,BeeftextExport,P1,Cheat sheet CSV quattro colonne da non scambiare per import,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-050,EspansoYaml,P1,matches trigger/replace semplici,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-051,EspansoYaml,P1,matches triggers multipli,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-052,EspansoYaml,P1,match replace multilinea,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-053,EspansoYaml,P1,macro date,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-054,EspansoYaml,P1,form e form_fields,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-055,EspansoYaml,P1,variabile shell NON eseguita,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-056,EspansoYaml,P1,variabile script NON eseguita,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-057,EspansoYaml,P1,regex non attivata,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-058,EspansoYaml,P1,YAML include verso file locale,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-059,EspansoYaml,P1,YAML include fuori root,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-060,EspansoYaml,P1,symlink include fuori root,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-061,EspansoYaml,P1,include circolare,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-062,EspansoYaml,P1,alias YAML nidificati eccessivi,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-063,EspansoYaml,P1,YAML tag custom,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-064,EspansoYaml,P1,YAML UTF-8 invalid,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-065,EspansoYaml,P1,YAML testo arabo,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-066,EspansoYaml,P1,YAML immagini image_path esterno,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-067,EspansoYaml,P1,YAML config app per Wayland dichiarata limitata,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-068,Unicode,P0,accento precomposto é,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-069,Unicode,P0,accento decomposto e + combining,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-070,Unicode,P0,emoji famiglia ZWJ,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-071,Unicode,P0,emoji modificatore tonalità,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-072,Unicode,P0,emoji flag regional indicator,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-073,Unicode,P0,greco e cirillico,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-074,Unicode,P0,testo RTL arabo con numeri,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-075,Unicode,P0,CJK e surrogate pair UTF-16,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-076,Unicode,P0,newline CRLF preservato,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-077,Unicode,P0,newline LF preservato,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-078,Unicode,P0,tab e spazi finali,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-079,Unicode,P0,caratteri nulli/control,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-080,Unicode,P0,body Unicode 1 MiB,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-081,Unicode,P0,trigger Unicode collidente dopo NFC,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-082,Transactions,P0,Annullamento preview senza mutazioni,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-083,Transactions,P0,Crash prima della preparazione,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-084,Transactions,P0,Crash dopo snapshot prima del commit,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-085,Transactions,P0,Crash a metà commit,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-086,Transactions,P0,Disco pieno nella scrittura,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-087,Transactions,P0,Permesso negato al salvataggio,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-088,Transactions,P0,Backup non validabile,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-089,Transactions,P0,Backup checksum non corrisponde,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-090,Transactions,P0,Restore versione futura,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-091,Transactions,P0,Conflitto trigger in import multiplo,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-092,Transactions,P0,Conflitto UUID in import multiplo,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-093,Transactions,P0,Import ripetuto idempotente,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-094,Transactions,P0,Snapshot WAL con write concorrente,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-095,Transactions,P0,Restore simultaneo da due istanze,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-096,Transactions,P0,Retention preserva ultimo snapshot sano,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-097,Transactions,P0,Percorso portable su volume removibile,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-098,ScaleSecurity,P2,1 snippet,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-099,ScaleSecurity,P2,100 snippet,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-100,ScaleSecurity,P2,1000 snippet,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-101,ScaleSecurity,P2,10000 snippet,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-102,ScaleSecurity,P2,100000 snippet test opzionale,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-103,ScaleSecurity,P2,Zip con path traversal,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-104,ScaleSecurity,P2,Zip bomb rapporto compressione estremo,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-105,ScaleSecurity,P2,Report diagnostico non contiene testo snippet,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-106,ScaleSecurity,P2,Esportazione CSV per spreadsheet opt-in,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-107,ScaleSecurity,P2,Input JSON nesting eccessivo,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-108,ScaleSecurity,P2,Import dati sconosciuti preservati come inerti,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8
+DAT-109,ScaleSecurity,P2,File modificato fra preview e commit,Data is unchanged on failed/aborted operation; the applicable mapping and warnings match the documented contract,NOT_RUN,,Audit v1.8

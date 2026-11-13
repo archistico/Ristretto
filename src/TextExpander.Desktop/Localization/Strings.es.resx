@@ -1,0 +1,375 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Ristretto</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Fragmentos rápidos sin distracciones</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Grupos</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Nombre del grupo</value>
+  </data>
+  <data name="AddGroup" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="Snippets" xml:space="preserve">
+    <value>Fragmentos</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Buscar…</value>
+  </data>
+  <data name="NewSnippet" xml:space="preserve">
+    <value>Nuevo fragmento</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="TriggerLabel" xml:space="preserve">
+    <value>Activador</value>
+  </data>
+  <data name="ContentLabel" xml:space="preserve">
+    <value>Texto de expansión</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Activado</value>
+  </data>
+  <data name="PreviewTitle" xml:space="preserve">
+    <value>Prueba de coincidencia local</value>
+  </data>
+  <data name="PreviewInput" xml:space="preserve">
+    <value>Escribe texto que termine con un activador</value>
+  </data>
+  <data name="PreviewRun" xml:space="preserve">
+    <value>Probar</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Crear copia</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restaurar copia</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>La expansión automática aún no está disponible: los adaptadores nativos llegarán después.</value>
+  </data>
+  <data name="SelectGroup" xml:space="preserve">
+    <value>Elige un grupo</value>
+  </data>
+  <data name="StatusReady" xml:space="preserve">
+    <value>Biblioteca lista</value>
+  </data>
+  <data name="StatusSaved" xml:space="preserve">
+    <value>Fragmento guardado</value>
+  </data>
+  <data name="StatusGroupCreated" xml:space="preserve">
+    <value>Grupo creado</value>
+  </data>
+  <data name="StatusDeleted" xml:space="preserve">
+    <value>Fragmento eliminado</value>
+  </data>
+  <data name="StatusBackup" xml:space="preserve">
+    <value>Copia SQLite creada</value>
+  </data>
+  <data name="StatusRestored" xml:space="preserve">
+    <value>Copia restaurada</value>
+  </data>
+  <data name="StatusNoMatch" xml:space="preserve">
+    <value>Ningún activador coincide</value>
+  </data>
+  <data name="StatusAmbiguous" xml:space="preserve">
+    <value>Activadores en conflicto</value>
+  </data>
+  <data name="StatusMatched" xml:space="preserve">
+    <value>Coincidencia: {0}</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>¿Eliminar el fragmento seleccionado?</value>
+  </data>
+  <data name="ConfirmRestore" xml:space="preserve">
+    <value>¿Restaurar esta copia? Se guardará una copia de recuperación.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="ChooseBackup" xml:space="preserve">
+    <value>Elegir copia SQLite</value>
+  </data>
+  <data name="StatusError" xml:space="preserve">
+    <value>Error: {0}</value>
+  </data>
+  <data name="GroupDisabled" xml:space="preserve">
+    <value>Desactivado</value>
+  </data>
+  <data name="EditSnippet" xml:space="preserve">
+    <value>Editar fragmento</value>
+  </data>
+  <data name="OpenPicker" xml:space="preserve">
+    <value>Selector rápido</value>
+  </data>
+  <data name="PickerHeading" xml:space="preserve">
+    <value>Fragmentos rápidos</value>
+  </data>
+  <data name="PickerSearchHint" xml:space="preserve">
+    <value>Buscar nombre, activador, descripción o texto…</value>
+  </data>
+  <data name="PickerInstructions" xml:space="preserve">
+    <value>Intro: insertar primer resultado · Esc: cerrar</value>
+  </data>
+  <data name="PickerOpenLibrary" xml:space="preserve">
+    <value>Biblioteca</value>
+  </data>
+  <data name="PickerCopy" xml:space="preserve">
+    <value>Copiar texto</value>
+  </data>
+  <data name="PickerCopied" xml:space="preserve">
+    <value>Texto copiado. Pégalo en la aplicación de destino.</value>
+  </data>
+  <data name="PickerManualNotice" xml:space="preserve">
+    <value>Copiar o insertar manualmente. La expansión automática de disparadores aún no está activa.</value>
+  </data>
+  <data name="PickerClipboardUnavailable" xml:space="preserve">
+    <value>Portapapeles no disponible.</value>
+  </data>
+  <data name="TrayOpen" xml:space="preserve">
+    <value>Abrir biblioteca</value>
+  </data>
+  <data name="TrayPicker" xml:space="preserve">
+    <value>Selector rápido</value>
+  </data>
+  <data name="TrayExit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="GroupEditName" xml:space="preserve">
+    <value>Nombre del grupo</value>
+  </data>
+  <data name="GroupRename" xml:space="preserve">
+    <value>Renombrar</value>
+  </data>
+  <data name="GroupEnable" xml:space="preserve">
+    <value>Activar</value>
+  </data>
+  <data name="GroupDisable" xml:space="preserve">
+    <value>Desactivar</value>
+  </data>
+  <data name="GroupDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="ConfirmDeleteGroup" xml:space="preserve">
+    <value>¿Eliminar este grupo vacío? No se pueden eliminar grupos que contienen fragmentos.</value>
+  </data>
+  <data name="StatusGroupUpdated" xml:space="preserve">
+    <value>Grupo actualizado.</value>
+  </data>
+  <data name="StatusGroupDeleted" xml:space="preserve">
+    <value>Grupo vacío eliminado.</value>
+  </data>
+  <data name="DiscardChangesQuestion" xml:space="preserve">
+    <value>¿Descartar los cambios no guardados del fragmento actual?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>● Cambios sin guardar</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importar JSON</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Exportar JSON</value>
+  </data>
+  <data name="ChooseImport" xml:space="preserve">
+    <value>Importar fragmentos desde JSON</value>
+  </data>
+  <data name="ChooseExport" xml:space="preserve">
+    <value>Exportar fragmentos a JSON</value>
+  </data>
+  <data name="StatusImported" xml:space="preserve">
+    <value>Se importaron {0} grupos y {1} fragmentos.</value>
+  </data>
+  <data name="StatusExported" xml:space="preserve">
+    <value>Fragmentos exportados</value>
+  </data>
+  <data name="ExportUnsavedQuestion" xml:space="preserve">
+    <value>La exportación JSON incluirá solo los elementos guardados, no los cambios pendientes. ¿Continuar?</value>
+  </data>
+  <data name="ImportPreviewTitle" xml:space="preserve">
+    <value>Vista previa de importación</value>
+  </data>
+  <data name="ImportPreviewCounts" xml:space="preserve">
+    <value>Origen: {0} • Grupos: {1} • Fragmentos: {2} • Omitidos: {3}</value>
+  </data>
+  <data name="ImportNativePolicy" xml:space="preserve">
+    <value>Importación JSON nativa: los fragmentos conservan su estado. No se sobrescriben los datos existentes.</value>
+  </data>
+  <data name="ImportExternalDisabled" xml:space="preserve">
+    <value>Los fragmentos externos se importan desactivados por seguridad. Revisa disparadores, contenido y opciones antes de activarlos.</value>
+  </data>
+  <data name="ImportWarnings" xml:space="preserve">
+    <value>Avisos: {0}</value>
+  </data>
+  <data name="ImportMoreWarnings" xml:space="preserve">
+    <value>Hay más avisos que no aparecen aquí.</value>
+  </data>
+  <data name="ImportItemsTitle" xml:space="preserve">
+    <value>Fragmentos a añadir</value>
+  </data>
+  <data name="ImportMoreItems" xml:space="preserve">
+    <value>Otros fragmentos no se muestran en el resumen.</value>
+  </data>
+  <data name="ImportConfirm" xml:space="preserve">
+    <value>Importar</value>
+  </data>
+  <data name="ImportIssueUnsupported" xml:space="preserve">
+    <value>Opciones no compatibles todavía</value>
+  </data>
+  <data name="ImportIssueDynamic" xml:space="preserve">
+    <value>Contenido dinámico guardado como texto, no ejecutado</value>
+  </data>
+  <data name="ImportIssueSkipped" xml:space="preserve">
+    <value>Elemento omitido: no convertible</value>
+  </data>
+  <data name="ImportIssueCollision" xml:space="preserve">
+    <value>Conflicto de disparador: revisar antes de activar</value>
+  </data>
+  <data name="ImportIssueMetadata" xml:space="preserve">
+    <value>Algunos metadatos no se pueden transferir</value>
+  </data>
+  <data name="ImportIssueNotice" xml:space="preserve">
+    <value>Aviso de importación</value>
+  </data>
+  <data name="ImportReviewRiskPolicy" xml:space="preserve">
+    <value>Los elementos con avisos no se preseleccionan; revísalos antes de importar.</value>
+  </data>
+  <data name="ImportReviewFilter" xml:space="preserve">
+    <value>Filtrar por título, activador o grupo</value>
+  </data>
+  <data name="ImportReviewSafe" xml:space="preserve">
+    <value>Selección segura</value>
+  </data>
+  <data name="ImportReviewSelectVisible" xml:space="preserve">
+    <value>Seleccionar página</value>
+  </data>
+  <data name="ImportReviewClearVisible" xml:space="preserve">
+    <value>Deseleccionar página</value>
+  </data>
+  <data name="ImportReviewPrevious" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="ImportReviewNext" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="ImportReviewNoResults" xml:space="preserve">
+    <value>No hay fragmentos coincidentes.</value>
+  </data>
+  <data name="ImportReviewPage" xml:space="preserve">
+    <value>Página {0} de {1}</value>
+  </data>
+  <data name="ImportReviewSelected" xml:space="preserve">
+    <value>Seleccionados {0}/{1}</value>
+  </data>
+  <data name="ActionsMenu" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+  <data name="GroupManage" xml:space="preserve">
+    <value>Gestionar grupo</value>
+  </data>
+  <data name="PickerHotkeyLabel" xml:space="preserve">
+    <value>Atajo global del selector</value>
+  </data>
+  <data name="PickerHotkeyHint" xml:space="preserve">
+    <value>Ejemplo: Ctrl+Shift+Space. Escribe None para desactivar. Funciona desde la bandeja en Windows.</value>
+  </data>
+  <data name="PickerHotkeyApply" xml:space="preserve">
+    <value>Aplicar atajo</value>
+  </data>
+  <data name="PickerHotkeyInvalid" xml:space="preserve">
+    <value>Combinación incorrecta. Usa Ctrl/Alt + letra, número, F1–F11 o Space.</value>
+  </data>
+  <data name="PickerHotkeyUnsupported" xml:space="preserve">
+    <value>El atajo global aún no está disponible en este sistema.</value>
+  </data>
+  <data name="PickerHotkeyConflict" xml:space="preserve">
+    <value>Atajo ocupado o rechazado por Windows. El anterior sigue activo.</value>
+  </data>
+  <data name="PickerHotkeyDisabled" xml:space="preserve">
+    <value>Atajo global desactivado.</value>
+  </data>
+  <data name="PickerHotkeyRegistered" xml:space="preserve">
+    <value>Atajo activo: {0}</value>
+  </data>
+  <data name="PickerHotkeySaveFailed" xml:space="preserve">
+    <value>No se pudo guardar. Se mantiene el atajo anterior.</value>
+  </data>
+  <data name="PickerHotkeyUnavailable" xml:space="preserve">
+    <value>Servicio de atajos no disponible.</value>
+  </data>
+  <data name="PickerInsert" xml:space="preserve">
+    <value>Insertar</value>
+  </data>
+  <data name="PickerInsertNoTarget" xml:space="preserve">
+    <value>No había ningún editor externo activo al abrir el selector. Usa Copiar.</value>
+  </data>
+  <data name="PickerInsertSubmitted" xml:space="preserve">
+    <value>Comando de pegado enviado; comprueba el resultado en el editor.</value>
+  </data>
+  <data name="PickerInsertFocusChanged" xml:space="preserve">
+    <value>El foco cambió o se rechazó el pegado. Usa Copiar.</value>
+  </data>
+  <data name="PickerInsertUncertain" xml:space="preserve">
+    <value>Resultado del pegado incierto. Comprueba el editor antes de reintentar.</value>
+  </data>
+  <data name="PickerLoading" xml:space="preserve">
+    <value>Cargando fragmentos…</value>
+  </data>
+  <data name="PickerCopyFailed" xml:space="preserve">
+    <value>No se pudo copiar el texto.</value>
+  </data>
+  <data name="PickerOperationPending" xml:space="preserve">
+    <value>Operación en curso…</value>
+  </data>
+</root>

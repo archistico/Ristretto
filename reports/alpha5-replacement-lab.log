@@ -1,0 +1,6 @@
+PASS: riconoscimento NFD -> piano -> sostituzione Unicode/multiriga, delimitatore preservato.
+PASS: il piano consumato non viene eseguito una seconda volta.
+PASS: modifica intervenuta -> rifiuto senza cambiare il testo.
+PASS: ricevuta mancante -> SubmittedUnverified, nessun retry.
+PASS: errore dopo effetto -> PartialOrUnknown, nessun rollback.
+5/5 scenari passati nel SOLO editor simulato. Nessuna compatibilita' nativa attestata.

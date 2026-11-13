@@ -1,0 +1,69 @@
+{
+  "version": "3.9.0-alpha.20.1",
+  "audit_date": "2026-11-13",
+  "origin": "source review of Alpha 20 ZIP",
+  "checks": {
+    "node_adapter": {
+      "status": "PASS",
+      "passed": 32,
+      "failed": 0,
+      "method": "bash scripts/validate-vscode.sh"
+    },
+    "python_audit_tests": {
+      "status": "PASS",
+      "passed": 5,
+      "failed": 0,
+      "method": "python3 -m unittest discover -s scripts -p test_audit_source.py -v"
+    },
+    "internal_namespace_references": {
+      "status": "PASS",
+      "method": "python3 scripts/audit_source.py"
+    },
+    "xml_xaml_localization_links_sqlite_python": {
+      "status": "PASS",
+      "locales": 5,
+      "keys_per_locale": 112,
+      "checked_local_markdown_links": 602,
+      "method": "python3 scripts/validate_static.py"
+    },
+    "gui_static": {
+      "status": "PASS",
+      "method": "python3 scripts/verify_gui_redesign.py"
+    },
+    "dotnet_build": {
+      "status": "NOT_RUN",
+      "reason": ".NET SDK unavailable"
+    },
+    "dotnet_xunit": {
+      "status": "NOT_RUN",
+      "reason": ".NET SDK unavailable"
+    },
+    "dotnet_to_node_export_contract": {
+      "status": "NOT_RUN",
+      "reason": ".NET SDK unavailable"
+    },
+    "windows_native": {
+      "status": "NOT_RUN",
+      "reason": "No Windows desktop runtime"
+    },
+    "vscode_extension_host": {
+      "status": "NOT_RUN",
+      "reason": "Real Extension Development Host not launched"
+    }
+  },
+  "source_scope": {
+    "desktop_core_csharp_and_axaml_unchanged_from_alpha20": true,
+    "changed_areas": [
+      "four auxiliary csproj versions",
+      "Desktop version",
+      "validation and packaging scripts",
+      "new Python reference audit and tests",
+      "canonical documentation and handoff"
+    ]
+  },
+  "historical_evidence_not_revalidated": {
+    "alpha7_xunit_passed": 180,
+    "alpha7_win32_native_passed": 21
+  },
+  "notes": "C# compiler and xUnit results cannot be inferred from Python/Node checks."
+}

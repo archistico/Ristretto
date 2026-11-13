@@ -1,0 +1,26 @@
+{
+  "schema": "ristretto/alpha10-static-source-audit/1",
+  "version": "3.9.0-alpha.10",
+  "status": "STATIC_ONLY_NOT_COMPILED",
+  "baseline": "alpha.9",
+  "gui_core_and_storage_files_unchanged": {
+    "src/TextExpander.Desktop/MainWindow.axaml": true,
+    "src/TextExpander.Desktop/MainWindow.axaml.cs": true,
+    "src/TextExpander.Desktop/PickerWindow.axaml": true,
+    "src/TextExpander.Desktop/PickerWindow.axaml.cs": true,
+    "src/TextExpander.Desktop/ViewModels/MainViewModel.cs": true,
+    "src/TextExpander.Desktop/ViewModels/PickerViewModel.cs": true,
+    "src/TextExpander.Infrastructure/Storage/SqliteLibraryStore.cs": true,
+    "src/TextExpander.Core/Matching/CompiledTriggerCatalog.cs": true,
+    "src/TextExpander.Core/Matching/CommittedInputSession.cs": true,
+    "src/TextExpander.Core/Matching/TriggerActivationSession.cs": true,
+    "src/TextExpander.Application/Features/Output/ExpansionAdmission.cs": true,
+    "tools/Ristretto.WindowsOutputLab/CooperatingProcessLab.cs": true
+  },
+  "native_probe_forbidden_write_or_content_call_patterns_absent": true,
+  "external_replacement_permitted": false,
+  "dotnet_build": "NOT_RUN",
+  "dotnet_xunit": "NOT_RUN",
+  "native_windows_probe": "NOT_RUN",
+  "historical_windows_evidence": "alpha.7; 180 xUnit and 21 native; not rerun here"
+}

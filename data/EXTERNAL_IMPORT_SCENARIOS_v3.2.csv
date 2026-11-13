@@ -1,0 +1,31 @@
+Id,Scenario,Expected,Status
+IMP-001,Beeftext v10 with one group,valid imported disabled,NOT_RUN
+IMP-002,Beeftext export without groups,fallback group linked,NOT_RUN
+IMP-003,Beeftext group UUID with braces and case variants,stable mapping,NOT_RUN
+IMP-004,Beeftext duplicate group UUIDs,rejected without mutation,NOT_RUN
+IMP-005,Beeftext v9/v11,version rejected,NOT_RUN
+IMP-006,Beeftext malformed groups,rejected without mutation,NOT_RUN
+IMP-007,Beeftext missing keyword,skipped with warning,NOT_RUN
+IMP-008,Beeftext legacy matching options,disabled with warning,NOT_RUN
+IMP-009,Beeftext #{...} expression,literal and disabled,NOT_RUN
+IMP-010,Beeftext useHtml true,literal and warning,NOT_RUN
+IMP-011,Espanso plain replace,imported disabled,NOT_RUN
+IMP-012,Espanso triggers array,one snippet per trigger,NOT_RUN
+IMP-013,Espanso shell vars,not executed,NOT_RUN
+IMP-014,Espanso form fields,literal and warning,NOT_RUN
+IMP-015,Espanso regex-only,skipped with warning,NOT_RUN
+IMP-016,Espanso image_path,skipped with warning,NOT_RUN
+IMP-017,Espanso imports reference,not followed,NOT_RUN
+IMP-018,Espanso invalid YAML syntax,no mutation,NOT_RUN
+IMP-019,Espanso huge YAML (>8 MiB),rejected before parse,NOT_RUN
+IMP-020,Espanso deep YAML / cyclic alias,rejected,NOT_RUN
+IMP-021,"Unicode emoji ZWJ, decomposed accents",content preserved,NOT_RUN
+IMP-022,Collision with existing trigger,warning; originals unchanged,NOT_RUN
+IMP-023,Collision within imported file,warning; imported disabled,NOT_RUN
+IMP-024,Cancel preview,no SQLite mutation,NOT_RUN
+IMP-025,SQLite failure mid-import,whole transaction rollback,NOT_RUN
+IMP-026,Native JSON import retains status,backward compatible,NOT_RUN
+IMP-027,No convertible entries,commit disabled,NOT_RUN
+IMP-028,File changed after preview,commit uses preview snapshot,NOT_RUN
+IMP-029,Filesystem permissions / unreadable input,error; no mutation,NOT_RUN
+IMP-030,UI locales five languages,dialog strings present,NOT_RUN

@@ -1,0 +1,75 @@
+{
+  "schema": "ristretto/picker-clipboard-validation/1",
+  "source_version": "3.9.0-alpha.20.3",
+  "date": "2026-11-13",
+  "release_builds": {
+    "solution": "PASS",
+    "windows_lab": "PASS",
+    "core_benchmark": "PASS",
+    "replacement_lab": "PASS",
+    "ui_review": "PASS_COMPILED_NOT_RUN"
+  },
+  "restore": "local NuGet cache; no TLS or signature verification disabled; online vulnerability audit not run",
+  "xunit": {
+    "passed": 550,
+    "failed": 0,
+    "skipped": 0,
+    "viewmodel_cases": 42,
+    "new_cases": 22
+  },
+  "checks": {
+    "source_audit": "PASS",
+    "static_audit": "PASS",
+    "python_unit_tests_passed": 7,
+    "localized_messages": [
+      "en",
+      "it",
+      "fr",
+      "de",
+      "es"
+    ]
+  },
+  "change_scope": [
+    "serialize picker Copy and Insert callbacks",
+    "freeze content at click",
+    "suppress stale copy outcome messages",
+    "retain busy gate across picker reload/dismissal",
+    "preserve new-session Insert permission",
+    "generic localized copy errors without raw exception details"
+  ],
+  "not_run": [
+    "actual clipboard provider",
+    "Avalonia window/dispatcher integration",
+    "real editor paste",
+    "native laboratory scenarios in this increment",
+    "VS Code host",
+    "Node tests in this increment",
+    "UI latency and memory measurements",
+    "online NuGet vulnerability audit"
+  ],
+  "gui_processes_started_for_validation": false,
+  "contains_user_text": false,
+  "source_sha256": {
+    "src/TextExpander.Desktop/ViewModels/PickerViewModel.cs": "535909203d4585f3d1abd232ba97228715ded4c9c89f1c69c1a5a0aee0547b67",
+    "src/TextExpander.Desktop/PickerWindow.axaml.cs": "1a739a343ddbdb81dd755cc3b7447b6bf272d036b56f507e971100b83a8a2e75",
+    "src/TextExpander.Desktop/PickerWindow.axaml": "3344e189ac841f2f6e479e3264492a5f3b0ce4ae77d7ec4e3ea7dba1a955e03e",
+    "src/TextExpander.Desktop/Localization/UiStrings.cs": "612738522d3e71e4c0079506f870b7f833f566cc28e31f9a13716fe3179d27ed",
+    "src/TextExpander.Desktop/Localization/Strings.resx": "bbbb5a4149152c2a9421251aa71de3dcd105a0b7254da0dba0a67f9d54c9010c",
+    "src/TextExpander.Desktop/Localization/Strings.it.resx": "1dfa9ebb91e2faa1a1f8a51c57931e5409a0f978bcea594dbe7ddbf121c34782",
+    "src/TextExpander.Desktop/Localization/Strings.fr.resx": "0ea18902fd0f527b7636c7c02d3c034f7bb6d766068b0ef76a7792e149c413e7",
+    "src/TextExpander.Desktop/Localization/Strings.de.resx": "bab416e1f5858fce1fff153b97487d2e55f22c54ee5666fc1e3c3cfe0fadc59c",
+    "src/TextExpander.Desktop/Localization/Strings.es.resx": "34c88208ca5d3c720516427065596d647f1c34b1a2f99a1285ce44bbb0b41386",
+    "tests/TextExpander.Tests/PickerViewModelTests.cs": "bbca7949ae5a246c1b100f221f028490acdbd7eb7d218992837e476683dffe7a",
+    "scripts/verify_static.py": "b137e1fc985f5f0741aee5f53c3a2b15cd0447b24560d049b1334d6bc06fbb90",
+    "scripts/verify-release.ps1": "32375df149cf15ddea78336bf34393cc60bbed5d06378409541d0721f2af9484"
+  },
+  "previous_baseline": "PICKER_LOADING_VALIDATION.json",
+  "qualification": "Production ViewModel with controlled asynchronous delegates and synthetic content; Avalonia.Application and native clipboard never initialized. Already-dispatched clipboard writes are not revoked or rolled back. Gate covers picker commands only, not other applications. Callback completion is not verified editor paste.",
+  "fresh_extraction": {
+    "manifest": "PASS",
+    "initial_bin_obj_absent": true,
+    "solution_and_four_tools": "PASS",
+    "xunit_passed": 550,
+    "compiled_sources_resources_and_guards_match_delivery": true
+  }
+}

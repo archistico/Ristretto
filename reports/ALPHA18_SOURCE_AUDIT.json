@@ -1,0 +1,58 @@
+{
+  "schema": "ristretto/alpha18-source-audit/1",
+  "version": "3.9.0-alpha.18",
+  "baseline": "3.9.0-alpha.17",
+  "validation": {
+    "static": "PASS",
+    "dotnet_build": "NOT_RUN",
+    "xunit": "NOT_RUN",
+    "windows_native": "NOT_RUN"
+  },
+  "last_windows_evidence": {
+    "version": "alpha.7",
+    "xunit_passed": 180,
+    "native_passed": 21
+  },
+  "functional_scope": "synthetic command-driven conditional replacement in exact owned child process only",
+  "non_goals": [
+    "not arbitrary external editor",
+    "no global keyboard observation",
+    "no automatic Windows expansion",
+    "no GUI redesign"
+  ],
+  "preserved": {
+    "xaml": true,
+    "viewmodels": true,
+    "picker_hotkey": true,
+    "sqlite": true,
+    "trigger_core": true
+  },
+  "added_files": [
+    "docs/ALPHA18_REMOTE_OWNED_EDIT.md",
+    "src/TextExpander.Application/Features/Output/RemoteOwnedEditProtocol.cs",
+    "tests/TextExpander.Tests/RemoteOwnedEditProtocolTests.cs",
+    "tools/Ristretto.WindowsOutputLab/RemoteOwnedEditLab.cs"
+  ],
+  "modified_files": [
+    "README.md",
+    "VERSION.txt",
+    "docs/BUILD_AND_TEST.md",
+    "docs/CHANGELOG.md",
+    "docs/CURRENT_STATE.md",
+    "docs/FUNCTIONAL_ROADMAP.md",
+    "docs/HANDOFF.md",
+    "docs/INDEX.md",
+    "docs/ROADMAP.md",
+    "reports/STATIC_VALIDATION.json",
+    "scripts/validate-native.cmd",
+    "scripts/validate.cmd",
+    "scripts/validate.sh",
+    "scripts/verify-release.ps1",
+    "src/TextExpander.Desktop/TextExpander.Desktop.csproj",
+    "tools/Ristretto.CoreBenchmark/Ristretto.CoreBenchmark.csproj",
+    "tools/Ristretto.ReplacementLab/Ristretto.ReplacementLab.csproj",
+    "tools/Ristretto.UiReview/Ristretto.UiReview.csproj",
+    "tools/Ristretto.WindowsOutputLab/Program.cs",
+    "tools/Ristretto.WindowsOutputLab/Ristretto.WindowsOutputLab.csproj"
+  ]
+}

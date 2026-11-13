@@ -1,0 +1,232 @@
+{
+  "Status": "AVALONIA_CLIENT_RENDERED",
+  "Data": "SYNTHETIC_MEMORY_ONLY",
+  "NativeDesktopManualValidation": "NOT_RUN",
+  "Avalonia": "11.3.22.0",
+  "Captures": [
+    {
+      "File": "main-light-it.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-min-light-it.png",
+      "Width": 800,
+      "Height": 510,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-light-it.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-min-light-it.png",
+      "Width": 500,
+      "Height": 365,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-empty-light.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-light-en.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-light-en.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-light-fr.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-light-fr.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-light-de.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-min-light-de.png",
+      "Width": 800,
+      "Height": 510,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-light-de.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-min-light-de.png",
+      "Width": 500,
+      "Height": 365,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-light-es.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-light-es.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "controls-light.png",
+      "Width": 440,
+      "Height": 550,
+      "VisibleActionsChecked": 11,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-dark-it.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-min-dark-it.png",
+      "Width": 800,
+      "Height": 510,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-dark-it.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-min-dark-it.png",
+      "Width": 500,
+      "Height": 365,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-empty-dark.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-dark-en.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-dark-en.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-dark-fr.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-dark-fr.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-dark-de.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-min-dark-de.png",
+      "Width": 800,
+      "Height": 510,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-dark-de.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-min-dark-de.png",
+      "Width": 500,
+      "Height": 365,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "main-dark-es.png",
+      "Width": 980,
+      "Height": 640,
+      "VisibleActionsChecked": 9,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "picker-dark-es.png",
+      "Width": 600,
+      "Height": 390,
+      "VisibleActionsChecked": 2,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "controls-dark.png",
+      "Width": 440,
+      "Height": 550,
+      "VisibleActionsChecked": 11,
+      "ActionBounds": "PASS"
+    }
+  ]
+}

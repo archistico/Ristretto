@@ -1,0 +1,57 @@
+{
+  "schema": "ristretto/alpha17/source-audit/1",
+  "release": "Ristretto 3.9.0-alpha.17",
+  "execution_status": {
+    "dotnet_build": "NOT_RUN",
+    "xunit": "NOT_RUN",
+    "windows_native": "NOT_RUN",
+    "interactive_demo": "NOT_RUN"
+  },
+  "historical_evidence": {
+    "release": "alpha.7",
+    "xunit": "180/180 (archived)",
+    "native": "21/21 (archived)"
+  },
+  "changes": {
+    "new_files": [
+      "docs/ALPHA17_EXTERNAL_ADAPTER_CAPABILITIES.md",
+      "src/TextExpander.Infrastructure/Platform/Windows/WindowsExternalAdapterCapability.cs",
+      "tests/TextExpander.Tests/WindowsExternalAdapterCapabilityTests.cs",
+      "tools/Ristretto.WindowsOutputLab/ExternalAdapterCapabilityCommand.cs"
+    ],
+    "modified_files": [
+      "README.md",
+      "VERSION.txt",
+      "docs/CHANGELOG.md",
+      "docs/CURRENT_STATE.md",
+      "docs/FUNCTIONAL_ROADMAP.md",
+      "docs/HANDOFF.md",
+      "docs/INDEX.md",
+      "docs/ROADMAP.md",
+      "reports/STATIC_VALIDATION.json",
+      "scripts/package.py",
+      "scripts/validate-native.cmd",
+      "scripts/validate.cmd",
+      "scripts/validate.sh",
+      "scripts/verify-release.ps1",
+      "src/TextExpander.Desktop/TextExpander.Desktop.csproj",
+      "tools/Ristretto.CoreBenchmark/Ristretto.CoreBenchmark.csproj",
+      "tools/Ristretto.ReplacementLab/Ristretto.ReplacementLab.csproj",
+      "tools/Ristretto.UiReview/Ristretto.UiReview.csproj",
+      "tools/Ristretto.WindowsOutputLab/Program.cs",
+      "tools/Ristretto.WindowsOutputLab/Ristretto.WindowsOutputLab.csproj"
+    ],
+    "deleted_files": [],
+    "unchanged_files": 282
+  },
+  "protected_code_unchanged": {
+    "desktop_gui": true,
+    "picker_hotkey": true,
+    "sqlite_storage": true,
+    "core_matching": true,
+    "application_output": true
+  },
+  "alpha17_external_write_permitted": false,
+  "alpha17_external_committed_text_read_permitted": false,
+  "notes": "La diagnostica Alpha17 riunisce letture gia esistenti e restituisce soltanto categorie; il report non contiene identificativi del target, testo o offset. Nessun test .NET eseguito in questo ambiente."
+}

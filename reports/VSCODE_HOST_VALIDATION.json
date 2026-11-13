@@ -1,0 +1,55 @@
+{
+  "schema": "ristretto/vscode-host-validation/1",
+  "date": "2026-11-13",
+  "source_version": "3.9.0-alpha.20.3",
+  "vscode_version": "1.127.0",
+  "platform": "Windows x64",
+  "implemented_host_scenarios": 14,
+  "executed_host_scenarios": 0,
+  "host_status": "NOT_RUN",
+  "observed_failure": "CodeWindow renderer process gone: launch-failed, code 49",
+  "cause": "Not established from the available logs",
+  "launcher": {
+    "schema": "ristretto/vscode-host-launch/1",
+    "timestampUtc": "2026-11-13T21:24:43.0638625Z",
+    "status": "HOST_NOT_RUN",
+    "exitCode": 1,
+    "hostReportProduced": false,
+    "isolatedPortableProfile": true,
+    "containsUserText": false
+  },
+  "checks": {
+    "javascript_syntax": "PASS",
+    "powershell_parse": "PASS",
+    "node_unit_tests_passed": 32,
+    "node_unit_tests_failed": 0
+  },
+  "previous_baseline": {
+    "report": "WINDOWS_ALPHA20_3_VALIDATION.json",
+    "dotnet_native_sources_changed": false,
+    "dotnet_native_tests_rerun": false
+  },
+  "source_sha256": {
+    "scripts/validate-vscode-host.ps1": "827553f11ac203af0875ed9cae474945147c8fd288e606cd6df413b7286866a9",
+    "scripts/validate-vscode-host.cmd": "ff286d30578cb8777dd50aa273abd9e479b312d5b6c5a7ef823ba8f0d7cb44ba",
+    "tools/ristretto-vscode-extension/test/host/index.js": "18d15f2efc7e4b2f77499a584f897f0f400ccb55c033270af0672196230a67e2",
+    "tools/ristretto-vscode-extension/package.json": "73ca0939bb3f409cf6b043b610f09df20288b6590663758a12df523c937d689a"
+  },
+  "contains_user_text": false,
+  "scope": "Explicit manual expansion only. Host execution pending; no new editor compatibility qualified.",
+  "user_report": {
+    "application": "Code.exe",
+    "exception": "0x80000003",
+    "address": "0x00007FF68E37D586",
+    "during_host_launch_attempts": true,
+    "interpretation": "STATUS_BREAKPOINT; exact faulting module and attempt not confirmed without a crash dump"
+  },
+  "runner_followup": {
+    "experimental_gpu_switches_removed": true,
+    "prepare_only_check": "PASS; PREPARED_NOT_RUN, no child process output",
+    "powershell_parse": "PASS",
+    "desktop_relaunch_after_user_report": false,
+    "runtime_crash_fix_verified": false,
+    "source_sha256": "cfee0157174ff15a7cdf07383c318e9283201f42214b1bb6a83a25b055d50726"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "ristretto/picker-search-validation/1",
+  "source_version": "3.9.0-alpha.20.3",
+  "date": "2026-11-13",
+  "release_builds": {
+    "solution": "PASS",
+    "windows_lab": "PASS",
+    "core_benchmark": "PASS",
+    "replacement_lab": "PASS",
+    "ui_review": "PASS"
+  },
+  "restore": "local NuGet cache; online vulnerability audit not run; no TLS or signature verification disabled",
+  "xunit": {
+    "passed": 506,
+    "failed": 0,
+    "skipped": 0,
+    "search_passed": 30,
+    "new_search_cases": 22
+  },
+  "regression_before_fix": {
+    "failed_cases": 4,
+    "scenarios": [
+      "surrogate pair across content prefix boundary",
+      "combining cluster across boundary",
+      "lone high surrogate query",
+      "lone low surrogate query"
+    ]
+  },
+  "checks": {
+    "source_audit": "PASS",
+    "static_audit": "PASS",
+    "python_unit_tests_passed": 7
+  },
+  "not_run": [
+    "GUI/IME integration",
+    "GUI latency or memory benchmark",
+    "native laboratory scenarios in this increment",
+    "VS Code host",
+    "Node tests in this increment",
+    "online NuGet vulnerability audit"
+  ],
+  "gui_processes_started_for_validation": false,
+  "contains_user_text": false,
+  "source_sha256": {
+    "src/TextExpander.Application/Features/Picker/PickerSearch.cs": "747e64bac7c95d77977a42b1ef48952a358691fe41207c894e2824a9e8453a31",
+    "src/TextExpander.Application/Features/Picker/PickerSearchIndex.cs": "9d18fd538f08a6676385340b177b8f130c59f7da484e3b48166c2a741726781a",
+    "src/TextExpander.Desktop/ViewModels/PickerViewModel.cs": "3ea5c27cc08b012b74424b72567fd091611ccfea62365dbfb3f261fd106d630f",
+    "tests/TextExpander.Tests/PickerSearchTests.cs": "1243e9ad181011c261334cb5e671f1b2323b45e3f96aae72aef00317015e2f81",
+    "tests/TextExpander.Tests/PickerSearchIndexTests.cs": "1994f45af7032f080a5fea01fbe2a310ea07577b8a1b9e58a5ff527bb3bc0d88"
+  },
+  "previous_baseline": "PICKER_INSERT_SESSION_VALIDATION.json",
+  "qualification": "Managed search tests only. Raw content preserved. Indexed content prefix ends at whole graphemes within 4096 original UTF-16 units; suffix is not searched or validated. No measured GUI performance claim.",
+  "fresh_extraction": {
+    "manifest": "PASS",
+    "initial_bin_obj_absent": true,
+    "solution_and_four_tools": "PASS",
+    "xunit_passed": 506,
+    "compiled_sources_match_delivery": true
+  }
+}

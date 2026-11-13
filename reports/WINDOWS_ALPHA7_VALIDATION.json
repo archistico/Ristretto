@@ -1,0 +1,79 @@
+{
+  "version": "3.9.0-alpha.7",
+  "date": "2026-11-13",
+  "sdk": "10.0.403",
+  "runtime": "10.0.14",
+  "platform": "Windows 10.0.22631 win-x64",
+  "validate_cmd": "PASS_LOCAL_SOURCE",
+  "release_builds": {
+    "solution": "PASS",
+    "windows_lab": "PASS",
+    "replacement_lab": "PASS",
+    "core_benchmark": "PASS",
+    "ui_review": "PASS",
+    "errors": 0,
+    "warnings": 0
+  },
+  "xunit": {
+    "status": "PASS",
+    "total": 180,
+    "passed": 180,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "windows-alpha7-tests.trx"
+  },
+  "native_replacement": {
+    "status": "PASS_OWNED_NATIVE_EDIT_ONLY",
+    "passed": 21,
+    "failed": 0,
+    "evidence": "windows-alpha7-native.json",
+    "log": "windows-alpha7-native.log",
+    "lab_assembly_sha256": "fa62c95f0a283563929d35de961ef81c61669e15ca81a8a8e56d0eab1fe6e2bf",
+    "target": "Owned cooperating Win32 EDIT, same process and UI thread",
+    "input": "Observed native deltas after synthetic directed fixture commits",
+    "output": "EM_SETSEL/EM_REPLACESEL, native text and caret readback",
+    "no_message_pump_during_compare_and_edit": true,
+    "ime": "Disabled on owned CLI thread before first window",
+    "human_typing": "NOT_RUN",
+    "external_editors": "NOT_QUALIFIED",
+    "sendinput": "NOT_USED_NOT_VERIFIED",
+    "clipboard": "NOT_USED",
+    "global_hooks": "NOT_INSTALLED"
+  },
+  "source_scope": {
+    "unchanged_original_sources": 53,
+    "changed_original_sources": [
+      "src/TextExpander.Application/Features/Output/TriggerReplacementExecutor.cs",
+      "src/TextExpander.Desktop/TextExpander.Desktop.csproj",
+      "tools/Ristretto.CoreBenchmark/Program.cs",
+      "tools/Ristretto.CoreBenchmark/Ristretto.CoreBenchmark.csproj",
+      "tools/Ristretto.ReplacementLab/Ristretto.ReplacementLab.csproj",
+      "tools/Ristretto.UiReview/Ristretto.UiReview.csproj",
+      "tools/Ristretto.WindowsOutputLab/Program.cs",
+      "tools/Ristretto.WindowsOutputLab/Ristretto.WindowsOutputLab.csproj"
+    ],
+    "new_sources": [
+      "tools/Ristretto.WindowsOutputLab/NativeReplacementLab.cs",
+      "tools/Ristretto.WindowsOutputLab/OwnedEditRecognitionSession.cs",
+      "tools/Ristretto.WindowsOutputLab/OwnedEditTarget.cs"
+    ],
+    "application_change": "Documentation comment only",
+    "gui_xaml": "UNCHANGED_PREVIEW9",
+    "core_and_storage": "UNCHANGED",
+    "viewmodels_codebehind_translations": "UNCHANGED",
+    "unit_tests": "UNCHANGED",
+    "product_global_autoexpansion": false,
+    "new_dependencies": false
+  },
+  "gui_render": "NOT_RERUN_ALPHA6_EVIDENCE_RETAINED",
+  "benchmark": "NOT_RERUN_ALPHA4_EVIDENCE_RETAINED",
+  "bash_syntax": "PASS",
+  "linux_macos_runtime": "NOT_RUN",
+  "python_static_checks": "NOT_RUN",
+  "nuget_vulnerability_audit": "NOT_RUN_OFFLINE",
+  "structural_checks": {
+    "status": "PASS",
+    "xml_files_parsed": 18,
+    "local_markdown_links_checked": 559
+  }
+}

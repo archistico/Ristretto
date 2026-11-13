@@ -1,0 +1,284 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="TextExpander.Desktop.App">
+  <!-- UI reset: one semantic palette and owned templates for button/list selection.
+       No fixed accent inside user-facing content. The Fluent palette is neutralized
+       for OS-themed controls we do not replace (checkboxes, menus, scrollbars). -->
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="RCanvas" Color="#F6F5F1" />
+          <SolidColorBrush x:Key="RSidebar" Color="#F0EFEB" />
+          <SolidColorBrush x:Key="RSurface" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="RInput" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="REditorInset" Color="#FAF9F6" />
+          <SolidColorBrush x:Key="RSubtle" Color="#E7E5DF" />
+          <SolidColorBrush x:Key="RHover" Color="#E2E2DB" />
+          <SolidColorBrush x:Key="RSelection" Color="#E3E7E0" />
+          <SolidColorBrush x:Key="RSelectionMarker" Color="#646F65" />
+          <SolidColorBrush x:Key="RBorder" Color="#D2D2C9" />
+          <SolidColorBrush x:Key="RSoftBorder" Color="#DEDFD7" />
+          <SolidColorBrush x:Key="RText" Color="#272A28" />
+          <SolidColorBrush x:Key="RMuted" Color="#5C615C" />
+          <SolidColorBrush x:Key="RFaint" Color="#61665F" />
+          <SolidColorBrush x:Key="RPrimary" Color="#2D302F" />
+          <SolidColorBrush x:Key="RPrimaryHover" Color="#414541" />
+          <SolidColorBrush x:Key="RPrimaryPressed" Color="#212422" />
+          <SolidColorBrush x:Key="RPrimaryForeground" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="RFocus" Color="#647164" />
+          <SolidColorBrush x:Key="RSuccess" Color="#3F765C" />
+          <SolidColorBrush x:Key="RWarning" Color="#8A572B" />
+          <SolidColorBrush x:Key="RDanger" Color="#A13F3D" />
+          <!-- Compatibility aliases for existing secondary dialogs. -->
+          <SolidColorBrush x:Key="RHeroSurface" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="RHeroText" Color="#272A28" />
+          <SolidColorBrush x:Key="RHeroMuted" Color="#5C615C" />
+          <SolidColorBrush x:Key="RAccentText" Color="#515D51" />
+          <SolidColorBrush x:Key="RAccentSurface" Color="#E3E7E0" />
+          <SolidColorBrush x:Key="RAccentBorder" Color="#C5CEC2" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="RCanvas" Color="#171819" />
+          <SolidColorBrush x:Key="RSidebar" Color="#1C1D1E" />
+          <SolidColorBrush x:Key="RSurface" Color="#242527" />
+          <SolidColorBrush x:Key="RInput" Color="#2A2B2D" />
+          <SolidColorBrush x:Key="REditorInset" Color="#202123" />
+          <SolidColorBrush x:Key="RSubtle" Color="#353638" />
+          <SolidColorBrush x:Key="RHover" Color="#3C3F3D" />
+          <SolidColorBrush x:Key="RSelection" Color="#363D37" />
+          <SolidColorBrush x:Key="RSelectionMarker" Color="#B8C1B6" />
+          <SolidColorBrush x:Key="RBorder" Color="#494B48" />
+          <SolidColorBrush x:Key="RSoftBorder" Color="#3B3D3A" />
+          <SolidColorBrush x:Key="RText" Color="#F0F0EB" />
+          <SolidColorBrush x:Key="RMuted" Color="#C1C5BC" />
+          <SolidColorBrush x:Key="RFaint" Color="#ABAFA6" />
+          <SolidColorBrush x:Key="RPrimary" Color="#ECEBE6" />
+          <SolidColorBrush x:Key="RPrimaryHover" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="RPrimaryPressed" Color="#D6D4CD" />
+          <SolidColorBrush x:Key="RPrimaryForeground" Color="#242624" />
+          <SolidColorBrush x:Key="RFocus" Color="#C0CABD" />
+          <SolidColorBrush x:Key="RSuccess" Color="#8ABAA2" />
+          <SolidColorBrush x:Key="RWarning" Color="#E4BB8E" />
+          <SolidColorBrush x:Key="RDanger" Color="#F0A29B" />
+          <SolidColorBrush x:Key="RHeroSurface" Color="#242527" />
+          <SolidColorBrush x:Key="RHeroText" Color="#F0F0EB" />
+          <SolidColorBrush x:Key="RHeroMuted" Color="#C1C5BC" />
+          <SolidColorBrush x:Key="RAccentText" Color="#C0CABD" />
+          <SolidColorBrush x:Key="RAccentSurface" Color="#363D37" />
+          <SolidColorBrush x:Key="RAccentBorder" Color="#494B48" />
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+
+      <!-- Explicit templates prevent Fluent from painting over state colors on
+           ContentPresenters, the cause of dark-on-dark hover and blue selection. -->
+      <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
+        <Setter Property="FocusAdorner" Value="{x:Null}" />
+        <Setter Property="Background" Value="{DynamicResource RSubtle}" />
+        <Setter Property="Foreground" Value="{DynamicResource RText}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="9" />
+        <Setter Property="Padding" Value="14,8" />
+        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Padding="{TemplateBinding Padding}">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+          </ControlTemplate>
+        </Setter>
+      </ControlTheme>
+      <ControlTheme x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
+        <Setter Property="FocusAdorner" Value="{x:Null}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource RText}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="3,0,0,0" />
+        <Setter Property="Padding" Value="8,7" />
+        <Setter Property="CornerRadius" Value="7" />
+        <Setter Property="MinHeight" Value="40" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Padding="{TemplateBinding Padding}">
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                HorizontalAlignment="Stretch" />
+            </Border>
+          </ControlTemplate>
+        </Setter>
+      </ControlTheme>
+    </ResourceDictionary>
+  </Application.Resources>
+  <Application.Styles>
+    <FluentTheme>
+      <FluentTheme.Palettes>
+        <ColorPaletteResources x:Key="Light" Accent="#647164" />
+        <ColorPaletteResources x:Key="Dark" Accent="#C0CABD" />
+      </FluentTheme.Palettes>
+    </FluentTheme>
+    <!-- Set foreground once at window level; nested TextBlocks now inherit
+         the button's foreground, including all hover and disabled states. -->
+    <Style Selector="Window">
+      <Setter Property="Foreground" Value="{DynamicResource RText}" />
+      <Setter Property="FontSize" Value="14" />
+    </Style>
+    <Style Selector="TextBlock.muted"><Setter Property="Foreground" Value="{DynamicResource RMuted}" /></Style>
+    <Style Selector="TextBlock.faint"><Setter Property="Foreground" Value="{DynamicResource RFaint}" /></Style>
+    <Style Selector="TextBlock.hero"><Setter Property="FontSize" Value="24"/><Setter Property="FontWeight" Value="Bold" /></Style>
+    <Style Selector="TextBlock.section"><Setter Property="FontSize" Value="16"/><Setter Property="FontWeight" Value="SemiBold" /></Style>
+    <Style Selector="TextBlock.eyebrow"><Setter Property="FontSize" Value="12"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Foreground" Value="{DynamicResource RFaint}" /></Style>
+    <Style Selector="TextBlock.label"><Setter Property="FontSize" Value="13"/><Setter Property="FontWeight" Value="SemiBold" /></Style>
+    <Style Selector="Border.trigger-chip">
+      <Setter Property="Background" Value="{DynamicResource RSubtle}" />
+      <Setter Property="CornerRadius" Value="4" />
+      <Setter Property="Padding" Value="5,1" />
+    </Style>
+
+    <Style Selector="Button">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="0:0:0.12" />
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.12" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Button:pointerover"><Setter Property="Background" Value="{DynamicResource RHover}"/><Setter Property="Foreground" Value="{DynamicResource RText}" /></Style>
+    <Style Selector="Button:pressed"><Setter Property="Background" Value="{DynamicResource RSelection}"/><Setter Property="Foreground" Value="{DynamicResource RText}" /></Style>
+    <Style Selector="Button:focus-visible"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>
+    <Style Selector="Button:focus"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>
+    <Style Selector="Button:disabled"><Setter Property="Opacity" Value="0.55" /></Style>
+    <Style Selector="Button.icon"><Setter Property="Width" Value="36"/><Setter Property="MinWidth" Value="36"/><Setter Property="Padding" Value="0" /></Style>
+    <Style Selector="Button.primary"><Setter Property="Background" Value="{DynamicResource RPrimary}"/><Setter Property="Foreground" Value="{DynamicResource RPrimaryForeground}" /></Style>
+    <Style Selector="Button.primary:pointerover"><Setter Property="Background" Value="{DynamicResource RPrimaryHover}"/><Setter Property="Foreground" Value="{DynamicResource RPrimaryForeground}" /></Style>
+    <Style Selector="Button.primary:pressed"><Setter Property="Background" Value="{DynamicResource RPrimaryPressed}"/><Setter Property="Foreground" Value="{DynamicResource RPrimaryForeground}" /></Style>
+    <Style Selector="Button.subtle"><Setter Property="Background" Value="{DynamicResource RSubtle}"/><Setter Property="Foreground" Value="{DynamicResource RText}" /></Style>
+    <Style Selector="Button.subtle:pointerover"><Setter Property="Background" Value="{DynamicResource RHover}"/><Setter Property="Foreground" Value="{DynamicResource RText}" /></Style>
+    <Style Selector="Button.ghost"><Setter Property="Background" Value="Transparent"/><Setter Property="Foreground" Value="{DynamicResource RMuted}" /></Style>
+    <Style Selector="Button.ghost:pointerover"><Setter Property="Background" Value="{DynamicResource RHover}"/><Setter Property="Foreground" Value="{DynamicResource RText}" /></Style>
+    <Style Selector="Button.danger"><Setter Property="Background" Value="Transparent"/><Setter Property="Foreground" Value="{DynamicResource RDanger}" /></Style>
+    <Style Selector="Button.danger:pointerover"><Setter Property="Background" Value="{DynamicResource RHover}"/><Setter Property="Foreground" Value="{DynamicResource RDanger}" /></Style>
+    <Style Selector="Button.dialog-small"><Setter Property="MinHeight" Value="34"/><Setter Property="Padding" Value="10,6" /></Style>
+
+    <Style Selector="TextBox">
+      <Setter Property="Padding" Value="12,9" /><Setter Property="MinHeight" Value="39" />
+      <Setter Property="CornerRadius" Value="8" /><Setter Property="FontSize" Value="14" />
+      <Setter Property="Background" Value="{DynamicResource RInput}" />
+      <Setter Property="Foreground" Value="{DynamicResource RText}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource RBorder}" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="TextBox:pointerover"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>
+    <Style Selector="TextBox:focus"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>
+    <Style Selector="TextBox">
+      <Setter Property="CaretBrush" Value="{DynamicResource RText}" />
+    </Style>
+    <!-- Fluent has state-specific template brushes. Own these states explicitly
+         so focused placeholders and disabled fields follow the current palette. -->
+    <Style Selector="TextBox /template/ TextBlock#PART_Watermark">
+      <Setter Property="Foreground" Value="{DynamicResource RFaint}" />
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="TextBox:focus /template/ TextBlock#PART_Watermark, TextBox:pointerover /template/ TextBlock#PART_Watermark">
+      <Setter Property="Foreground" Value="{DynamicResource RMuted}" />
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement, TextBox:pointerover /template/ Border#PART_BorderElement">
+      <Setter Property="Background" Value="{Binding $parent[TextBox].Background}" />
+      <Setter Property="BorderBrush" Value="{Binding $parent[TextBox].BorderBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="TextBox:disabled"><Setter Property="Foreground" Value="{DynamicResource RFaint}" /></Style>
+    <Style Selector="TextBox:disabled /template/ TextBlock#PART_Watermark">
+      <Setter Property="Foreground" Value="{DynamicResource RFaint}" />
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="TextBox:disabled /template/ Border#PART_BorderElement">
+      <Setter Property="Background" Value="{DynamicResource RSubtle}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource RSoftBorder}" />
+    </Style>
+    <Style Selector="TextBox.search-field"><Setter Property="Padding" Value="11,8" /><Setter Property="MinHeight" Value="40" /></Style>
+    <Style Selector="TextBox.editor-field">
+      <Setter Property="Background" Value="{DynamicResource REditorInset}" />
+      <Setter Property="Padding" Value="16,13" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="MinHeight" Value="150" />
+    </Style>
+    <Style Selector="ListBox"><Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0" /></Style>
+    <Style Selector="ListBoxItem:pointerover"><Setter Property="Background" Value="{DynamicResource RHover}" /></Style>
+    <Style Selector="ListBoxItem:selected"><Setter Property="Background" Value="{DynamicResource RSelection}"/><Setter Property="BorderBrush" Value="{DynamicResource RSelectionMarker}" /></Style>
+    <Style Selector="ListBoxItem:selected:pointerover"><Setter Property="Background" Value="{DynamicResource RSelection}"/><Setter Property="BorderBrush" Value="{DynamicResource RSelectionMarker}" /></Style>
+    <Style Selector="ListBoxItem:focus-visible"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>
+    <Style Selector="ListBoxItem:focus"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>
+
+    <Style Selector="Window.ristretto-dialog"><Setter Property="Background" Value="{DynamicResource RCanvas}" /></Style>
+    <Style Selector="Border.dialog-hero"><Setter Property="Background" Value="{DynamicResource RSurface}"/><Setter Property="BorderBrush" Value="{DynamicResource RSoftBorder}"/><Setter Property="BorderThickness" Value="0,0,0,1" /></Style>
+    <Style Selector="Border.dialog-card"><Setter Property="Background" Value="{DynamicResource RSurface}"/><Setter Property="BorderBrush" Value="{DynamicResource RSoftBorder}"/><Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="10" /></Style>
+    <Style Selector="Border.dialog-toolbar"><Setter Property="Background" Value="{DynamicResource RCanvas}"/><Setter Property="BorderBrush" Value="{DynamicResource RSoftBorder}"/><Setter Property="BorderThickness" Value="0,0,0,1" /></Style>
+    <Style Selector="Border.dialog-footer"><Setter Property="Background" Value="{DynamicResource RSidebar}"/><Setter Property="BorderBrush" Value="{DynamicResource RSoftBorder}"/><Setter Property="BorderThickness" Value="0,1,0,0" /></Style>
+    <Style Selector="Border.dialog-warning"><Setter Property="Background" Value="{DynamicResource RSubtle}"/><Setter Property="BorderBrush" Value="{DynamicResource RBorder}"/><Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="8" /></Style>
+    <Style Selector="Border.review-row"><Setter Property="Background" Value="{DynamicResource RSurface}"/><Setter Property="BorderBrush" Value="{DynamicResource RSoftBorder}"/><Setter Property="BorderThickness" Value="0,0,0,1"/><Setter Property="Padding" Value="12,10" /></Style>
+    <Style Selector="Border.review-row-risk"><Setter Property="Background" Value="{DynamicResource RSubtle}" /></Style>
+    <Style Selector="TextBlock.dialog-title"><Setter Property="FontSize" Value="21"/><Setter Property="FontWeight" Value="Bold"/><Setter Property="Foreground" Value="{DynamicResource RText}" /></Style>
+    <Style Selector="TextBlock.dialog-hero-muted"><Setter Property="Foreground" Value="{DynamicResource RMuted}" /></Style>
+    <Style Selector="TextBlock.dialog-trigger-text"><Setter Property="Foreground" Value="{DynamicResource RMuted}"/><Setter Property="FontWeight" Value="SemiBold" /></Style>
+    <Style Selector="TextBlock.dialog-risk-text"><Setter Property="Foreground" Value="{DynamicResource RWarning}"/><Setter Property="FontWeight" Value="SemiBold" /></Style>
+
+    <!-- Density is opt-in for the two everyday windows. Import/confirm dialogs
+         retain their existing metrics, focus behavior and button hit areas. -->
+    <Style Selector="Window.compact"><Setter Property="FontSize" Value="13" /></Style>
+    <Style Selector="Window.compact Button">
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="Padding" Value="11,6" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="Window.compact Button.icon">
+      <Setter Property="Width" Value="32" /><Setter Property="MinWidth" Value="32" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+    <Style Selector="Window.compact TextBox">
+      <Setter Property="MinHeight" Value="34" />
+      <Setter Property="Padding" Value="10,6" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="BorderBrush" Value="{DynamicResource RSoftBorder}" />
+      <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="Window.compact TextBox.search-field"><Setter Property="MinHeight" Value="34" /><Setter Property="Padding" Value="10,6" /></Style>
+    <Style Selector="Window.compact TextBox.editor-field">
+      <Setter Property="MinHeight" Value="110" />
+      <Setter Property="Padding" Value="14,12" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="Background" Value="{DynamicResource REditorInset}" />
+    </Style>
+    <Style Selector="Window.compact ListBoxItem">
+      <Setter Property="MinHeight" Value="28" />
+      <Setter Property="Padding" Value="7,4" />
+      <Setter Property="CornerRadius" Value="4" />
+      <Setter Property="BorderThickness" Value="2,0,0,0" />
+    </Style>
+    <Style Selector="Window.compact TextBlock.section"><Setter Property="FontSize" Value="13" /></Style>
+    <Style Selector="Window.compact TextBlock.label"><Setter Property="FontSize" Value="12" /></Style>
+    <!-- These selectors outrank the compact TextBox border for visible focus. -->
+    <Style Selector="Window.compact TextBox:pointerover"><Setter Property="BorderBrush" Value="{DynamicResource RBorder}" /></Style>
+    <Style Selector="Window.compact TextBox:focus"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>
+  </Application.Styles>
+</Application>

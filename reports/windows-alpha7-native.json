@@ -1,0 +1,128 @@
+{
+  "SchemaVersion": 1,
+  "Status": "PASS_OWNED_NATIVE_EDIT_ONLY",
+  "CreatedUtc": "2026-11-13T15:48:58.1309485+00:00",
+  "OS": "Microsoft Windows 10.0.22631",
+  "Architecture": "X64",
+  "Runtime": ".NET 10.0.14",
+  "LabAssemblySha256": "fa62c95f0a283563929d35de961ef81c61669e15ca81a8a8e56d0eab1fe6e2bf",
+  "Passed": 21,
+  "Failed": 0,
+  "Cases": [
+    {
+      "Name": "ascii_unicode_payload",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "nfd_raw_nbsp",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "cjk_trigger",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "emoji_zwj_trigger",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "rtl_trigger",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "selection_32bit_at_65536",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "intervening_text_rejected",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "intervening_selection_rejected",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "revision_aba_same_text_rejected",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "different_owned_control_rejected",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "readonly_before_effect",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "disabled_before_effect",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "password_without_text_read",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "password_change_rejects_prepared_plan",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "cancellation_never_enters_native_target",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "wrong_ui_thread_rejected",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "single_use_no_second_native_call",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "lost_receipt_is_unverified",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "exception_after_native_effect_no_rollback",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "navigation_invalidates_pending_prefix",
+      "Passed": true,
+      "Error": ""
+    },
+    {
+      "Name": "disposed_native_target_rejected",
+      "Passed": true,
+      "Error": ""
+    }
+  ],
+  "Target": "Real Win32 EDIT created and owned by this laboratory on its UI thread",
+  "Input": "Synthetic commits sent to owned control; recognizer consumes observed native text deltas",
+  "Output": "EM_SETSEL / EM_REPLACESEL / EM_GETSEL \u002B exact UTF-16 readback",
+  "Revision": "Owned edit batches \u002B EN_CHANGE for other edits; no message pump during compare/edit",
+  "Ime": "ImmDisableIME on owned CLI thread before first window; context removed for fixture; general IME NOT_QUALIFIED",
+  "HumanTyping": "NOT_RUN",
+  "ArbitraryExternalEditors": "NOT_QUALIFIED",
+  "SendInput": "NOT_USED_NOT_VERIFIED",
+  "Clipboard": "NOT_USED",
+  "GlobalHooks": "NOT_INSTALLED"
+}

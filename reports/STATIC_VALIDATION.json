@@ -1,0 +1,60 @@
+{
+  "status": "STATIC_ONLY",
+  "checks": [
+    {
+      "name": "XML progetti, XAML e localizzazioni",
+      "passed": true,
+      "details": "18 file; []"
+    },
+    {
+      "name": "Progetti della solution + lab isolato",
+      "passed": true,
+      "details": "5 in solution + laboratorio separato"
+    },
+    {
+      "name": "Chiavi di traduzione allineate",
+      "passed": true,
+      "details": "5 lingue, 117 chiavi"
+    },
+    {
+      "name": "Binding testi GUI presenti",
+      "passed": true,
+      "details": "['ActionsMenu', 'AddGroup', 'Appearance', 'Backup', 'ContentLabel', 'Delete', 'DescriptionLabel', 'Enabled', 'Export', 'GroupDelete', 'GroupEditName', 'GroupManage', 'GroupName', 'GroupRename', 'Groups', 'Import', 'Language', 'NewSnippet', 'OpenPicker', 'PickerHotkeyApply', 'PickerHotkeyHint', 'PickerHotkeyLabel', 'PreviewInput', 'PreviewRun', 'PreviewTitle', 'Restore', 'Save', 'Search', 'SettingsMenu', 'Snippets', 'Theme', 'TitleLabel', 'TriggerLabel', 'UnsavedChanges']"
+    },
+    {
+      "name": "Schema SQLite + unicode + FK",
+      "passed": true,
+      "details": "SQLite di Python, NON il provider .NET"
+    },
+    {
+      "name": "Link Markdown interni",
+      "passed": true,
+      "details": "610 link; 0 errori, esempi=[]"
+    },
+    {
+      "name": "Adapter VS Code opt-in, export v1 e comando esplicito",
+      "passed": true,
+      "details": "Controllo statico, NON prova in VS Code"
+    },
+    {
+      "name": "Gate Alpha 20 verso export .NET",
+      "passed": true,
+      "details": "La prova .NET -> Node richiede .NET SDK + Node, NON viene eseguita qui"
+    },
+    {
+      "name": "Cartella archive assente",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Cartella beeftext-screenshots assente",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "passed": 10,
+  "failed": 0,
+  "dotnet_build": "NOT_RUN",
+  "dotnet_test": "NOT_RUN",
+  "gui_runtime": "NOT_RUN"
+}

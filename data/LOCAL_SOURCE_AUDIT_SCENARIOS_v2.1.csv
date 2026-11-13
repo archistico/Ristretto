@@ -1,0 +1,38 @@
+id,area,scenario,evidence,priority,status
+AS-001,baseline,"Snapshots ZIP, submodule vuoti e licenze",Both archives,P1,NOT_RUN
+AS-002,engine,Matching deterministic duplicate and precedence,Beeftext/Combo/ComboManager.cpp,P0,NOT_RUN
+AS-003,engine,Strict/loose and case sensitivity,Beeftext/Combo/Combo.cpp,P0,NOT_RUN
+AS-004,engine,Space delimiter and keep space,Beeftext/Combo/ComboManager.cpp,P0,NOT_RUN
+AS-005,engine,Keyboard hook and excluded apps,Beeftext/InputManager.cpp,P0,NOT_RUN
+AS-006,engine,IME committed text and dead keys,Beeftext/InputManager.cpp,P0,NOT_RUN
+AS-007,unicode,Emoji ZWJ trigger deletion,Beeftext/Combo/Combo.cpp,P0,NOT_RUN
+AS-008,unicode,Unicode surrogate pair typing mode,Beeftext/BeeftextUtils.cpp,P0,NOT_RUN
+AS-009,unicode,Combining mark NFC/NFD matching,Beeftext/Combo/Combo.cpp,P0,NOT_RUN
+AS-010,unicode,Arabic/RTL insertion + cursor,Beeftext/Combo/Combo.cpp,P0,NOT_RUN
+AS-011,unicode,Emoji segmentation mac chunk 20,espanso-inject/src/mac/native.mm,P0,NOT_RUN
+AS-012,clipboard,Clipboard changed by user before restoration,Beeftext/BeeftextUtils.cpp,P0,NOT_RUN
+AS-013,clipboard,Clipboard HTML/image round-trip,Beeftext/Clipboard/ClipboardManagerDefault.cpp,P0,NOT_RUN
+AS-014,clipboard,Wayland wl-copy/wl-paste dependencies,espanso-clipboard/src/lib.rs,P0,NOT_RUN
+AS-015,native,X11 injector fallback when default fails,espanso-inject/src/x11/mod.rs,P0,NOT_RUN
+AS-016,native,Wayland device permissions evdev/uinput,espanso-inject/src/evdev/uinput.rs,P0,NOT_RUN
+AS-017,native,Windows keyboard under elevated target,Beeftext/InputManager.cpp,P0,NOT_RUN
+AS-018,native,Focus switched after opening picker,Beeftext/Picker/PickerWindow.cpp,P0,NOT_RUN
+AS-019,native,Background app and tray on window close,Beeftext/main.cpp,P0,NOT_RUN
+AS-020,data,Preferences export custom backup mapping,Beeftext/Preferences/PreferencesManager.cpp,P1,NOT_RUN
+AS-021,data,Splitter state import mapping,Beeftext/Preferences/PreferencesManager.cpp,P1,NOT_RUN
+AS-022,data,Library load invalid JSON without data loss,Beeftext/Combo/ComboList.cpp,P1,NOT_RUN
+AS-023,data,Backup interruption and restore consistency,Beeftext/Backup/BackupManager.cpp,P1,NOT_RUN
+AS-024,data,Import Beeftext v10 groups and variable escaping,Beeftext/Combo/ComboList.cpp,P1,NOT_RUN
+AS-025,data,Import Espanso YAML restricted no script exec,espanso-config/src/matches/group/loader/yaml/parse.rs,P1,NOT_RUN
+AS-026,data,Unicode multi-file import/export,Beeftext/Combo/Combo.cpp,P1,NOT_RUN
+AS-027,localization,Polish migration path mapping,Beeftext/I18nManager.cpp,P1,NOT_RUN
+AS-028,localization,Live theme/language in tray,Beeftext/I18nManager.cpp,P1,NOT_RUN
+AS-029,security,No logging of snippet text in diagnostics,Beeftext/main.cpp,P0,NOT_RUN
+AS-030,security,Shell/script evaluation requires explicit trust,espanso-render/src/extension/shell.rs,P0,NOT_RUN
+AS-031,license,GPL source reuse review and notices,espanso-dev/LICENSE,P1,NOT_RUN
+AS-032,license,MIT source reuse review and notices,Beeftext-master/LICENSE,P1,NOT_RUN
+AS-033,build,Submodules XMiLib and emojilib required,Beeftext-master/.gitmodules,P1,NOT_RUN
+AS-034,build,CMake vs qmake drift,Beeftext/CMakeLists.txt,P1,NOT_RUN
+AS-035,build,Espanso workspace Cargo.lock reproducible offline build,espanso-dev/Cargo.lock,P1,NOT_RUN
+AS-036,quality,Unit tests pure matcher/regex,espanso-match/src/rolling/matcher.rs,P1,NOT_RUN
+AS-037,quality,Unambiguous injection outcome vs consumed event,espanso-engine/src/dispatch/executor/text_inject.rs,P1,NOT_RUN

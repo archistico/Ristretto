@@ -1,0 +1,73 @@
+id,platform,scenario,target,fixture,expected,status,evidence,risk,notes
+NAT-WIN-01,WIN,hook-lifecycle,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-02,WIN,synthetic-loop,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-03,WIN,unicode-event,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-04,WIN,clipboard-paste,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-05,WIN,clipboard-race,test editor + browser,F-01..F-10 secondo piano,Nuova clipboard utente conservata; nessun restore cieco,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-06,WIN,target-switch,test editor + browser,F-01..F-10 secondo piano,Inserimento annullato o esplicitamente diretto al target valido,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-07,WIN,protected-field,test editor + browser,F-01..F-10 secondo piano,Nessuna osservazione/espansione in campo protetto,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-08,WIN,uipi-elevation,test editor + browser,F-01..F-10 secondo piano,Permesso negato senza perdita o effetto collaterale,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-09,WIN,ime-preedit,test editor + browser,F-01..F-10 secondo piano,Nessuna espansione durante composizione non confermata,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-10,WIN,dead-keys,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-11,WIN,app-exclusion,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WIN-12,WIN,latency-long,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P1,Solo piano; non eseguito
+NAT-MAC-01,MAC,eventtap-permission,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-02,MAC,accessibility-revoke,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-03,MAC,secure-input,test editor + browser,F-01..F-10 secondo piano,Nessuna osservazione/espansione in campo protetto,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-04,MAC,unicode-event,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-05,MAC,clipboard-paste,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-06,MAC,clipboard-race,test editor + browser,F-01..F-10 secondo piano,Nuova clipboard utente conservata; nessun restore cieco,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-07,MAC,target-switch,test editor + browser,F-01..F-10 secondo piano,Inserimento annullato o esplicitamente diretto al target valido,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-08,MAC,picker-recovery,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-09,MAC,ime-preedit,test editor + browser,F-01..F-10 secondo piano,Nessuna espansione durante composizione non confermata,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-10,MAC,dead-keys,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-11,MAC,app-exclusion,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-MAC-12,MAC,latency-long,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P1,Solo piano; non eseguito
+NAT-X11-01,X11,capture-keyevent,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-02,X11,xtest-inject,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-03,X11,clipboard-primary,test editor + browser,F-01..F-10 secondo piano,PRIMARY non alterata usando CLIPBOARD,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-04,X11,clipboard-owner-exit,test editor + browser,F-01..F-10 secondo piano,Comportamento documentato con owner che termina,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-05,X11,unicode-paste,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-06,X11,clipboard-race,test editor + browser,F-01..F-10 secondo piano,Nuova clipboard utente conservata; nessun restore cieco,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-07,X11,target-switch,test editor + browser,F-01..F-10 secondo piano,Inserimento annullato o esplicitamente diretto al target valido,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-08,X11,ime-preedit,test editor + browser,F-01..F-10 secondo piano,Nessuna espansione durante composizione non confermata,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-09,X11,dead-keys,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-10,X11,app-exclusion,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-11,X11,xwayland-vs-x11,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-X11-12,X11,latency-long,test editor + browser,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P1,Solo piano; non eseguito
+NAT-WL-GNOME-01,WL-GNOME,capability-probe,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-02,WL-GNOME,global-shortcut,compositor + test editor,F-01..F-10 secondo piano,Apre picker solo se portal/autorizzazione disponibile,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-03,WL-GNOME,picker-copy-only,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-04,WL-GNOME,inputcapture-activation,compositor + test editor,F-01..F-10 secondo piano,Nessuna cattura globale involontaria,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-05,WL-GNOME,remote-desktop-consent,compositor + test editor,F-01..F-10 secondo piano,Nessuna iniezione senza consenso/sessione,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-06,WL-GNOME,unicode-paste,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-07,WL-GNOME,focus-change,compositor + test editor,F-01..F-10 secondo piano,Inserimento annullato o esplicitamente diretto al target valido,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-08,WL-GNOME,clipboard-race,compositor + test editor,F-01..F-10 secondo piano,Nuova clipboard utente conservata; nessun restore cieco,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-09,WL-GNOME,ime-preedit,compositor + test editor,F-01..F-10 secondo piano,Nessuna espansione durante composizione non confermata,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-10,WL-GNOME,secure-unsupported,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-11,WL-GNOME,uinput-permission,compositor + test editor,F-01..F-10 secondo piano,"Nessuna escalation automatica, consenso esplicito",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-GNOME-12,WL-GNOME,latency-long,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P1,Solo piano; non eseguito
+NAT-WL-KDE-01,WL-KDE,capability-probe,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-02,WL-KDE,global-shortcut,compositor + test editor,F-01..F-10 secondo piano,Apre picker solo se portal/autorizzazione disponibile,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-03,WL-KDE,picker-copy-only,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-04,WL-KDE,inputcapture-activation,compositor + test editor,F-01..F-10 secondo piano,Nessuna cattura globale involontaria,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-05,WL-KDE,remote-desktop-consent,compositor + test editor,F-01..F-10 secondo piano,Nessuna iniezione senza consenso/sessione,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-06,WL-KDE,unicode-paste,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-07,WL-KDE,focus-change,compositor + test editor,F-01..F-10 secondo piano,Inserimento annullato o esplicitamente diretto al target valido,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-08,WL-KDE,clipboard-race,compositor + test editor,F-01..F-10 secondo piano,Nuova clipboard utente conservata; nessun restore cieco,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-09,WL-KDE,ime-preedit,compositor + test editor,F-01..F-10 secondo piano,Nessuna espansione durante composizione non confermata,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-10,WL-KDE,secure-unsupported,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-11,WL-KDE,uinput-permission,compositor + test editor,F-01..F-10 secondo piano,"Nessuna escalation automatica, consenso esplicito",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-KDE-12,WL-KDE,latency-long,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P1,Solo piano; non eseguito
+NAT-WL-WLROOTS-01,WL-WLROOTS,capability-probe,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-02,WL-WLROOTS,global-shortcut,compositor + test editor,F-01..F-10 secondo piano,Apre picker solo se portal/autorizzazione disponibile,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-03,WL-WLROOTS,picker-copy-only,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-04,WL-WLROOTS,inputcapture-activation,compositor + test editor,F-01..F-10 secondo piano,Nessuna cattura globale involontaria,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-05,WL-WLROOTS,remote-desktop-consent,compositor + test editor,F-01..F-10 secondo piano,Nessuna iniezione senza consenso/sessione,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-06,WL-WLROOTS,unicode-paste,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-07,WL-WLROOTS,focus-change,compositor + test editor,F-01..F-10 secondo piano,Inserimento annullato o esplicitamente diretto al target valido,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-08,WL-WLROOTS,clipboard-race,compositor + test editor,F-01..F-10 secondo piano,Nuova clipboard utente conservata; nessun restore cieco,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-09,WL-WLROOTS,ime-preedit,compositor + test editor,F-01..F-10 secondo piano,Nessuna espansione durante composizione non confermata,NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-10,WL-WLROOTS,secure-unsupported,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-11,WL-WLROOTS,uinput-permission,compositor + test editor,F-01..F-10 secondo piano,"Nessuna escalation automatica, consenso esplicito",NOT_RUN,,P0,Solo piano; non eseguito
+NAT-WL-WLROOTS-12,WL-WLROOTS,latency-long,compositor + test editor,F-01..F-10 secondo piano,"Risultato coerente, capabilities documentate e nessun payload perso",NOT_RUN,,P1,Solo piano; non eseguito

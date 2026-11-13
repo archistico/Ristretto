@@ -1,0 +1,14 @@
+{
+  "snapshot": "emojilib-main.zip",
+  "package_version": "4.0.3",
+  "dataset": "dist/emoji-en-US.json",
+  "license": "MIT",
+  "entries": 1914,
+  "keyword_assignments": 15412,
+  "zwj_entries": 249,
+  "vs16_entries": 365,
+  "supplementary_entries": 1730,
+  "max_utf16_units": 14,
+  "has_beeftext_expected_emojis_json": false,
+  "status": "STATIC_VALIDATED_NO_APP_RUNTIME_TEST"
+}

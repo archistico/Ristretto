@@ -1,0 +1,78 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="TextExpander.Desktop.PickerWindow"
+        Classes="compact" Width="600" Height="390" MinWidth="500" MinHeight="365"
+        CanResize="True" SizeToContent="Manual"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="True"
+        Title="Ristretto — Picker" Background="{DynamicResource RCanvas}">
+  <!-- Compact command picker: quick search, scrollable results, brief preview, persistent actions. -->
+  <Grid Margin="12,9,12,9" RowDefinitions="Auto,Auto,*,Auto,Auto" RowSpacing="6">
+    <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+      <TextBlock Grid.Column="0" Text="{Binding Texts.PickerHeading}" FontSize="16" FontWeight="SemiBold"
+                 VerticalAlignment="Center" />
+      <TextBlock Grid.Column="1" Text="Esc" Classes="faint" FontSize="11" VerticalAlignment="Center" />
+    </Grid>
+    <TextBox Grid.Row="1" Name="SearchBox" Classes="search-field"
+             Text="{Binding Query, Mode=TwoWay}" Watermark="{Binding Texts.PickerSearchHint}" />
+    <Border Grid.Row="2" Background="{DynamicResource RSurface}" BorderBrush="{DynamicResource RSoftBorder}"
+            BorderThickness="0" CornerRadius="0" ClipToBounds="True">
+      <Grid RowDefinitions="Auto,*">
+        <Border Grid.Row="0" Padding="8,4" BorderBrush="{DynamicResource RSoftBorder}"
+                BorderThickness="0,0,0,1">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Grid.Column="0" Text="{Binding Texts.Snippets}" Classes="label" />
+            <TextBlock Grid.Column="1" Text="{Binding Results.Count}" Classes="faint" FontSize="12" />
+          </Grid>
+        </Border>
+        <ListBox Grid.Row="1" Name="ResultsList" ItemsSource="{Binding Results}"
+                 SelectedItem="{Binding Selected, Mode=TwoWay}" MinHeight="124">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,Auto" RowSpacing="2" ColumnSpacing="7" Margin="2,1">
+                <Path Grid.RowSpan="2" Grid.Column="0" Data="M6,4 L18,4 L21,7 L21,20 L6,20 Z M10,10 L17,10 M10,14 L17,14"
+                      Stroke="{DynamicResource RMuted}" StrokeThickness="1.4" Width="13" Height="13"
+                      Stretch="Uniform" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}" FontSize="13" FontWeight="SemiBold"
+                           TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Trigger}" Classes="muted" FontSize="12"
+                           MaxWidth="145" TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Content}" Classes="faint"
+                           FontSize="12" MaxLines="1" TextTrimming="CharacterEllipsis" />
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </Grid>
+    </Border>
+    <Border Grid.Row="3" Background="{DynamicResource RSidebar}" BorderBrush="{DynamicResource RSoftBorder}"
+            BorderThickness="0,1,0,0" CornerRadius="0" Padding="9,7" Height="84">
+      <Grid RowDefinitions="Auto,Auto,*" RowSpacing="2">
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+          <TextBlock Grid.Column="0" Text="{Binding Texts.PreviewTitle}" Classes="eyebrow" />
+          <TextBlock Grid.Column="1" Text="{Binding Selected.GroupName}" Classes="faint" FontSize="12" />
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10">
+          <TextBlock Text="{Binding Selected.Title}" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+          <TextBlock Text="{Binding Selected.Trigger}" Classes="muted" FontSize="12" TextTrimming="CharacterEllipsis" />
+        </StackPanel>
+        <ScrollViewer Grid.Row="2">
+          <TextBlock Text="{Binding Selected.Content}" FontSize="13" TextWrapping="Wrap" />
+        </ScrollViewer>
+      </Grid>
+    </Border>
+    <Grid Grid.Row="4" ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="6">
+      <StackPanel Grid.Column="0" Spacing="2" VerticalAlignment="Center">
+        <TextBlock Text="{Binding Texts.PickerInstructions}" Classes="muted" FontSize="11"
+                   TextTrimming="CharacterEllipsis" />
+        <TextBlock Text="{Binding Status}" Classes="faint" FontSize="11"
+                   TextTrimming="CharacterEllipsis" />
+      </StackPanel>
+      <Button Grid.Column="1" Classes="ghost" Content="{Binding Texts.PickerOpenLibrary}"
+              Click="OpenLibrary_Click" VerticalAlignment="Center" />
+      <Button Grid.Column="2" Classes="ghost" Content="{Binding Texts.PickerCopy}"
+              IsEnabled="{Binding CanCopy}" Click="Copy_Click" VerticalAlignment="Center" />
+      <Button Grid.Column="3" Classes="primary" Content="{Binding Texts.PickerInsert}"
+              IsEnabled="{Binding CanInsert}" Click="Insert_Click" VerticalAlignment="Center" />
+    </Grid>
+  </Grid>
+</Window>

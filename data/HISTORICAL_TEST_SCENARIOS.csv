@@ -1,0 +1,118 @@
+﻿id,source,priority,kind,scenario,expected,status
+IN-01,pipeline_v1.3,P0,U,Keyword strict `;firma` completa,Match solo quando la sequenza è identica,NOT_RUN
+IN-02,pipeline_v1.3,P0,U,Keyword suffix in `abc;firma`,Match della keyword terminale se modalità loose attiva,NOT_RUN
+IN-03,pipeline_v1.3,P0,U,`Firma` vs `firma` sensibile/insensibile,"Match secondo la singola regola, non lingua UI",NOT_RUN
+IN-04,pipeline_v1.3,P0,U,Trigger duplicati in gruppi diversi entrambi attivi,"Conflitto esplicito, nessuna scelta casuale",NOT_RUN
+IN-05,pipeline_v1.3,P0,U,Gruppo disabilitato,Nessun match degli snippet del gruppo,NOT_RUN
+IN-06,pipeline_v1.3,P0,U,Snippet singolo disabilitato,Nessun match,NOT_RUN
+IN-07,pipeline_v1.3,P0,U,"Trigger dopo spazio, con mantenimento finale ON/OFF",Lo spazio viene preservato/rimosso secondo preferenza,NOT_RUN
+IN-08,pipeline_v1.3,P0,U,Modalità manuale,Nessuna espansione prima della shortcut,NOT_RUN
+IN-09,pipeline_v1.3,P0,U,Backspace durante sequenza parziale,Buffer coerente con la policy di testo,NOT_RUN
+IN-10,pipeline_v1.3,P0,I,Cambio finestra a trigger incompleto,"Buffer scartato, non espandere nel nuovo target",NOT_RUN
+IN-11,pipeline_v1.3,P0,I,Mouse click in altro campo dello stesso processo,Buffer invalidato quando cambia il campo,NOT_RUN
+IN-12,pipeline_v1.3,P0,I,Ctrl+C / Ctrl+V durante candidato,Nessun match basato su testo non osservato,NOT_RUN
+IN-13,pipeline_v1.3,P0,U,Buffer oltre dimensione massima,Tronca/invalida senza accumulo indefinito,NOT_RUN
+IN-14,pipeline_v1.3,P1,E,"Layout IT/US International, tasti morti","Test caratteri effettivi, senza doppie emissioni",NOT_RUN
+IN-15,pipeline_v1.3,P1,E,IME e input composito CJK,"Disabilita expansion in sessione non interpretabile, o funziona secondo capability verificata",NOT_RUN
+IN-16,pipeline_v1.3,P1,U,Emoji composte e grafemi combinanti,"Policy Unicode deterministica, niente split cieco dei grafemi",NOT_RUN
+IN-17,pipeline_v1.3,P0,I,Ricezione di un evento sintetico del nostro motore,Non genera espansione ricorsiva,NOT_RUN
+IN-18,pipeline_v1.3,P1,E,Focus cambia mentre il matcher sta decidendo,Preflight impedisce modifica del target sbagliato,NOT_RUN
+PL-01,pipeline_v1.3,P0,U,"Solo testo, newline, UTF-8",Piano di `InsertText` senza effetti aggiunti,NOT_RUN
+PL-02,pipeline_v1.3,P0,U,"`#{date}`, `#{time}` con clock test","Output riproducibile, cultura configurata",NOT_RUN
+PL-03,pipeline_v1.3,P0,U,UI cambiata in tedesco,Non cambia il contenuto salvato o la cultura del template senza scelta esplicita,NOT_RUN
+PL-04,pipeline_v1.3,P1,U,Template con più `#{input:...}`,"Prompt ripetuti gestiti secondo policy, abort senza effetti se annullati",NOT_RUN
+PL-05,pipeline_v1.3,P0,U,`#{combo:...}` univoco,Espansione corretta e referenza stabile,NOT_RUN
+PL-06,pipeline_v1.3,P0,U,`#{combo:...}` ambiguo,"Errore/avviso, mai scelta casuale",NOT_RUN
+PL-07,pipeline_v1.3,P0,U,Ciclo A→B→A,"Rilevato, niente ricorsione infinita",NOT_RUN
+PL-08,pipeline_v1.3,P0,U,Catena profonda senza cicli,Rifiuto se supera limite di profondità,NOT_RUN
+PL-09,pipeline_v1.3,P1,U,Variabile sconosciuta,"Policy esplicita di resa letterale oppure errore, senza esecuzione",NOT_RUN
+PL-10,pipeline_v1.3,P0,U,"`#{delay:}` negativo, zero, eccessivo",Validazione e limiti temporali,NOT_RUN
+PL-11,pipeline_v1.3,P0,U,`#{key:}` con ripetizioni enormi,Limite alle azioni simulate,NOT_RUN
+PL-12,pipeline_v1.3,P1,U,`#{shortcut:}` non valida,Piano rifiutato prima della modifica del target,NOT_RUN
+PL-13,pipeline_v1.3,P1,U,`#{cursor}` duplicato,"Policy definita, test con emoji e grafemi",NOT_RUN
+PL-14,pipeline_v1.3,P0,I,Script PowerShell importato da Beeftext,Inerte fino ad autorizzazione esplicita; fuori MVP,NOT_RUN
+PL-15,pipeline_v1.3,P1,U,Macro con testo e tab/delay,Ordine azioni preservato e durata stimata,NOT_RUN
+PL-16,pipeline_v1.3,P0,U,Piano > massimo di azioni o byte,"Stop in preflight, nessuna azione sul target",NOT_RUN
+EX-01,pipeline_v1.3,P0,I,Dialog input annullato,Trigger originale non cancellato,NOT_RUN
+EX-02,pipeline_v1.3,P0,I,"Dialog input confermato, ma focus su altra app","Inserimento annullato, no testo nel target sbagliato",NOT_RUN
+EX-03,pipeline_v1.3,P0,I,"Operazione già in corso, arriva secondo trigger",Serializzazione o rifiuto controllato; no sovrapposizione,NOT_RUN
+EX-04,pipeline_v1.3,P0,I,Clipboard aggiornata dall'utente prima del restore,Non sovrascrivere il valore più recente,NOT_RUN
+EX-05,pipeline_v1.3,P0,I,Clipboard con HTML/immagine e testo,"Restore fedele quando supportato, altrimenti avviso/fallback senza perdita silenziosa",NOT_RUN
+EX-06,pipeline_v1.3,P0,I,La destinazione rifiuta Paste,Errore espresso; nessun falso successo,NOT_RUN
+EX-07,pipeline_v1.3,P0,I,L'inserimento fallisce dopo cancellazione,"Best-effort recovery, diagnostica redatta, mai promessa di rollback garantito",NOT_RUN
+EX-08,pipeline_v1.3,P0,I,L'utente mette in pausa durante un piano,"Stop sicuro al boundary disponibile, rilascio risorse",NOT_RUN
+EX-09,pipeline_v1.3,P0,I,Permessi revocati durante inserimento,"Stop e stato «limitato», nessun loop di retry",NOT_RUN
+EX-10,pipeline_v1.3,P1,E,Campo editor lento (Electron),Nessun delay universale presunto; prova di focus/compatibilità,NOT_RUN
+EX-11,pipeline_v1.3,P1,E,"Terminale, textarea browser, LibreOffice",Espansione coerente con la matrice capacità del target,NOT_RUN
+EX-12,pipeline_v1.3,P0,I,Password/secure field identificabile,"Nessuna acquisizione/espansione, niente contenuto nel log",NOT_RUN
+EX-13,pipeline_v1.3,P1,E,Windows app con privilegi elevati vs normale,Segnalare i limiti e non alterare target non consentito,NOT_RUN
+EX-14,pipeline_v1.3,P1,E,Mac con Secure Input/accessibilità negata,"Stato e fallback, senza bypass permessi",NOT_RUN
+EX-15,pipeline_v1.3,P1,E,X11 vs Wayland,Capability verificate separatamente; funzionalità disabilitate dove non supportate,NOT_RUN
+EX-16,pipeline_v1.3,P1,E,Desktop remoto e due monitor DPI diversi,"Verifica focus, picker e target senza digitazione altrove",NOT_RUN
+DB-01,pipeline_v1.3,P0,I,JSON malformato o versione futura,Libreria corrente identica dopo errore,NOT_RUN
+DB-02,pipeline_v1.3,P0,I,Import parzialmente valido,Nessun commit parziale se scelto comportamento atomico,NOT_RUN
+DB-03,pipeline_v1.3,P0,I,Import con keyword duplicate,"Anteprima conflitti, nessuna scelta casuale",NOT_RUN
+DB-04,pipeline_v1.3,P0,I,Interruzione mentre si salva backup,File precedente recuperabile o esito esplicito; prova di atomicità filesystem,NOT_RUN
+DB-05,pipeline_v1.3,P1,I,JSON legacy con gruppi / solo combo,Mappatura campi e abilitazioni preservate,NOT_RUN
+DB-06,pipeline_v1.3,P1,I,"CSV con accenti, virgole, newline e virgolette","Parsing senza troncamento, formato e limiti documentati",NOT_RUN
+DB-07,pipeline_v1.3,P1,I,Export e reimport su stesso formato,Round-trip semantico verificato,NOT_RUN
+UI-01,pipeline_v1.3,P1,I,"Picker aperto, lingua cambiata da preferenze",Stringhe aggiornate senza perdere ricerca e selezione,NOT_RUN
+UI-02,pipeline_v1.3,P1,I,"Temi auto/chiaro/scuro, cambi a caldo",Nessun cambio dimensioni/focus inatteso,NOT_RUN
+UI-03,pipeline_v1.3,P1,I,Snippet con macro pericolosa,"Badge/avviso nella GUI, nessuna esecuzione dalla preview",NOT_RUN
+UI-04,pipeline_v1.3,P1,I,Shortcut globale non registrabile,Messaggio localizzato e scelta alternativa,NOT_RUN
+UI-05,pipeline_v1.3,P1,I,"Tray, pausa, uscita, chiusura finestra","Transizioni distinte, sincronizzate",NOT_RUN
+UI-06,pipeline_v1.3,P1,I,Pseudo-localizzazione / stringhe tedesche lunghe,"Niente testo tagliato in picker, menu, preferenze",NOT_RUN
+UTF-001,unicode_v1.4,P0/P1 (vedi piano),NFC/NFD,`caffè` / `caffe\u0300`,"Matching secondo policy, storage esatto",NOT_RUN
+UTF-002,unicode_v1.4,P0/P1 (vedi piano),Emoji base,`😀`,Inserimento esatto,NOT_RUN
+UTF-003,unicode_v1.4,P0/P1 (vedi piano),Emoji VS16,`❤️`,Sequenza invariata,NOT_RUN
+UTF-004,unicode_v1.4,P0/P1 (vedi piano),ZWJ,`👨‍👩‍👧‍👦`,Sequenza invariata,NOT_RUN
+UTF-005,unicode_v1.4,P0/P1 (vedi piano),Skin tone,`👍🏽`,Sequenza invariata,NOT_RUN
+UTF-006,unicode_v1.4,P0/P1 (vedi piano),Flag,`🇮🇹`,Sequenza invariata,NOT_RUN
+UTF-007,unicode_v1.4,P0/P1 (vedi piano),Arabo,`مرحبا`,Output RTL esatto,NOT_RUN
+UTF-008,unicode_v1.4,P0/P1 (vedi piano),Ebraico,`שלום`,Output e direzionalità,NOT_RUN
+UTF-009,unicode_v1.4,P0/P1 (vedi piano),Greco,"`Ελλάδα`, `σ/ς`",Case policy non ambigua,NOT_RUN
+UTF-010,unicode_v1.4,P0/P1 (vedi piano),Cirillico,`Здравствуйте`,Inserimento fedele,NOT_RUN
+UTF-011,unicode_v1.4,P0/P1 (vedi piano),CJK,"`東京`, `你好`",Inserimento fedele,NOT_RUN
+UTF-012,unicode_v1.4,P0/P1 (vedi piano),Devanagari,"`नमस्ते`, conjunct",Nessun cluster spezzato,NOT_RUN
+UTF-013,unicode_v1.4,P0/P1 (vedi piano),Thai,Testo Thai senza spazi,Trigger secondo regola dichiarata,NOT_RUN
+UTF-014,unicode_v1.4,P0/P1 (vedi piano),Turco,`I/İ/ı/i`,Confronto stabile secondo cultura scelta,NOT_RUN
+UTF-015,unicode_v1.4,P0/P1 (vedi piano),Tedesco,"`ß/SS`, `ä`",Nessuna confusione indesiderata,NOT_RUN
+UTF-016,unicode_v1.4,P0/P1 (vedi piano),Dead keys,`é` da tasto morto,Trigger riconosciuto solo quando commit,NOT_RUN
+UTF-017,unicode_v1.4,P0/P1 (vedi piano),AltGr,"`@`, `€`, `\`",Nessuna falsa espansione,NOT_RUN
+UTF-018,unicode_v1.4,P0/P1 (vedi piano),IME pre-edit,Romaji in conversione,Nessuna espansione prematura,NOT_RUN
+UTF-019,unicode_v1.4,P0/P1 (vedi piano),IME commit,Kanji selezionato,Trigger solo se disponibile come text-commit,NOT_RUN
+UTF-020,unicode_v1.4,P0/P1 (vedi piano),Trigger emoji,`:👍🏽`,Corretto o fallback documentato per piattaforma,NOT_RUN
+UTF-021,unicode_v1.4,P0/P1 (vedi piano),Trigger arabo,Prefisso + parola araba,"Corretto o fallback, niente cancellazioni errate",NOT_RUN
+UTF-022,unicode_v1.4,P0/P1 (vedi piano),Newline/tab,"CRLF, LF, Tab",Normalizzazione solo se voluta,NOT_RUN
+UTF-023,unicode_v1.4,P0/P1 (vedi piano),Testo lungo,200 KB CJK + emoji,"Nessuna corruzione, cancellazione/focus sicuri",NOT_RUN
+UTF-024,unicode_v1.4,P0/P1 (vedi piano),Cursore,Marker prima di ZWJ,Nessun offset basato su UTF-16,NOT_RUN
+UTF-025,unicode_v1.4,P0/P1 (vedi piano),Clipboard text,Testo precedente,Policy di restore rispettata,NOT_RUN
+UTF-026,unicode_v1.4,P0/P1 (vedi piano),Clipboard immagine,Screenshot precedente,Non distruggere silenziosamente,NOT_RUN
+UTF-027,unicode_v1.4,P0/P1 (vedi piano),Clipboard HTML,HTML + plain text,Politica multi-format dichiarata,NOT_RUN
+UTF-028,unicode_v1.4,P0/P1 (vedi piano),Clipboard file,Copy di file prima di espansione,Restore/fallback coerente,NOT_RUN
+UTF-029,unicode_v1.4,P0/P1 (vedi piano),Clipboard race,Utente copia durante espansione,Non sovrascrivere sua nuova copia,NOT_RUN
+UTF-030,unicode_v1.4,P0/P1 (vedi piano),Clipboard lock,Altra app blocca clipboard,"Errore gestito, niente stato falso",NOT_RUN
+UTF-031,unicode_v1.4,P0/P1 (vedi piano),Focus switch,Cambia app prima dell'incolla,Aborta e non inserisce nella app sbagliata,NOT_RUN
+UTF-032,unicode_v1.4,P0/P1 (vedi piano),Target elevated,App con privilegi più alti,"Disabilita/avverte, non bypassa permessi",NOT_RUN
+UTF-033,unicode_v1.4,P0/P1 (vedi piano),Secure Input,Campo protetto macOS,Nessun global typing hook forzato,NOT_RUN
+UTF-034,unicode_v1.4,P0/P1 (vedi piano),Password field,Campo credenziali,Non registrare/espandere automaticamente,NOT_RUN
+UTF-035,unicode_v1.4,P0/P1 (vedi piano),Remote session,Desktop remoto/VM,"Capacità misurate, fallback sicuro",NOT_RUN
+UTF-036,unicode_v1.4,P0/P1 (vedi piano),X11,2 layout tastiera,Nessuna sorpresa nella mappatura,NOT_RUN
+UTF-037,unicode_v1.4,P0/P1 (vedi piano),Wayland GNOME,Copia/incolla e layout IT,Documentare capacità e flicker,NOT_RUN
+UTF-038,unicode_v1.4,P0/P1 (vedi piano),Wayland KDE,Identificazione app,Supporto solo se misurato,NOT_RUN
+UTF-039,unicode_v1.4,P0/P1 (vedi piano),Wayland Sway,Clipboard/events,Supporto solo se misurato,NOT_RUN
+UTF-040,unicode_v1.4,P0/P1 (vedi piano),Sleep/wake,Riattivazione sistema,Hook ripristinato o errore evidente,NOT_RUN
+UTF-041,unicode_v1.4,P0/P1 (vedi piano),Hotplug keyboard,Seconda tastiera,Nessuna cattura “muta” inosservata,NOT_RUN
+UTF-042,unicode_v1.4,P0/P1 (vedi piano),Multimonitor DPI,Picker target e focus,"UI coerente, nessun focus perso",NOT_RUN
+UTF-043,unicode_v1.4,P0/P1 (vedi piano),Trigger duplicato,Due match uguali,Menu deterministico o conflitto prevenuto,NOT_RUN
+UTF-044,unicode_v1.4,P0/P1 (vedi piano),Trigger suffisso,`:text` vs `text`,Priorità e longest-first definite,NOT_RUN
+UTF-045,unicode_v1.4,P0/P1 (vedi piano),Retrocessione,Backspace durante trigger,"Buffer aggiornato, niente espansione errata",NOT_RUN
+UTF-046,unicode_v1.4,P0/P1 (vedi piano),App exclusion,App esclusa,Nessun hook espansione,NOT_RUN
+UTF-047,unicode_v1.4,P0/P1 (vedi piano),UI locale,Switch IT → EN → JA/AR futuro,Solo UI cambia; snippet invariato,NOT_RUN
+UTF-048,unicode_v1.4,P0/P1 (vedi piano),Date locale,Locale IT/EN/FR,"Formato da impostazione contenuto, non GUI automatica",NOT_RUN
+UTF-049,unicode_v1.4,P0/P1 (vedi piano),Import legacy,File JSON Beeftext con emoji,Round-trip senza perdita,NOT_RUN
+UTF-050,unicode_v1.4,P0/P1 (vedi piano),Teste bytes,UTF-8 BOM/non BOM,Lettura esplicita e preservazione,NOT_RUN
+UTF-051,unicode_v1.4,P0/P1 (vedi piano),Script injection,Snippet con `#{}` e `{...}`,"Letterale di default, no esecuzione inattesa",NOT_RUN
+UTF-052,unicode_v1.4,P0/P1 (vedi piano),Search,Ricerca accentata e RTL nel picker,"Risultati corretti, no alterazione testo",NOT_RUN
+UTF-053,unicode_v1.4,P0/P1 (vedi piano),Locale fallbacks,Risorsa UI mancante,Fallback EN e log senza dati privati,NOT_RUN
+UTF-054,unicode_v1.4,P0/P1 (vedi piano),Concorrenza,Due trigger ravvicinati,"Un'espansione per target, no collisione",NOT_RUN

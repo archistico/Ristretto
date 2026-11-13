@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Ristretto</AssemblyName>
+    <RootNamespace>TextExpander.Desktop</RootNamespace>
+    <Product>Ristretto</Product>
+    <Title>Ristretto</Title>
+    <Version>3.9.0-alpha.20.5</Version>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../TextExpander.Application/TextExpander.Application.csproj" />
+    <ProjectReference Include="../TextExpander.Infrastructure/TextExpander.Infrastructure.csproj" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.22" />
+    <AvaloniaResource Include="Assets/app-icon.ico" />
+  </ItemGroup>
+</Project>

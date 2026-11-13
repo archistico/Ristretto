@@ -1,0 +1,78 @@
+{
+  "schema": "ristretto/picker-loading-validation/1",
+  "source_version": "3.9.0-alpha.20.3",
+  "date": "2026-11-13",
+  "release_builds": {
+    "solution": "PASS",
+    "windows_lab": "PASS",
+    "core_benchmark": "PASS",
+    "replacement_lab": "PASS",
+    "ui_review": "PASS_COMPILED_NOT_RUN"
+  },
+  "restore": "local NuGet cache; online vulnerability audit not run; no TLS or signature verification disabled",
+  "xunit": {
+    "passed": 528,
+    "failed": 0,
+    "skipped": 0,
+    "new_cases": 22,
+    "viewmodel_cases": 20,
+    "new_index_cancellation_cases": 2
+  },
+  "regression_before_fix": {
+    "failed_cases": 3,
+    "scenarios": [
+      "older read overwrites newer results",
+      "older failure overwrites newer status",
+      "old selection available while reloading"
+    ]
+  },
+  "checks": {
+    "source_audit": "PASS",
+    "static_audit": "PASS",
+    "python_unit_tests_passed": 7,
+    "localized_loading_languages": [
+      "en",
+      "it",
+      "fr",
+      "de",
+      "es"
+    ]
+  },
+  "not_run": [
+    "Avalonia dispatcher/window integration",
+    "native laboratory scenarios in this increment",
+    "clipboard or physical typing",
+    "VS Code host",
+    "Node tests in this increment",
+    "UI latency or memory measurements",
+    "UI review renders",
+    "online NuGet vulnerability audit"
+  ],
+  "gui_processes_started_for_validation": false,
+  "contains_user_text": false,
+  "source_sha256": {
+    "src/TextExpander.Application/Features/Picker/PickerSearchIndex.cs": "bbd8f27ce632f00884563305bf38f217272dafc86143494b2d2e97f652ca6b3f",
+    "src/TextExpander.Desktop/ViewModels/PickerViewModel.cs": "c7bae35610548205660b691139190be4b2b23ea17809f414961febf9634abbb3",
+    "src/TextExpander.Desktop/App.axaml.cs": "2938192f35bf06a346169c4ce5df80962b618ac61788bbdd8f4e0ddcddc7ef0a",
+    "src/TextExpander.Desktop/PickerWindow.axaml.cs": "e65dfd873ced1666861623bbfb61a52510dbad7d6e5b6098c89447d6b8985673",
+    "src/TextExpander.Desktop/Localization/UiStrings.cs": "e37170869e29defe1338bef94275f724eb5f397990c0b1d8de33babd17001713",
+    "src/TextExpander.Desktop/Localization/Strings.resx": "9cf84eeccbda594e4f488f909c97888c5055840f8bc5fcb2eb01a0868d11491d",
+    "src/TextExpander.Desktop/Localization/Strings.it.resx": "70b3de63913e36e98ed3b42b5c057e944b80ea793e948778aeee9b286536e5b7",
+    "src/TextExpander.Desktop/Localization/Strings.fr.resx": "2208da41a31ed507a247dcdbbc587014eafa87bc2e3292530af551c8fd7a6cea",
+    "src/TextExpander.Desktop/Localization/Strings.de.resx": "6c4e046c2efafa9887cee481e0422e454515ca3db3be94d1639f0bd3107aa695",
+    "src/TextExpander.Desktop/Localization/Strings.es.resx": "133aa0dae7686a5ae938cde23a67f9c76b3e20609d154233bae7281363b5022f",
+    "tools/Ristretto.UiReview/Program.cs": "d5d9703bad191b414726ff681e0d93264fdf54d5227c717a7cadd27e7dcef138",
+    "tests/TextExpander.Tests/TextExpander.Tests.csproj": "d435a734fea737c061c2a343a000e53d174d0e1f22f7d93b0eb724de5394169b",
+    "tests/TextExpander.Tests/PickerViewModelTests.cs": "aeaef9c6cb3ff292c3b1f41105b5357a61c6f0e0a54ff18a02643d05ae6a1f8e",
+    "tests/TextExpander.Tests/PickerSearchIndexTests.cs": "223ada4a40e95a8e6180ed029c034ab60254fce99206718f0c06aebb94c122c9"
+  },
+  "previous_baseline": "PICKER_SEARCH_VALIDATION.json",
+  "qualification": "Production PickerViewModel tested with synthetic store, real localized resources and deterministic read/index barriers. Test project references Desktop but never initializes Avalonia.Application or a graphical backend. Worker cancellation is cooperative; provider I/O may outlive cancellation.",
+  "fresh_extraction": {
+    "manifest": "PASS",
+    "initial_bin_obj_absent": true,
+    "solution_and_four_tools": "PASS",
+    "xunit_passed": 528,
+    "compiled_sources_projects_resources_match_delivery": true
+  }
+}

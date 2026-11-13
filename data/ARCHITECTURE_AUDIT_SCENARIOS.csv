@@ -1,0 +1,46 @@
+﻿id,area,scenario,expected,priority,status
+ARCH-01,Startup,Seconda istanza mostra quella già aperta,"Una sola istanza, nessun hook doppio",P0,NOT_RUN
+ARCH-02,Startup,Primo avvio senza libreria,Onboarding e libreria vuota validi,P0,NOT_RUN
+ARCH-03,Startup,Libreria JSON/DB danneggiata,"Nessuna distruzione di dati, diagnostica e recovery",P0,NOT_RUN
+ARCH-04,Startup,Caricamento lingua incompleto,Fallback inglese coerente,P0,NOT_RUN
+ARCH-05,Startup,Assenza permessi input,GUI e picker manuale secondo capability,P0,NOT_RUN
+ARCH-06,Lifecycle,Chiudi finestra con tray,Motore rimane se configurato; stato chiaro,P0,NOT_RUN
+ARCH-07,Lifecycle,Esci dal tray,"Rimozione hook, flush storage, nessun processo orfano",P0,NOT_RUN
+ARCH-08,Lifecycle,Pausa e riprendi,Reset buffer e stato sincronizzato GUI/tray,P0,NOT_RUN
+ARCH-09,Lifecycle,Sospensione PC e resume,"Input state reset, no target stale",P0,NOT_RUN
+ARCH-10,Lifecycle,Logout sessione o lock,Nessun ascolto improprio di input,P0,NOT_RUN
+ARCH-11,Lifecycle,IPC seconda istanza con altro utente,Nessuna comunicazione cross-user non autorizzata,P0,NOT_RUN
+ARCH-12,Lifecycle,Crash prima del flush finale,Storage recuperabile e recovery log,P0,NOT_RUN
+UI-20,GUI,Tray cambia da attivo a pausa,Icona e voce menu accessibili e coerenti,P1,NOT_RUN
+UI-21,GUI,Lingua cambia con tray visibile,"Ogni voce menu ritradotta, stesso stato",P1,NOT_RUN
+UI-22,GUI,Drag/drop file multipli,"Anteprima o gestione esplicita, niente scarto silenzioso",P1,NOT_RUN
+UI-23,GUI,Import file con estensione backup ma payload non valido,Mai ripristino prima della validazione,P0,NOT_RUN
+UI-24,GUI,Salvataggio dimensione e divider,Riapertura coerente con più monitor DPI,P1,NOT_RUN
+PREF-01,Preferences,Esportazione opzione custom backup indipendente dal suono,Round-trip vero della stessa preferenza,P0,NOT_RUN
+PREF-02,Preferences,Import stato splitter e geometria,Nessuna chiave sovrascritta,P0,NOT_RUN
+PREF-03,Preferences,JSON valido con campo malformato in coda,Zero cambiamenti a configurazione corrente,P0,NOT_RUN
+PREF-04,Preferences,Import path Windows su Linux,Non applicare path non disponibile senza scelta,P0,NOT_RUN
+PREF-05,Preferences,Export file target già esistente,Sostituzione sicura e recoverable,P0,NOT_RUN
+PREF-06,Preferences,Import shortcut già usata da OS,Validazione e fallback,P1,NOT_RUN
+PREF-07,Preferences,Reset to defaults con file dati esistente,Non eliminare snippet o backup,P0,NOT_RUN
+PREF-08,Preferences,Switch portable mode,Mai confondere profili installati e portable,P0,NOT_RUN
+PREF-09,Preferences,Portable mode read-only,"Errori chiari, niente install autostart",P0,NOT_RUN
+I18N-10,Localization,Traduzione polacca migrazione cartelle,La cartella destinazione coincide con locale,P1,NOT_RUN
+I18N-11,Localization,Traduzione mancante in picker,Fallback e ricerca invariata,P0,NOT_RUN
+I18N-12,Localization,Cambio lingua durante dialog aperto,Label e validazioni ri-localizzati,P1,NOT_RUN
+I18N-13,Localization,Pseudo-localizzazione e stringhe lunghe,Nessuna perdita interazioni GUI,P1,NOT_RUN
+I18N-14,Localization,UI in arabo con snippet in lingua giapponese,Contenuto snippet invariato; bidi locale,P0,NOT_RUN
+I18N-15,Localization,Plurali e locale regionale,Formati coerenti con locale selezionata,P1,NOT_RUN
+DATA-20,Profiles,Escludi app wildcard,Matching identificatore app con semantica testata,P0,NOT_RUN
+DATA-21,Profiles,Profilo output terminale diverso da blocco privacy,Policy indipendenti,P0,NOT_RUN
+DATA-22,Profiles,Campo password incerto,Fail-safe senza cattura contenuto,P0,NOT_RUN
+DATA-23,Profiles,Cambio app focus con trigger buffer,Buffer invalidato e target verificato,P0,NOT_RUN
+BUILD-01,Build,Build Windows con SDK .NET pinned,Artifact riproducibile,P0,NOT_RUN
+BUILD-02,Build,Build macOS runner,"App bundle, permessi e notarizzazione valutati",P1,NOT_RUN
+BUILD-03,Build,Build Linux diverse distro,Packaging con manifest e runtime dichiarati,P1,NOT_RUN
+BUILD-04,Build,License inventory NuGet/assets/font/emoji,SBOM e notices completi,P0,NOT_RUN
+BUILD-05,Build,Preflight dependencies e version drift,Nessun componente Pro proprietario involontario,P0,NOT_RUN
+BUILD-06,Build,Sorgente terzo incluso accidentalmente,License gate e attribuzioni,P0,NOT_RUN
+UPD-01,Updates,Update network non disponibile,L’app continua offline senza blocchi,P1,NOT_RUN
+UPD-02,Updates,Metadata aggiornamento manomessi,Non installare payload non verificato,P0,NOT_RUN
+UPD-03,Updates,Check automatico disabilitato,Nessuna richiesta in background,P1,NOT_RUN

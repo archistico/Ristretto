@@ -1,0 +1,41 @@
+{
+  "fileFormatVersion": 10,
+  "groups": [
+    {
+      "uuid": "{aaac6900-a3c4-4058-bc7c-53f89933be01}",
+      "name": "Multilingua",
+      "description": "Fixture sintetica",
+      "creationDateTime": "2026-11-12T10:00:00.000Z",
+      "modificationDateTime": "2026-11-12T10:00:00.000Z",
+      "enabled": true
+    }
+  ],
+  "combos": [
+    {
+      "uuid": "{b4c15ecb-f743-47b6-8a5c-a2d775aa9a71}",
+      "name": "Saluto Unicode",
+      "keyword": ":ciao",
+      "snippet": "Caffè, Καλημέρα, مرحبا, こんにちは, 👨‍👩‍👧‍👦 👍🏽 🇮🇹\nseconda riga",
+      "description": "Preservare Unicode senza normalizzazione",
+      "matchingMode": 0,
+      "caseSensitivity": 0,
+      "creationDateTime": "2026-11-12T10:00:00.000Z",
+      "modificationDateTime": "2026-11-12T10:00:00.000Z",
+      "enabled": true,
+      "group": "{aaac6900-a3c4-4058-bc7c-53f89933be01}"
+    },
+    {
+      "uuid": "{30c5a667-e0e1-4eab-98c6-910071e4131b}",
+      "name": "Combinanti",
+      "keyword": ":comb",
+      "snippet": "é versus é",
+      "description": "Normalization preservation test",
+      "matchingMode": 1,
+      "caseSensitivity": 2,
+      "creationDateTime": "2026-11-12T10:00:00.000Z",
+      "modificationDateTime": "2026-11-12T10:00:00.000Z",
+      "enabled": false,
+      "group": "{aaac6900-a3c4-4058-bc7c-53f89933be01}"
+    }
+  ]
+}

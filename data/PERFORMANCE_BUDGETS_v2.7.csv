@@ -1,0 +1,13 @@
+ID,Metric,Unit,Target,Status,MeasurementScope
+PB-01,core matcher p99 D10,ms,1,Proposed,"core, warm, n=10000"
+PB-02,core matcher p99 D50 exploratory,ms,2,Proposed,"core, warm, not MVP guarantee"
+PB-03,native callback p99,ms,0.5,Proposed,requires native OS measurement
+PB-04,picker first results p95,ms,120,Proposed,D10 picker already open
+PB-05,picker opening p95,ms,300,Proposed,D10 warm index
+PB-06,ready-to-expand cold p95,ms,3000,Proposed,D10 SSD
+PB-07,tray steady RSS,MiB,150,Proposed,D10 reference machine
+PB-08,idle CPU average,percent_one_core,0.5,Proposed,10min after settle
+PB-09,max continuous UI freeze import,ms,100,Proposed,10k staging import
+PB-10,normal shutdown p95,ms,2000,Proposed,no uninterruptible native call
+PB-11,snapshot publication,consistency,atomic,Proposed,no mixed revision
+PB-12,24h stability,trend,no unexplained monotonic growth,Proposed,RSS handles threads

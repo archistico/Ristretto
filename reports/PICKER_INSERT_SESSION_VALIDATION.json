@@ -1,0 +1,58 @@
+{
+  "schema": "ristretto/picker-insert-session-validation/1",
+  "source_version": "3.9.0-alpha.20.3",
+  "date": "2026-11-13",
+  "release_builds": {
+    "solution": "PASS",
+    "windows_lab": "PASS",
+    "core_benchmark": "PASS",
+    "replacement_lab": "PASS",
+    "ui_review": "PASS"
+  },
+  "restore": "local NuGet cache; no TLS or signature verification disabled; online vulnerability audit not run",
+  "xunit": {
+    "passed": 484,
+    "failed": 0,
+    "skipped": 0,
+    "picker_passed": 36,
+    "new_picker_cases": 18
+  },
+  "regression_before_fix": {
+    "case": "NativeValidationErrorsAreContainedBeforeAnyInput",
+    "failed_cases": 2,
+    "cause": "Win32Exception and InvalidOperationException escaped validation in TryActivate"
+  },
+  "checks": {
+    "source_audit": "PASS",
+    "static_audit": "PASS",
+    "python_unit_tests_passed": 7
+  },
+  "not_run": [
+    "real clipboard/paste",
+    "desktop UI event integration",
+    "native laboratory scenarios in this increment",
+    "VS Code host",
+    "Node tests in this increment",
+    "online NuGet vulnerability audit"
+  ],
+  "gui_processes_started_for_validation": false,
+  "contains_user_text": false,
+  "previous_baseline": "WINDOWS_ALPHA20_3_VALIDATION.json",
+  "source_sha256": {
+    "src/TextExpander.Infrastructure/Platform/Windows/WindowsPickerPasteService.cs": "484e503ad1cad295fb3b813db20eec6521747387773357a1cedb3f184288d3e3",
+    "src/TextExpander.Infrastructure/Platform/Windows/WindowsPickerInsertRequest.cs": "64eba6839565ea7a00c16745fb07ea8f161792e67c3350d6e454f41ac331a098",
+    "src/TextExpander.Desktop/App.axaml.cs": "eadcf4fa7528b80e1905b8929817f0294207e299afd3a8c89f960fb5ef259314",
+    "src/TextExpander.Desktop/PickerWindow.axaml.cs": "38f8d1e2eac788d1bf9fbb7fd1c19551007b95f27abcef3048d9e8e5a78cf246",
+    "tests/TextExpander.Tests/WindowsPickerPasteTests.cs": "ab358b058a235081f19534fddab755a67744051112b3f2fad2b9d22195e40740",
+    "scripts/verify_static.py": "3defd883eb54ff24ee34b498289792f982592b6a9a13adeb1500e13932929c05",
+    "scripts/verify-release.ps1": "9c5031ecce3aa2e609e380a603853b245bb187b2ef7d76c256d4d17ee3de134e"
+  },
+  "qualification": "Managed fake-adapter tests only; no new external editor compatibility or verified paste claim",
+  "fresh_extraction": {
+    "manifest": "PASS",
+    "initial_bin_obj_absent": true,
+    "release_solution_and_four_tools": "PASS",
+    "xunit_passed": 484,
+    "compiled_sources_match_delivery": true
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "ristretto/startup-cli-check/1",
+  "source_version": "3.9.0-alpha.20.5",
+  "status": "PASS",
+  "passed": 10,
+  "cases": [
+    {
+      "case": "help",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "case": "version",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "case": "relative-unicode-directory",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "case": "absolute-equals-directory",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "case": "missing-directory-value",
+      "status": "PASS",
+      "exit_code": 2
+    },
+    {
+      "case": "empty-directory",
+      "status": "PASS",
+      "exit_code": 2
+    },
+    {
+      "case": "duplicate-directory",
+      "status": "PASS",
+      "exit_code": 2
+    },
+    {
+      "case": "unknown-option",
+      "status": "PASS",
+      "exit_code": 2
+    },
+    {
+      "case": "conflicting-actions",
+      "status": "PASS",
+      "exit_code": 2
+    },
+    {
+      "case": "file-as-directory",
+      "status": "PASS",
+      "exit_code": 2
+    }
+  ],
+  "gui_started": false,
+  "database_opened": false,
+  "scope": "Real entry point, diagnostic commands, temporary synthetic directories only"
+}

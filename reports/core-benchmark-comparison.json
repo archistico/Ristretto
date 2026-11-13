@@ -1,0 +1,90 @@
+[
+  {
+    "Scenario": "ascii_delimiter",
+    "BaselineMeanBytes": 364.0144,
+    "OptimizedMeanBytes": 324.0096,
+    "AllocationReductionPercent": 10.989894905256502,
+    "BaselineWorstP99Us": 1.2,
+    "OptimizedWorstP99Us": 1.2
+  },
+  {
+    "Scenario": "nfd_delimiter",
+    "BaselineMeanBytes": 416.0048,
+    "OptimizedMeanBytes": 339.2,
+    "AllocationReductionPercent": 18.462479279085244,
+    "BaselineWorstP99Us": 2.9,
+    "OptimizedWorstP99Us": 1.6
+  },
+  {
+    "Scenario": "cjk_delimiter",
+    "BaselineMeanBytes": 284.0,
+    "OptimizedMeanBytes": 284.0144,
+    "AllocationReductionPercent": -0.005070422535213837,
+    "BaselineWorstP99Us": 0.7,
+    "OptimizedWorstP99Us": 0.7
+  },
+  {
+    "Scenario": "emoji_zwj_delimiter",
+    "BaselineMeanBytes": 354.6762647470506,
+    "OptimizedMeanBytes": 312.0047990401919,
+    "AllocationReductionPercent": 12.031102712015784,
+    "BaselineWorstP99Us": 0.8,
+    "OptimizedWorstP99Us": 2.4
+  },
+  {
+    "Scenario": "rtl_delimiter",
+    "BaselineMeanBytes": 345.15245426372087,
+    "OptimizedMeanBytes": 317.7142857142857,
+    "AllocationReductionPercent": 7.949579442500632,
+    "BaselineWorstP99Us": 1.1,
+    "OptimizedWorstP99Us": 0.7
+  },
+  {
+    "Scenario": "canonical_ambiguity",
+    "BaselineMeanBytes": 298.0,
+    "OptimizedMeanBytes": 292.0096,
+    "AllocationReductionPercent": 2.010201342281892,
+    "BaselineWorstP99Us": 0.7,
+    "OptimizedWorstP99Us": 1.0
+  },
+  {
+    "Scenario": "immediate_overlap",
+    "BaselineMeanBytes": 413.60960000000006,
+    "OptimizedMeanBytes": 294.40959999999995,
+    "AllocationReductionPercent": 28.819447130820976,
+    "BaselineWorstP99Us": 0.9,
+    "OptimizedWorstP99Us": 0.8
+  },
+  {
+    "Scenario": "long_shared_prefix",
+    "BaselineMeanBytes": 1068.6487341772151,
+    "OptimizedMeanBytes": 482.70174050632914,
+    "AllocationReductionPercent": 54.83064499412187,
+    "BaselineWorstP99Us": 3.5,
+    "OptimizedWorstP99Us": 1.9
+  },
+  {
+    "Scenario": "bounded_continuous_miss",
+    "BaselineMeanBytes": 24320.456,
+    "OptimizedMeanBytes": 4592.0864,
+    "AllocationReductionPercent": 81.11841981910207,
+    "BaselineWorstP99Us": 24.5,
+    "OptimizedWorstP99Us": 15.0
+  },
+  {
+    "Scenario": "protected_field",
+    "BaselineMeanBytes": 32.009598080383924,
+    "OptimizedMeanBytes": 32.0,
+    "AllocationReductionPercent": 0.02998500749625821,
+    "BaselineWorstP99Us": 0.1,
+    "OptimizedWorstP99Us": 0.1
+  },
+  {
+    "Scenario": "composing_input",
+    "BaselineMeanBytes": 32.0,
+    "OptimizedMeanBytes": 32.0,
+    "AllocationReductionPercent": 0.0,
+    "BaselineWorstP99Us": 0.1,
+    "OptimizedWorstP99Us": 0.1
+  }
+]

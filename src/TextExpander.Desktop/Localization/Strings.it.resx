@@ -1,0 +1,375 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Ristretto</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Snippet rapidi, senza distrazioni</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Gruppi</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Nome del gruppo</value>
+  </data>
+  <data name="AddGroup" xml:space="preserve">
+    <value>Aggiungi</value>
+  </data>
+  <data name="Snippets" xml:space="preserve">
+    <value>Snippet</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Cerca snippet…</value>
+  </data>
+  <data name="NewSnippet" xml:space="preserve">
+    <value>Nuovo snippet</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="TriggerLabel" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="ContentLabel" xml:space="preserve">
+    <value>Testo da espandere</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Salva snippet</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Elimina</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Abilitato</value>
+  </data>
+  <data name="PreviewTitle" xml:space="preserve">
+    <value>Anteprima matching locale</value>
+  </data>
+  <data name="PreviewInput" xml:space="preserve">
+    <value>Scrivi un testo che termina con un trigger</value>
+  </data>
+  <data name="PreviewRun" xml:space="preserve">
+    <value>Verifica trigger</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Crea backup</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Ripristina backup</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Aspetto</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
+    <value>Chiaro</value>
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
+    <value>Scuro</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>Espansione automatica non ancora attiva: gli adapter nativi arriveranno nelle prossime slice.</value>
+  </data>
+  <data name="SelectGroup" xml:space="preserve">
+    <value>Seleziona un gruppo</value>
+  </data>
+  <data name="StatusReady" xml:space="preserve">
+    <value>Libreria pronta</value>
+  </data>
+  <data name="StatusSaved" xml:space="preserve">
+    <value>Snippet salvato</value>
+  </data>
+  <data name="StatusGroupCreated" xml:space="preserve">
+    <value>Gruppo creato</value>
+  </data>
+  <data name="StatusDeleted" xml:space="preserve">
+    <value>Snippet eliminato</value>
+  </data>
+  <data name="StatusBackup" xml:space="preserve">
+    <value>Backup SQLite creato</value>
+  </data>
+  <data name="StatusRestored" xml:space="preserve">
+    <value>Backup ripristinato</value>
+  </data>
+  <data name="StatusNoMatch" xml:space="preserve">
+    <value>Nessun trigger corrispondente</value>
+  </data>
+  <data name="StatusAmbiguous" xml:space="preserve">
+    <value>Trigger in conflitto: espansione automatica bloccata</value>
+  </data>
+  <data name="StatusMatched" xml:space="preserve">
+    <value>Corrispondenza: {0}</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Eliminare lo snippet selezionato?</value>
+  </data>
+  <data name="ConfirmRestore" xml:space="preserve">
+    <value>Ripristinare questo backup? Il database corrente sarà salvato come copia di recupero.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Conferma</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="ChooseBackup" xml:space="preserve">
+    <value>Seleziona un backup SQLite</value>
+  </data>
+  <data name="StatusError" xml:space="preserve">
+    <value>Errore: {0}</value>
+  </data>
+  <data name="GroupDisabled" xml:space="preserve">
+    <value>Disabilitato</value>
+  </data>
+  <data name="EditSnippet" xml:space="preserve">
+    <value>Modifica snippet</value>
+  </data>
+  <data name="OpenPicker" xml:space="preserve">
+    <value>Picker rapido</value>
+  </data>
+  <data name="PickerHeading" xml:space="preserve">
+    <value>Snippet rapidi</value>
+  </data>
+  <data name="PickerSearchHint" xml:space="preserve">
+    <value>Cerca nome, trigger, descrizione o testo…</value>
+  </data>
+  <data name="PickerInstructions" xml:space="preserve">
+    <value>Invio: inserisci primo risultato · Esc: chiudi</value>
+  </data>
+  <data name="PickerOpenLibrary" xml:space="preserve">
+    <value>Libreria</value>
+  </data>
+  <data name="PickerCopy" xml:space="preserve">
+    <value>Copia testo</value>
+  </data>
+  <data name="PickerCopied" xml:space="preserve">
+    <value>Testo copiato. Incollalo nell’applicazione desiderata.</value>
+  </data>
+  <data name="PickerManualNotice" xml:space="preserve">
+    <value>Copia o inserisci manualmente. Espansione automatica dei trigger non ancora attiva.</value>
+  </data>
+  <data name="PickerClipboardUnavailable" xml:space="preserve">
+    <value>Appunti non disponibili.</value>
+  </data>
+  <data name="TrayOpen" xml:space="preserve">
+    <value>Apri libreria</value>
+  </data>
+  <data name="TrayPicker" xml:space="preserve">
+    <value>Picker rapido</value>
+  </data>
+  <data name="TrayExit" xml:space="preserve">
+    <value>Esci</value>
+  </data>
+  <data name="GroupEditName" xml:space="preserve">
+    <value>Nome del gruppo</value>
+  </data>
+  <data name="GroupRename" xml:space="preserve">
+    <value>Rinomina</value>
+  </data>
+  <data name="GroupEnable" xml:space="preserve">
+    <value>Attiva</value>
+  </data>
+  <data name="GroupDisable" xml:space="preserve">
+    <value>Disattiva</value>
+  </data>
+  <data name="GroupDelete" xml:space="preserve">
+    <value>Elimina</value>
+  </data>
+  <data name="ConfirmDeleteGroup" xml:space="preserve">
+    <value>Eliminare questo gruppo vuoto? I gruppi con snippet non possono essere eliminati.</value>
+  </data>
+  <data name="StatusGroupUpdated" xml:space="preserve">
+    <value>Gruppo aggiornato.</value>
+  </data>
+  <data name="StatusGroupDeleted" xml:space="preserve">
+    <value>Gruppo vuoto eliminato.</value>
+  </data>
+  <data name="DiscardChangesQuestion" xml:space="preserve">
+    <value>Scartare le modifiche non salvate allo snippet corrente?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>● Modifiche non salvate</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importa JSON</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Esporta JSON</value>
+  </data>
+  <data name="ChooseImport" xml:space="preserve">
+    <value>Importa snippet da JSON</value>
+  </data>
+  <data name="ChooseExport" xml:space="preserve">
+    <value>Esporta snippet in JSON</value>
+  </data>
+  <data name="StatusImported" xml:space="preserve">
+    <value>Importati {0} gruppi e {1} snippet.</value>
+  </data>
+  <data name="StatusExported" xml:space="preserve">
+    <value>Snippet esportati</value>
+  </data>
+  <data name="ExportUnsavedQuestion" xml:space="preserve">
+    <value>L’esportazione JSON includerà solo gli elementi salvati, non le modifiche in sospeso. Continuare?</value>
+  </data>
+  <data name="ImportPreviewTitle" xml:space="preserve">
+    <value>Anteprima importazione</value>
+  </data>
+  <data name="ImportPreviewCounts" xml:space="preserve">
+    <value>Origine: {0} • Gruppi: {1} • Snippet: {2} • Saltati: {3}</value>
+  </data>
+  <data name="ImportNativePolicy" xml:space="preserve">
+    <value>Importazione JSON nativa: gli snippet mantengono lo stato attivo. Nessun elemento esistente viene sovrascritto.</value>
+  </data>
+  <data name="ImportExternalDisabled" xml:space="preserve">
+    <value>Gli snippet esterni saranno disattivati per sicurezza. Controlla trigger, contenuto e opzioni non supportate prima di abilitarli.</value>
+  </data>
+  <data name="ImportWarnings" xml:space="preserve">
+    <value>Avvisi: {0}</value>
+  </data>
+  <data name="ImportMoreWarnings" xml:space="preserve">
+    <value>Altri avvisi non mostrati; consulta la documentazione.</value>
+  </data>
+  <data name="ImportItemsTitle" xml:space="preserve">
+    <value>Snippet da aggiungere</value>
+  </data>
+  <data name="ImportMoreItems" xml:space="preserve">
+    <value>Altri snippet non mostrati nel riepilogo.</value>
+  </data>
+  <data name="ImportConfirm" xml:space="preserve">
+    <value>Importa</value>
+  </data>
+  <data name="ImportIssueUnsupported" xml:space="preserve">
+    <value>Opzioni non ancora supportate</value>
+  </data>
+  <data name="ImportIssueDynamic" xml:space="preserve">
+    <value>Contenuto dinamico preservato come testo, non eseguito</value>
+  </data>
+  <data name="ImportIssueSkipped" xml:space="preserve">
+    <value>Elemento saltato: conversione non possibile</value>
+  </data>
+  <data name="ImportIssueCollision" xml:space="preserve">
+    <value>Conflitto tra trigger: verificare prima di abilitare</value>
+  </data>
+  <data name="ImportIssueMetadata" xml:space="preserve">
+    <value>Alcuni metadati non possono essere trasferiti</value>
+  </data>
+  <data name="ImportIssueNotice" xml:space="preserve">
+    <value>Avviso importazione</value>
+  </data>
+  <data name="ImportReviewRiskPolicy" xml:space="preserve">
+    <value>Gli elementi con avvisi non sono preselezionati: controllali prima di importarli.</value>
+  </data>
+  <data name="ImportReviewFilter" xml:space="preserve">
+    <value>Filtra per titolo, trigger o gruppo</value>
+  </data>
+  <data name="ImportReviewSafe" xml:space="preserve">
+    <value>Selezione sicura</value>
+  </data>
+  <data name="ImportReviewSelectVisible" xml:space="preserve">
+    <value>Seleziona pagina</value>
+  </data>
+  <data name="ImportReviewClearVisible" xml:space="preserve">
+    <value>Deseleziona pagina</value>
+  </data>
+  <data name="ImportReviewPrevious" xml:space="preserve">
+    <value>Precedente</value>
+  </data>
+  <data name="ImportReviewNext" xml:space="preserve">
+    <value>Successiva</value>
+  </data>
+  <data name="ImportReviewNoResults" xml:space="preserve">
+    <value>Nessuno snippet corrispondente.</value>
+  </data>
+  <data name="ImportReviewPage" xml:space="preserve">
+    <value>Pagina {0} di {1}</value>
+  </data>
+  <data name="ImportReviewSelected" xml:space="preserve">
+    <value>Selezionati {0}/{1}</value>
+  </data>
+  <data name="ActionsMenu" xml:space="preserve">
+    <value>Azioni</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
+  <data name="GroupManage" xml:space="preserve">
+    <value>Gestisci gruppo</value>
+  </data>
+  <data name="PickerHotkeyLabel" xml:space="preserve">
+    <value>Scorciatoia globale del picker</value>
+  </data>
+  <data name="PickerHotkeyHint" xml:space="preserve">
+    <value>Esempio: Ctrl+Shift+Space. Usa None per disattivarla. Su Windows, attiva anche con l’app nella tray.</value>
+  </data>
+  <data name="PickerHotkeyApply" xml:space="preserve">
+    <value>Applica scorciatoia</value>
+  </data>
+  <data name="PickerHotkeyInvalid" xml:space="preserve">
+    <value>Combinazione non valida. Usa Ctrl/Alt + lettera, numero, F1–F11 o Space.</value>
+  </data>
+  <data name="PickerHotkeyUnsupported" xml:space="preserve">
+    <value>Scorciatoia globale non ancora disponibile su questo sistema.</value>
+  </data>
+  <data name="PickerHotkeyConflict" xml:space="preserve">
+    <value>Combinazione già occupata o rifiutata da Windows. È rimasta attiva la precedente.</value>
+  </data>
+  <data name="PickerHotkeyDisabled" xml:space="preserve">
+    <value>Scorciatoia globale disattivata.</value>
+  </data>
+  <data name="PickerHotkeyRegistered" xml:space="preserve">
+    <value>Scorciatoia attiva: {0}</value>
+  </data>
+  <data name="PickerHotkeySaveFailed" xml:space="preserve">
+    <value>Impossibile salvare. La scorciatoia precedente è stata mantenuta.</value>
+  </data>
+  <data name="PickerHotkeyUnavailable" xml:space="preserve">
+    <value>Servizio scorciatoie non disponibile.</value>
+  </data>
+  <data name="PickerInsert" xml:space="preserve">
+    <value>Inserisci</value>
+  </data>
+  <data name="PickerInsertNoTarget" xml:space="preserve">
+    <value>Nessun editor esterno attivo all’apertura del picker. Usa Copia.</value>
+  </data>
+  <data name="PickerInsertSubmitted" xml:space="preserve">
+    <value>Comando di incolla inviato: verifica il risultato nell’editor.</value>
+  </data>
+  <data name="PickerInsertFocusChanged" xml:space="preserve">
+    <value>Focus cambiato oppure incollamento rifiutato. Usa Copia.</value>
+  </data>
+  <data name="PickerInsertUncertain" xml:space="preserve">
+    <value>Esito dell’incollamento incerto. Controlla l’editor prima di riprovare.</value>
+  </data>
+  <data name="PickerLoading" xml:space="preserve">
+    <value>Caricamento snippet…</value>
+  </data>
+  <data name="PickerCopyFailed" xml:space="preserve">
+    <value>Impossibile copiare il testo.</value>
+  </data>
+  <data name="PickerOperationPending" xml:space="preserve">
+    <value>Operazione in corso…</value>
+  </data>
+</root>

@@ -1,0 +1,18 @@
+﻿Riferimento,Tipo,Windows,macOS,Linux_X11,Linux_Wayland,GUI_Gestione,Ricerca_Picker,Trigger_Delimitatori,Variabili,Forms,Profili_App,Output_Backend,Collab_Sync,Scripting,Open_Source,Note_Stato
+Beeftext,Text expander,D,NO,NO,NO,D,D,D,D,PAR,D,D,PAR,D,D,Baseline Win e sorgente storico
+Espanso,Text expander,D,D,D,PAR,PAR,D,D,D,D,D,D,PAR,D,D,Wayland sperimentale
+PhraseExpress,Text expander enterprise,D,D,NO,NO,D,D,D,D,D,D,D,D,D,NO,Manuale Windows può differire Mac
+FastKeys,Automation+expander,D,NO,NO,NO,D,D,D,D,D,D,D,PAR,D,NO,Non confondere suite automation con expander
+TextExpander,Team expander,D,D,NO,NO,D,D,D,D,D,PAR,ND,D,PAR,NO,Servizi e feature differenti per piano
+aText,Text expander,D,D,NO,NO,D,D,D,D,D,PAR,D,PAR,D,NO,Clipboard e Secure Input caveats
+Karabiner-Elements,Remapper,NO,D,NO,NO,D,PAR,PAR,PAR,NO,D,D,ND,D,D,NON text expander diretto
+Keyboard Maestro,Automation,NO,D,NO,NO,D,D,D,D,D,D,D,ND,D,NO,"Automation, not direct comparison"
+Text Blaze,Snippet forms,D,D,NO,NO,D,D,D,D,D,PAR,PAR,D,D,NO,Desktop support varies by edition; verify
+Typinator,Text expander,PAR,D,NO,NO,D,D,D,D,PAR,PAR,ND,PAR,PAR,NO,Windows maturity to verify
+AutoKey,Linux automation,NO,NO,D,NO,D,D,D,D,PAR,D,D,ND,D,D,Repo states X11; does not correctly work Wayland
+AutoHotkey,Hotstrings automation,D,NO,NO,NO,PAR,PAR,D,D,PAR,D,D,PAR,D,D,GUI via scripts/external tools
+Alfred,Launcher+snippet,NO,D,NO,NO,D,D,D,D,PAR,D,D,D,D,NO,Snippets in Powerpack
+Raycast,Launcher+snippet,ND,D,NO,NO,D,D,D,D,PAR,D,D,D,D,NO,Platform availability verify; 2026 v2 docs
+TypeIt4Me,Text expander,NO,D,NO,NO,D,D,D,D,D,PAR,ND,PAR,PAR,NO,Mac-centric app
+Hammerspoon,Automation API,NO,D,NO,NO,PAR,PAR,PAR,D,PAR,D,D,ND,D,D,Technical API reference only
+macOS Text Replacements,System feature,NO,D,NO,NO,D,NO,D,NO,NO,PAR,PAR,PAR,NO,NO,Only some applications

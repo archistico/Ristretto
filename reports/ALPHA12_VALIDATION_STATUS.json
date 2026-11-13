@@ -1,0 +1,15 @@
+{
+  "version": "3.9.0-alpha.12",
+  "source_based_on": "3.9.0-alpha.11",
+  "feature": "configurable Windows picker global hotkey",
+  "default": "Ctrl+Shift+Space",
+  "disable": "None",
+  "source_static_checks": "PASS",
+  "gui_redesign_static": "PASS",
+  "dotnet_build": "NOT_RUN",
+  "dotnet_xunit": "NOT_RUN",
+  "windows_global_hotkey_manual": "NOT_RUN",
+  "windows_native_lab": "NOT_RUN",
+  "previous_historical_evidence": "alpha.7 (180/180 xUnit, 21/21 native) — NOT a validation of alpha.12",
+  "privacy": "RegisterHotKey + WM_HOTKEY, no keyboard hook or text capture"
+}

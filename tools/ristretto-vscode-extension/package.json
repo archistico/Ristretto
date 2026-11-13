@@ -1,0 +1,63 @@
+{
+  "name": "ristretto-vscode-adapter",
+  "displayName": "Ristretto — VS Code Adapter (Experimental)",
+  "description": "Opt-in, manual trigger expansion from a local Ristretto JSON export. No global hooks or background typing listener.",
+  "version": "0.20.0-alpha",
+  "private": true,
+  "license": "UNLICENSED",
+  "publisher": "ristretto-local-dev",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onCommand:ristrettoVscode.expandAtCursor",
+    "onCommand:ristrettoVscode.chooseExport"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "Lettura di un file esportato locale e modifica esplicita del documento."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "Solo documenti file locali o nuovi documenti non salvati."
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "ristrettoVscode.expandAtCursor",
+        "title": "Ristretto: Espandi trigger al cursore"
+      },
+      {
+        "command": "ristrettoVscode.chooseExport",
+        "title": "Ristretto: Scegli file JSON esportato"
+      }
+    ],
+    "configuration": {
+      "title": "Ristretto Adapter — Sperimentale",
+      "properties": {
+        "ristrettoVscode.enabled": {
+          "type": "boolean",
+          "default": false,
+          "scope": "application",
+          "description": "Consenti espansioni manuali in VS Code (opt-in, mai automatiche)."
+        },
+        "ristrettoVscode.exportFile": {
+          "type": "string",
+          "default": "",
+          "scope": "application",
+          "description": "Percorso assoluto del JSON esportato manualmente da Ristretto. Non legge SQLite."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node --check src/planner.js && node --check src/controller.js && node --check src/extension.js && node --check test/host/index.js && npm test"
+  }
+}

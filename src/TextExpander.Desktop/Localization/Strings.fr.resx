@@ -1,0 +1,375 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Ristretto</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Extraits rapides et sans distractions</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Groupes</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Nom du groupe</value>
+  </data>
+  <data name="AddGroup" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Snippets" xml:space="preserve">
+    <value>Extraits</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Rechercher…</value>
+  </data>
+  <data name="NewSnippet" xml:space="preserve">
+    <value>Nouvel extrait</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="TriggerLabel" xml:space="preserve">
+    <value>Déclencheur</value>
+  </data>
+  <data name="ContentLabel" xml:space="preserve">
+    <value>Texte développé</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="PreviewTitle" xml:space="preserve">
+    <value>Test local de correspondance</value>
+  </data>
+  <data name="PreviewInput" xml:space="preserve">
+    <value>Saisir un texte terminant par le déclencheur</value>
+  </data>
+  <data name="PreviewRun" xml:space="preserve">
+    <value>Tester</value>
+  </data>
+  <data name="Backup" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restaurer</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Apparence</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Thème</value>
+  </data>
+  <data name="ThemeSystem" xml:space="preserve">
+    <value>Système</value>
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
+    <value>Clair</value>
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
+    <value>Sombre</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>L’expansion automatique n’est pas encore disponible : les adaptateurs natifs viendront plus tard.</value>
+  </data>
+  <data name="SelectGroup" xml:space="preserve">
+    <value>Choisir un groupe</value>
+  </data>
+  <data name="StatusReady" xml:space="preserve">
+    <value>Bibliothèque prête</value>
+  </data>
+  <data name="StatusSaved" xml:space="preserve">
+    <value>Extrait enregistré</value>
+  </data>
+  <data name="StatusGroupCreated" xml:space="preserve">
+    <value>Groupe créé</value>
+  </data>
+  <data name="StatusDeleted" xml:space="preserve">
+    <value>Extrait supprimé</value>
+  </data>
+  <data name="StatusBackup" xml:space="preserve">
+    <value>Sauvegarde SQLite créée</value>
+  </data>
+  <data name="StatusRestored" xml:space="preserve">
+    <value>Sauvegarde restaurée</value>
+  </data>
+  <data name="StatusNoMatch" xml:space="preserve">
+    <value>Aucun déclencheur trouvé</value>
+  </data>
+  <data name="StatusAmbiguous" xml:space="preserve">
+    <value>Déclencheurs en conflit</value>
+  </data>
+  <data name="StatusMatched" xml:space="preserve">
+    <value>Correspondance : {0}</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Supprimer l’extrait sélectionné ?</value>
+  </data>
+  <data name="ConfirmRestore" xml:space="preserve">
+    <value>Restaurer cette sauvegarde ? Une copie de récupération sera conservée.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmer</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ChooseBackup" xml:space="preserve">
+    <value>Choisir une sauvegarde SQLite</value>
+  </data>
+  <data name="StatusError" xml:space="preserve">
+    <value>Erreur : {0}</value>
+  </data>
+  <data name="GroupDisabled" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="EditSnippet" xml:space="preserve">
+    <value>Modifier l’extrait</value>
+  </data>
+  <data name="OpenPicker" xml:space="preserve">
+    <value>Sélecteur rapide</value>
+  </data>
+  <data name="PickerHeading" xml:space="preserve">
+    <value>Extraits rapides</value>
+  </data>
+  <data name="PickerSearchHint" xml:space="preserve">
+    <value>Rechercher nom, déclencheur, description ou texte…</value>
+  </data>
+  <data name="PickerInstructions" xml:space="preserve">
+    <value>Entrée : insérer le premier résultat · Échap : fermer</value>
+  </data>
+  <data name="PickerOpenLibrary" xml:space="preserve">
+    <value>Bibliothèque</value>
+  </data>
+  <data name="PickerCopy" xml:space="preserve">
+    <value>Copier le texte</value>
+  </data>
+  <data name="PickerCopied" xml:space="preserve">
+    <value>Texte copié. Collez-le dans l’application cible.</value>
+  </data>
+  <data name="PickerManualNotice" xml:space="preserve">
+    <value>Copie ou insertion manuelle. L’expansion automatique des déclencheurs n’est pas encore active.</value>
+  </data>
+  <data name="PickerClipboardUnavailable" xml:space="preserve">
+    <value>Presse-papiers indisponible.</value>
+  </data>
+  <data name="TrayOpen" xml:space="preserve">
+    <value>Ouvrir la bibliothèque</value>
+  </data>
+  <data name="TrayPicker" xml:space="preserve">
+    <value>Sélecteur rapide</value>
+  </data>
+  <data name="TrayExit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="GroupEditName" xml:space="preserve">
+    <value>Nom du groupe</value>
+  </data>
+  <data name="GroupRename" xml:space="preserve">
+    <value>Renommer</value>
+  </data>
+  <data name="GroupEnable" xml:space="preserve">
+    <value>Activer</value>
+  </data>
+  <data name="GroupDisable" xml:space="preserve">
+    <value>Désactiver</value>
+  </data>
+  <data name="GroupDelete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="ConfirmDeleteGroup" xml:space="preserve">
+    <value>Supprimer ce groupe vide ? Les groupes contenant des extraits ne peuvent pas être supprimés.</value>
+  </data>
+  <data name="StatusGroupUpdated" xml:space="preserve">
+    <value>Groupe mis à jour.</value>
+  </data>
+  <data name="StatusGroupDeleted" xml:space="preserve">
+    <value>Groupe vide supprimé.</value>
+  </data>
+  <data name="DiscardChangesQuestion" xml:space="preserve">
+    <value>Abandonner les modifications non enregistrées de cet extrait ?</value>
+  </data>
+  <data name="UnsavedChanges" xml:space="preserve">
+    <value>● Modifications non enregistrées</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importer JSON</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Exporter JSON</value>
+  </data>
+  <data name="ChooseImport" xml:space="preserve">
+    <value>Importer des extraits JSON</value>
+  </data>
+  <data name="ChooseExport" xml:space="preserve">
+    <value>Exporter des extraits JSON</value>
+  </data>
+  <data name="StatusImported" xml:space="preserve">
+    <value>{0} groupes et {1} extraits importés.</value>
+  </data>
+  <data name="StatusExported" xml:space="preserve">
+    <value>Extraits exportés</value>
+  </data>
+  <data name="ExportUnsavedQuestion" xml:space="preserve">
+    <value>L’export JSON comprendra uniquement les éléments enregistrés, pas les modifications en cours. Continuer ?</value>
+  </data>
+  <data name="ImportPreviewTitle" xml:space="preserve">
+    <value>Aperçu de l’importation</value>
+  </data>
+  <data name="ImportPreviewCounts" xml:space="preserve">
+    <value>Source : {0} • Groupes : {1} • Extraits : {2} • Ignorés : {3}</value>
+  </data>
+  <data name="ImportNativePolicy" xml:space="preserve">
+    <value>Import JSON natif : les extraits conservent leur état. Les données existantes ne sont pas écrasées.</value>
+  </data>
+  <data name="ImportExternalDisabled" xml:space="preserve">
+    <value>Les extraits externes sont désactivés par sécurité. Vérifiez les déclencheurs, le contenu et les options avant de les activer.</value>
+  </data>
+  <data name="ImportWarnings" xml:space="preserve">
+    <value>Avertissements : {0}</value>
+  </data>
+  <data name="ImportMoreWarnings" xml:space="preserve">
+    <value>D'autres avertissements ne sont pas affichés.</value>
+  </data>
+  <data name="ImportItemsTitle" xml:space="preserve">
+    <value>Extraits à ajouter</value>
+  </data>
+  <data name="ImportMoreItems" xml:space="preserve">
+    <value>D'autres extraits ne sont pas affichés.</value>
+  </data>
+  <data name="ImportConfirm" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="ImportIssueUnsupported" xml:space="preserve">
+    <value>Options non prises en charge</value>
+  </data>
+  <data name="ImportIssueDynamic" xml:space="preserve">
+    <value>Contenu dynamique conservé comme texte, non exécuté</value>
+  </data>
+  <data name="ImportIssueSkipped" xml:space="preserve">
+    <value>Élément ignoré : non convertible</value>
+  </data>
+  <data name="ImportIssueCollision" xml:space="preserve">
+    <value>Déclencheur en conflit : vérifier avant activation</value>
+  </data>
+  <data name="ImportIssueMetadata" xml:space="preserve">
+    <value>Certaines métadonnées ne peuvent être transférées</value>
+  </data>
+  <data name="ImportIssueNotice" xml:space="preserve">
+    <value>Information sur l’importation</value>
+  </data>
+  <data name="ImportReviewRiskPolicy" xml:space="preserve">
+    <value>Les éléments avec avertissements ne sont pas présélectionnés ; vérifiez-les avant importation.</value>
+  </data>
+  <data name="ImportReviewFilter" xml:space="preserve">
+    <value>Filtrer par titre, déclencheur ou groupe</value>
+  </data>
+  <data name="ImportReviewSafe" xml:space="preserve">
+    <value>Sélection sûre</value>
+  </data>
+  <data name="ImportReviewSelectVisible" xml:space="preserve">
+    <value>Sélectionner la page</value>
+  </data>
+  <data name="ImportReviewClearVisible" xml:space="preserve">
+    <value>Désélectionner la page</value>
+  </data>
+  <data name="ImportReviewPrevious" xml:space="preserve">
+    <value>Précédente</value>
+  </data>
+  <data name="ImportReviewNext" xml:space="preserve">
+    <value>Suivante</value>
+  </data>
+  <data name="ImportReviewNoResults" xml:space="preserve">
+    <value>Aucun extrait correspondant.</value>
+  </data>
+  <data name="ImportReviewPage" xml:space="preserve">
+    <value>Page {0} sur {1}</value>
+  </data>
+  <data name="ImportReviewSelected" xml:space="preserve">
+    <value>Sélectionnés {0}/{1}</value>
+  </data>
+  <data name="ActionsMenu" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="SettingsMenu" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="GroupManage" xml:space="preserve">
+    <value>Gérer le groupe</value>
+  </data>
+  <data name="PickerHotkeyLabel" xml:space="preserve">
+    <value>Raccourci global du sélecteur</value>
+  </data>
+  <data name="PickerHotkeyHint" xml:space="preserve">
+    <value>Exemple : Ctrl+Shift+Space. Saisir None pour désactiver. Fonctionne en zone de notification sous Windows.</value>
+  </data>
+  <data name="PickerHotkeyApply" xml:space="preserve">
+    <value>Appliquer le raccourci</value>
+  </data>
+  <data name="PickerHotkeyInvalid" xml:space="preserve">
+    <value>Combinaison incorrecte. Utilisez Ctrl/Alt + lettre, chiffre, F1–F11 ou Space.</value>
+  </data>
+  <data name="PickerHotkeyUnsupported" xml:space="preserve">
+    <value>Raccourci global non encore disponible sur ce système.</value>
+  </data>
+  <data name="PickerHotkeyConflict" xml:space="preserve">
+    <value>Raccourci occupé ou refusé par Windows. L’ancien reste actif.</value>
+  </data>
+  <data name="PickerHotkeyDisabled" xml:space="preserve">
+    <value>Raccourci global désactivé.</value>
+  </data>
+  <data name="PickerHotkeyRegistered" xml:space="preserve">
+    <value>Raccourci actif : {0}</value>
+  </data>
+  <data name="PickerHotkeySaveFailed" xml:space="preserve">
+    <value>Échec de l’enregistrement. L’ancien raccourci reste actif.</value>
+  </data>
+  <data name="PickerHotkeyUnavailable" xml:space="preserve">
+    <value>Service de raccourcis indisponible.</value>
+  </data>
+  <data name="PickerInsert" xml:space="preserve">
+    <value>Insérer</value>
+  </data>
+  <data name="PickerInsertNoTarget" xml:space="preserve">
+    <value>Aucun éditeur externe actif à l’ouverture du sélecteur. Utilisez Copier.</value>
+  </data>
+  <data name="PickerInsertSubmitted" xml:space="preserve">
+    <value>Commande de collage envoyée : vérifiez le résultat dans l’éditeur.</value>
+  </data>
+  <data name="PickerInsertFocusChanged" xml:space="preserve">
+    <value>Le focus a changé ou le collage a été refusé. Utilisez Copier.</value>
+  </data>
+  <data name="PickerInsertUncertain" xml:space="preserve">
+    <value>Résultat du collage incertain. Vérifiez l’éditeur avant de réessayer.</value>
+  </data>
+  <data name="PickerLoading" xml:space="preserve">
+    <value>Chargement des extraits…</value>
+  </data>
+  <data name="PickerCopyFailed" xml:space="preserve">
+    <value>Impossible de copier le texte.</value>
+  </data>
+  <data name="PickerOperationPending" xml:space="preserve">
+    <value>Opération en cours…</value>
+  </data>
+</root>

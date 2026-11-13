@@ -1,0 +1,143 @@
+======================================================
+
+Ristretto alpha.20.3 - test nativi EDIT posseduto
+
+Eseguire solo in sessione Windows desktop interattiva.
+
+======================================================
+
+SORGENTI RISTRETTO 3.9.0-alpha.20.3 VERIFICATI: E:\siti\2026 Ristretto\Ristretto
+
+PASS: ascii_unicode_payload
+
+PASS: nfd_raw_nbsp
+
+PASS: cjk_trigger
+
+PASS: emoji_zwj_trigger
+
+PASS: rtl_trigger
+
+PASS: alphabetic_trigger_after_verified_word_boundary
+
+PASS: alphabetic_trigger_inside_word_must_not_expand
+
+PASS: synthetic_fixture_provenance_is_revision_correlated
+
+PASS: queued_character_message_is_not_human_proof
+
+PASS: alpha16_queued_burst_observed_one_committed_turn_at_a_time
+
+PASS: alpha16_queued_navigation_breaks_prefix_before_remaining_characters
+
+PASS: alpha16_queued_utf16_surrogate_pair_not_observed_half_formed
+
+PASS: navigation_message_invalidates_epoch_without_document_change
+
+PASS: pending_prefix_is_discarded_after_navigation_message
+
+PASS: backspace_character_message_invalidates_even_empty_document
+
+PASS: selection_32bit_at_65536
+
+PASS: intervening_text_rejected
+
+PASS: intervening_selection_rejected
+
+PASS: revision_aba_same_text_rejected
+
+PASS: different_owned_control_rejected
+
+PASS: readonly_before_effect
+
+PASS: disabled_before_effect
+
+PASS: password_without_text_read
+
+PASS: password_change_rejects_prepared_plan
+
+PASS: cancellation_never_enters_native_target
+
+PASS: wrong_ui_thread_rejected
+
+PASS: single_use_no_second_native_call
+
+PASS: lost_receipt_is_unverified
+
+PASS: exception_after_native_effect_no_rollback
+
+PASS: navigation_invalidates_pending_prefix
+
+PASS: disposed_native_target_rejected
+
+NATIVE OWNED EDIT: 31/31 PASS; failed=0.
+
+Solo controlli creati dal laboratorio; nessun SendInput, clipboard o hook globale. IME non qualificato.
+
+Test nativo automatico in processo figlio cooperante (senza input umano)...
+
+Alpha 9 — laboratorio cooperante in un SECONDO processo Windows.
+
+Smoke automatico con fixture sintetica nel controllo del processo figlio.
+
+Il processo principale non riceve tasti, testo, snapshot o clipboard.
+
+Nessun editor esterno arbitrario viene modificato.
+
+Campo cooperante avviato (PID 4780). Chiudere la finestra per terminare.
+
+Esito secondo processo: VERIFICATO. ready=True, verified=1, rejected=0, uncertain=0, childExit=0.
+
+Test Alpha 18: richiesta esplicita verso un editor EDIT posseduto dal processo figlio...
+
+Alpha 18 remote owned EDIT: verified=True; stale-rejected=True; result=PASS. No third-party editors modified.
+
+
+FRESH ZIP EXTRACTION VALIDATION
+======================================================
+Ristretto alpha.20.3 - test nativi EDIT posseduto
+Eseguire solo in sessione Windows desktop interattiva.
+======================================================
+SORGENTI RISTRETTO 3.9.0-alpha.20.3 VERIFICATI: E:\siti\2026 Ristretto\Ristretto\.local-cache\alpha20-3-clean-validation\Ristretto
+PASS: ascii_unicode_payload
+PASS: nfd_raw_nbsp
+PASS: cjk_trigger
+PASS: emoji_zwj_trigger
+PASS: rtl_trigger
+PASS: alphabetic_trigger_after_verified_word_boundary
+PASS: alphabetic_trigger_inside_word_must_not_expand
+PASS: synthetic_fixture_provenance_is_revision_correlated
+PASS: queued_character_message_is_not_human_proof
+PASS: alpha16_queued_burst_observed_one_committed_turn_at_a_time
+PASS: alpha16_queued_navigation_breaks_prefix_before_remaining_characters
+PASS: alpha16_queued_utf16_surrogate_pair_not_observed_half_formed
+PASS: navigation_message_invalidates_epoch_without_document_change
+PASS: pending_prefix_is_discarded_after_navigation_message
+PASS: backspace_character_message_invalidates_even_empty_document
+PASS: selection_32bit_at_65536
+PASS: intervening_text_rejected
+PASS: intervening_selection_rejected
+PASS: revision_aba_same_text_rejected
+PASS: different_owned_control_rejected
+PASS: readonly_before_effect
+PASS: disabled_before_effect
+PASS: password_without_text_read
+PASS: password_change_rejects_prepared_plan
+PASS: cancellation_never_enters_native_target
+PASS: wrong_ui_thread_rejected
+PASS: single_use_no_second_native_call
+PASS: lost_receipt_is_unverified
+PASS: exception_after_native_effect_no_rollback
+PASS: navigation_invalidates_pending_prefix
+PASS: disposed_native_target_rejected
+NATIVE OWNED EDIT: 31/31 PASS; failed=0.
+Solo controlli creati dal laboratorio; nessun SendInput, clipboard o hook globale. IME non qualificato.
+Test nativo automatico in processo figlio cooperante (senza input umano)...
+Alpha 9 — laboratorio cooperante in un SECONDO processo Windows.
+Smoke automatico con fixture sintetica nel controllo del processo figlio.
+Il processo principale non riceve tasti, testo, snapshot o clipboard.
+Nessun editor esterno arbitrario viene modificato.
+Campo cooperante avviato (PID 16396). Chiudere la finestra per terminare.
+Esito secondo processo: VERIFICATO. ready=True, verified=1, rejected=0, uncertain=0, childExit=0.
+Test Alpha 18: richiesta esplicita verso un editor EDIT posseduto dal processo figlio...
+Alpha 18 remote owned EDIT: verified=True; stale-rejected=True; result=PASS. No third-party editors modified.

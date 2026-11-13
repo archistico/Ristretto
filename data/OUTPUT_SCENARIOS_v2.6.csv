@@ -1,0 +1,109 @@
+﻿ID,Area,Scenario,ExpectedOutcome,Priority,Level,Status,Notes
+OUT-PRE-001,PRE,Match univoco preparato senza variabili,"Ready, nessun effetto prima del preflight",P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-002,PRE,Variabile con form annullato,CancelledBeforeEffect,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-003,PRE,Variabile fallisce,Invalid senza modifiche,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-004,PRE,Snapshot snippet cambia durante form,Preflight riparte/BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-005,PRE,Piano include azione non consentita,Invalid,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-006,PRE,Snip largo supera limite configurato,Invalid senza modifica,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-007,PRE,Due trigger in coda stesso target,"Serializzazione, un tentativo solo",P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-008,PRE,Cambio focus durante form,BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-009,PRE,IME ancora in composizione,BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-010,PRE,Backend sconosciuto,BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-011,PRE,Target password,BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-PRE-012,PRE,Evento sintetico osservato dal matcher,Nessun secondo match,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-001,TGT,Focus cambia prima del primo Backspace,BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-002,TGT,Focus cambia dopo Backspace,PartialOrUnknownAfterEffects e stop,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-003,TGT,Stesso processo ma campo diverso,Blocked se target token non coincide,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-004,TGT,Picker rientra nel campo originale,Preflight prima dell inserimento,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-005,TGT,Picker non riesce a risolvere origin,ManualCopy,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-006,TGT,UI foreground del programma stesso,Niente autoespansione nel picker,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-007,TGT,Target elevation differente,Unsupported/PermissionRequired,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-008,TGT,Target in sola lettura,BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-009,TGT,Secure Input attivo macOS,BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-010,TGT,Permission revoked mid-session,PartialOrUnknownAfterEffects,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-011,TGT,Target navigato da click,Invalidare sessione match,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-TGT-012,TGT,Target epoch scaduto,BlockedNoChange,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-001,DEL,Trigger semplice ASCII in target qualificato,Rimozione controllata,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-002,DEL,Trigger emoji famiglia ZWJ,No auto-delete se non qualificato,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-003,DEL,Trigger emoji skin tone,No auto-delete se non qualificato,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-004,DEL,Trigger VS16 cuore,No count basato su UTF16,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-005,DEL,Trigger NFC vs NFD,Preserva RawMatchedText,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-006,DEL,Trigger in lingua araba con bidi marks,Preserva sequenza e non inferisce caret,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-007,DEL,Trigger Devanagari cluster,No count universale,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-008,DEL,Input IME giapponese committato,Valida capability rimozione prima di agire,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-009,DEL,Impossibile determinare selezione,Blocca auto-delete,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-010,DEL,Delimitatore conservato,Rimuove solo ciò che contract prevede,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-011,DEL,Delimitatore consumato,Preserva testo atteso,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-DEL-012,DEL,Backspace consegnati parzialmente,PartialOrUnknownAfterEffects,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-001,OUT,Invio Unicode Win32 accettato,SubmittedUnverified senza prova target,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-002,OUT,SendInput ritorna zero,"Errore diagnostico, UIPI non dedotto con certezza",P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-003,OUT,SendInput ritorna eventi parziali,PartialOrUnknownAfterEffects,P0,E2E,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-004,OUT,Incolla app Electron in ritardo,Timer non equivale conferma paste,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-005,OUT,Invio di testo multilinea,Preserva newline o segnala incompatibilità,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-006,OUT,Emoji complessa tramite evento,Verifica in E2E; non assumere corretto,P0,E2E,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-007,OUT,UTF16 surrogate split nel backend,No output o report errore corretto,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-008,OUT,Metodo non supportato target,ManualCopy/BlockedNoChange,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-009,OUT,Insert parzialmente inviato,No retry automatico,P0,E2E,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-010,OUT,Editor sostituisce autonormalizzando,Senza verifica exact niente Verified,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-011,OUT,Focus cambia durante invio,Stop senza completare in nuovo target,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OUT-012,OUT,UI tenta replay dopo crash,Nessun replay persistito,P0,E2E,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-001,CLP,Non uso clipboard,Nessuna lettura clipboard,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-002,CLP,Copia iniziale text/plain,Snapshot se autorizzato,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-003,CLP,Clipboard con HTML/bitmap,"Best effort, nessuna garanzia tutti formati",P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-004,CLP,Clipboard proprietario change dopo publish,Non ripristina vecchia copia,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-005,CLP,Clipboard ownership invariata,Ripristino solo se lease verificabile,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-006,CLP,Clipboard cambia uguale contenuto,Non inferire ownership da sola uguaglianza stringa,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-007,CLP,Clipboard senza accesso,No auto paste o segna unsupported,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-008,CLP,Clipboard con delayed rendering,Segnala snapshot parziale,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-009,CLP,Paste non ancora consumato,No restore basato solo su timer,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-010,CLP,Interruzione app durante lease,"Preserva dati, no clear automatico",P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-011,CLP,X11 CLIPBOARD cambia owner,Skip restore,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-CLP-012,CLP,Mac changeCount cambia,Skip restore; testare effettivo comportamento,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-001,ERR,Preflight errore certo senza effetto,FailedNoChangeConfirmed,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-002,ERR,Errore sconosciuto dopo delete,PartialOrUnknownAfterEffects,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-003,ERR,Errore dopo paste,SubmittedUnverified o PartialOrUnknown,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-004,ERR,Timeout output,Non implica nessun effetto,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-005,ERR,Segnale cancel durante output,Cleanup e outcome non certo,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-006,ERR,Retry premuto automaticamente,Rifiutato se MayHaveModifiedTarget,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-007,ERR,Backend ritorna success senza target feedback,SubmittedUnverified,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-008,ERR,Provider target restituisce known applied,VerifiedComplete solo se contenuto e target confermati,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-009,ERR,Cleanup release modifiers fallisce,Errore diagnostico e controllo recovery,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-010,ERR,Hook riattivato dopo exception,Evitare loop e resource leak,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-011,ERR,Log contiene testo inserito,Test privacy fallisce,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-ERR-012,ERR,Statistiche successo per submitted,Separare metrica submitted/verified,P0,UNIT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-001,UX,Blocked password field,Messaggio localizzato senza testo sensibile,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-002,UX,Partially inserted warning,"No auto-retry, offri Copia",P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-003,UX,Clipboard changed warning,Informazione minima e redatta,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-004,UX,Picker target non ritrovato,Copia manuale,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-005,UX,Tema dark errore,Contrasto adeguato senza solo colore,P1,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-006,UX,Lingua tedesca lungo warning,Non taglia contenuto essenziale,P1,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-007,UX,RTL Arabic warning,Direzione testo corretta,P1,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-008,UX,Escape form,Annulla prima effetti,P1,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-009,UX,Escape picker,Non tocca target,P1,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-010,UX,Toast Verified quando solo accepted,Test UX fallisce,P1,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-011,UX,Diagnostica senza app name sensibile,Log redatti,P1,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-UX-012,UX,Preferenze backend per-app,Non promette compat universale,P1,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-001,OS,Windows low IL verso elevated target,"No guarantee, segnala capability",P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-002,OS,Windows keyboard modifiers rimasti premuti,Cleanup consistente,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-003,OS,Win32 clipboard seq zero,Non considerare ownership verificata,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-004,OS,macOS accessibility negato,PermissionRequired,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-005,OS,macOS secure input,Auto-expansion disabled,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-006,OS,macOS clipboard changeCount,Consent conditional restore,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-007,OS,X11 clipboard manager owner changes,Non sovrascrivere nuovo owner,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-008,OS,X11 XTest event non ricevuto,SubmittedUnverified/Unknown,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-009,OS,GNOME Wayland input non osservabile,ManualCopy,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-010,OS,KDE Wayland hotkey ma no observation,Non abilita auto-expand,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-011,OS,wlroots permission/input device unavailable,Capability separata,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-OS-012,OS,RemoteDesktop portal session revoked,Non iniettare fuori sessione,P0,OS,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-001,INT,Copia utente durante incolla,Preserva copia nuova,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-002,INT,Mouse click mentre input in corso,Stop e invalida context,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-003,INT,Digitazione simultanea utente,No artificial retry,P0,E2E,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-004,INT,Shortcut doppio ravvicinato,Idempotenza del tentativo,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-005,INT,Cambio layout tastiera,Invalidare mappa se necessario,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-006,INT,IME composition cambiata in flight,Stop/unknown se effetti,P0,E2E,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-007,INT,Clipboard manager pulisce contenuto,Segnala unknown,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-008,INT,Sospensione OS durante paste,Nessun auto retry al resume,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-009,INT,App target chiude a metà espansione,Outcome partial/unknown,P0,E2E,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-010,INT,Permessi OS cambiati,Capability re-query,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-011,INT,Snippets aggiornati mentre output,Piano immutabile attempt originale,P0,CONTRACT,NOT_RUN,V2.6 design; native proof pending
+OUT-INT-012,INT,Notifica successo dopo callback handler,Non dedurre da handler true,P0,E2E,NOT_RUN,V2.6 design; native proof pending

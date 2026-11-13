@@ -1,0 +1,37 @@
+id,area,scenario,evidence,priority,status
+SUB-001,baseline,Verify XMiLib snapshot integrity and file hash,XMiLib-master.zip,P0,NOT_RUN
+SUB-002,baseline,Verify emojilib snapshot integrity and file hash,emojilib-main.zip,P0,NOT_RUN
+SUB-003,reproducibility,Resolve actual gitlink SHA of XMiLib in Beeftext release,Beeftext-master/.gitmodules,P1,NOT_RUN
+SUB-004,reproducibility,Resolve actual gitlink SHA of emojilib in Beeftext release,Beeftext-master/.gitmodules,P1,NOT_RUN
+SUB-005,compatibility,Build Beeftext using the exact pinned XMiLib revision,Beeftext-master/CMakeLists.txt,P1,NOT_RUN
+SUB-006,compatibility,Packaging requires historical emojilib emojis.json,Beeftext-master/Installer/installer.nsi:199,P0,NOT_RUN
+SUB-007,native-win,Windows Unicode key up event must include UNICODE flag,XMiLib-master/XMiLib/SystemUtils.cpp:169-182,P0,NOT_RUN
+SUB-008,native-win,Unicode injection returns observed event count and failure,XMiLib-master/XMiLib/SystemUtils.cpp:134-147,P0,NOT_RUN
+SUB-009,native-win,Emojis astral plane typing and surrogate pair output,Beeftext-master/Beeftext/BeeftextUtils.cpp:229-246,P0,NOT_RUN
+SUB-010,native-win,Complex ZWJ emoji typing vs paste fidelity,XMiLib-master/XMiLib/SystemUtils.cpp,P0,NOT_RUN
+SUB-011,native-win,RTL and diacritics composition insertion,XMiLib-master/XMiLib/SystemUtils.cpp,P0,NOT_RUN
+SUB-012,native-win,Simulated backspaces match actual displayed text,XMiLib-master/XMiLib/SystemUtils.cpp:107-126,P0,NOT_RUN
+SUB-013,native-win,RegisterHotKey duplicate handling without atom leak,XMiLib-master/XMiLib/GlobalShortcut/GlobalShortcut.cpp:28-35,P1,NOT_RUN
+SUB-014,native-win,Shortcuts released after settings replacement,XMiLib-master/XMiLib/GlobalShortcut/GlobalShortcutManager.cpp:68-101,P1,NOT_RUN
+SUB-015,clipboard,Busy clipboard acquisition does not clear existing backup,Beeftext-master/Beeftext/Clipboard/ClipboardManagerDefault.cpp:63-100,P0,NOT_RUN
+SUB-016,clipboard,Clipboard snapshot and restore preserving multiple formats,Beeftext-master/Beeftext/Clipboard/ClipboardManagerDefault.cpp:110-148,P0,NOT_RUN
+SUB-017,clipboard,User copy during expansion is not overwritten,Beeftext-master/Beeftext/BeeftextUtils.cpp:217-218,P0,NOT_RUN
+SUB-018,lifecycle,Launching second instance focuses primary only once,XMiLib-master/XMiLib/SingleInstanceApp.cpp:27-44,P1,NOT_RUN
+SUB-019,lifecycle,Primary restart handles stale shared-memory lock,XMiLib-master/XMiLib/SingleInstanceApp.cpp:66-99,P1,NOT_RUN
+SUB-020,emoji,Validate JSON 4.x emoji-keyed keyword array schema,emojilib-main/dist/emoji-en-US.json,P0,NOT_RUN
+SUB-021,emoji,Reject incorrect schema in Beeftext-format import,Beeftext-master/Beeftext/Emoji/EmojiManager.cpp:133-158,P0,NOT_RUN
+SUB-022,emoji,Cannot silently rename dist/emoji-en-US.json to emojis.json,Beeftext-master/Installer/installer.nsi:198-199,P0,NOT_RUN
+SUB-023,emoji,Picker searches keywords but does not auto-activate ambiguous aliases,emojilib-main/dist/emoji-en-US.json,P1,NOT_RUN
+SUB-024,emoji,Preserve VS16 and ZWJ bytes during catalog import,emojilib-main/dist/emoji-en-US.json,P0,NOT_RUN
+SUB-025,emoji,Skin tone variants remain insertable even when not present in keyword catalog,emojilib-main/dist/emoji-en-US.json,P0,NOT_RUN
+SUB-026,emoji,Emoji catalog corruption does not break snippet library,Beeftext-master/Beeftext/Emoji/EmojiManager.cpp:53-70,P0,NOT_RUN
+SUB-027,emoji,Multilingual keywords independent of UI language selection,emojilib-main/dist/emoji-en-US.json,P1,NOT_RUN
+SUB-028,emoji,Versioned catalog update atomic with rollback,docs/EMOJI_CATALOG.md,P1,NOT_RUN
+SUB-029,license,Third party MIT license notices for both datasets/libs,XMiLib-master/LICENSE.md;emojilib-main/LICENSE,P1,NOT_RUN
+SUB-030,license,Do not copy Espanso GPLv3 implementation without policy decision,espanso-dev/LICENSE,P0,NOT_RUN
+SUB-031,build,XMiLib Windows-only sources and qmake dependency verified,XMiLib-master/XMiLib/CMakeLists.txt,P1,NOT_RUN
+SUB-032,build,Confirm CMake prefix path configuration in real Qt build,XMiLib-master/XMiLib/CMakeLists.txt:16,P2,NOT_RUN
+SUB-033,gui,Picker emoji disabled in incompatible app or secure field,Beeftext-master/Beeftext/Picker/PickerWindow.cpp,P0,NOT_RUN
+SUB-034,gui,Picker displays emoji with screen-reader text alternative,docs/EMOJI_CATALOG.md,P1,NOT_RUN
+SUB-035,performance,Search 1914 emoji locally with deterministic results,emojilib-main/dist/emoji-en-US.json,P1,NOT_RUN
+SUB-036,security,Catalog is parsed as data and never executes scripts,docs/EMOJI_CATALOG.md,P0,NOT_RUN

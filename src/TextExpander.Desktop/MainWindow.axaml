@@ -1,0 +1,250 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="TextExpander.Desktop.MainWindow"
+        Classes="compact" Width="980" Height="640" MinWidth="800" MinHeight="510"
+        Title="Ristretto" Background="{DynamicResource RCanvas}">
+  <!-- Preview 9: warm neutral surfaces, clearer hierarchy and readable compact controls. -->
+  <Grid RowDefinitions="Auto,*,Auto">
+    <Border Grid.Row="0" Background="{DynamicResource RCanvas}"
+            BorderBrush="{DynamicResource RSoftBorder}" BorderThickness="0,0,0,1"
+            Padding="12,7,12,7">
+      <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <Border Width="24" Height="24" CornerRadius="5" Background="{DynamicResource RPrimary}">
+            <TextBlock Text="R" FontSize="13" FontWeight="Bold"
+                       Foreground="{DynamicResource RPrimaryForeground}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+          <TextBlock Text="Ristretto" FontSize="14" FontWeight="SemiBold"
+                     VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+          <Button Classes="ghost" Click="Picker_Click" ToolTip.Tip="{Binding Texts.OpenPicker}">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <Path Data="M11,2 A9,9 0 1 0 11.01,2 M18,18 L23,23"
+                    Stroke="{DynamicResource RMuted}" StrokeThickness="1.6" Width="14" Height="14"
+                    Stretch="Uniform" VerticalAlignment="Center" />
+              <TextBlock Text="{Binding Texts.OpenPicker}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="subtle" Click="NewSnippet_Click" ToolTip.Tip="{Binding Texts.NewSnippet}">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <Path Data="M12,3 L12,21 M3,12 L21,12" Stroke="{DynamicResource RText}"
+                    StrokeThickness="1.8" Width="13" Height="13" Stretch="Uniform" />
+              <TextBlock Text="{Binding Texts.NewSnippet}" />
+            </StackPanel>
+          </Button>
+          <Button Classes="ghost icon" ToolTip.Tip="{Binding Texts.ActionsMenu}">
+            <Button.Content><TextBlock Text="⋯" FontSize="18" /></Button.Content>
+            <Button.Flyout>
+              <MenuFlyout Placement="BottomEdgeAlignedRight">
+                <MenuItem Header="{Binding Texts.Import}" Click="Import_Click" />
+                <MenuItem Header="{Binding Texts.Export}" Click="Export_Click" />
+                <MenuItem Header="-" />
+                <MenuItem Header="{Binding Texts.Backup}" Command="{Binding BackupCommand}" />
+                <MenuItem Header="{Binding Texts.Restore}" Click="Restore_Click" />
+              </MenuFlyout>
+            </Button.Flyout>
+          </Button>
+          <Button Classes="ghost icon" ToolTip.Tip="{Binding Texts.SettingsMenu}">
+            <Button.Content>
+              <Path Data="M12,3 L12,6 M12,18 L12,21 M3,12 L6,12 M18,12 L21,12 M5.6,5.6 L7.7,7.7 M16.3,16.3 L18.4,18.4 M5.6,18.4 L7.7,16.3 M16.3,7.7 L18.4,5.6 M12,8 A4,4 0 1 0 12.01,8"
+                    Stroke="{DynamicResource RMuted}" StrokeThickness="1.7" Width="16" Height="16" Stretch="Uniform" />
+            </Button.Content>
+            <Button.Flyout>
+              <Flyout Placement="BottomEdgeAlignedRight">
+                <StackPanel Width="265" Margin="10" Spacing="10">
+                  <TextBlock Text="{Binding Texts.Appearance}" Classes="section" />
+                  <TextBlock Text="{Binding Texts.Language}" Classes="label muted" />
+                  <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Name}" /></DataTemplate></ComboBox.ItemTemplate>
+                  </ComboBox>
+                  <TextBlock Text="{Binding Texts.Theme}" Classes="label muted" />
+                  <ComboBox ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Name}" /></DataTemplate></ComboBox.ItemTemplate>
+                  </ComboBox>
+                  <TextBlock Text="{Binding Texts.PickerHotkeyLabel}" Classes="section" Margin="0,6,0,0" />
+                  <TextBox Text="{Binding PickerHotkeyDraft, Mode=TwoWay}"
+                           Watermark="Ctrl+Shift+Space" />
+                  <TextBlock Text="{Binding Texts.PickerHotkeyHint}" Classes="faint"
+                             FontSize="11" TextWrapping="Wrap" />
+                  <Button Classes="subtle" Content="{Binding Texts.PickerHotkeyApply}"
+                          Click="ApplyPickerHotkey_Click" HorizontalAlignment="Stretch" />
+                  <TextBlock Text="{Binding PickerHotkeyFeedback}" Classes="muted"
+                             FontSize="11" TextWrapping="Wrap" />
+                </StackPanel>
+              </Flyout>
+            </Button.Flyout>
+          </Button>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="1" ColumnDefinitions="226,4,*" Background="{DynamicResource RSurface}">
+      <Border Grid.Column="0" Background="{DynamicResource RSidebar}"
+              BorderBrush="{DynamicResource RSoftBorder}" BorderThickness="0,0,1,0"
+              Padding="10,11,8,8">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*" RowSpacing="6">
+          <Grid Grid.Row="0" ColumnDefinitions="Auto,Auto,*,Auto,Auto" ColumnSpacing="4">
+            <TextBlock Grid.Column="0" Text="{Binding Texts.Groups}" Classes="section" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="{Binding Groups.Count}" Classes="faint" FontSize="12" Margin="3,0,0,0" VerticalAlignment="Center" />
+            <Button Grid.Column="3" Classes="ghost icon" ToolTip.Tip="{Binding Texts.AddGroup}">
+              <Button.Content>
+                <Path Data="M12,3 L12,21 M3,12 L21,12" Stroke="{DynamicResource RText}"
+                      StrokeThickness="1.7" Width="14" Height="14" Stretch="Uniform" />
+              </Button.Content>
+              <Button.Flyout>
+                <Flyout Placement="BottomEdgeAlignedRight">
+                  <StackPanel Width="250" Margin="10" Spacing="10">
+                    <TextBlock Text="{Binding Texts.AddGroup}" Classes="section" />
+                    <TextBox Text="{Binding NewGroupName, Mode=TwoWay}" Watermark="{Binding Texts.GroupName}" />
+                    <Button Classes="primary" Content="{Binding Texts.AddGroup}"
+                            HorizontalAlignment="Stretch" Click="AddGroup_Click" />
+                  </StackPanel>
+                </Flyout>
+              </Button.Flyout>
+            </Button>
+            <Button Grid.Column="4" Classes="ghost icon" ToolTip.Tip="{Binding Texts.GroupManage}">
+              <Button.Content><TextBlock Text="⋯" FontSize="17" /></Button.Content>
+              <Button.Flyout>
+                <Flyout Placement="BottomEdgeAlignedRight">
+                  <StackPanel Width="260" Margin="10" Spacing="10">
+                    <TextBlock Text="{Binding Texts.GroupManage}" Classes="section" />
+                    <TextBox Text="{Binding GroupEditName, Mode=TwoWay}" Watermark="{Binding Texts.GroupEditName}" />
+                    <Button Classes="subtle" Content="{Binding Texts.GroupRename}" Click="RenameGroup_Click" HorizontalAlignment="Stretch" />
+                    <Button Classes="subtle" Content="{Binding GroupToggleLabel}" Click="ToggleGroup_Click" HorizontalAlignment="Stretch" />
+                    <Button Classes="danger" Content="{Binding Texts.GroupDelete}" Click="DeleteGroup_Click" HorizontalAlignment="Stretch" />
+                  </StackPanel>
+                </Flyout>
+              </Button.Flyout>
+            </Button>
+          </Grid>
+          <ListBox Grid.Row="1" Name="GroupsList" ItemsSource="{Binding Groups}"
+                   MinHeight="29" MaxHeight="122" SelectionChanged="Group_SelectionChanged">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="7" Margin="1,1">
+                  <Path Grid.Column="0" Data="M3,7 L9,7 L11,10 L21,10 L21,19 L3,19 Z"
+                        Stroke="{DynamicResource RMuted}" StrokeThickness="1.6" Width="14" Height="14"
+                        Stretch="Uniform" VerticalAlignment="Center" />
+                  <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="13" FontWeight="SemiBold"
+                             TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                  <TextBlock Grid.Column="2" Text="●" Foreground="{DynamicResource RSuccess}"
+                             FontSize="8" IsVisible="{Binding IsEnabled}" VerticalAlignment="Center" />
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+          <Border Grid.Row="2" Background="{DynamicResource RSoftBorder}" Height="1" Margin="0,4" />
+          <Grid Grid.Row="3" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="6">
+            <TextBlock Grid.Column="0" Text="{Binding Texts.Snippets}" Classes="section" />
+            <TextBlock Grid.Column="1" Text="{Binding FilteredSnippets.Count}" Classes="faint" FontSize="12" VerticalAlignment="Center" />
+          </Grid>
+          <TextBox Grid.Row="4" Classes="search-field" Text="{Binding SearchText, Mode=TwoWay}"
+                   Watermark="{Binding Texts.Search}" />
+          <ListBox Grid.Row="5" Name="SnippetsList" ItemsSource="{Binding FilteredSnippets}"
+                   SelectionChanged="Snippet_SelectionChanged">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" ColumnSpacing="7" RowSpacing="4" Margin="1,3">
+                  <Path Grid.RowSpan="2" Grid.Column="0" Data="M6,4 L18,4 L21,7 L21,20 L6,20 Z M10,10 L17,10 M10,14 L17,14"
+                        Stroke="{DynamicResource RMuted}" StrokeThickness="1.4" Width="13" Height="13"
+                        Stretch="Uniform" VerticalAlignment="Top" Margin="0,2,0,0" />
+                  <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Title}" FontSize="13" FontWeight="SemiBold"
+                             TextTrimming="CharacterEllipsis" />
+                  <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="Auto,*" ColumnSpacing="6">
+                    <Border Grid.Column="0" Classes="trigger-chip" MaxWidth="100" VerticalAlignment="Center">
+                      <TextBlock Text="{Binding Trigger}" Classes="muted" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Trigger}" />
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="{Binding Content}" Classes="faint" FontSize="12"
+                               MaxLines="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                  </Grid>
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </Grid>
+      </Border>
+      <GridSplitter Grid.Column="1" Width="4" ResizeDirection="Columns" Background="{DynamicResource RSurface}"
+                    HorizontalAlignment="Stretch" />
+
+      <!-- The editor owns its scroll instead of filling the whole window with a bordered text field.
+           The footer stays accessible at the smallest supported height. -->
+      <Grid Grid.Column="2" RowDefinitions="Auto,*,Auto" Background="{DynamicResource RSurface}">
+        <Border Grid.Row="0" Padding="17,11,17,10" BorderBrush="{DynamicResource RSoftBorder}"
+                BorderThickness="0,0,0,1">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <StackPanel Grid.Column="0" Spacing="5">
+              <TextBlock Text="{Binding EditorDisplayTitle}" FontSize="17" FontWeight="SemiBold"
+                         TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding EditorDisplayTitle}" />
+              <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
+                <TextBlock Grid.Column="0" Text="{Binding SelectedGroup.Name}" Classes="faint" FontSize="12" MaxWidth="120" TextTrimming="CharacterEllipsis" />
+                <TextBlock Grid.Column="1" Text="{Binding EditorHeading}" Classes="faint" FontSize="12" />
+                <TextBlock Grid.Column="2" Text="{Binding Texts.UnsavedChanges}" Foreground="{DynamicResource RWarning}" FontSize="12"
+                           TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Texts.UnsavedChanges}" IsVisible="{Binding HasUnsavedChanges}" />
+              </Grid>
+            </StackPanel>
+            <CheckBox Grid.Column="1" Content="{Binding Texts.Enabled}"
+                      IsChecked="{Binding EditorEnabled, Mode=TwoWay}" VerticalAlignment="Center" />
+          </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+          <StackPanel Margin="17,13,17,20" Spacing="12" MaxWidth="830" HorizontalAlignment="Stretch">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+              <StackPanel Grid.Column="0" Spacing="4">
+                <TextBlock Text="{Binding Texts.TitleLabel}" Classes="label muted" />
+                <TextBox Text="{Binding EditorTitle, Mode=TwoWay}" />
+              </StackPanel>
+              <StackPanel Grid.Column="1" Spacing="4">
+                <TextBlock Text="{Binding Texts.TriggerLabel}" Classes="label muted" />
+                <TextBox Text="{Binding EditorTrigger, Mode=TwoWay}" />
+              </StackPanel>
+            </Grid>
+
+            <StackPanel Spacing="4">
+              <TextBlock Text="{Binding Texts.ContentLabel}" Classes="label muted" />
+              <TextBox Name="ContentEditor" Classes="editor-field" Text="{Binding EditorContent, Mode=TwoWay}"
+                       AcceptsReturn="True" TextWrapping="Wrap" Height="225" />
+            </StackPanel>
+
+            <StackPanel Spacing="4">
+              <TextBlock Text="{Binding Texts.DescriptionLabel}" Classes="label muted" />
+              <TextBox Text="{Binding EditorDescription, Mode=TwoWay}"
+                       AcceptsReturn="True" TextWrapping="Wrap" Height="47" />
+            </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" BorderBrush="{DynamicResource RSoftBorder}" BorderThickness="0,1,0,0"
+                Padding="14,7">
+          <Grid ColumnDefinitions="Auto,Auto,*,Auto" ColumnSpacing="6">
+            <Button Grid.Column="0" Classes="primary" Command="{Binding SaveCommand}"
+                    Content="{Binding Texts.Save}" />
+            <Button Grid.Column="1" Classes="danger" Content="{Binding Texts.Delete}" Click="Delete_Click" />
+            <Button Grid.Column="3" Classes="ghost" Content="{Binding Texts.PreviewTitle}">
+              <Button.Flyout>
+                <Flyout Placement="TopEdgeAlignedRight">
+                  <StackPanel Width="305" Margin="9" Spacing="10">
+                    <TextBlock Text="{Binding Texts.PreviewTitle}" Classes="section" />
+                    <TextBox Text="{Binding PreviewInput, Mode=TwoWay}" Watermark="{Binding Texts.PreviewInput}" />
+                    <Button Classes="subtle" Content="{Binding Texts.PreviewRun}" Command="{Binding PreviewCommand}" />
+                    <TextBlock Text="{Binding PreviewResult}" TextWrapping="Wrap" MaxHeight="120" />
+                  </StackPanel>
+                </Flyout>
+              </Button.Flyout>
+            </Button>
+          </Grid>
+        </Border>
+      </Grid>
+    </Grid>
+    <Border Grid.Row="2" Padding="11,2" MinHeight="21" Background="{DynamicResource RCanvas}"
+            BorderBrush="{DynamicResource RSoftBorder}" BorderThickness="0,1,0,0">
+      <Grid ColumnDefinitions="Auto,*" ColumnSpacing="7" VerticalAlignment="Center">
+        <TextBlock Grid.Column="0" Text="●" Foreground="{DynamicResource RSuccess}" FontSize="8" VerticalAlignment="Center" />
+        <TextBlock Grid.Column="1" Text="{Binding StatusMessage}" Classes="muted" FontSize="12"
+                   TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding StatusMessage}" />
+      </Grid>
+    </Border>
+  </Grid>
+</Window>

@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><AssemblyName>TextExpander.Core</AssemblyName></PropertyGroup>
+</Project>

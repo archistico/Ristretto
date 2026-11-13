@@ -1,0 +1,91 @@
+﻿id,area,scenario,expected,priority,level,platform,status,ref
+DM-001,IDENT,Creazione snippet produce identità stabile,Id nuovo e revision iniziale coerente,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-002,IDENT,Duplicazione crea nuovo ID,Identità originale preservata,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-003,IDENT,Rinomina conserva ID,Identità e appartenenza non cambiano,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-004,IDENT,Sposta snippet tra gruppi,"Gruppo aggiornato, snippet ID immutato",P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-005,IDENT,GroupId inesistente al salvataggio,Commit rifiutato senza orfani,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-006,IDENT,Eliminazione gruppo con move-to,Tutti i riferimenti aggiornati in unico commit,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-007,IDENT,Eliminazione gruppo cancellata,Nessuna modifica persistente,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-008,IDENT,Tentativo eliminazione gruppo default,Rifiuto esplicito,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-009,IDENT,Disabilitazione gruppo,Snippet tecnicamente enabled ma non candidati,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-010,IDENT,Riabilitazione gruppo,Torna candidatura senza cambiare flag singoli,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-011,IDENT,Concurrent edit stessa revision,Secondo commit StaleRevision,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-012,IDENT,Import collisione UUID,Mapping o rifiuto senza sovrascritture,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-013,IDENT,Ordine gruppi cambia,Matcher invariato,P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-014,IDENT,Metadata UTC e localizzazione UI,"Date archivio stabili, display per locale",P1,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-015,TRIGGER,Trigger vuoto,InvalidTrigger e nessun salvataggio,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-016,TRIGGER,Trigger composto da surrogate orfano,InvalidUnicode senza replacement,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-017,TRIGGER,Trigger esatto univoco,Un Candidate deterministicamente,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-018,TRIGGER,Trigger duplicati stesso scope,Ambiguous o collision validation,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-019,TRIGGER,Trigger duplicato con gruppo disabilitato,Solo candidato abilitato,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-020,TRIGGER,Prefissi :sig / :signature immediate,"Attesa o collisione, mai trigger prematuro",P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-021,TRIGGER,Attivazione OnDelimiter prima del delimitatore,PendingDelimiterOrLongerMatch,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-022,TRIGGER,Delimitatore mantenuto,Output logicamente contiene il delimitatore prescritto,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-023,TRIGGER,Delimitatore consumato,Output logicamente non lo conserva,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-024,TRIGGER,Trigger in middle-word con boundary,Nessun match se vietato,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-025,TRIGGER,Case sensitive Ordinal,Distinzione ordinal coerente,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-026,TRIGGER,Case insensitive invariant,Policy esplicita e fixture culture,P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-027,TRIGGER,Confronto NFC opzionale,"NFC/NFD equivalenza solo nel match, non nel payload",P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-028,TRIGGER,Conflitto introdotto da NFC,Collision detection prima del commit,P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-029,TRIGGER,Modifica gruppo/scope post snapshot,Snapshot revision sostituita dopo commit,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-030,TRIGGER,Picker Manual non auto-match,Nessun evento osservato avvia inserimento,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-031,UNICODE,Caffè à è ñ Łódź,Roundtrip string Unicode invariata,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-032,UNICODE,e + combining acute,Sequenza preservata senza NFC implicito,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-033,UNICODE,Emoji famiglia ZWJ,"Sequenza Unicode preservata, non conta char per Backspace",P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-034,UNICODE,Emoji tono pelle,Modifier e scalar preservati,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-035,UNICODE,Emoji bandiera,Indicatori regionali preservati,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-036,UNICODE,Emoji heart VS16,Selector preservato,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-037,UNICODE,CJK e giapponese,Scalari e ordine preservati,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-038,UNICODE,Ebraico + arabo + latino e numeri,Ordine logico preservato,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-039,UNICODE,Turco I / İ / ı / i,Case policy non deriva dalla lingua UI,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-040,UNICODE,Greco sigma finale e ordinario,Confronto rispetta policy e fixture,P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-041,UNICODE,CRLF vs LF misti,Terminatori preservati in template literal,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-042,UNICODE,SQL JSON con #{cursor} in literal,Nessuna interpolazione involontaria,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-043,UNICODE,Unpaired surrogate import,Errore esplicito e report no silenzio,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-044,UNICODE,Testo oltre limite configurato,Errore chiaro senza alterare libreria,P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-045,TEMPLATE,Template Literal nessuna macro,RawText inserito logicamente invariato,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-046,TEMPLATE,Template Structured token sconosciuto,UnsupportedInstruction prima effetti,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-047,TEMPLATE,Template con variabile mancante,PreparationFailed senza rimozione trigger,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-048,TEMPLATE,Prompt variabile annullato,Cancelled e target immutato,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-049,TEMPLATE,Variabili sicure pre-risolte,Plan contiene solo output e step ammessi,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-050,TEMPLATE,Riferimenti circolari fra snippet,"Errore cycle, limite profondità rispettato",P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-051,TEMPLATE,Cursor anchor a confine grapheme,Plan valido dove capability supporta,P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-052,TEMPLATE,Cursor anchor nel mezzo di surrogate,Plan rifiutato,P0,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-053,TEMPLATE,Più cursor anchor non supportate,Errore esplicito e nessun side effect,P1,Core,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-054,TEMPLATE,Due inserimenti simultanei stesso target,"Coordinamento seriale, nessun interleaving",P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-055,OBSERVE,Solo keydown senza commit,InvalidObservation / nessuna cancellazione,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-056,OBSERVE,IME composition ongoing,Nessun match finché non commit attestato,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-057,OBSERVE,CompositionEnd senza commit,Nessuna presunzione di testo committato,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-058,OBSERVE,IME commit osservato,Matching soltanto su testo attestato,P0,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-059,OBSERVE,Target epoch cambiata,Reset buffer e candidate invalidata,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-060,OBSERVE,Cursor navigation in sequenza,Reset buffer,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-061,OBSERVE,Backend Unknown observation,Suppress / reset,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-062,OBSERVE,Evento sintetico originato dal motore,Non triggera nuova espansione,P0,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-063,OBSERVE,Session buffer overflow,Troncamento/reset sicuro senza log payload,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-064,OBSERVE,Protected field,Blocco auto-expansion,P0,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-065,OUTPUT,Target cambia dopo form,Preflight Blocks prima di rimuovere,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-066,OUTPUT,Target protection Unknown,Block senza cancellazione,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-067,OUTPUT,Backend output Unsupported,Block o fallback manuale visibile,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-068,OUTPUT,Missing OS permission,PermissionRequired con recovery UX,P0,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-069,OUTPUT,Rimozione trigger Unicode composta,Niente BackspaceLength derivato da UTF16,P0,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-070,OUTPUT,Remove API returns partial,PartialFailure o UnknownAfterEffects,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-071,OUTPUT,Insert API success senza verifica target,SubmittedUnverified,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-072,OUTPUT,Insert output verificato indipendentemente,VerifiedComplete solo con prova robusta,P0,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-073,OUTPUT,Insert fallisce dopo rimozione,PartialFailure e non retry,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-074,OUTPUT,Target cambia dopo preflight,UnknownAfterEffects/PartialFailure,P0,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-075,OUTPUT,Clipboard changed by user mid-injection,No overwrite del nuovo clipboard,P0,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-076,OUTPUT,Clipboard HTML+image preserved when supported,"Restore condizionale per formati, no universal claim",P1,Native,OS matrix required,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-077,OUTPUT,Picker inserts without typed trigger,Nessuna cancellazione trigger dal target,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-078,OUTPUT,Plan invalidato da nuova snapshot,Abort before effects,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-079,OUTPUT,Nuovo tentativo dopo effect uncertain,Nessun retry implicito,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-080,OUTPUT,Window title sensitive,Diagnostic redacted,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-081,PERSIST,Import Beeftext preview,Nessun comando/snippet eseguito,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-082,PERSIST,Import Espanso YAML script fields,"Tutti i script inerti, warning e no side effects",P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-083,PERSIST,Import validation fails late,Libreria originale intatta,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-084,PERSIST,Storage commit precedes matcher publish,No snapshot con dati non committati,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-085,PERSIST,Save interrupted / disk full,Recovery previous consistent state,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-086,PERSIST,Export JSON roundtrip Unicode,Scalari e line endings invariati,P0,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-087,PERSIST,Backup raw contains settings and library,Restore validates fully before commit,P1,Integration,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-088,PERSIST,CSV lossy export,Warning on lost fields,P1,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-089,PERSIST,UI language changed,Content e trigger non cambiano,P0,Desktop,Shared,NOT_RUN,docs/DOMAIN_MODEL.md
+DM-090,PERSIST,Logger receives accidental payload,Test fallisce se payload nei log,P0,Application,Shared,NOT_RUN,docs/DOMAIN_MODEL.md

@@ -1,0 +1,82 @@
+{
+  "version": "3.9.0-alpha.20.3",
+  "date": "2026-11-13",
+  "sdk": "10.0.201",
+  "test_runtime": "10.0.5",
+  "platform": "Windows x64",
+  "restore": {
+    "source": "existing local NuGet package cache",
+    "online_attempt": "NU1301: TLS connection to repository-signatures endpoint failed",
+    "online_vulnerability_audit": false,
+    "tls_or_signature_verification_disabled": false
+  },
+  "release_builds": {
+    "solution": "PASS",
+    "windows_lab": "PASS",
+    "core_benchmark": "PASS",
+    "replacement_lab": "PASS",
+    "ui_review": "PASS",
+    "errors": 0,
+    "known_warning": "xUnit2000 in WindowsExternalAdapterCapabilityTests; pre-existing"
+  },
+  "xunit": {
+    "passed": 466,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "windows-alpha20-3-tests.trx"
+  },
+  "native": {
+    "owned_edit_passed": 31,
+    "owned_edit_failed": 0,
+    "cooperating_child": "PASS",
+    "remote_owned_valid": "PASS",
+    "remote_owned_stale_rejection": "PASS",
+    "replay_rejected": true,
+    "log": "windows-alpha20-3-native.log"
+  },
+  "node": {
+    "runtime": "24.20.0",
+    "passed": 32,
+    "failed": 0,
+    "syntax_check": "PASS"
+  },
+  "export_contract": {
+    "status": "PASS",
+    "groups": 2,
+    "snippets": 6,
+    "eligible": 3,
+    "checks": 7
+  },
+  "python": {
+    "source_audit": "PASS",
+    "static_checks": "PASS",
+    "unit_tests_passed": 7
+  },
+  "script_optional_detection": "validate.cmd did not detect Python/Node with where; all supplemental checks executed directly",
+  "not_executed": [
+    "manual picker insert in external editors",
+    "real VS Code Extension Development Host",
+    "online NuGet vulnerability audit",
+    "macOS/Linux runtime",
+    "IME qualification"
+  ],
+  "source_sha256": {
+    "src/TextExpander.Infrastructure/Platform/Windows/WindowsPickerPasteService.cs": "cc66906d9217e268f179554a4fbb25713d5e50d5900272a95fb4a54efce3dca1",
+    "tests/TextExpander.Tests/WindowsPickerPasteTests.cs": "204e4b8510c0b3c2e0b93dfc105ff6d09bf168d62628c3a9be6b084c3f33aa0e",
+    "tools/Ristretto.WindowsOutputLab/RemoteOwnedEditLab.cs": "959da984346916e8d433c00f113fe2b26555dcf385f9c0ea0f34be912ad9efab",
+    "tests/TextExpander.Tests/RemoteOwnedEditProtocolTests.cs": "aec6333ec2daf6795145396c21a173a2b0fc6ed7e4b2e0fa2dbc5151b277032a"
+  },
+  "qualification": "Owned laboratory EDIT controls only; no global typing expansion, no verified external editor paste",
+  "fresh_zip_extraction": {
+    "manifest_sha256": "PASS",
+    "no_initial_bin_or_obj": true,
+    "release_builds": "PASS",
+    "xunit_passed": 466,
+    "native_owned_edit_passed": 31,
+    "cooperating_and_remote_smoke": "PASS",
+    "node_passed": 32,
+    "python_passed": 7,
+    "export_contract": "PASS",
+    "compiled_sources_match_delivery": true
+  }
+}
