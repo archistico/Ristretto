@@ -4,6 +4,7 @@ Interfaccia introdotta nella alpha.6, aggiornata nella **3.9.0-alpha.20.22** con
 
 ## Superfici e comportamento
 
+- **Alpha 20.29:** form Registra hotkey allineata alla densità compatta della libreria: font 13/16/11 DIP, pulsanti e campo standard, padding compatti e istruzioni brevi. [Anteprime aggiornate](ALPHA20_29_HOTKEY_STYLE.md), render offscreen nei due temi; non sono screenshot del desktop.
 - **Alpha 20.27:** Tab/Shift+Tab conservano la combinazione acquisita e le azioni del dialogo possono andare a capo. Flusso libreria/dialogo/SQLite e disposizione in cinque lingue/due temi coperti da test headless; resa e registrazioni Windows restano da qualificare. [Prove e limiti](ALPHA20_27_CAPTURE_INTEGRATION.md).
 - **Alpha 20.26:** pulsante Registra… accanto alla hotkey e form di acquisizione, con combinazione leggibile dopo il rilascio, conferma, annullamento e rimozione. Richiamo base hotkey in Blocco note confermato dall'utente; il nuovo dialogo richiede ancora verifica desktop. [Uso](ALPHA20_26_HOTKEY_CAPTURE.md).
 - **Alpha 20.25:** campo facoltativo hotkey nell'editor, con stato di registrazione e istruzioni in cinque lingue. Il testo rimane nell'area flessibile. Picker invariato; rendering del nuovo campo ancora da qualificare. [Uso](ALPHA20_25_SNIPPET_HOTKEYS.md).

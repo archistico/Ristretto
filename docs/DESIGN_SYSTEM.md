@@ -33,7 +33,9 @@ Gli alias `RHero*` e `RAccent*` mantengono coerenti i dialoghi esistenti.
 
 ## Metriche e gerarchia
 
-Main e picker usano `Window.compact`: testo base e pulsanti 13 DIP, label 12 DIP, contenuto editor 14 DIP. Pulsanti alti almeno 32 DIP con angoli 6; campi almeno 34 DIP; righe lista almeno 28 DIP con indicatore laterale da 2 DIP. I dialoghi mantengono metriche proprie, con pulsanti base da almeno 36 DIP salvo override.
+Main, picker e Registra hotkey usano `Window.compact`: testo base e pulsanti 13 DIP, label 12 DIP, contenuto editor 14 DIP. Pulsanti alti almeno 32 DIP con angoli 6; campi almeno 34 DIP; righe lista almeno 28 DIP con indicatore laterale da 2 DIP. Le note hotkey condividono `field-hint` da 11 DIP. Import e conferme mantengono le loro metriche, con pulsanti base da almeno 36 DIP salvo override.
+
+La form hotkey combina `compact` e `ristretto-dialog`: titolo 16 DIP SemiBold come il picker, header/footer 12×9 DIP, corpo 12 DIP, campo 10×6 DIP con bordo 1 e focus `RFocus`. Il display eredita i 13 DIP dei campi; non usa una dimensione speciale. [Anteprime e comportamento](ALPHA20_29_HOTKEY_STYLE.md).
 
 Il nome dello snippet precede i metadati; il trigger è un chip su riga distinta. Le dimensioni delle finestre sono nella [guida GUI](GUI.md). Evitare bordi doppi e decorazioni che competono con il contenuto.
 

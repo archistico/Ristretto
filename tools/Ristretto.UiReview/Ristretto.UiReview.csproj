@@ -6,6 +6,7 @@
 
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Avalonia.Headless" Version="11.3.22" PrivateAssets="all" />
     <ProjectReference Include="../../src/TextExpander.Desktop/TextExpander.Desktop.csproj" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 
 Riferimenti: [guida GUI](GUI.md), [design system](DESIGN_SYSTEM.md), [32 render storici della Alpha 7](../design/current/review.json). Gli audit di preview sono consolidati qui; una build o un render non promuovono una prova manuale a PASS.
 
-**Baseline attuale 20.27:** form Registra… e hotkey per snippet. Routing dei controlli e disposizione delle azioni provati in headless su cinque lingue/due temi; corretti Shift+Tab e pulsanti fuori dal bordo. Il richiamo base in Blocco note è confermato dall'utente; resa, DPI e tastiera del desktop restano aperti. Usare la [matrice Windows](WINDOWS_QUALIFICATION_PLAN.md) e aggiornare le immagini solo dopo la qualificazione prevista in R2.06.
+**Baseline attuale 20.29:** form Registra… armonizzata allo stile compact di libreria e picker, con 80 render offscreen Skia di lingue/temi/larghezze/stati e due anteprime aggiornate incluse. Routing dei controlli e disposizione delle azioni restano coperti dalla suite headless. Il richiamo base in Blocco note è confermato dall'utente; DPI e tastiera del desktop restano aperti. [Anteprime e perimetro](ALPHA20_29_HOTKEY_STYLE.md) · [matrice Windows](WINDOWS_QUALIFICATION_PLAN.md).
 
 ## Evidenze disponibili
 

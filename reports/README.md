@@ -1,4 +1,8 @@
-## Alpha 20.28 — ultimo rapporto funzionale
+## Alpha 20.29 — ultimo rapporto funzionale
+
+[Verifiche](ALPHA20_29_CHECKS.md) · [JSON](ALPHA20_29_VALIDATION.json) · [render](alpha20-29-ui-review.json) · [log](alpha20-29-validation.log). Form hotkey armonizzata con libreria e picker; 80 anteprime offscreen in cinque lingue, due temi, due larghezze e quattro stati.
+
+## Alpha 20.28 — rapporto precedente
 
 [Verifiche](ALPHA20_28_CHECKS.md) · [JSON](ALPHA20_28_VALIDATION.json) · [ricevute native](alpha20-28-native-hotkeys.json) · [log](alpha20-28-validation.log). 21 casi con registrazioni Windows reali passati, compresi conflitti fra processi e rilascio dopo terminazione del figlio; nuova conferma utente del richiamo tramite hotkey. L'orchestrazione completa del desktop resta da qualificare.
 

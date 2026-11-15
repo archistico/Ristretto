@@ -1,6 +1,6 @@
 # Installazione, aggiornamento e dati — Windows
 
-**Versione di riferimento:** 3.9.0-alpha.20.28. Questa guida riguarda lo ZIP dei sorgenti. Un installer e un pacchetto eseguibile qualificato sono attività di R4 nella [roadmap](ROADMAP.md).
+**Versione di riferimento:** 3.9.0-alpha.20.29. Questa guida riguarda lo ZIP dei sorgenti. Un installer e un pacchetto eseguibile qualificato sono attività di R4 nella [roadmap](ROADMAP.md).
 
 ## Prima installazione
 

@@ -1,0 +1,351 @@
+{
+    "schema":  "ristretto/alpha-validation/1",
+    "version":  "3.9.0-alpha.20.29",
+    "date":  "2026-11-15",
+    "status":  "PASS",
+    "counts":  {
+                   "xunit":  870,
+                   "node":  32,
+                   "devtools":  23,
+                   "startup_cli":  10,
+                   "capture_filter":  50,
+                   "ui_renders":  80,
+                   "new_unit_tests":  0
+               },
+    "native_hotkeys_this_release":  "NOT_RUN",
+    "prior_native_evidence":  "Alpha 20.28: 21 PASS",
+    "fresh_extraction":  {
+                             "status":  "PASS",
+                             "manifest_hashes_verified":  518,
+                             "initial_bin_obj_count":  0,
+                             "source_sha256_matches":  true,
+                             "tested_candidate_archive_sha256":  "b6ab65db6498a75d242af6a77612daa7664959ec47b9c2dca18b938362e8f0aa",
+                             "gate_ci":  {
+                                             "schema":  "ristretto/quality-gate/2",
+                                             "source_version":  "3.9.0-alpha.20.29",
+                                             "git_commit":  null,
+                                             "source_sha256":  "039cafe3fa39d1846d0d4e045c49a14404ce23b1634a749edf548c247d26de5d",
+                                             "utc":  "2026-11-15T21:57:06.5404184+00:00",
+                                             "mode":  "ci",
+                                             "platform":  "Win32NT",
+                                             "steps":  [
+                                                           {
+                                                               "name":  "source_audit",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "csharp_regressions",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "static_checks",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "dotnet_restore",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "solution_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "xunit",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "windows_lab_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "benchmark_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "replacement_lab_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "ui_review_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "devtools_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "startup_cli",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "node_tests",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "export_contract",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "native_windows",
+                                                               "status":  "NOT_RUN",
+                                                               "detail":  "Escluso dal gate"
+                                                           }
+                                                       ],
+                                             "restore":  {
+                                                             "source":  "local-cache",
+                                                             "status":  "PASS"
+                                                         },
+                                             "nuget_vulnerability_audit":  {
+                                                                               "status":  "NOT_RUN",
+                                                                               "detail":  "Serve un audit online separato"
+                                                                           },
+                                             "vs_code_real_host":  "NOT_RUN",
+                                             "desktop_picker_real_io":  "NOT_RUN",
+                                             "result":  "PASS"
+                                         },
+                             "ui_renders":  80,
+                             "included_preview_bytes_match":  true,
+                             "note":  "Rapporti e documentazione completati dopo la prova; sorgenti compilati invariati."
+                         },
+    "gate_ci":  {
+                    "schema":  "ristretto/quality-gate/2",
+                    "source_version":  "3.9.0-alpha.20.29",
+                    "git_commit":  null,
+                    "source_sha256":  "039cafe3fa39d1846d0d4e045c49a14404ce23b1634a749edf548c247d26de5d",
+                    "utc":  "2026-11-15T21:55:44.2761977+00:00",
+                    "mode":  "ci",
+                    "platform":  "Win32NT",
+                    "steps":  [
+                                  {
+                                      "name":  "source_audit",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "csharp_regressions",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "static_checks",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "dotnet_restore",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "solution_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "xunit",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "windows_lab_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "benchmark_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "replacement_lab_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "ui_review_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "devtools_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "startup_cli",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "node_tests",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "export_contract",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "native_windows",
+                                      "status":  "NOT_RUN",
+                                      "detail":  "Escluso dal gate"
+                                  }
+                              ],
+                    "restore":  {
+                                    "source":  "local-cache",
+                                    "status":  "PASS"
+                                },
+                    "nuget_vulnerability_audit":  {
+                                                      "status":  "NOT_RUN",
+                                                      "detail":  "Serve un audit online separato"
+                                                  },
+                    "vs_code_real_host":  "NOT_RUN",
+                    "desktop_picker_real_io":  "NOT_RUN",
+                    "result":  "PASS"
+                },
+    "ui_review":  {
+                      "status":  "PASS",
+                      "renders":  80,
+                      "backend":  "Avalonia.Headless 11.3.22 + Skia",
+                      "languages":  [
+                                        "it",
+                                        "en",
+                                        "fr",
+                                        "de",
+                                        "es"
+                                    ],
+                      "themes":  [
+                                     "Light",
+                                     "Dark"
+                                 ],
+                      "widths_dip":  [
+                                         500,
+                                         440
+                                     ],
+                      "states":  [
+                                     "waiting",
+                                     "release",
+                                     "ready",
+                                     "invalid"
+                                 ],
+                      "action_bounds":  "PASS",
+                      "normal_italian_size_dip":  [
+                                                      500,
+                                                      194
+                                                  ],
+                      "display_font_dip":  13,
+                      "manual_desktop":  "NOT_RUN"
+                  },
+    "final_documentation_gate":  {
+                                     "schema":  "ristretto/quality-gate/2",
+                                     "source_version":  "3.9.0-alpha.20.29",
+                                     "git_commit":  null,
+                                     "source_sha256":  "039cafe3fa39d1846d0d4e045c49a14404ce23b1634a749edf548c247d26de5d",
+                                     "utc":  "2026-11-15T21:58:43.3378578+00:00",
+                                     "mode":  "source",
+                                     "platform":  "Win32NT",
+                                     "steps":  [
+                                                   {
+                                                       "name":  "source_audit",
+                                                       "status":  "PASS",
+                                                       "detail":  "Codice di uscita 0"
+                                                   },
+                                                   {
+                                                       "name":  "csharp_regressions",
+                                                       "status":  "PASS",
+                                                       "detail":  "Codice di uscita 0"
+                                                   },
+                                                   {
+                                                       "name":  "static_checks",
+                                                       "status":  "PASS",
+                                                       "detail":  "Codice di uscita 0"
+                                                   },
+                                                   {
+                                                       "name":  "dotnet_restore",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "solution_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "xunit",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "windows_lab_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "benchmark_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "replacement_lab_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "ui_review_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "devtools_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "startup_cli",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "node_tests",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "export_contract",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "native_windows",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   }
+                                               ],
+                                     "restore":  {
+                                                     "source":  "unknown",
+                                                     "status":  "NOT_RUN"
+                                                 },
+                                     "nuget_vulnerability_audit":  {
+                                                                       "status":  "NOT_RUN",
+                                                                       "detail":  "Serve un audit online separato"
+                                                                   },
+                                     "vs_code_real_host":  "NOT_RUN",
+                                     "desktop_picker_real_io":  "NOT_RUN",
+                                     "result":  "PASS"
+                                 }
+}

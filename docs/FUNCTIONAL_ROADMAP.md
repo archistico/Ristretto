@@ -1,6 +1,6 @@
 # Quadro funzionale F0–F6
 
-Questo documento è una mappa delle aree tecniche. Priorità, attività e criteri di chiusura sono soltanto nella [roadmap R1–R8](ROADMAP.md). Baseline: **3.9.0-alpha.20.28**; [stato effettivo](CURRENT_STATE.md).
+Questo documento è una mappa delle aree tecniche. Priorità, attività e criteri di chiusura sono soltanto nella [roadmap R1–R8](ROADMAP.md). Baseline: **3.9.0-alpha.20.29**; [stato effettivo](CURRENT_STATE.md).
 
 | Area | Contenuto | Stato e lavoro collegato |
 | --- | --- | --- |

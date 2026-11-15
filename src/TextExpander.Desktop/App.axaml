@@ -242,8 +242,8 @@
     <Style Selector="TextBlock.dialog-trigger-text"><Setter Property="Foreground" Value="{DynamicResource RMuted}"/><Setter Property="FontWeight" Value="SemiBold" /></Style>
     <Style Selector="TextBlock.dialog-risk-text"><Setter Property="Foreground" Value="{DynamicResource RWarning}"/><Setter Property="FontWeight" Value="SemiBold" /></Style>
 
-    <!-- Density is opt-in for the two everyday windows. Import/confirm dialogs
-         retain their existing metrics, focus behavior and button hit areas. -->
+    <!-- Compact density is shared by the main window, picker and hotkey capture.
+         Import/confirm dialogs retain their existing metrics. -->
     <Style Selector="Window.compact"><Setter Property="FontSize" Value="13" /></Style>
     <Style Selector="Window.compact Button">
       <Setter Property="MinHeight" Value="32" />
@@ -277,6 +277,23 @@
     </Style>
     <Style Selector="Window.compact TextBlock.section"><Setter Property="FontSize" Value="13" /></Style>
     <Style Selector="Window.compact TextBlock.label"><Setter Property="FontSize" Value="12" /></Style>
+    <Style Selector="Window.compact TextBlock.field-hint"><Setter Property="FontSize" Value="11" /></Style>
+    <Style Selector="Window.compact TextBlock.hotkey-feedback"><Setter Property="MinHeight" Value="14" /></Style>
+    <Style Selector="Window.compact.ristretto-dialog TextBlock.dialog-title">
+      <Setter Property="FontSize" Value="16" /><Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Window.compact.ristretto-dialog Border.dialog-hero"><Setter Property="Padding" Value="12,9" /></Style>
+    <Style Selector="Window.compact.ristretto-dialog Border.dialog-body"><Setter Property="Padding" Value="12" /></Style>
+    <Style Selector="Window.compact.ristretto-dialog Border.dialog-footer"><Setter Property="Padding" Value="12,9" /></Style>
+    <!-- A focusable capture surface with the same metrics and states as compact inputs. -->
+    <Style Selector="Window.compact Border.hotkey-field">
+      <Setter Property="MinHeight" Value="34" /><Setter Property="Padding" Value="10,6" />
+      <Setter Property="CornerRadius" Value="6" /><Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Background" Value="{DynamicResource RInput}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource RSoftBorder}" />
+    </Style>
+    <Style Selector="Window.compact Border.hotkey-field:pointerover"><Setter Property="BorderBrush" Value="{DynamicResource RBorder}" /></Style>
+    <Style Selector="Window.compact Border.hotkey-field:focus"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>
     <!-- These selectors outrank the compact TextBox border for visible focus. -->
     <Style Selector="Window.compact TextBox:pointerover"><Setter Property="BorderBrush" Value="{DynamicResource RBorder}" /></Style>
     <Style Selector="Window.compact TextBox:focus"><Setter Property="BorderBrush" Value="{DynamicResource RFocus}" /></Style>

@@ -1,3 +1,10 @@
+## 3.9.0-alpha.20.29 — Stile uniforme della form hotkey
+
+- Registra hotkey usa la densità compatta di libreria e picker: testo/combinazione 13 DIP, titolo 16, indicazioni 11, pulsanti 32 e campo 34. Padding, raggi, colori e focus definiti negli stili condivisi.
+- Istruzioni più brevi in cinque lingue, nessuna ripetizione iniziale e spazio riservato al feedback. Azioni adattabili anche alla larghezza minima.
+- Nuova modalità UiReview `--hotkey-only`: 80 render offscreen di temi, lingue, larghezze e stati, senza finestre native o registrazioni. [Anteprime](docs/ALPHA20_29_HOTKEY_STYLE.md) · [verifiche](reports/ALPHA20_29_CHECKS.md).
+- 870 xUnit, 32 Node e gate CI passati anche da ZIP nuovo; 80 render ripetuti nell'estrazione e anteprime incluse identiche a quelle rigenerate.
+
 ## 3.9.0-alpha.20.28 — Verifica delle registrazioni Windows
 
 - Nuovo laboratorio e comando `validate-snippet-hotkeys.cmd`: 21 casi con i worker del prodotto e registrazioni Windows reali, senza inviare input o usare appunti/profili personali.

@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <!-- Versione canonica di ogni assembly, inclusi tool e test. -->
-    <Version>3.9.0-alpha.20.28</Version>
+    <Version>3.9.0-alpha.20.29</Version>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>

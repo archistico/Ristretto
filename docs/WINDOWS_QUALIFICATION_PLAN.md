@@ -1,6 +1,6 @@
 # Piano di qualificazione Windows — picker e hotkey
 
-**Baseline da provare:** Alpha 20.28 · **Roadmap:** R2.01, R2.08, R2.09 e completamento R2.
+**Baseline da provare:** Alpha 20.29 · **Roadmap:** R2.01, R2.08, R2.09 e completamento R2.
 
 Questa è la matrice da eseguire, non un rapporto di prove già effettuate. Il richiamo base in Blocco note della 20.25 è confermato dall'utente; non viene trasferito automaticamente ai casi sotto. Tutti i nuovi casi iniziano come `NOT_RUN`.
 
@@ -10,10 +10,12 @@ La [suite headless 20.27](ALPHA20_27_CAPTURE_INTEGRATION.md) copre parti di CAP-
 
 ## Preparazione
 
+La [form 20.29](ALPHA20_29_HOTKEY_STYLE.md) usa ora lo stile compact; 80 render offscreen verificano azioni e disposizione. Ripetere UI-02/UI-03 sul desktop per font, DPI e focus reali; il rendering non cambia gli stati manuali sotto.
+
 Annotare versione/hash di Ristretto, versione/build Windows, versione editor, layout tastiera, lingua, tema, DPI e data. Usare una cartella dati nuova e un documento di prova vuoto, con testo sintetico.
 
 ```powershell
-dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-28"
+dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-29"
 ```
 
 Preparare due gruppi e tre snippet con nomi distinti. Assegnare a uno un testo multilinea con accenti combinanti, emoji ZWJ, CJK e RTL. Scegliere combinazioni disponibili nella sessione; per i casi di collisione registrare chi le possiede. Prima delle prove desktop il gate CORE deve essere PASS.

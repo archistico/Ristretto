@@ -13,8 +13,8 @@ public sealed class HotkeyCaptureWindow : Window
 {
     private readonly HotkeyCaptureState _state = new();
     private readonly UiStrings _texts;
-    private readonly TextBlock _display = new() { FontSize = 23, FontWeight = FontWeight.SemiBold, TextWrapping = TextWrapping.Wrap };
-    private readonly TextBlock _feedback = new() { TextWrapping = TextWrapping.Wrap, FontSize = 12 };
+    private readonly TextBlock _display = new() { TextWrapping = TextWrapping.Wrap };
+    private readonly TextBlock _feedback = new() { TextWrapping = TextWrapping.Wrap };
     private readonly Border _captureArea;
     private readonly Button _use;
 
@@ -22,42 +22,44 @@ public sealed class HotkeyCaptureWindow : Window
     {
         _texts = texts;
         Title = texts.HotkeyCaptureTitle;
-        Width = 540;
+        Width = 500;
         MinWidth = 440;
         CanResize = false;
         SizeToContent = SizeToContent.Height;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
         ShowInTaskbar = false;
         Classes.Add("ristretto-dialog");
+        Classes.Add("compact");
         var title = new TextBlock { Text = texts.HotkeyCaptureTitle };
         title.Classes.Add("dialog-title");
-        var header = new Border { Padding = new Thickness(24, 18), Child = title };
+        var header = new Border { Child = title };
         header.Classes.Add("dialog-hero");
 
         _captureArea = new Border
         {
             Focusable = true,
-            Padding = new Thickness(18),
-            MinHeight = 85,
-            CornerRadius = new CornerRadius(8),
-            BorderThickness = new Thickness(2),
             Child = _display
         };
-        _captureArea.Bind(Border.BorderBrushProperty, this.GetResourceObservable("RPrimary"));
+        _captureArea.Classes.Add("hotkey-field");
+        _feedback.Classes.Add("field-hint");
+        _feedback.Classes.Add("hotkey-feedback");
+        _feedback.Classes.Add("muted");
         AutomationProperties.SetAutomationId(_captureArea, "HotkeyCaptureArea");
         AutomationProperties.SetAutomationId(_display, "HotkeyCaptureDisplay");
         AutomationProperties.SetAutomationId(_feedback, "HotkeyCaptureFeedback");
         AutomationProperties.SetName(_captureArea, texts.HotkeyCaptureTitle);
         _captureArea.PointerPressed += (_, _) => _captureArea.Focus();
-        var body = new StackPanel
+        var instructions = new TextBlock { Text = texts.HotkeyCaptureInstructions, TextWrapping = TextWrapping.Wrap };
+        instructions.Classes.Add("muted");
+        var body = new Border
         {
-            Margin = new Thickness(24, 20), Spacing = 14,
-            Children =
+            Child = new StackPanel
             {
-                new TextBlock { Text = texts.HotkeyCaptureInstructions, TextWrapping = TextWrapping.Wrap },
-                _captureArea, _feedback
+                Spacing = 8,
+                Children = { instructions, _captureArea, _feedback }
             }
         };
+        body.Classes.Add("dialog-body");
         var cancel = new Button { Content = texts.Cancel };
         AutomationProperties.SetAutomationId(cancel, "HotkeyCaptureCancel");
         cancel.Classes.Add("ghost");
@@ -74,12 +76,12 @@ public sealed class HotkeyCaptureWindow : Window
         {
             Orientation = Orientation.Horizontal,
             HorizontalAlignment = HorizontalAlignment.Right,
+            ItemSpacing = 6,
+            LineSpacing = 6,
             Children = { clear, cancel, _use }
         };
-        foreach (var button in new[] { clear, cancel, _use }) button.Margin = new Thickness(4);
         var footer = new Border
         {
-            Padding = new Thickness(18, 9),
             Child = actions
         };
         footer.Classes.Add("dialog-footer");
@@ -128,7 +130,8 @@ public sealed class HotkeyCaptureWindow : Window
         _display.Text = _state.DisplayText.Length == 0 ? _texts.HotkeyCaptureWaiting : _state.DisplayText;
         _feedback.Text = _state.IsInvalid ? _texts.PickerHotkeyInvalid : _state.CanConfirm
             ? _texts.HotkeyCaptureReady : _state.Hotkey is not null
-                ? _texts.HotkeyCaptureRelease : _texts.HotkeyCaptureInstructions;
+                ? _texts.HotkeyCaptureRelease : "";
+        _display.Classes.Set("muted", _state.DisplayText.Length == 0);
         _use.IsEnabled = _state.CanConfirm;
     }
 }

@@ -212,8 +212,8 @@
               <Button Grid.Column="1" Name="CaptureSnippetHotkeyButton" Content="{Binding Texts.HotkeyCaptureButton}"
                       IsEnabled="False" Click="CaptureSnippetHotkey_Click" />
             </Grid>
-            <TextBlock Text="{Binding Texts.SnippetHotkeyHint}" Classes="faint" FontSize="11" TextWrapping="Wrap" />
-            <TextBlock Text="{Binding SnippetHotkeyFeedback}" Classes="muted" FontSize="11" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding Texts.SnippetHotkeyHint}" Classes="faint field-hint" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding SnippetHotkeyFeedback}" Classes="muted field-hint" TextWrapping="Wrap" />
           </StackPanel>
 
           <Grid Grid.Row="2" RowDefinitions="Auto,*" RowSpacing="4" MinHeight="100">

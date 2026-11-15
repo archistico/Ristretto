@@ -1,6 +1,6 @@
 # Roadmap unica — Ristretto
 
-**Revisione:** 15 novembre 2026 · **Baseline funzionale:** 3.9.0-alpha.20.28.
+**Revisione:** 15 novembre 2026 · **Baseline funzionale:** 3.9.0-alpha.20.29.
 
 **Obiettivo:** scrivere un trigger come `;firma` in un'applicazione compatibile e ottenere automaticamente lo snippet. Il picker e le hotkey manuali restano disponibili.
 
@@ -17,7 +17,7 @@ Questa è la fonte delle attività future. [Stato corrente](CURRENT_STATE.md) de
 | R5 | Lettore Edit, WinEvent e anteprima di trigger disponibili; test inclusi nella suite | Provenienza dell'input, IME e capacità di sostituzione esterna non qualificate |
 | Espansione automatica esterna | Contratti e laboratori controllati disponibili | Adapter di prodotto da qualificare e implementare |
 | Distribuzione | ZIP sorgenti e manifest | Pacchetto eseguibile, licenza, notices e aggiornamento qualificato |
-| Immagini | 32 anteprime Preview 9, Alpha 7 | Screenshot del prodotto corrente, inclusa la form Registra… |
+| Immagini | 32 anteprime storiche main/picker; due nuovi render form 20.29 e verifica di 80 configurazioni offscreen | Screenshot desktop e verifica DPI del prodotto corrente |
 
 I risultati di laboratorio, un test unitario e una conferma manuale hanno perimetri diversi. `NOT_RUN` non equivale a `PASS`.
 
@@ -51,6 +51,8 @@ R5 può avanzare con esperimenti isolati mentre si qualifica R2. L'installer com
 
 **Priorità immediata:** R2.01 → R2.08 → R2.09. La prova positiva in Blocco note non chiude l'intera milestone.
 
+**Richiesta visuale 20.29 completata:** form hotkey allineata allo stile compact di libreria e picker, con note condivise, istruzioni brevi e anteprime nei due temi. Verificate 80 configurazioni offscreen; la parte desktop/DPI di R2.06 resta aperta. [Metriche e immagini](ALPHA20_29_HOTKEY_STYLE.md).
+
 **Avanzamento 20.27–20.28:** prove UI headless, salvataggio SQLite e disposizione in cinque lingue/due temi; corretti Shift+Tab e pulsanti fuori dal bordo. Aggiunti 21 casi con worker/coordinatore e registrazioni Windows reali, incluse collisioni fra processi e rilascio dopo terminazione del figlio. [UI headless](ALPHA20_27_CAPTURE_INTEGRATION.md) · [ricevute native](ALPHA20_28_NATIVE_HOTKEY_REGISTRATIONS.md). R2.08/R2.06 restano aperte per hardware/DPI; R2.09 per orchestrazione completa, flussi UI/import e notifiche pendenti.
 
 - [ ] **R2.01 — Ambiente e matrice.** La [matrice iniziale è predisposta](WINDOWS_QUALIFICATION_PLAN.md); ambiente, fixture ed esecuzione sono ancora aperti. Preparare un profilo nuovo, snippet sintetici e un documento esterno; annotare versione app/Windows/editor, layout, tema e DPI. Per ciascun caso registrare atteso, osservato, metodo e stato. **Chiusura:** una persona diversa può ripetere i passaggi senza usare la libreria personale.
@@ -60,7 +62,7 @@ R5 può avanzare con esperimenti isolati mentre si qualifica R2. L'installer com
 - [ ] **R2.03 — Appunti effettivi.** Provare Copia e Inserisci con multilinea, CRLF/LF, NFC/NFD, emoji ZWJ, RTL e CJK. Forzare appunti occupati o cambiati, scrittura lenta e comando concorrente. **Chiusura:** testo corretto o rifiuto esplicito, nessun incollamento accodato e nessun ripristino alla cieca degli appunti.
 - [ ] **R2.04 — Destinatario controllato.** Collegare il percorso reale del prodotto a un Edit posseduto da un laboratorio e verificare contenuto/cursore prima e dopo. **Chiusura:** esito ripetibile con ricevuta osservata, distinto dal supporto di un editor esterno.
 - [ ] **R2.05 — Editor esterno e focus.** Partire da Blocco note e registrare casi con caret/selezione, cambio finestra/campo, chiusura del target, modificatori, campi di sola lettura e protetti sintetici. Annotare anche i rifiuti verso app elevate. **Chiusura:** matrice per editor/versione e metodo; il numero di eventi SendInput accettati non è conteggiato come testo verificato.
-- [ ] **R2.06 — Resa, accessibilità e screenshot.** Verificare cinque lingue, due temi, dimensioni minime, DPI 100/125/150/200%, focus e nomi accessibili. Aggiornare il tool di anteprima per la nuova form usando dati sintetici e registrazioni native disattivate; acquisire immagini correnti di libreria, picker e cattura. **Chiusura:** immagini coerenti con i comandi effettivi e nessuna etichetta o azione tagliata; README aggiornato con provenienza delle immagini.
+- [ ] **R2.06 — Resa, accessibilità e screenshot.** La 20.29 completa lo stile della cattura, il renderer offscreen e due anteprime aggiornate (80 configurazioni verificate). Restano da controllare DPI 100/125/150/200%, focus e nomi accessibili sul desktop; acquisire immagini correnti anche di libreria e picker. **Chiusura:** immagini coerenti con i comandi effettivi e nessuna etichetta o azione tagliata; README aggiornato con provenienza delle immagini.
 - [ ] **R2.07 — Correzioni e riconferma.** Correggere i difetti dimostrati, aggiungere regressioni utili e ripetere i casi coinvolti e i gate pertinenti. **Chiusura:** nessun caso bloccante aperto nelle funzioni dichiarate qualificate.
 
 **Consegna R2:** matrice desktop, rapporti delle correzioni e screenshot attuali. La sola crescita del numero di test non chiude questa milestone.

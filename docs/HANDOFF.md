@@ -1,8 +1,10 @@
-# Handoff — Ristretto Alpha 20.28
+# Handoff — Ristretto Alpha 20.29
 
-**15 novembre 2026.** Codice e documentazione aggiornati a 3.9.0-alpha.20.28.
+**15 novembre 2026.** Codice e documentazione aggiornati a 3.9.0-alpha.20.29.
 
 ## Obiettivo e punto di ripresa
+
+La richiesta più recente è uniformare Registra hotkey al resto del software. **20.29:** classi compact/ristretto-dialog, testo/display 13 DIP, titolo 16, note 11 condivise con il campo hotkey della libreria, campo e pulsanti compatti, istruzioni brevi e spazio riservato allo stato. 80 render offscreen in cinque lingue/due temi/due larghezze/quattro stati; due immagini aggiornate incluse. Nessun nuovo test unitario per i valori di stile; il flusso usa i test esistenti. [Dettagli e anteprime](ALPHA20_29_HOTKEY_STYLE.md).
 
 **Registra…** nella libreria acquisisce i tasti e mostra per esempio `ALT + CTRL + SHIFT + B`. La 20.27 prova il flusso con i controlli Avalonia reali su backend headless e SQLite sintetico: la conferma cambia la bozza, soltanto Salva persiste. Corretti perdita della combinazione con Shift+Tab e pulsanti fuori dal bordo in francese/tedesco. L'utente ha confermato che il richiamo via hotkey della 20.25 funziona in Blocco note Windows.
 
@@ -14,7 +16,7 @@ La [roadmap](ROADMAP.md) è l'unico piano autorevole; include dipendenze e crite
 
 ## Baseline da conservare
 
-- Alpha 20.28: gate CI locale e da ZIP nuovo; **870 xUnit**, **32 Node**, 23 regressioni dei tool, 10 CLI e contratto .NET→Node passati; build senza warning. Verificati 510 hash del manifest e sorgenti compilati identici; 21/21 nativi anche dall'estrazione.
+- Alpha 20.29: gate CI PASS locale e da ZIP nuovo, 870 xUnit/32 Node inclusi i 50 casi della cattura; 80 render offscreen ripetuti nell'estrazione. Verificati 518 hash e sorgenti identici, anteprime incluse uguali byte per byte a quelle rigenerate. La baseline 20.28 conserva 21/21 nativi passati, non rieseguiti per la modifica visuale.
 - Restore NuGet da cache/feed locale; due pacchetti headless mancanti scaricati da NuGet con HTTPS verificato. Audit vulnerabilità online non eseguito.
 - Schema SQLite 2 dalla 20.25, migrazione da 1, backup legacy migrato solo nello staging, hotkey nel JSON v1 facoltativo.
 - Registra…: ai 26 casi della 20.26 si aggiungono 22 UI headless e due di stato della 20.27. Verificati navigazione/azioni, libreria e persistenza, cinque lingue/due temi/due larghezze. La 20.28 prova inoltre il coordinatore con worker Windows reali, separatamente da Desktop.App.
@@ -49,7 +51,7 @@ R5 deve confrontare digitazione, paste, IME, programmatiche e contesto con evide
 
 **Preferenza dell'utente da mantenere:** README con titolo, screenshot, descrizione del progetto, funzionamento, installazione, aggiornamento e riferimenti. Linguaggio chiaro e diretto; storico delle versioni nel changelog, procedure tecniche nei documenti dedicati.
 
-Le immagini attuali sono anteprime Preview 9 della Alpha 7: indicarne la provenienza finché non vengono sostituite con acquisizioni reali del prodotto corrente. Nessun render o mockup va presentato come prova manuale.
+Le immagini main/picker restano anteprime Preview 9 della Alpha 7. La form hotkey ha due render offscreen aggiornati alla 20.29: indicarne la provenienza. Nessun render o mockup va presentato come prova manuale.
 
 Aggiornare insieme README, stato, roadmap, changelog e indice quando cambia il comportamento. Le specifiche e i rapporti delle vecchie Alpha restano storici. I documenti di studio non dimostrano implementazione o qualificazione attuale.
 

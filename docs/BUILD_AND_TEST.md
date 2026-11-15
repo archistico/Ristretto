@@ -1,8 +1,8 @@
-# Compilazione e verifiche — Ristretto Alpha 20.28
+# Compilazione e verifiche — Ristretto Alpha 20.29
 
 Per installare, aggiornare e recuperare i dati partire dalla [guida utente](INSTALLATION_AND_UPDATE.md). Questo documento descrive i controlli per lo sviluppo.
 
-**Baseline già eseguita:** CI locale e da ZIP nuovo, 870 xUnit, 32 Node, 23 regressioni degli strumenti, 10 CLI e contratto .NET→Node passati. Inoltre 21 casi nativi sulle registrazioni, eseguiti separatamente da CI e ripetuti anche dall'estrazione. Consegna e rebuild nel [rapporto](../reports/ALPHA20_28_CHECKS.md).
+**Baseline corrente:** 870 xUnit, 32 Node, 23 regressioni degli strumenti, 10 CLI e contratto .NET→Node; esiti CI e cartella nuova nel [rapporto 20.29](../reports/ALPHA20_29_CHECKS.md). Aggiunti 80 render offscreen. I 21 casi nativi rimangono evidenza della 20.28 e non sono stati rieseguiti per lo stile.
 
 ## Requisiti
 
@@ -42,7 +42,7 @@ Il secondo filtro apre i controlli reali su backend Avalonia headless: 22 casi, 
 Per avviare una libreria isolata, senza usare quella personale:
 
 ~~~powershell
-dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-28"
+dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-29"
 ~~~
 
 Per riutilizzare il profilo nelle versioni successive conservare lo stesso percorso assoluto. Un secondo profilo separa i dati, ma può entrare in conflitto sulle combinazioni globali.
@@ -106,7 +106,15 @@ Gli esiti sono osservazioni o trigger potenziali: paste, IME e modifiche program
 
 Il ramo host VS Code è sospeso. Prima di riprenderlo diagnosticare l'avvio normale; il precedente crash `0x80000003` non ha una causa confermata. Il runner supporta `-PrepareOnly` per preparare senza avviare l'editor; le istruzioni sono in [host VS Code](ALPHA20_3_VSCODE_HOST_TESTS.md).
 
-Il tool UiReview apre finestre proprie: è compilato dai gate, ma non avviato automaticamente. Le immagini attuali sono render della Alpha 7. La rigenerazione del nuovo dialogo è pianificata in R2.06; un render non sostituisce tastiera, focus, DPI e registrazioni reali. [Anteprime](../design/README.md) · [accettazione visuale](GUI_VISUAL_ACCEPTANCE.md).
+Il tool UiReview è compilato dai gate, ma non avviato automaticamente. Le modalità storiche aprono finestre proprie; le immagini main/picker incluse restano render della Alpha 7. Un render non sostituisce tastiera, focus, DPI e registrazioni reali. [Anteprime](../design/README.md) · [accettazione visuale](GUI_VISUAL_ACCEPTANCE.md).
+
+La modalità nuova `--hotkey-only` rende soltanto la form hotkey **offscreen**, con Skia e backend Headless, senza finestre native o lifetime desktop. Genera 80 PNG e misure su una cartella nuova:
+
+~~~powershell
+dotnet run -c Release --project tools/Ristretto.UiReview -- --output .local-cache/hotkey-review-nuova --hotkey-only
+~~~
+
+Due render della form 20.29 sono inclusi in `design/hotkey-capture-20-29`; main/picker restano immagini storiche. [Metriche e perimetro](ALPHA20_29_HOTKEY_STYLE.md).
 
 ## 7. Pacchetto e cartella nuova
 

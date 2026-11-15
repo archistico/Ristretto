@@ -23,9 +23,9 @@ internal static class Program
     public static int Main(string[] args)
     {
         if (args.Length is < 2 or > 3 || args[0] != "--output" ||
-            (args.Length == 3 && args[2] != "--baseline"))
+            (args.Length == 3 && args[2] is not ("--baseline" or "--hotkey-only")))
         {
-            Console.Error.WriteLine("Uso: Ristretto.UiReview --output <nuova-cartella> [--baseline]");
+            Console.Error.WriteLine("Uso: Ristretto.UiReview --output <nuova-cartella> [--baseline|--hotkey-only]");
             return 2;
         }
         var directory = Path.GetFullPath(args[1]);
@@ -35,6 +35,7 @@ internal static class Program
             return 2;
         }
         Directory.CreateDirectory(directory);
+        if (args.Length == 3 && args[2] == "--hotkey-only") return HotkeyCaptureReview.Run(directory);
         AppBuilder.Configure<App>().UsePlatformDetect().WithInterFont()
             .SetupWithoutStarting(); // No desktop lifetime: App never opens DB, tray or single-instance host.
         var captures = new List<object>();

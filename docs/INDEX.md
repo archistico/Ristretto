@@ -1,6 +1,6 @@
-# Documentazione — Ristretto Alpha 20.28
+# Documentazione — Ristretto Alpha 20.29
 
-**Aggiornamento:** 15 novembre 2026. Versione dell'applicazione 3.9.0-alpha.20.28.
+**Aggiornamento:** 15 novembre 2026. Versione dell'applicazione 3.9.0-alpha.20.29.
 
 ## Da dove iniziare
 
@@ -17,8 +17,11 @@
 
 La 20.28 aggiunge 21 casi con registrazioni native Windows e collisioni fra processi: [rapporto](../reports/ALPHA20_28_CHECKS.md). Il dialogo resta coperto da integrazione headless; l'orchestrazione completa sul desktop è ancora da qualificare. Il richiamo tramite hotkey è stato nuovamente confermato dall'utente.
 
+La 20.29 uniforma la form hotkey allo stile compatto di libreria/picker; include [anteprime aggiornate e metriche](ALPHA20_29_HOTKEY_STYLE.md) e 80 render offscreen. [Verifiche attuali](../reports/ALPHA20_29_CHECKS.md).
+
 ## Uso, dati e interfaccia
 
+- [Stile condiviso della form hotkey, Alpha 20.29](ALPHA20_29_HOTKEY_STYLE.md)
 - [Registrazioni Windows e conflitti, Alpha 20.28](ALPHA20_28_NATIVE_HOTKEY_REGISTRATIONS.md)
 - [Prove UI e correzioni della cattura, Alpha 20.27](ALPHA20_27_CAPTURE_INTEGRATION.md)
 - [Registra hotkey, Alpha 20.26](ALPHA20_26_HOTKEY_CAPTURE.md)

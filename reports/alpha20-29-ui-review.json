@@ -1,0 +1,728 @@
+{
+  "Status": "AVALONIA_HEADLESS_SKIA_RENDERED",
+  "NativeDesktopManualValidation": "NOT_RUN",
+  "PhysicalKeyboard": "NOT_RUN",
+  "Data": "SYNTHETIC_ONLY",
+  "Captures": [
+    {
+      "File": "hotkey-light-it-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-it-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-it-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-it-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-it-min-waiting.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-it-min-release.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-it-min-ready.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-it-min-invalid.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-en-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-en-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-en-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-en-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-en-min-waiting.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-en-min-release.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-en-min-ready.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-en-min-invalid.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-fr-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-fr-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-fr-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-fr-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-fr-min-waiting.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-fr-min-release.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-fr-min-ready.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-fr-min-invalid.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-de-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-de-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-de-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-de-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-de-min-waiting.png",
+      "Width": 440,
+      "Height": 232,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-de-min-release.png",
+      "Width": 440,
+      "Height": 232,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-de-min-ready.png",
+      "Width": 440,
+      "Height": 232,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-de-min-invalid.png",
+      "Width": 440,
+      "Height": 245,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-es-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-es-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-es-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-es-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-es-min-waiting.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-es-min-release.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-es-min-ready.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-light-es-min-invalid.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-it-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-it-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-it-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-it-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-it-min-waiting.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-it-min-release.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-it-min-ready.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-it-min-invalid.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-en-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-en-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-en-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-en-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-en-min-waiting.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-en-min-release.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-en-min-ready.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-en-min-invalid.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-fr-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-fr-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-fr-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-fr-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-fr-min-waiting.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-fr-min-release.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-fr-min-ready.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-fr-min-invalid.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-de-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-de-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-de-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-de-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-de-min-waiting.png",
+      "Width": 440,
+      "Height": 232,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-de-min-release.png",
+      "Width": 440,
+      "Height": 232,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-de-min-ready.png",
+      "Width": 440,
+      "Height": 232,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-de-min-invalid.png",
+      "Width": 440,
+      "Height": 245,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-es-normal-waiting.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-es-normal-release.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-es-normal-ready.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-es-normal-invalid.png",
+      "Width": 500,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-es-min-waiting.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "waiting",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-es-min-release.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "release",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-es-min-ready.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "ready",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    },
+    {
+      "File": "hotkey-dark-es-min-invalid.png",
+      "Width": 440,
+      "Height": 194,
+      "State": "invalid",
+      "DisplayFontSize": 13,
+      "WindowFontSize": 13,
+      "ActionBounds": "PASS"
+    }
+  ]
+}

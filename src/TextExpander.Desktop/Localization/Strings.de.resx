@@ -381,10 +381,10 @@
   <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Kombination bereits einem anderen Snippet oder dem Picker zugewiesen. Bitte eine andere wählen.</value></data>
   <data name="HotkeyCaptureButton" xml:space="preserve"><value>Aufzeichnen…</value></data>
   <data name="HotkeyCaptureTitle" xml:space="preserve"><value>Tastenkürzel aufzeichnen</value></data>
-  <data name="HotkeyCaptureInstructions" xml:space="preserve"><value>Die Tasten des Kürzels gleichzeitig drücken. Die Kombination erscheint unten. Zum Ändern eine andere Kombination drücken.</value></data>
+  <data name="HotkeyCaptureInstructions" xml:space="preserve"><value>Die dem Snippet zuzuweisenden Tasten gleichzeitig drücken.</value></data>
   <data name="HotkeyCaptureWaiting" xml:space="preserve"><value>Warte auf Tastendruck…</value></data>
   <data name="HotkeyCaptureRelease" xml:space="preserve"><value>Vor dem Bestätigen alle Tasten loslassen.</value></data>
-  <data name="HotkeyCaptureReady" xml:space="preserve"><value>Kombination erkannt. Bestätigen oder eine andere Kombination drücken.</value></data>
+  <data name="HotkeyCaptureReady" xml:space="preserve"><value>Kombination erkannt. Bestätigen oder ändern.</value></data>
   <data name="HotkeyCaptureUse" xml:space="preserve"><value>Kombination verwenden</value></data>
   <data name="HotkeyCaptureClear" xml:space="preserve"><value>Tastenkürzel entfernen</value></data>
 </root>

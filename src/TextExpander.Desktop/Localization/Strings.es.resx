@@ -381,10 +381,10 @@
   <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Combinación ya asignada a otro snippet o al selector. Elige otra.</value></data>
   <data name="HotkeyCaptureButton" xml:space="preserve"><value>Grabar…</value></data>
   <data name="HotkeyCaptureTitle" xml:space="preserve"><value>Grabar atajo</value></data>
-  <data name="HotkeyCaptureInstructions" xml:space="preserve"><value>Pulsa las teclas del atajo a la vez. La combinación aparecerá debajo. Pulsa otra combinación para cambiarla.</value></data>
+  <data name="HotkeyCaptureInstructions" xml:space="preserve"><value>Pulsa a la vez las teclas que quieras asignar al snippet.</value></data>
   <data name="HotkeyCaptureWaiting" xml:space="preserve"><value>Esperando las teclas…</value></data>
   <data name="HotkeyCaptureRelease" xml:space="preserve"><value>Suelta todas las teclas antes de confirmar.</value></data>
-  <data name="HotkeyCaptureReady" xml:space="preserve"><value>Combinación detectada. Confirma o pulsa otra combinación.</value></data>
+  <data name="HotkeyCaptureReady" xml:space="preserve"><value>Combinación detectada. Confirma o cámbiala.</value></data>
   <data name="HotkeyCaptureUse" xml:space="preserve"><value>Usar combinación</value></data>
   <data name="HotkeyCaptureClear" xml:space="preserve"><value>Eliminar atajo</value></data>
 </root>
