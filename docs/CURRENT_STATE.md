@@ -1,28 +1,33 @@
-# Stato corrente — Ristretto 3.9.0-alpha.20.19.5
+# Stato corrente — Ristretto 3.9.0-alpha.20.20
 
 ## Dove siamo
 
-- **R1:** C#/.NET 10, Avalonia, SQLite, import/export e quality gate. Strumenti di validazione migrati da Python a un tool C# (`tools/Ristretto.DevTools`) nella 20.19.4; hotfix CS9174 applicato nella 20.19.5.
-- **R2:** picker, ricerca Unicode e hotkey configurabile; il test manuale Notepad ha dato `PASS` sul documento sintetico, con inserimento confermato dall'utente. Resta da qualificare il comportamento in altri editor.
-- **R3:** adapter VS Code facoltativo; per ora non è prioritario.
-- **R5:** motore di trigger Unicode e laboratorio Win32 per ricerca e confini di focus. Non esiste ancora un'espansione automatica globale qualificata.
+- **R1 — Fondamenta:** C#/.NET 10, Avalonia, SQLite, portabilità JSON, strumenti `Ristretto.DevTools` interamente in C# e gate SOURCE/CORE/CI. L'utente ha confermato che **Alpha 20.19.5 compila e supera tutti i test**.
+- **R2 — Picker Windows:** ricerca Unicode, hotkey configurabile, Copia e Inserisci/Invio. La prova del documento sintetico Notepad è stata completata con `PASS` e inserimento confermato dall'utente; restano altri editor e casi di errore.
+- **R3 — VS Code:** integrazione facoltativa, in pausa. Non è necessaria per il motore generale di Ristretto.
+- **R5 — Input automatico:** l'Alpha 20.19 aveva aggiunto il reset su cambio finestra/focus. La **Alpha 20.20** introduce un coordinatore applicativo `OwnedCommittedInputBridge`, riutilizzato dal laboratorio Win32: verifica delta Unicode, provenienza legata alla revisione e attivazione del trigger in successione. Non aggiunge monitoraggio globale o privilegi sui controlli esterni.
+- **R6 — Espansione automatica:** non ancora disponibile nelle applicazioni esterne; l'esecuzione è consentita solo nel proprio editor Win32 qualificato.
 
-## Evidenze e stato dei test
+## Stato delle verifiche
 
-- **Alpha 20.19.3:** `GATE CORE: PASS` confermato dall'utente, con compilazione e xUnit superati.
-- **Alpha 20.19.4:** `validate-source.cmd` e `validate.cmd` si arrestano durante la compilazione di `Ristretto.DevTools` con **due errori CS9174** in `NotepadQualification.cs`, come confermato dall'utente. Non implicano un errore del picker.
-- **Alpha 20.19.5:** due chiamate corrette e regressioni C# aggiunte. L'ambiente di preparazione non dispone dell'SDK .NET 10: **build C#, regressioni C# e gate Windows NON ESEGUITI**. Non segnare `PASS` fino alla verifica effettiva.
+| Versione | Evidenza | Stato |
+|---|---|---|
+| **20.19.5** | Compilazione e test confermati dall'utente | **PASS** |
+| **20.20** | Nuovo bridge e nuovi test xUnit preparati, laboratorio integrato | **Da compilare/eseguire su Windows** |
+| Picker Notepad sintetico | Documento salvato Unicode corretto e azione Inserisci confermata | **PASS** per questa specifica prova |
+| Espansione globale in editor esterni | Non implementata | **NOT_RUN** |
 
-Sono rimasti invariati il codice dell'applicazione, il picker, la hotkey e SQLite.
+I controlli statici dell'archivio non equivalgono alla compilazione del codice C#. Non conservare dati digitati nei rapporti diagnostici.
 
-## Obiettivo
+## Obiettivo finale
 
-Espandere automaticamente un trigger come `;firma` nelle applicazioni compatibili, rispettando Unicode, IME, focus e sicurezza dei dati. Il picker rimane la modalità manuale di riserva.
+Digitare un trigger Unicode come `;firma` in un'applicazione compatibile e ottenere automaticamente lo snippet, senza aprire il picker. Il picker deve restare disponibile come fallback manuale.
 
-## Prossimi passi
+## Cosa resta da fare
 
-1. Confermare su Windows il nuovo gate C# (`.\scripts\validate-source.cmd`, poi `.\scripts\validate.cmd`) e l’assenza degli errori CS9174 e del warning xUnit2000.
-2. Correggere ogni regressione emersa dalla migrazione degli strumenti, senza modificare il picker funzionante.
-3. Riprendere R5: provenienza del testo Unicode committato e supporto degli editor esterni qualificati.
+1. Eseguire `scripts\validate-source.cmd` e `scripts\validate.cmd` sulla 20.20. Confermare i nuovi test del bridge e l'assenza di regressioni nel laboratorio.
+2. Eseguire `scripts\validate-native.cmd` da un desktop Windows interattivo per verificare che il laboratorio continui ad espandere correttamente i propri trigger.
+3. R5: progettare un adapter esterno che possa **dimostrare** la provenienza e il testo Unicode committato, distinguendo IME, incollamenti, focus e campi protetti.
+4. R6: introdurre l'espansione globale in forma opt-in solo dopo una qualificazione del destinatario e test di sicurezza. Non usare eventi di tastiera grezzi come prova del testo inserito.
 
-Per istruzioni complete vedere [BUILD_AND_TEST](BUILD_AND_TEST.md) e per la sequenza dei lavori [ROADMAP](ROADMAP.md).
+Vedi [ROADMAP](ROADMAP.md), [BUILD_AND_TEST](BUILD_AND_TEST.md) e il [rapporto tecnico 20.20](ALPHA20_20_OWNED_INPUT_BRIDGE.md).

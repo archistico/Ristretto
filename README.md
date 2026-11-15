@@ -1,14 +1,16 @@
 # Ristretto — text expander multipiattaforma
 
-**Versione di lavoro: 3.9.0-alpha.20.19.5.** Stack: C# / .NET 10, Avalonia, SQLite e test xUnit.
+**Versione di lavoro: 3.9.0-alpha.20.20.** Stack: C# / .NET 10, Avalonia, SQLite e test xUnit.
 
 Ristretto gestisce gruppi e snippet Unicode, consente la ricerca tramite picker e offre su Windows una hotkey globale configurabile per aprirlo. **Invio** e **Inserisci** nel picker hanno avuto una prova positiva su Notepad con documento sintetico Unicode; questo non dimostra ancora l'espansione automatica durante la digitazione.
 
-## Hotfix Alpha 20.19.5 — errori CS9174
+## Alpha 20.20 — raccordo Unicode verificato per il laboratorio
 
-La prima compilazione Windows della Alpha 20.19.4 è stata bloccata da due errori `CS9174` nel nuovo strumento C#, in `NotepadQualification.cs` (righe 173 e 198). In questa versione entrambe le chiamate `Span<byte>.StartsWith([0xEF, 0xBB, 0xBF])` sono sostituite da un confronto esplicito dei byte del BOM UTF-8 tramite una funzione condivisa, senza allocazioni aggiuntive. Tre nuovi test C# coprono documento con BOM, BOM incompleto e fixture BOM; il controllo `SourceAudit` previene il ritorno della sintassi problematica.
+L'utente ha confermato **compilazione e test PASS** della Alpha 20.19.5, chiudendo la migrazione degli strumenti di validazione in C#.
 
-**Compilazione e xUnit della Alpha 20.19.5: da verificare su Windows.** Non toccati picker, hotkey, UI e database. Per tutti i dettagli vedere [il rapporto dell'hotfix](docs/ALPHA20_19_5_CS9174_FIX.md).
+La Alpha 20.20 introduce `OwnedCommittedInputBridge`: unifica la verifica delle modifiche Unicode nel controllo posseduto, la correlazione con la revisione e la provenienza ammessa e il riconoscimento dei trigger. Il laboratorio Win32 utilizza il nuovo componente; i test xUnit sono stati ampliati. **La nuova versione deve ancora essere compilata e provata su Windows.**
+
+La GUI, il picker, la hotkey e SQLite sono invariati. Il bridge non intercetta la tastiera globale e non abilita sostituzioni in editor esterni. Vedi [rapporto tecnico](docs/ALPHA20_20_OWNED_INPUT_BRIDGE.md).
 
 ## Cosa era cambiato nella Alpha 20.19.4
 
@@ -56,7 +58,7 @@ Sostituire `TOKEN` con l'identificativo mostrato da `prepare`. Per i passaggi de
 - [Compilazione e verifiche in italiano](docs/BUILD_AND_TEST.md)
 - [Handoff](docs/HANDOFF.md)
 - [Indice dei documenti](docs/INDEX.md)
-- [Hotfix CS9174](docs/ALPHA20_19_5_CS9174_FIX.md)
+- [Bridge input Unicode 20.20](docs/ALPHA20_20_OWNED_INPUT_BRIDGE.md) · [Hotfix CS9174](docs/ALPHA20_19_5_CS9174_FIX.md)
 - [Migrazione strumenti C#](docs/ALPHA20_19_4_CSHARP_TOOLS.md)
 
 Gli archivi e i report delle Alpha precedenti restano storici: alcuni descrivono la vecchia pipeline Python, non più disponibile in questa release.

@@ -1,3 +1,11 @@
+## 3.9.0-alpha.20.20 — Collegamento del testo committato al motore trigger (R5)
+
+- Confermata dall'utente la baseline **Alpha 20.19.5**, compilazione e test passati.
+- Nuovo `OwnedCommittedInputBridge` in Application: integra delta Unicode verificato, provenienza associata alla revisione e attivazione dei trigger con reset su input non affidabili.
+- Il laboratorio Win32 `OwnedEditRecognitionSession` usa il nuovo bridge; continua a eseguire sostituzioni soltanto nel proprio controllo qualificato.
+- Nuova suite xUnit `OwnedCommittedInputBridgeTests`, senza dipendenze Python e senza accesso nativo globale.
+- GUI, picker, hotkey, SQLite e adapter VS Code invariati. Compilazione/test della nuova versione da eseguire su Windows.
+
 ## 3.9.0-alpha.20.19.5 — Hotfix compilazione DevTools CS9174
 
 - Corrette due collection expression in `NotepadQualification.cs` che su Windows impedivano la compilazione (`CS9174`, righe 173 e 198 della Alpha 20.19.4).

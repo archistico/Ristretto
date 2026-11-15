@@ -1,4 +1,4 @@
-# Compilazione, verifiche e procedure — Ristretto Alpha 20.19.5
+# Compilazione, verifiche e procedure — Ristretto Alpha 20.20
 
 ## Prerequisiti
 
@@ -10,7 +10,7 @@ Installa **.NET SDK 10**. Apri PowerShell nella cartella del progetto contenente
 .\scripts\validate-source.cmd
 ```
 
-Questo script avvia il tool C# `Ristretto.DevTools` ed esegue audit dei namespace/riferimenti, test propri e controlli statici su XAML, traduzioni, documentazione e SQLite tramite `Microsoft.Data.Sqlite`. Anche questo passaggio richiede .NET 10 perché deve compilare il tool. Il risultato atteso è `GATE SOURCE: PASS`. La Alpha 20.19.4 falliva prima di questo risultato per CS9174: nella Alpha 20.19.5 è stata corretta la lettura BOM UTF-8. Se compare un altro errore di compilazione, invia il **primo** errore completo; non considerare riuscita una validazione interrotta.
+Questo script avvia il tool C# `Ristretto.DevTools` ed esegue audit dei namespace/riferimenti, test propri e controlli statici su XAML, traduzioni, documentazione e SQLite tramite `Microsoft.Data.Sqlite`. Anche questo passaggio richiede .NET 10 perché deve compilare il tool. Il risultato atteso è `GATE SOURCE: PASS`. La Alpha 20.19.5 ha superato compilazione e test sul PC dell'utente. Nella Alpha 20.20 aggiungiamo i test del nuovo bridge Unicode: se compare un errore di compilazione, invia il **primo** errore completo; non considerare riuscita una validazione interrotta.
 
 ## 2. Compilare ed eseguire tutti i test ordinari
 

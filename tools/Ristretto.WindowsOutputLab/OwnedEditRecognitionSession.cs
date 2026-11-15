@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using TextExpander.Application.Features.Input;
 using TextExpander.Application.Features.Output;
 using TextExpander.Core;
 using TextExpander.Core.Matching;
@@ -8,15 +9,14 @@ using TextExpander.Core.Matching;
 namespace Ristretto.WindowsOutputLab;
 
 /// <summary>
-/// Input bridge ONLY for this cooperating test editor, whose IME association is removed.
-/// Reads actual EDIT text changes, never translates physical keys. Not a global observer.
-/// A whole contiguous insertion at the previous caret must be demonstrated; other changes reset.
+/// Osservatore SOLO del controllo EDIT posseduto dal laboratorio. Il raccordo
+/// applicativo verifica delta Unicode e provenienza della revisione prima di
+/// consegnare il testo al matcher. Nessun input globale viene intercettato.
 /// </summary>
 internal sealed class OwnedEditRecognitionSession
 {
     private readonly OwnedEditTarget _target;
-    private readonly TriggerActivationSession _recognizer;
-    private ReplacementTargetSnapshot _previous;
+    private readonly OwnedCommittedInputBridge _input;
     private readonly Stopwatch _clock = Stopwatch.StartNew();
     private readonly bool _requireHumanFocus;
 
@@ -24,8 +24,7 @@ internal sealed class OwnedEditRecognitionSession
     {
         _target = target;
         _requireHumanFocus = requireHumanFocus;
-        _recognizer = new(library);
-        _previous = target.ReadSnapshot();
+        _input = new OwnedCommittedInputBridge(library, target.ReadSnapshot());
     }
 
     public TriggerActivationStatus LastRecognition { get; private set; }
@@ -36,42 +35,42 @@ internal sealed class OwnedEditRecognitionSession
     public ReplacementExecutionOutcome? ObserveCurrent()
     {
         var current = _target.ReadSnapshot();
-        var previous = _previous;
-        _previous = current;
-        // The verifier operates solely on snapshots of this owned EDIT. It does not
-        // infer Unicode characters from key events or grant access to external editors.
         var focusVerified = !_requireHumanFocus || _target.HasHumanInputFocus;
-        var input = CommittedEditDeltaVerifier.Verify(previous, current,
+        var result = _input.Observe(current,
             new OwnedEditObservationContext(
                 OwnsControl: true, InputFocusVerified: focusVerified,
                 CompositionStateKnown: true, IsComposing: false,
-                ModifiersPressed: _requireHumanFocus && _target.HasHumanInputModifiers));
-        LastInputRejection = input.Rejection;
-        if (input.Rejection == CommittedEditDeltaRejection.NoChange) return null;
-        if (!input.IsVerified) return Reset();
-        // An exact delta proves WHAT changed, not WHY. Correlate with this
-        // revision's locally observed edit-message provenance before recognition.
-        // The interactive demo never authorizes synthetic test fixtures.
-        var source = OwnedEditProvenancePolicy.Evaluate(current, _target.LastMutation,
-            allowOwnedFixture: !_requireHumanFocus);
-        LastProvenanceRejection = source.Rejection;
-        if (!source.Accepted) return Reset();
-        var insertion = input.Insertion!;
-        var decision = _recognizer.Observe(insertion.Observation, _clock.ElapsedMilliseconds,
-            insertion.InitialBoundary);
+                ModifiersPressed: _requireHumanFocus && _target.HasHumanInputModifiers),
+            _target.LastMutation,
+            allowOwnedFixture: !_requireHumanFocus,
+            monotonicMilliseconds: _clock.ElapsedMilliseconds);
+        LastInputRejection = result.DeltaRejection;
+        LastProvenanceRejection = result.ProvenanceRejection;
+        if (result.DeltaRejection == CommittedEditDeltaRejection.NoChange) return null;
+        if (!result.HasTrustedObservation)
+        {
+            LastRecognition = TriggerActivationStatus.Suppressed;
+            return null;
+        }
+
+        var decision = result.Activation!;
         LastRecognition = decision.Status;
         if (decision is not { Status: TriggerActivationStatus.Ready, Snippet: not null }) return null;
         var raw = ResolveRawSuffix(current, decision.Snippet.Trigger, out var delimiter);
         if (raw is null)
         {
             LastPreparation = ReplacementRejection.InvalidRawMatch;
-            _recognizer.Reset();
+            _input.Rebase(current);
             return null;
         }
-        var origin = new ReplacementOrigin(current.TargetToken, current.TargetEpoch, current.TextRevision, _recognizer.LibraryRevision);
-        var prepared = TriggerReplacementPlanner.Prepare(new(decision, origin, current, raw, delimiter), _recognizer.LibraryRevision);
+        var origin = new ReplacementOrigin(current.TargetToken, current.TargetEpoch, current.TextRevision, _input.LibraryRevision);
+        var prepared = TriggerReplacementPlanner.Prepare(new(decision, origin, current, raw, delimiter), _input.LibraryRevision);
         LastPreparation = prepared.Rejection;
-        if (!prepared.IsReady) return null;
+        if (!prepared.IsReady)
+        {
+            _input.Rebase(current);
+            return null;
+        }
         var evidence = new ExpansionAdmissionEvidence(
             ExpansionTargetScope.OwnedCooperatingLaboratory,
             ExpansionInputProvenance.VerifiedCommittedTextDelta,
@@ -80,17 +79,10 @@ internal sealed class OwnedEditRecognitionSession
             CompositionStateKnown: true, IsComposing: false,
             ModifiersPressed: _requireHumanFocus && _target.HasHumanInputModifiers);
         var outcome = QualifiedReplacementDispatcher.Execute(prepared.Plan!, _target, evidence,
-            _recognizer.LibraryRevision).Execution;
-        _recognizer.Reset(); // Text generated by expansion cannot become fresh input.
-        _previous = _target.ReadSnapshot();
+            _input.LibraryRevision).Execution;
+        // Il risultato generato dall'espansione non deve diventare nuovo input.
+        _input.Rebase(_target.ReadSnapshot());
         return outcome;
-    }
-
-    private ReplacementExecutionOutcome? Reset()
-    {
-        _recognizer.Reset();
-        LastRecognition = TriggerActivationStatus.Suppressed;
-        return null;
     }
 
     internal static string? ResolveRawSuffix(ReplacementTargetSnapshot snapshot, string trigger, out string delimiter)
@@ -110,7 +102,7 @@ internal sealed class OwnedEditRecognitionSession
             if (boundary >= delimiterStart || delimiterStart - boundary > TriggerReplacementPlanner.MaxRawMatchUtf16Units) continue;
             var candidate = text[boundary..delimiterStart];
             if (!string.Equals(candidate.Normalize(NormalizationForm.FormC), canonical, StringComparison.Ordinal)) continue;
-            if (found is not null) return null; // No arbitrary selection of a raw range.
+            if (found is not null) return null;
             found = candidate;
         }
         return found;

@@ -1,8 +1,8 @@
 # Indice documentale — Ristretto Alpha 20.19.5
 
-**Fonti correnti:** [Stato](CURRENT_STATE.md) · [Roadmap unica](ROADMAP.md) · [Compilazione e test in italiano](BUILD_AND_TEST.md) · [Handoff](HANDOFF.md) · [Hotfix CS9174](ALPHA20_19_5_CS9174_FIX.md) · [Strumenti C#](ALPHA20_19_4_CSHARP_TOOLS.md).
+**Fonti correnti:** [Alpha 20.20 — Bridge Unicode](ALPHA20_20_OWNED_INPUT_BRIDGE.md) · [Verifiche 20.20](../reports/ALPHA20_20_CHECKS.md) · [Stato](CURRENT_STATE.md) · [Roadmap unica](ROADMAP.md) · [Compilazione e test in italiano](BUILD_AND_TEST.md) · [Handoff](HANDOFF.md) · [Hotfix CS9174](ALPHA20_19_5_CS9174_FIX.md) · [Strumenti C#](ALPHA20_19_4_CSHARP_TOOLS.md).
 
-La migrazione agli strumenti C# è in consolidamento; la correzione CS9174 è la milestone corrente. I rapporti delle Alpha precedenti rappresentano solo lo **storico**: possono menzionare script Python non più presenti nella versione attuale.
+La migrazione degli strumenti C# ha passato compilazione e test nella Alpha 20.19.5. La nuova milestone è il bridge di input Unicode R5 dell'Alpha 20.20, ancora da compilare. I rapporti delle Alpha precedenti rappresentano solo lo **storico**: possono menzionare script Python non più presenti nella versione attuale.
 
 ## Punti di ingresso (fonti canoniche)
 
