@@ -1,0 +1,26 @@
+{
+  "schema": "ristretto/validation-status/1",
+  "version": "3.9.0-alpha.20.19",
+  "date": "2026-11-15",
+  "baseline_user_reported": {
+    "alpha20_15_compile": "PASS_REPORTED",
+    "alpha20_15_xunit": "PASS_REPORTED",
+    "alpha20_15_picker_enter": "PASS_REPORTED",
+    "alpha20_18_notepad_saved_unicode_fixture": "PASS_REPORTED",
+    "alpha20_18_picker_used": "PASS_REPORTED"
+  },
+  "this_version": {
+    "scope": "R5: barriera focus e prova WinEvent temporanea, senza lettura testo o output in altre applicazioni",
+    "python_tests": { "status": "PASS", "count": 61 },
+    "node_tests": { "status": "PASS", "count": 32 },
+    "source_audit": "PASS",
+    "static_checks": "PASS",
+    "dotnet_build": "NOT_RUN",
+    "dotnet_xunit": "NOT_RUN",
+    "windows_focus_probe": "NOT_RUN",
+    "windows_interactive_picker": "NOT_RUN",
+    "vscode_real_host": "NOT_RUN",
+    "gui_hotkey_sqlite_and_picker_insert_changed": false,
+    "note": "Un WinEvent di focus non fornisce testo Unicode committato e non concede permessi di sostituzione"
+  }
+}

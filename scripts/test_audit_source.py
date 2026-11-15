@@ -80,6 +80,16 @@ class SourceAuditTests(unittest.TestCase):
             '<Project><PropertyGroup><Version>3.9.0-alpha.20.2</Version></PropertyGroup></Project>')
         self.assertTrue(any('versione duplicata' in issue for issue in audit(self.root)))
 
+    def test_obsolete_avalonia_clipboard_api_is_rejected(self):
+        source = self.root / 'src/App/App.cs'
+        source.write_text('namespace TextExpander.App;\npublic class App { public async Task Run() { await clipboard.GetTextAsync(); } }')
+        self.assertTrue(any('API Avalonia obsoleta GetTextAsync' in issue for issue in audit(self.root)))
+
+    def test_avalonia_try_get_text_async_is_accepted(self):
+        source = self.root / 'src/App/App.cs'
+        source.write_text('namespace TextExpander.App;\npublic class App { public async Task Run() { await clipboard.TryGetTextAsync(); } }')
+        self.assertFalse(any('API Avalonia obsoleta GetTextAsync' in issue for issue in audit(self.root)))
+
     def test_xunit_import_required(self):
         tests = self.root / 'tests/TextExpander.Tests'
         tests.mkdir(parents=True)

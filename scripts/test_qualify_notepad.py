@@ -15,8 +15,11 @@ class NotepadQualificationTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
         (self.root / 'data').mkdir()
+        # I test devono costruire la stessa fixture su Windows e sugli altri OS:
+        # write_text senza newline esplicito converte LF in CRLF su Windows.
         (self.root / 'data' / 'PICKER_INSERT_SYNTHETIC_FIXTURE.txt').write_text(
-            'Caffè cafe\u0301 👩🏽\u200d💻 العربية 日本語\nseconda riga', encoding='utf-8')
+            'Caffè cafe\u0301 👩🏽\u200d💻 العربية 日本語\nseconda riga',
+            encoding='utf-8', newline='\n')
         (self.root / 'VERSION.txt').write_text('Ristretto 3.9.0-alpha.20.12', encoding='utf-8')
         self.session = prepare(self.root)
 
@@ -109,7 +112,10 @@ class NotepadQualificationTests(unittest.TestCase):
         self.assertEqual('NOT_RUN', result['status'])
 
     def test_exact_multiline_unicode_matches_when_saved(self):
-        self._save(BASE_TEXT.replace('\n', '\r\n') + fixture(self.root).replace('\n', '\r\n'))
+        # Normalizzare PRIMA della conversione in CRLF: una sorgente già in
+        # formato Windows non deve diventare CRCRLF con replace ripetuti.
+        saved = normalize_newlines(BASE_TEXT + fixture(self.root)).replace('\n', '\r\n')
+        self._save(saved)
         result = verify(self.session['session'], self.root)
         self.assertEqual('PASS', result['status'])
         report = json.loads(result['receipt'].read_text(encoding='utf-8'))
@@ -117,6 +123,35 @@ class NotepadQualificationTests(unittest.TestCase):
         self.assertFalse(report['desktop_action_proven'])
         self.assertNotIn('Caffè', result['receipt'].read_text(encoding='utf-8'))
         self.assertNotIn('👩', result['receipt'].read_text(encoding='utf-8'))
+
+    def test_windows_crlf_source_fixture_matches_saved_crlf_document(self):
+        # Riproduce esattamente il bug segnalato su Windows, anche se questi
+        # test vengono eseguiti su Linux: file sorgente con CRLF reali.
+        source = self.root / 'data' / 'PICKER_INSERT_SYNTHETIC_FIXTURE.txt'
+        source.write_bytes(source.read_bytes().replace(b'\n', b'\r\n'))
+        windows_session = prepare(self.root)
+        saved = normalize_newlines(BASE_TEXT + fixture(self.root)).replace('\n', '\r\n')
+        windows_session['document'].write_bytes(b'\xef\xbb\xbf' + saved.encode('utf-8'))
+        result = verify(windows_session['session'], self.root)
+        self.assertEqual('PASS', result['status'])
+        self.assertEqual('MATCHES_EXPECTED', status(windows_session['session'], self.root)['document'])
+        self.assertFalse(json.loads(result['receipt'].read_text(encoding='utf-8'))['desktop_action_proven'])
+
+    def test_windows_crlf_source_fixture_matches_saved_lf_document(self):
+        # Il qualificatore accetta LF/CRLF, ma non normalizzazioni Unicode.
+        source = self.root / 'data' / 'PICKER_INSERT_SYNTHETIC_FIXTURE.txt'
+        source.write_bytes(source.read_bytes().replace(b'\n', b'\r\n'))
+        windows_session = prepare(self.root)
+        normalized = normalize_newlines(BASE_TEXT + fixture(self.root))
+        windows_session['document'].write_bytes(b'\xef\xbb\xbf' + normalized.encode('utf-8'))
+        self.assertEqual('PASS', verify(windows_session['session'], self.root)['status'])
+
+    def test_stray_carriage_return_must_remain_failure(self):
+        # Non indebolire classify_saved_document: CRCRLF è un errore reale.
+        self._save((BASE_TEXT + fixture(self.root)).replace('\n', '\r\r\n'))
+        result = verify(self.session['session'], self.root)
+        self.assertEqual('FAIL', result['status'])
+        self.assertEqual('CHANGED_DIFFERENT', status(self.session['session'], self.root)['document'])
 
     def test_nfd_is_not_silently_normalized(self):
         self._save(BASE_TEXT + fixture(self.root).replace('cafe\u0301', 'café'))

@@ -21,6 +21,9 @@ SOLUTION_PROJECT = re.compile(r'Project\([^\r\n]+?\)\s*=\s*"[^"]+",\s*"([^"]+\.c
 # Conservative check for explicit Type.InternalMethod(...) calls across project boundaries.
 # This is a source-pattern guard, NOT a replacement for Roslyn binding/compilation.
 CLASS_DECL = re.compile(r'\b(?:public|internal|private|protected)\s+(?:(?:abstract|sealed|static|partial)\s+)*class\s+(\w+)')
+# Avalonia 11.3: IClipboard.GetTextAsync is obsolete and emits CS0618.
+# Keep a conservative syntactic guard for calls in our C# sources.
+OBSOLETE_CLIPBOARD_TEXT = re.compile(r"\.GetTextAsync\s*\(")
 INTERNAL_STATIC_METHOD = re.compile(r'\binternal\s+static\s+[\w?<>\[\],]+\s+(\w+)\s*\(')
 
 
@@ -87,6 +90,9 @@ def audit(root: Path) -> list[str]:
         project_files[project] = sources
         for source in sources:
             text = source.read_text(encoding='utf-8-sig')
+            for obsolete in OBSOLETE_CLIPBOARD_TEXT.finditer(text):
+                line = text.count('\n', 0, obsolete.start()) + 1
+                issues.append(f'{source.relative_to(root)}:{line}: API Avalonia obsoleta GetTextAsync; usare TryGetTextAsync')
             found = NAMESPACE.findall(text)
             if len(found) != 1:
                 issues.append(f'{source.relative_to(root)}: attesa una dichiarazione namespace, trovate {len(found)}')
@@ -156,7 +162,7 @@ def main() -> int:
         for issue in issues:
             print('ERRORE:', issue, file=sys.stderr)
         return 1
-    print('AUDIT SOURCE OK — using, namespace, riferimenti, versioni, accessi static internal, solution, xUnit (strutturale)')
+    print('AUDIT SOURCE OK — using, namespace, riferimenti, versioni, accessi static internal, API clipboard, solution, xUnit (strutturale)')
     print('NOTA: questo controllo NON sostituisce dotnet build, dotnet test né l’host VS Code')
     return 0
 

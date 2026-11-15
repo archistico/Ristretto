@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Input.Platform;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Avalonia.Styling;
@@ -271,7 +272,7 @@ public partial class App : Avalonia.Application
                 // Do not record clipboard contents in diagnostics.
                 if (!WindowsPickerPasteService.HasClipboardAdvanced(before, afterWrite))
                     return 0u;
-                var observed = await clipboard.GetTextAsync();
+                var observed = await clipboard.TryGetTextAsync();
                 var afterRead = _pickerPaste.ClipboardSequence();
                 return PickerClipboardReadbackVerifier.VerifiedSequence(
                     content, observed, before, afterWrite, afterRead);

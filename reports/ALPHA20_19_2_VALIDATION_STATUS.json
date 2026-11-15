@@ -1,0 +1,48 @@
+{
+  "schema": "ristretto/validation-status/1",
+  "version": "3.9.0-alpha.20.19.2",
+  "date": "2026-11-15",
+  "purpose": "Correzione del gate PowerShell per alpha prerelease con tre o piu identificativi numerici",
+  "source": "ZIP integrale Alpha 20.19.1 consegnato nel turno precedente; modificati solo script version, test, report e documentazione",
+  "results": {
+    "python_regressions": {
+      "status": "PASS",
+      "count": 68,
+      "detail": "Quattro nuovi casi per la regex reale di verify-release.ps1"
+    },
+    "node_tests": {
+      "status": "PASS",
+      "count": 32,
+      "detail": "Test Node estensione VS Code"
+    },
+    "source_audit": {
+      "status": "PASS",
+      "detail": "Namespace, versioni, progetti e API obsolete"
+    },
+    "static_checks": {
+      "status": "PASS",
+      "detail": "XAML, SQLite, localizzazioni e link Markdown"
+    },
+    "powershell_preflight_windows": {
+      "status": "NOT_RUN",
+      "detail": "Nessun interprete PowerShell disponibile nell ambiente di preparazione"
+    },
+    "dotnet_build": {
+      "status": "NOT_RUN",
+      "detail": "SDK .NET non disponibile"
+    },
+    "xunit": {
+      "status": "NOT_RUN",
+      "detail": "SDK .NET non disponibile"
+    },
+    "native_windows": {
+      "status": "NOT_RUN",
+      "detail": "Desktop Windows non disponibile"
+    }
+  },
+  "user_evidence_previous_version": {
+    "alpha_20_19_1_python": "PASS, 64 test",
+    "alpha_20_19_1_validate_cmd": "FAIL, falso rifiuto formato versione PowerShell prima del gate"
+  },
+  "caution": "Il PASS di Node/Python/statici non equivale alla compilazione o ai test nativi Windows."
+}

@@ -8,14 +8,20 @@ $canonicalProps = Join-Path $root 'Directory.Build.props'
 
 function Stop-Validation([string]$why) {
     Write-Host "ERRORE VALIDAZIONE RISTRETTO: $why" -ForegroundColor Red
-    Write-Host "Estrai lo ZIP integrale della versione corrente in una cartella nuova; non unire le cartelle di versioni differenti." -ForegroundColor Yellow
+    Write-Host "Controlla il messaggio precedente: non e' necessariamente un problema di estrazione o di cartelle mescolate." -ForegroundColor Yellow
     exit 3
 }
 if (!(Test-Path -LiteralPath $versionFile)) { Stop-Validation 'VERSION.txt non trovato: possibile vecchia versione.' }
 if (!(Test-Path -LiteralPath $canonicalProps)) { Stop-Validation 'Directory.Build.props mancante.' }
 [xml]$canonicalXml = Get-Content -LiteralPath $canonicalProps -Raw
 $expectedVersion = [string]$canonicalXml.Project.PropertyGroup.Version
-if ($expectedVersion -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-alpha\.[0-9]+\.[0-9]+$') { Stop-Validation 'Versione MSBuild non valida.' }
+# Il suffisso di prerelease e' formato da una o piu' componenti numeriche:
+# alpha.20.19, alpha.20.19.1, alpha.20.19.2 e versioni successive.
+# Un vecchio controllo assumeva esattamente due componenti e bloccava Alpha 20.19.1
+# PRIMA di dotnet restore/build, pur essendo valida in Directory.Build.props.
+if ($expectedVersion -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-alpha(?:\.[0-9]+)+$') {
+    Stop-Validation "Formato versione sorgente non riconosciuto in Directory.Build.props: '$expectedVersion'. Verifica VERSION.txt e la regola del gate."
+}
 if (([System.IO.File]::ReadAllText($versionFile)).Trim() -ne "Ristretto $expectedVersion") { Stop-Validation 'VERSION.txt non corrisponde a Directory.Build.props.' }
 if (!(Test-Path -LiteralPath $testsPath)) { Stop-Validation 'File test Windows non trovato.' }
 $tests = [System.IO.File]::ReadAllText($testsPath)

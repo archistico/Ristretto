@@ -1,3 +1,52 @@
+## 3.9.0-alpha.20.19.3 — 15 novembre 2026
+
+- **Correzione `startup_cli` Windows:** eliminata la decodifica forzata UTF-8 dei messaggi diagnostici di errore di .NET, che potevano essere codificati nella codepage locale (`UnicodeDecodeError` seguito da `AttributeError`).
+- Acquisizione binaria di `stdout` e `stderr`, senza decoder nei thread di `subprocess`; per gli errori attesi si convalidano codice e canale, mentre lo stdout dei comandi riusciti deve rimanere UTF-8 rigoroso e Unicode integro.
+- **Nove test Python** con processi sintetici reali e regressioni per CP1252, CP850, messaggi inattesi e risultati UTF-8 non validi.
+- Registrati i risultati confermati dall'utente nella Alpha 20.19.2: build/xUnit/tool PASS e `startup_cli` FAIL per il decoder. **Nessun cambiamento a codice C#, picker, GUI, hotkey o SQLite**. .NET/Windows della nuova Alpha da eseguire.
+- [Rapporto](ALPHA20_19_3_STARTUP_CLI_ENCODING.md).
+
+---
+
+## 3.9.0-alpha.20.19.2 — 15 novembre 2026
+
+- **Corretto il falso errore di versione del gate Windows:** `verify-release.ps1` non assume più che la versione sia esattamente `alpha.N.N`; supporta anche `alpha.N.N.N` e futuri segmenti numerici, continuando a confrontare `Directory.Build.props` e `VERSION.txt`.
+- Aggiunti quattro test Python sul pattern realmente presente nello script PowerShell e sui formati validi/non validi.
+- Diagnostica migliorata: un errore del gate non viene attribuito automaticamente a cartelle estratte o versioni mescolate. L'utente ha confermato 64 test Python verdi nella 20.19.1; lo script falliva prima della build .NET.
+- Nessuna modifica ai sorgenti C#, al picker, all'hotkey, a SQLite o al comportamento di R5. PowerShell reale, build .NET e xUnit di questa versione ancora **NOT_RUN** nell'ambiente di preparazione. [Dettagli](ALPHA20_19_2_VERSION_GATE_FIX.md).
+
+---
+
+## 3.9.0-alpha.20.19.1 — 15 novembre 2026
+
+- **Hotfix dei test Python su Windows:** il test `test_exact_multiline_unicode_matches_when_saved` trasformava una fixture con CRLF già presenti in CRCRLF, causando `python_regressions=FAIL` nel gate CORE prima della compilazione .NET.
+- La fixture dei test viene creata con fine riga LF esplicito e la conversione CRLF avviene dopo una sola normalizzazione; aggiunti tre test di regressione multipiattaforma, incluso il rifiuto dei CRCRLF invalidi.
+- Nessun cambiamento al qualificatore di produzione, picker, hotkey, GUI, SQLite o sorgenti C#; funzionalità R5 della 20.19 conservate.
+- Compilazione .NET, nuovi xUnit e test nativi Windows della hotfix **NOT_RUN** nell'ambiente di preparazione. [Dettagli](ALPHA20_19_1_CRLF_REGRESSION_FIX.md).
+
+---
+
+## 3.9.0-alpha.20.19 — 15 novembre 2026
+
+- Avviato R5 su Windows: `ExternalFocusBoundarySession` invalida i suffissi di riconoscimento al cambio di finestra/focus o alla perdita di affidabilità del contesto, senza ricostruire caratteri da keycode.
+- Aggiunto nel laboratorio Win32 `--observe-focus N`, con sottoscrizione **temporanea e opt-in** a notifiche di foreground/focus, senza registrazione di tasti, testo, clipboard, titoli, HWND o PID.
+- Aggiunti nuovi test xUnit per la barriera di continuità; GUI, hotkey, SQLite e flusso del picker **invariati**.
+- Conservata la correzione Avalonia CS0618 della 20.18.1 e registrata la prova utente `PASS` della Alpha 20.18 su file sintetico in Notepad.
+- Aggiornati documentazione, roadmap e report. **Compilazione .NET, nuovi xUnit e prova WinEvent Windows NOT_RUN** nella preparazione.
+- [Dettagli](ALPHA20_19_FOCUS_BOUNDARY.md).
+
+---
+
+## 3.9.0-alpha.20.18.1 — 15 novembre 2026
+
+- Corretto il warning **CS0618** nel picker: API Avalonia `IClipboard.GetTextAsync()` sostituita con `ClipboardExtensions.TryGetTextAsync()`; aggiunto `using Avalonia.Input.Platform`.
+- Il controllo delle sequenze e del contenuto Unicode negli appunti resta identico; nessun cambiamento intenzionale a inserimento, GUI, hotkey, database o configurazione.
+- Rafforzato `audit_source.py` con il divieto della vecchia chiamata e due test Python anti-regressione.
+- Registrata la **prova manuale R2.05 PASS** della Alpha 20.18 sul documento sintetico Notepad: l'utente conferma l'inserimento dal picker. La ricevuta verifica il file salvato, non l'origine degli eventi.
+- Build .NET, xUnit e nuova prova Windows della Alpha 20.18.1 ancora **NOT_RUN**. [Rapporto corrente](ALPHA20_18_1_CLIPBOARD_CS0618.md).
+
+---
+
 ## 3.9.0-alpha.20.18 — 14 novembre 2026
 
 - R2.05: unificata la classificazione `status/verify` del file sintetico Notepad, con codici più precisi per doppio inserimento, posizione errata, intestazione alterata, modifica NFC/NFD e riga finale.

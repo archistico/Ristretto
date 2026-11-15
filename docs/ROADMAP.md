@@ -1,20 +1,12 @@
 # Roadmap unica — Ristretto
 
-**Versione sorgente corrente:** `3.9.0-alpha.20.17` (14 novembre 2026). Questo è l’unico piano operativo R1–R8; gli ID di milestone non coincidono con il numero Alpha. Lo [stato corrente](CURRENT_STATE.md) distingue implementazione, prove registrate e test ancora aperti.
+**Versione sorgente corrente:** `3.9.0-alpha.20.19.3` (15 novembre 2026). **Piano autorevole R1–R8**, con stati ed evidenze correnti in [CURRENT_STATE.md](CURRENT_STATE.md). I rapporti delle Alpha precedenti sono storici, non prove della build attuale.
 
-**Incremento R2.02/R2.03 — Alpha 20.14:** dopo il preflight finale di focus e clipboard, la richiesta Inserisci deve vincere una prenotazione atomica contro l’annullamento prima di `SendInput`. Non è revocabile un invio già iniziato; gli esiti rimangono non verificati senza retry. Casi simulati aggiunti e desktop ancora non provato. [Dettagli](ALPHA20_14_INSERT_LIFECYCLE.md).
+**Priorità presente: stabilizzare il gate `CORE` Windows (Alpha 20.19.3), poi R5 → R6.** L'utente ha verificato nella Alpha 20.19.2 che restore, solution, xUnit e quattro tool passano; il blocco residuo era la decodifica UTF-8 di `stderr` in un test Python del vero entry point. La nuova correzione cattura byte e tratta i messaggi diagnostici non UTF-8 come errori attesi, senza abbassare la verifica UTF-8 dei successi. [Dettagli](ALPHA20_19_3_STARTUP_CLI_ENCODING.md). Il picker/Notepad Unicode ha avuto una precedente prova positiva confermata dall'utente. R3 VS Code resta facoltativo, non parte del percorso prioritario R5–R6.
 
-**Incremento R2.03/R2.04 — Alpha 20.13:** prima della scrittura negli appunti ora vengono attesi e controllati focus, identità target e versione della clipboard; se non validi, non si avvia `SetTextAsync`. Dopo la scrittura i controlli vengono ripetuti prima dell'input. Test xUnit simulati aggiunti e verifica desktop ancora aperta. [Dettagli](ALPHA20_13_PRE_CLIPBOARD_GUARD.md).
+**Gate Windows:** correggere il test `test_exact_multiline_unicode_matches_when_saved` e mantenere la verifica `FAIL` per i fine riga corrotti. Correzione applicata nella Alpha 20.19.1; compilazione .NET e nuovi xUnit ancora da eseguire. [Dettagli](ALPHA20_19_1_CRLF_REGRESSION_FIX.md).
 
-**Incremento R2.05 — Alpha 20.12:** introdotta prova Notepad con documento sintetico isolato e verifica del contenuto **salvato** via fixture Unicode, senza leggere testi personali, automatizzare input o usare appunti. Genera ricevuta `PASS/FAIL/NOT_RUN` priva di testo; 11 nuovi test Python. L'accettazione desktop resta aperta: il test è uno strumento di misura e non prova l'origine dell'azione. [Procedura](ALPHA20_12_NOTEPAD_QUALIFICATION.md).
-
-**Incremento R2.04 — Alpha 20.11:** rafforzata la verifica manuale nel controllo Win32 posseduto. La comparazione UTF-16 avviene *nel processo figlio*, che comunica soltanto l’esito legato alla sessione. Aggiunti test del protocollo e rifiuti per risposta/controllo non validi. Non è un adapter per editor arbitrari e non trasforma `SendInput` in un esito verificato in Notepad. [Rapporto](ALPHA20_11_PICKER_RECEIPTS.md).
-
-**Diagnostica R2.05 — Alpha 20.17:** dopo `prepare` + `seed` l’utente ha ottenuto `NOT_RUN` perché il file sintetico era invariato. Aggiunti `status` (lettura del solo profilo sintetico) e `launch` (avvio con data-dir vincolato al profilo della sessione), senza toccare il flusso picker già validato. [Guida](ALPHA20_17_NOTEPAD_GUIDED_SESSION.md).
-
-**Lavoro immediatamente successivo:** Alpha 20.15 compilata, testata e Invio da picker verificato dall’utente in Notepad. Compilare Alpha 20.17 e verificarne il seeding SQLite in una sessione sintetica; poi eseguire la prova Unicode file-backed. Poi qualificare su Windows il picker con focus/clipboard, laboratorio posseduto e file Notepad sintetico usando la [matrice di accettazione](R2_PICKER_WINDOWS_ACCEPTANCE.md). Le prove desktop non eseguite restano NOT_RUN; il prossimo incremento implementativo può rafforzare diagnosi/gestione dei fallimenti nel laboratorio, senza ancora abilitare l’espansione globale. CI GitHub e vero host VS Code restano da provare; R6 dipende dalla qualifica R5.
-
-Questo è il piano canonico dei prossimi incrementi. Gli ID R1–R8 identificano milestone future, non versioni già rilasciate né lavoro già completato. Le caselle rappresentano attività da eseguire. Stato ed evidenze attuali sono in [CURRENT_STATE.md](CURRENT_STATE.md); [FUNCTIONAL_ROADMAP.md](FUNCTIONAL_ROADMAP.md) mantiene soltanto la mappa F0–F6.
+**Sequenza immediata:** (1) controllare la nuova barriera con xUnit e prova opt-in su Windows; (2) identificare un canale che fornisca *testo Unicode committato* associato a un destinatario verificabile; (3) qualificare revisione, caret, IME e modifica condizionale su un target specifico; (4) solo allora aprire R6 con espansione disattivabile. Le prove R2 desktop ancora aperte e la distribuzione R4 proseguono indipendentemente. R3 VS Code rimane un ramo facoltativo. Non dedurre la capacità di espandere dai soli WinEvent o keycode.
 
 ## 1. Punto di partenza
 
@@ -37,10 +29,10 @@ Prima piattaforma: **Windows**. Primo risultato di prodotto: **alpha Windows con
 | --- | --- | --- | --- |
 | **R1** | P0, prossima | Profili isolati, versioni e validazione riproducibile | Baseline attuale |
 | **R2** | P0 | Picker Windows verificato con UI e appunti reali | R1 |
-| **R3** | P0, ramo separato | Adapter manuale nel vero host VS Code | R1 e avvio normale di VS Code funzionante |
+| **R3** | P3, facoltativa | Adapter manuale nel vero host VS Code | R1 e avvio normale di VS Code funzionante |
 | **R4** | P0 | Prima alpha Windows utilizzabile, misurata e distribuibile | R2; R3 per qualificare anche l'estensione |
-| **R5** | P1, studio con decisione finale | Scelta dell'adapter per il primo automatismo | R2 e qualificazione del candidato; R3 se il candidato è VS Code |
-| **R6** | P1, condizionata | Espansione automatica su un target qualificato | R4 e risultato positivo di R5 |
+| **R5** | P0, percorso prioritario | Scelta dell'adapter per il primo automatismo | R2 e qualificazione del candidato; R3 se il candidato è VS Code |
+| **R6** | P0, condizionata | Espansione automatica su un target qualificato | R4 e risultato positivo di R5 |
 | **R7** | P2 | Template e form, per incrementi compatibili | R4; R6 solo per le funzioni che richiedono un adapter automatico |
 | **R8** | P2 | Altri OS e distribuzione per capacità verificate | R4; prove specifiche per ciascun OS |
 
@@ -72,8 +64,8 @@ R1 e le verifiche senza GUI possono avanzare senza riaprire VS Code. Un blocco d
 - [ ] **R2.02 — UI e ciclo di vita (regressione hotkey ripetuta Alpha 20.8 e annullamento pre-dispatch Alpha 20.14; prove desktop aperte).** Provare avvio, tray, hotkey configurabile/disattivata/in conflitto, secondo avvio, apertura/chiusura, tastiera, ricerca, selezione e ricaricamenti concorrenti. Aggiungere integrazione sul dispatcher dove rende ripetibile una regressione concreta.
 - [ ] **R2.03 — Clipboard effettiva (verifiche contenuto/seq. Alpha 20.10, preflight Alpha 20.13 e annullamento atomico pre-dispatch Alpha 20.14; runtime aperto).** Provare Copia con Unicode, NFD, emoji ZWJ, RTL e multilinea; clipboard occupata, scrittura lenta, doppio comando, selezione diversa, chiusura/riapertura ed errori. Verificare che non parta un comando accodato dopo il rilascio dell'attesa.
 - [ ] **R2.04 — Destinatario controllato.** Collegare il percorso reale Inserisci a un target sintetico in processo figlio posseduto dal laboratorio e verificare testo/range risultanti. Tenere distinto questo esito dal supporto a Notepad o altri editor.
-- [ ] **R2.05 — Editor esterno (diagnostica Alpha 20.18 pronta, verifica desktop aperta).**
-  `prepare`, `seed`, `status`, `launch`, `verify` guidano una prova isolata del picker verso Notepad. Il profilo SQLite viene creato con `SqliteLibraryStore`; una sola classificazione read-only distingue documento invariato, esito corretto, doppio inserimento, posizione errata, differenza Unicode NFC/NFD e altre anomalie. La guida e il terminale usano l'italiano; fallire l'apertura di Notepad non fa perdere il token di sessione. **Non chiudere R2.05 in base ai soli 32 test Python**: servono una prova manuale salvata su Windows, Unicode multilinea e casi negativi focus, clipboard e destinatario. [Guida attuale](ALPHA20_18_NOTEPAD_DIAGNOSTICS.md).
+- [ ] **R2.05 — Editor esterno (prima prova Unicode Notepad Alpha 20.18 PASS; matrice desktop ancora aperta).**
+  `prepare`, `seed`, `status`, `launch`, `verify` guidano una prova isolata del picker verso Notepad. Il profilo SQLite viene creato con `SqliteLibraryStore`; una sola classificazione read-only distingue documento invariato, esito corretto, doppio inserimento, posizione errata, differenza Unicode NFC/NFD e altre anomalie. La guida e il terminale usano l'italiano; fallire l'apertura di Notepad non fa perdere il token di sessione. **Evidenza aggiornata 15 novembre 2026:** primo documento sintetico Unicode salvato verificato `PASS` su Windows; l'utente conferma l'inserimento tramite picker. Restano aperti casi negativi focus, clipboard, destinatario, ripetibilità e altri editor. Il `PASS` non certifica espansione automatica. [Guida attuale](ALPHA20_18_NOTEPAD_DIAGNOSTICS.md).
 - [ ] **R2.06 — Temi e lingue.** Verificare chiaro/scuro, cinque lingue, tastiera e fattori DPI rappresentativi; rigenerare le anteprime necessarie dopo l'integrazione e controllare azioni, focus e testi tagliati.
 - [ ] **R2.07 — Correzione e riconferma.** Correggere le regressioni emerse, rieseguire i casi coinvolti e i gate pertinenti. Conservare la matrice distinguendo accettazione di `SendInput` e testo effettivamente osservato nell'editor.
 
@@ -81,7 +73,7 @@ R1 e le verifiche senza GUI possono avanzare senza riaprire VS Code. Un blocco d
 
 **Chiusura:** flussi principali osservati sul desktop, nessun invio al destinatario sbagliato nei casi previsti, nessun retry automatico dopo esito incerto e nessun crash irrisolto nei flussi qualificati. I test unitari da soli non chiudono R2.
 
-## 5. R3 — VS Code manuale nel vero host
+## 5. R3 — VS Code manuale nel vero host (facoltativo, priorità subordinata a R5–R6)
 
 **Obiettivo:** verificare l'adapter esistente e diagnosticare il blocco di avvio senza attribuirne prematuramente la causa all'estensione.
 
@@ -172,7 +164,7 @@ R1 e le verifiche senza GUI possono avanzare senza riaprire VS Code. Un blocco d
 
 ## 11. Sequenza immediata e decisioni
 
-R1.01 è completata in Alpha 20.5; R1.02 conserva le prove rimaste di hotkey globali e alias. L’incremento Alpha 20.6 implementa R1.03–R1.05 (provenienza Git e prove Windows ancora aperte). I prossimi incrementi completano R1.02 su desktop, poi R1.06–R1.07 e la qualificazione R2 del picker. Le prove grafiche si svolgono in una sessione desktop dedicata; nessuna applicazione grafica è stata avviata per questo incremento.
+La Alpha 20.19 apre il percorso R5 con barriere di focus, senza autorizzare espansioni. La prima prova manuale R2.05 sul file sintetico Notepad è positiva, ma la matrice multi-editor e i test negativi non sono chiusi. Priorità successiva: qualificare testo Unicode committato, destinatario e modifica condizionale; continuare in parallelo R2/R4. Nessuna prova nativa Windows è stata eseguita per questa consegna.
 
 Decisioni da chiudere al relativo punto: repository/CI di riferimento e politica versioni (R1), licenza e tipo di pacchetto prima della pubblicazione (R1/R4), primo editor automatico e garanzie ottenibili (R5), ordine degli altri OS e configurazioni realmente supportate (R8).
 

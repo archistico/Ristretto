@@ -57,6 +57,9 @@ internal static class Program
             Console.Error.WriteLine("F2a: laboratorio nativo disponibile solo su Windows.");
             return 2;
         }
+        if (args.Length == 2 && args[0] == "--observe-focus" &&
+            int.TryParse(args[1], out var focusSeconds))
+            return await WindowsFocusBoundaryProbe.RunCommandAsync(focusSeconds);
         if (args.Length == 1 && args[0] == "--remote-owned-smoke")
             return await RemoteOwnedEditLab.RunParent(null);
         if (args.Length == 3 && args[0] == "--remote-owned-smoke" && args[1] == "--report")
@@ -103,6 +106,7 @@ internal static class Program
         Console.WriteLine("Uso: dotnet run --project tools/Ristretto.WindowsOutputLab -- --self-test");
         Console.WriteLine("Il test apre soltanto un proprio controllo Windows EDIT in un secondo processo.");
         Console.WriteLine("--probe-external [--report nuovo-file.json]: ricognizione Win32 in SOLA LETTURA, senza input.");
+        Console.WriteLine("--observe-focus 15: osserva per 15 secondi SOLO variazioni di finestra e focus, senza caratteri o modifiche.");
         Console.WriteLine("--inspect-classic-edit [--report nuovo-file.json]: EM_GETSEL read-only, senza testo/offset.");
         Console.WriteLine("--assess-external-adapter [--report nuovo-file.json]: matrice delle garanzie mancanti; nessuna sostituzione.");
         Console.WriteLine("--replacement-test: prove automatiche su EDIT Win32 propri, senza SendInput.");

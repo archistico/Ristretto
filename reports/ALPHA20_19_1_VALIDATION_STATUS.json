@@ -1,0 +1,61 @@
+{
+  "schema": "ristretto/alpha-validation-summary/1",
+  "version": "3.9.0-alpha.20.19.1",
+  "date": "2026-11-15",
+  "platform_of_executed_checks": "Linux (Python 3.13.5, Node 22.16.0)",
+  "status_conventions": {
+    "PASS": "eseguito con successo",
+    "FAIL": "eseguito con errore",
+    "NOT_RUN": "non eseguito"
+  },
+  "reason_for_hotfix": "Il test Python convertiva una fixture già CRLF in CRCRLF su Windows; non è una prova di malfunzionamento del picker.",
+  "evidence": {
+    "original_windows_core_gate": {
+      "status": "FAIL",
+      "scope": "python_regressions",
+      "test": "test_exact_multiline_unicode_matches_when_saved",
+      "reported_by": "utente in chat",
+      "subsequent_steps": "NOT_RUN"
+    },
+    "linux_windows_newline_reproduction": {
+      "status": "PASS",
+      "description": "fixture simulata con CRLF: vecchio test = FAIL; conversione corretta = PASS"
+    },
+    "python_regressions": {
+      "status": "PASS",
+      "count": 64,
+      "command": "python -m unittest discover -s scripts -p test_*.py -v"
+    },
+    "vscode_adapter_node": {
+      "status": "PASS",
+      "count": 32,
+      "command": "node --test tools/ristretto-vscode-extension/test/*.test.js"
+    },
+    "source_audit": {
+      "status": "PASS",
+      "command": "python scripts/audit_source.py"
+    },
+    "static_checks": {
+      "status": "PASS",
+      "command": "python scripts/verify_all_static.py"
+    },
+    "dotnet_build": {
+      "status": "NOT_RUN",
+      "reason": ".NET 10 SDK non disponibile"
+    },
+    "xunit": {
+      "status": "NOT_RUN",
+      "reason": ".NET 10 SDK non disponibile"
+    },
+    "windows_focus_probe": {
+      "status": "NOT_RUN",
+      "reason": "ambiente Windows desktop non disponibile"
+    },
+    "notepad_interactive": {
+      "status": "NOT_RUN",
+      "reason": "ambiente Windows desktop non disponibile"
+    }
+  },
+  "code_scope": "Solo scripts/test_qualify_notepad.py; nessuna modifica al verificatore, GUI, hotkey, SQLite, codice C#.",
+  "historical_evidence": "Utente aveva confermato inserimento picker in Notepad + PASS del file Unicode in Alpha 20.18; non è una verifica di questa build."
+}

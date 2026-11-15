@@ -1,3 +1,11 @@
+**Stato corrente Alpha 20.19.3:** [rapporto strutturato](ALPHA20_19_3_VALIDATION_STATUS.json) · [correzione startup CLI Windows](../docs/ALPHA20_19_3_STARTUP_CLI_ENCODING.md). I PASS della build/xUnit Alpha 20.19.2 sono confermati dall'utente; il test CLI della 20.19.2 era FAIL per la decodifica. Non trasferire questi esiti alla 20.19.3.
+
+**Stato corrente Alpha 20.19.2:** [rapporto strutturato](ALPHA20_19_2_VALIDATION_STATUS.json) · [correzione gate PowerShell](../docs/ALPHA20_19_2_VERSION_GATE_FIX.md). I controlli Python/Node/statici risultano PASS; PowerShell Windows, build .NET, xUnit e prove native restano NOT_RUN in questa consegna.
+
+**Stato corrente Alpha 20.19:** [rapporto strutturato](ALPHA20_19_VALIDATION_STATUS.json), [dettagli R5](../docs/ALPHA20_19_FOCUS_BOUNDARY.md). Nuovo codice e prove Windows non ancora compilati/eseguiti con .NET in questa consegna.
+
+**Stato corrente Alpha 20.18.1:** [rapporto strutturato](ALPHA20_18_1_VALIDATION_STATUS.json), [dettagli correzione](../docs/ALPHA20_18_1_CLIPBOARD_CS0618.md). Il test manuale Notepad Alpha 20.18 è PASS sul documento sintetico salvato (conferma dell'utente), ma gli xUnit e la compilazione della nuova Alpha sono NOT_RUN.
+
 **Alpha 20.12:** [rapporto corrente](ALPHA20_12_VALIDATION_STATUS.json) — controlli Python/Node/statici, .NET e Notepad reale `NOT_RUN`. Risultati storici delle Alpha precedenti rimangono documentati ma non vengono trasferiti.
 
 # Evidenze di verifica — Ristretto

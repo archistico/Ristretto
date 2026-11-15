@@ -1,0 +1,64 @@
+{
+  "schema": "ristretto/validation-status/1",
+  "version": "3.9.0-alpha.20.19.3",
+  "date": "2026-11-15",
+  "purpose": "Correzione della gestione binaria di stderr/stdout nel controllo startup_cli su Windows",
+  "results": {
+    "python_regressions": {
+      "status": "PASS",
+      "count": 77,
+      "detail": "68 test precedenti + 9 nuovi test reali su subprocess binari, CP1252/CP850, Unicode"
+    },
+    "node_tests": {
+      "status": "PASS",
+      "count": 32,
+      "detail": "npm run check: sintassi e 32/32 test Node"
+    },
+    "source_audit": {
+      "status": "PASS",
+      "detail": "Audit using, namespace, riferimenti, versioni, API obsolete (controllo statico)"
+    },
+    "static_checks": {
+      "status": "PASS",
+      "detail": "XAML, SQLite, cinque localizzazioni, 760 link locali, verifica GUI statica"
+    },
+    "dotnet_build": {
+      "status": "NOT_RUN",
+      "detail": "SDK .NET 10 non disponibile in questa sessione"
+    },
+    "xunit": {
+      "status": "NOT_RUN",
+      "detail": "SDK .NET 10 non disponibile in questa sessione"
+    },
+    "startup_cli_real_dotnet": {
+      "status": "NOT_RUN",
+      "detail": "Richiede .NET 10 e ambiente Windows"
+    },
+    "native_windows": {
+      "status": "NOT_RUN",
+      "detail": "Richiede desktop Windows interattivo"
+    },
+    "gate_source": {
+      "status": "PASS",
+      "detail": "Eseguito su Linux; non include .NET"
+    }
+  },
+  "user_evidence_previous_version": {
+    "version": "3.9.0-alpha.20.19.2",
+    "source_audit": "PASS",
+    "python_regressions": "PASS",
+    "static_checks": "PASS",
+    "dotnet_restore": "PASS",
+    "solution_build": "PASS",
+    "xunit": "PASS",
+    "windows_lab_build": "PASS",
+    "benchmark_build": "PASS",
+    "replacement_lab_build": "PASS",
+    "ui_review_build": "PASS",
+    "startup_cli": "FAIL (UnicodeDecodeError su stderr; AttributeError secondario)",
+    "node_tests": "NOT_RUN",
+    "export_contract": "NOT_RUN",
+    "native_windows": "NOT_RUN"
+  },
+  "caution": "Test di sottoprocessi sintetici non equivalgono al controllo startup_cli reale sul PC Windows."
+}

@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Check the real desktop entry point using diagnostic commands only; never request GUI startup."""
+"""Verifica il vero punto d'ingresso desktop senza avviare la GUI o aprire SQLite.
+
+Gli errori diagnostici su Windows possono essere emessi nella codifica della
+console (es. CP1252/CP850), mentre l'output di successo JSON deve essere UTF-8.
+Catturare byte, senza decoder nel thread di subprocess, evita crash spurii.
+"""
 from __future__ import annotations
 
 import argparse
@@ -7,6 +12,37 @@ import json
 import subprocess
 import tempfile
 from pathlib import Path
+from typing import Callable
+
+
+def invoke_cli(command: list[str], name: str, expected_code: int, cwd: Path,
+               *, runner: Callable = subprocess.run) -> str:
+    """Verifica codice e canale d'uscita; decodifica solo stdout dei successi.
+
+    Non occorre decodificare stderr nei casi di errore attesi: e' sufficiente
+    attestare che non e' vuoto. I messaggi possono usare codepage Windows.
+    L'output JSON di successo resta invece rigorosamente UTF-8: niente replace
+    che potrebbe nascondere percorsi Unicode danneggiati.
+    """
+    result = runner(command, cwd=cwd, stdin=subprocess.DEVNULL,
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                    timeout=15, check=False)
+    stdout, stderr = result.stdout, result.stderr
+    if not isinstance(stdout, bytes) or not isinstance(stderr, bytes):
+        raise AssertionError(f'{name}: subprocess non ha restituito byte per stdout/stderr')
+    if result.returncode != expected_code:
+        raise AssertionError(f'{name}: codice di uscita {result.returncode}, atteso {expected_code}; '
+                             f'stdout={len(stdout)} byte, stderr={len(stderr)} byte')
+    if expected_code != 0:
+        if not stderr.strip() or stdout.strip():
+            raise AssertionError(f'{name}: errore diagnostico deve usare solo stderr')
+        return ''
+    if stderr.strip():
+        raise AssertionError(f'{name}: successo con output inatteso su stderr ({len(stderr)} byte)')
+    try:
+        return stdout.decode('utf-8', errors='strict')
+    except UnicodeDecodeError as exc:
+        raise AssertionError(f'{name}: stdout del comando riuscito non e\' UTF-8 valido') from exc
 
 
 def check(assembly: Path, version: str, dotnet: str = 'dotnet') -> dict:
@@ -15,22 +51,15 @@ def check(assembly: Path, version: str, dotnet: str = 'dotnet') -> dict:
     with tempfile.TemporaryDirectory(prefix='ristretto-startup-') as temporary:
         root = Path(temporary).resolve()
 
-        def invoke(name: str, args: list[str], code: int) -> subprocess.CompletedProcess:
-            result = subprocess.run([dotnet, str(assembly), *args], cwd=root,
-                                    stdin=subprocess.DEVNULL, capture_output=True,
-                                    encoding='utf-8', timeout=15, check=False)
-            assert result.returncode == code, (name, result.returncode, result.stderr)
-            if code:
-                assert result.stderr.strip() and not result.stdout.strip(), name
-            else:
-                assert not result.stderr.strip(), (name, result.stderr)
+        def invoke(name: str, args: list[str], code: int) -> str:
+            stdout = invoke_cli([dotnet, str(assembly), *args], name, code, root)
             results.append({'case': name, 'status': 'PASS', 'exit_code': code})
-            return result
+            return stdout
 
         help_result = invoke('help', ['--help'], 0)
-        assert '--data-dir' in help_result.stdout
+        assert '--data-dir' in help_result
         version_result = invoke('version', ['--version'], 0)
-        assert version_result.stdout.strip() == 'Ristretto ' + version
+        assert version_result.strip() == 'Ristretto ' + version
         assert not list(root.iterdir()), 'Information commands created files'
 
         relative = 'prove con spazi/日本語 🌍'
@@ -39,7 +68,7 @@ def check(assembly: Path, version: str, dotnet: str = 'dotnet') -> dict:
             ('relative-unicode-directory', ['--check-profile', '--data-dir', relative]),
             ('absolute-equals-directory', ['--data-dir=' + str(expected), '--check-profile']),
         ]:
-            payload = json.loads(invoke(name, args, 0).stdout)
+            payload = json.loads(invoke(name, args, 0))
             assert payload['status'] == 'profile_writable'
             assert payload['version'] == version
             assert Path(payload['data_directory']) == expected
@@ -81,4 +110,4 @@ if __name__ == '__main__':
                    arguments.dotnet_executable)
     arguments.output.parent.mkdir(parents=True, exist_ok=True)
     arguments.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
-    print(f"Startup CLI: {report['passed']}/{report['passed']} PASS; no GUI or database opened")
+    print(f"Startup CLI: {report['passed']}/{report['passed']} PASS; nessuna GUI o database aperto")

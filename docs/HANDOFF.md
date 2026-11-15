@@ -1,34 +1,36 @@
-# Handoff — Ristretto 3.9.0-alpha.20.18
+# Handoff — Ristretto 3.9.0-alpha.20.19.3
 
-**Sorgenti canonici:** archivio ZIP integrale Alpha 20.18, estratto in una cartella nuova. **Stato corrente:** [CURRENT_STATE.md](CURRENT_STATE.md). **Roadmap unica:** [ROADMAP.md](ROADMAP.md).
+**Sorgenti canonici:** nuovo ZIP completo con radice `Ristretto/`. Non sovrapporre due Alpha. **Stato:** [CURRENT_STATE.md](CURRENT_STATE.md). **Unica roadmap:** [ROADMAP.md](ROADMAP.md).
 
-## Cosa è cambiato
+## Cosa è cambiato nella Alpha 20.19.3
 
-- Diagnostica del file sintetico in **italiano** e più precisa (`snippet_inserted_twice`, posizione, intestazione, NFC/NFD e riga finale).
-- `status` e `verify` condividono la classificazione, ma solo `verify` crea una ricevuta immutabile priva di contenuti.
-- `prepare --open` conserva la sessione anche quando l'avvio di Notepad fallisce; nuovi test simulano Windows e altri sistemi senza aprire editor.
-- File C# di produzione, picker, gestione focus, hotkey, GUI Preview 9, database e import/export **invariati** rispetto alla Alpha 20.17.
+- Corretto `scripts/check_startup_profile.py`: in Windows la lettura `encoding='utf-8'` causava `UnicodeDecodeError` nel reader thread quando un comando CLI con uscita 2 emetteva un messaggio di errore in codifica locale. Il conseguente `stderr=None` causava `AttributeError`. Ora si acquisiscono i byte in modo binario con timeout e codice di uscita invariati; solo stdout di successo viene decodificato rigorosamente come UTF-8.
+- Nove test Python in `scripts/test_check_startup_profile.py` riproducono messaggi CP1252/CP850 di processi veri, Unicode UTF-8 valido, output non UTF-8 sul canale di successo e errori di contratto.
+- Evidenza utente Alpha 20.19.2: gate `source_audit`, Python, statici, restore, solution, xUnit e quattro tool **PASS**; `startup_cli` **FAIL** per la decodifica; step seguenti `NOT_RUN`. Non scambiare questa evidenza con una validazione Alpha 20.19.3.
+- Nessuna modifica a sorgenti C#, GUI, picker, hotkey, SQLite e logica R5. [Rapporto](ALPHA20_19_3_STARTUP_CLI_ENCODING.md).
+
+## Funzionalità già presenti dalla Alpha 20.19
+
+- `ExternalFocusBoundarySession` in Application azzera i suffissi sia di `TriggerActivationSession` sia di `CommittedInputSession` quando arriva un segnale di cambio finestra/focus o quando l'osservazione non è affidabile.
+- Il laboratorio Windows offre **solo** `--observe-focus 15`: `SetWinEventHook` out-of-context riceve eventi di finestra/focus, senza tastiera, testo o clipboard. È disattivato per impostazione predefinita e termina dopo 3–30 secondi.
+- Nuovi xUnit per reset, evento duplicato, segnale sconosciuto e divieto di trattare eventi non qualificati come testo committato.
+- Nessun file GUI/XAML, gestione picker/Invio, hotkey, SQLite o output Windows di produzione modificato.
 
 ## Evidenze
 
-- Baseline utente: **Alpha 20.15 compilata e testata, Invio in Notepad funzionante**.
-- Alpha 20.18: controlli statici, Python e Node eseguibili qui; risultati nel report della consegna.
-- Build .NET, nuovi xUnit, prove native e inserimento manuale Windows: **NOT_RUN** finché non verificati sul desktop.
+- **Conferma utente precedente:** Alpha 20.15 compilata/testata, Inserisci/Invio ripristinato. Alpha 20.18 ha ottenuto `PASS` su documento sintetico Notepad Unicode con uso del picker confermato.
+- **Questa Alpha:** [report verifiche](../reports/ALPHA20_19_3_VALIDATION_STATUS.json); Python, Node e controlli statici eseguibili qui. **Build .NET, nuovi xUnit e WinEvent reali = NOT_RUN**.
+- Nessuna implementazione di text expander automatico per editor esterni: WinEvent segnala solo perdita di continuità; non certifica caratteri, revisione o caret.
 
-## Come riprendere
+## Istruzioni per riprendere
 
-1. In nuova estrazione, verificare **`VERSION.txt` e `Directory.Build.props`**; evitare di mescolare cartelle di due Alpha.
-2. Eseguire `scripts\validate.cmd` e `scripts\validate-picker.cmd` in PowerShell usando ` .\scripts\...` (vedi [istruzioni](BUILD_AND_TEST.md)).
-3. Per Notepad eseguire i passi guidati `prepare --open`, `seed`, `status`, `launch`, inserimento **manuale** e `verify` descritti in [Alpha 20.18](ALPHA20_18_NOTEPAD_DIAGNOSTICS.md). Se `FAIL`, non ripetere Inserisci sullo stesso file già modificato: creare una nuova sessione.
-4. Confermare su Windows contenuto Unicode multilinea e casi negativi della [matrice R2](R2_PICKER_WINDOWS_ACCEPTANCE.md). Non dedurre compatibilità generale da un solo `PASS`.
-5. Proseguire R3/VS Code reale senza introdurre hook globali e senza modificare il percorso Invio che l'utente ha già confermato funzionante.
+1. Estrarre il nuovo ZIP in una directory nuova. Chiudere Ristretto prima dei test che utilizzano la hotkey.
+2. Dalla cartella con `Ristretto.sln` eseguire ` .\scripts\validate.cmd `: prima verificare che compaia **SORGENTI RISTRETTO 3.9.0-alpha.20.19.3 VERIFICATI**, poi controllare `python_regressions=PASS`, compilazione e xUnit. I nuovi xUnit si chiamano `ExternalFocusBoundarySessionTests`.
+3. Solo **facoltativamente**, su Windows con desktop interattivo, avviare ` .\scripts\observe-focus.cmd 15 `, passare tra finestre/campi sintetici e leggere i conteggi. La procedura non chiede di digitare testo e **non** va usata per provare l'espansione automatica.
+4. Se una verifica fallisce, riportare il messaggio e la versione stampata. Non modificare i sorgenti del picker per indagare sulla sonda focus.
 
-## Obiettivo e prossimi lavori
+## Obiettivo e lavoro successivo
 
-**Adesso:** terminare R2 mediante prove desktop.
+**Ora:** qualificare il confine di focus R5. **Obiettivo:** espansione automatica Unicode in un target controllabile. **Da fare:** prove WinEvent e scelta di un canale affidabile di testo committato; focus/IME, target, revisioni e sostituzione verificabile; attivazione opt-in solo dopo evidenze. VS Code resta facoltativo, R2/R4 proseguono in parallelo.
 
-**Obiettivo finale:** espansione automatica Unicode affidabile per editor qualificati, quindi altre piattaforme e funzionalità avanzate.
-
-**Ancora aperto:** CI reale, R2 desktop, R3 host VS Code, R4 packaging e prestazioni, R5–R6 primo automatismo, R7 template e R8 OS.
-
-Ad ogni incremento consegnare **ZIP completo**, audit, risultati `PASS/FAIL/NOT_RUN`, documentazione aggiornata e istruzioni passo per passo in italiano. Gli script `clean-build` sono da conservare.
+Ogni consegna richiede ZIP completo, documenti correnti in italiano e risultati `PASS`/`FAIL`/`NOT_RUN` separati. Conservare `clean-build.cmd` e `clean-build.ps1`.

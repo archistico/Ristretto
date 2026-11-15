@@ -1,6 +1,6 @@
 # R2.01 — Matrice di accettazione del picker su Windows
 
-**Stato:** aggiornata in Alpha 20.16. L’utente ha confermato in Alpha 20.15 il caso base Invio→Notepad; le prove Unicode file-backed, DPI, clipboard e target negativi restano aperte. H06/H07 hanno test C# simulati, non prove native.
+**Stato:** aggiornata il 15 novembre 2026. Il caso base Invio→Notepad è stato confermato dall'utente in Alpha 20.15. Il 15 novembre è stato inoltre confermato **PASS** per il documento Unicode sintetico salvato dalla Alpha 20.18, con utilizzo del picker riferito dall'utente. Restano aperte le prove negative (focus, appunti, target), DPI e altri editor. H06/H07 hanno test C# simulati, non prove native.
 
 ## Preparazione
 
@@ -101,3 +101,14 @@ La prova usa soltanto il file sintetico salvato: `verify` non invia tasti e `PAS
 | R2-NP-18-06 | Notepad non disponibile durante `prepare --open` | Sessione conservata, avviso in italiano, nessun token perso |
 
 Questi casi sono **predisposti nei test Python** ma non attestano il desktop Windows; il loro esito nativo rimane aperto.
+
+## Evidenza Notepad del 15 novembre 2026 (Alpha 20.18)
+
+| Caso | Evidenza | Stato | Limite |
+| --- | --- | --- | --- |
+| R2-I01a / R2-NP-18-02 | `status: MATCHES_EXPECTED`, `verify: PASS` per il documento sintetico Unicode; l'utente conferma che il picker ha inserito il testo | **PASS riferito dall'utente** | Il qualificatore legge il file salvato, non registra la provenienza degli input |
+| R2-I01c | Profilo SQLite sintetico creato tramite `seed-picker-notepad.cmd` | **PASS riferito dall'utente** | Non valida da solo l'inserimento |
+| R2-I04 / R2-I05 | Casi negativi focus/clipboard | **NOT_RUN** | Ancora da eseguire |
+| R2-G02 | DPI 100/150/200% | **NOT_RUN** | Ancora da eseguire |
+
+La nuova Alpha 20.18.1 corregge esclusivamente il warning `CS0618` senza modificare Inserisci. La sua compilazione e la prova manuale **non** sono ancora state eseguite sul desktop Windows. R2 non è ancora chiusa.
