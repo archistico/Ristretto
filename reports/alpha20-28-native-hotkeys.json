@@ -1,0 +1,126 @@
+{
+  "Schema": "ristretto/snippet-hotkey-registrations/1",
+  "TimestampUtc": "2026-11-15T21:38:45.0269084+00:00",
+  "SourceVersion": "3.9.0-alpha.20.28",
+  "WindowsVersion": "Microsoft Windows NT 10.0.19045.0",
+  "UserInteractive": true,
+  "Result": "PASS",
+  "Detail": "Registrazione, conflitto e rilascio; nessuna prova di digitazione o inserimento",
+  "SelectedSyntheticHotkeys": [
+    "Ctrl\u002BAlt\u002BShift\u002BF6",
+    "Ctrl\u002BAlt\u002BShift\u002BF7",
+    "Ctrl\u002BAlt\u002BShift\u002BF8"
+  ],
+  "Cases": [
+    {
+      "Id": "register_two",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "collision_isolated",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "remove_releases_only_removed",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "disable_snippet",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "disable_group",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "reenable_group",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "change_hotkey",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "remove_assignment",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "delete_snippet",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "dispose_releases",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "cross_process_collision",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "process_exit_releases",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "picker_collision",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "picker_failed_change_preserves_previous",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "picker_cancel_releases_stage",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "picker_commit_releases_previous",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "picker_dispose_releases",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "capture_cancel_restores",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "capture_confirm_restores_saved",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "capture_failure_restores",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    },
+    {
+      "Id": "immediate_dispose_20_cycles",
+      "Status": "PASS",
+      "Detail": "Ricevute native conformi"
+    }
+  ],
+  "CallbacksObserved": 0,
+  "PhysicalKeyboard": "NOT_RUN",
+  "Clipboard": "NOT_RUN",
+  "ExternalEditorInsertion": "NOT_RUN",
+  "DesktopAppOrchestration": "NOT_RUN"
+}

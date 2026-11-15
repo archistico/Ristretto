@@ -1,3 +1,18 @@
+## 3.9.0-alpha.20.28 — Verifica delle registrazioni Windows
+
+- Nuovo laboratorio e comando `validate-snippet-hotkeys.cmd`: 21 casi con i worker del prodotto e registrazioni Windows reali, senza inviare input o usare appunti/profili personali.
+- Verificati conflitti fra processi, rilascio dopo uscita/terminazione del figlio, disabilitazione/rimozione/cambio delle assegnazioni, preparazione/annullamento del picker e coordinatore di cattura con ripristino.
+- Rapporto JSON per caso, timeout e rifiuto di sovrascrivere evidenze precedenti. Nuova prova inclusa in FULL e `validate-native.cmd`; CORE/CI mantengono il perimetro senza registrazioni.
+- Registrata la nuova conferma utente del richiamo tramite hotkey dopo la 20.27. GUI, picker, inserimento e dati invariati. [Dettagli](docs/ALPHA20_28_NATIVE_HOTKEY_REGISTRATIONS.md) · [verifiche](reports/ALPHA20_28_CHECKS.md).
+- 870 xUnit, 32 Node, gate CI e 21/21 casi nativi passati anche da ZIP nuovo; FULL non eseguito, orchestrazione Desktop.App ancora da qualificare.
+
+## 3.9.0-alpha.20.27 — Integrazione UI della cattura hotkey
+
+- Corretta la perdita della combinazione acquisita durante Shift+Tab. Tab e Shift+Tab conservano l'ultima combinazione completa; un nuovo tentativo non valido o il reset del focus la invalidano.
+- Azioni del dialogo su più righe quando manca spazio: eliminato il superamento del bordo osservato nelle traduzioni francese e tedesca.
+- 24 nuovi casi: 22 con i controlli Avalonia reali su backend headless e due di stato. Provati navigazione, conferma/annullamento/rimozione, libreria e salvataggio SQLite; disposizione in cinque lingue, due temi e due larghezze.
+- **870 xUnit, 32 Node e GATE CI passati.** Dipendenza headless solo nei test, allineata ad Avalonia 11.3.22. Tastiera fisica, DPI e registrazioni native ancora da qualificare. [Dettagli](docs/ALPHA20_27_CAPTURE_INTEGRATION.md) · [rapporto](reports/ALPHA20_27_CHECKS.md).
+
 ## 3.9.0-alpha.20.26 — Acquisizione visuale delle hotkey
 
 - Pulsante Registra… nell'editor dello snippet e form con visualizzazione dei tasti premuti, per esempio `ALT + CTRL + SHIFT + B`. Conferma dopo il rilascio, annullamento senza modifica e rimozione della bozza della hotkey.

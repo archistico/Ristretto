@@ -189,6 +189,38 @@ public sealed class HotkeyCaptureTests
     }
 
     [Fact]
+    public void NavigationPreservesOnlyAReleasedCandidateAndFocusResetInvalidatesIt()
+    {
+        var state = new HotkeyCaptureState();
+        state.KeyDown(Key.B, KeyModifiers.Control);
+        state.KeyUp(Key.B, KeyModifiers.None);
+        state.KeyDown(Key.LeftShift, KeyModifiers.Shift);
+        state.Navigate();
+        Assert.Equal("CTRL + B", state.DisplayText);
+        Assert.False(state.CanConfirm);
+        state.KeyUp(Key.LeftShift, KeyModifiers.None);
+        Assert.True(state.CanConfirm);
+        Assert.Equal("Ctrl+B", state.Hotkey);
+        state.Reset();
+        state.Navigate();
+        Assert.Null(state.Hotkey);
+    }
+
+    [Fact]
+    public void NavigationCannotResurrectAnOldChordAfterAnInvalidNewPrimary()
+    {
+        var state = new HotkeyCaptureState();
+        state.KeyDown(Key.B, KeyModifiers.Control);
+        state.KeyUp(Key.B, KeyModifiers.None);
+        state.KeyDown(Key.F12, KeyModifiers.Control);
+        state.KeyUp(Key.F12, KeyModifiers.None);
+        state.Navigate();
+        Assert.Null(state.Hotkey);
+        Assert.True(state.IsInvalid);
+        Assert.False(state.CanConfirm);
+    }
+
+    [Fact]
     public async Task NotificationsStaySuppressedUntilRestorationFinishes()
     {
         var coordinator = new HotkeyCaptureCoordinator();

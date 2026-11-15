@@ -1,6 +1,6 @@
 # Roadmap unica — Ristretto
 
-**Revisione:** 15 novembre 2026 · **Baseline funzionale:** 3.9.0-alpha.20.26.
+**Revisione:** 15 novembre 2026 · **Baseline funzionale:** 3.9.0-alpha.20.28.
 
 **Obiettivo:** scrivere un trigger come `;firma` in un'applicazione compatibile e ottenere automaticamente lo snippet. Il picker e le hotkey manuali restano disponibili.
 
@@ -10,10 +10,10 @@ Questa è la fonte delle attività future. [Stato corrente](CURRENT_STATE.md) de
 
 | Area | Evidenza disponibile | Ancora aperto |
 | --- | --- | --- |
-| Build e controlli | Gate CI locale e da ZIP nuovo: 846 xUnit, 32 Node, 23 regressioni degli strumenti, 10 CLI e contratto .NET→Node passati | Audit dipendenze online e attestazione dell'esecuzione remota della CI |
+| Build e controlli | Gate CI locale e da ZIP nuovo: 870 xUnit, 32 Node, 23 regressioni degli strumenti, 10 CLI e contratto .NET→Node passati | Audit dipendenze online e attestazione dell'esecuzione remota della CI |
 | Libreria e dati | SQLite schema 2, migrazione da 1, backup e import/export verificati su dati sintetici | Recupero dopo interruzioni e aggiornamento completo osservato sul desktop |
-| Picker e hotkey per snippet | Flussi base in Blocco note confermati dall'utente | Matrice di conflitti, appunti, focus, durata e altri editor |
-| Form Registra hotkey | Implementata in 20.26; stato e coordinatore coperti da 26 nuovi casi | Acquisizione e sospensione/ripristino reali sul desktop |
+| Picker e hotkey per snippet | Flussi base in Blocco note e nuova conferma hotkey dopo la 20.27; 21 casi nativi con collisioni fra processi passati in 20.28 | Orchestrazione Desktop.App, appunti, focus, durata e altri editor |
+| Form Registra hotkey | 20.27: 22 casi UI headless e due di stato aggiuntivi; Shift+Tab e disposizione dei pulsanti corretti | Acquisizione e sospensione/ripristino reali sul desktop |
 | R5 | Lettore Edit, WinEvent e anteprima di trigger disponibili; test inclusi nella suite | Provenienza dell'input, IME e capacità di sostituzione esterna non qualificate |
 | Espansione automatica esterna | Contratti e laboratori controllati disponibili | Adapter di prodotto da qualificare e implementare |
 | Distribuzione | ZIP sorgenti e manifest | Pacchetto eseguibile, licenza, notices e aggiornamento qualificato |
@@ -25,7 +25,7 @@ I risultati di laboratorio, un test unitario e una conferma manuale hanno perime
 
 | Ordine | Incremento candidato | Passi | Risultato richiesto |
 | --- | --- | --- | --- |
-| 1 | **Alpha 20.27 — Acquisizione e hotkey qualificate** | R2.01, R2.08, R2.09, correzioni R2.07 | Form provata davvero, combinazioni corrette, nessuna perdita delle hotkey al termine |
+| 1 | **Prossimo incremento — Flusso completo delle hotkey** | Completare R2.01/R2.08/R2.09 dopo UI headless 20.27 e registrazioni native 20.28; correzioni R2.07 | Save/import e notifiche pendenti gestiti nella vera app, tastiera/DPI provati, assegnazioni salvate ripristinate |
 | 2 | **Affidabilità del flusso manuale** | R2.02–R2.06, R4.03–R4.04 | Picker, dati, appunti e ciclo di vita verificati con una matrice ripetibile |
 | 3 | **R5 — Decisione sulla provenienza** | R5.01–R5.05 | Un target qualificabile con evidenze, oppure un esito negativo motivato |
 | 4 | **R6 — Primo automatismo opt-in** | R6.01–R6.06, solo dopo R5 positivo | Espansione e sostituzione verificate su un solo target dichiarato |
@@ -50,6 +50,8 @@ R5 può avanzare con esperimenti isolati mentre si qualifica R2. L'installer com
 ## 4. R2 — Libreria, picker e hotkey Windows
 
 **Priorità immediata:** R2.01 → R2.08 → R2.09. La prova positiva in Blocco note non chiude l'intera milestone.
+
+**Avanzamento 20.27–20.28:** prove UI headless, salvataggio SQLite e disposizione in cinque lingue/due temi; corretti Shift+Tab e pulsanti fuori dal bordo. Aggiunti 21 casi con worker/coordinatore e registrazioni Windows reali, incluse collisioni fra processi e rilascio dopo terminazione del figlio. [UI headless](ALPHA20_27_CAPTURE_INTEGRATION.md) · [ricevute native](ALPHA20_28_NATIVE_HOTKEY_REGISTRATIONS.md). R2.08/R2.06 restano aperte per hardware/DPI; R2.09 per orchestrazione completa, flussi UI/import e notifiche pendenti.
 
 - [ ] **R2.01 — Ambiente e matrice.** La [matrice iniziale è predisposta](WINDOWS_QUALIFICATION_PLAN.md); ambiente, fixture ed esecuzione sono ancora aperti. Preparare un profilo nuovo, snippet sintetici e un documento esterno; annotare versione app/Windows/editor, layout, tema e DPI. Per ciascun caso registrare atteso, osservato, metodo e stato. **Chiusura:** una persona diversa può ripetere i passaggi senza usare la libreria personale.
 - [ ] **R2.08 — Form Registra hotkey.** Provare `ALT + CTRL + SHIFT + B`, modificatori sinistri/destri, ripetizioni, tasti non supportati e più tasti principali. Verificare che il display resti leggibile al rilascio e corrisponda alla combinazione applicata. Provare Usa combinazione, Annulla, Esc, chiusura, rimozione, Tab/Shift+Tab e perdita di focus. **Chiusura:** solo la conferma aggiorna la bozza; solo Salva persiste; nessun gesto incompleto produce una hotkey diversa da quella mostrata.

@@ -57,6 +57,12 @@ internal static class Program
             Console.Error.WriteLine("F2a: laboratorio nativo disponibile solo su Windows.");
             return 2;
         }
+        if (args.Length == 1 && args[0] == "--snippet-hotkey-test")
+            return await SnippetHotkeyRegistrationLab.RunAsync(null);
+        if (args.Length == 3 && args[0] == "--snippet-hotkey-test" && args[1] == "--report")
+            return await SnippetHotkeyRegistrationLab.RunAsync(args[2]);
+        if (args.Length == 2 && args[0] == "--snippet-hotkey-holder")
+            return await SnippetHotkeyRegistrationLab.RunHolderAsync(args[1]);
         if (args.Length == 2 && args[0] == "--observe-focus" &&
             int.TryParse(args[1], out var focusSeconds))
             return await WindowsFocusBoundaryProbe.RunCommandAsync(focusSeconds);
@@ -127,6 +133,7 @@ internal static class Program
         Console.WriteLine("--replacement-demo [--report file-nuovo.json]: digita ;firma + spazio nel proprio EDIT Win32.");
         Console.WriteLine("--picker-insert-demo: prova MANUALE Inserisci in un EDIT isolato, senza cancellare gli appunti dell'utente dal laboratorio.");
         Console.WriteLine("--seed-picker-profile TOKEN: profilo SQLite isolato per sessione Notepad preparata.");
+        Console.WriteLine("--snippet-hotkey-test [--report nuovo-file.json]: registrazioni reali e conflitti fra processi, senza input o appunti.");
         return 2;
     }
 

@@ -1,0 +1,581 @@
+{
+    "schema":  "ristretto/alpha-validation/1",
+    "version":  "3.9.0-alpha.20.28",
+    "date":  "2026-11-15",
+    "gate_ci":  {
+                    "schema":  "ristretto/quality-gate/2",
+                    "source_version":  "3.9.0-alpha.20.28",
+                    "git_commit":  null,
+                    "source_sha256":  "3f97520d6487c4516351a68e6c16a13b6908d9ad7255334a13066e0be60a062f",
+                    "utc":  "2026-11-15T21:39:37.6866767+00:00",
+                    "mode":  "ci",
+                    "platform":  "Win32NT",
+                    "steps":  [
+                                  {
+                                      "name":  "source_audit",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "csharp_regressions",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "static_checks",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "dotnet_restore",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "solution_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "xunit",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "windows_lab_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "benchmark_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "replacement_lab_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "ui_review_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "devtools_build",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "startup_cli",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "node_tests",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "export_contract",
+                                      "status":  "PASS",
+                                      "detail":  "Codice di uscita 0"
+                                  },
+                                  {
+                                      "name":  "native_windows",
+                                      "status":  "NOT_RUN",
+                                      "detail":  "Escluso dal gate"
+                                  }
+                              ],
+                    "restore":  {
+                                    "source":  "local-cache",
+                                    "status":  "PASS"
+                                },
+                    "nuget_vulnerability_audit":  {
+                                                      "status":  "NOT_RUN",
+                                                      "detail":  "Serve un audit online separato"
+                                                  },
+                    "vs_code_real_host":  "NOT_RUN",
+                    "desktop_picker_real_io":  "NOT_RUN",
+                    "result":  "PASS"
+                },
+    "counts":  {
+                   "xunit":  870,
+                   "node":  32,
+                   "devtools":  23,
+                   "startup_cli":  10,
+                   "native_registration_cases":  21,
+                   "immediate_dispose_cycles":  20
+               },
+    "native_hotkeys":  {
+                           "Schema":  "ristretto/snippet-hotkey-registrations/1",
+                           "TimestampUtc":  "2026-11-15T21:38:45.0269084+00:00",
+                           "SourceVersion":  "3.9.0-alpha.20.28",
+                           "WindowsVersion":  "Microsoft Windows NT 10.0.19045.0",
+                           "UserInteractive":  true,
+                           "Result":  "PASS",
+                           "Detail":  "Registrazione, conflitto e rilascio; nessuna prova di digitazione o inserimento",
+                           "SelectedSyntheticHotkeys":  [
+                                                            "Ctrl+Alt+Shift+F6",
+                                                            "Ctrl+Alt+Shift+F7",
+                                                            "Ctrl+Alt+Shift+F8"
+                                                        ],
+                           "Cases":  [
+                                         {
+                                             "Id":  "register_two",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "collision_isolated",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "remove_releases_only_removed",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "disable_snippet",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "disable_group",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "reenable_group",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "change_hotkey",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "remove_assignment",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "delete_snippet",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "dispose_releases",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "cross_process_collision",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "process_exit_releases",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "picker_collision",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "picker_failed_change_preserves_previous",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "picker_cancel_releases_stage",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "picker_commit_releases_previous",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "picker_dispose_releases",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "capture_cancel_restores",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "capture_confirm_restores_saved",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "capture_failure_restores",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         },
+                                         {
+                                             "Id":  "immediate_dispose_20_cycles",
+                                             "Status":  "PASS",
+                                             "Detail":  "Ricevute native conformi"
+                                         }
+                                     ],
+                           "CallbacksObserved":  0,
+                           "PhysicalKeyboard":  "NOT_RUN",
+                           "Clipboard":  "NOT_RUN",
+                           "ExternalEditorInsertion":  "NOT_RUN",
+                           "DesktopAppOrchestration":  "NOT_RUN"
+                       },
+    "runner_guards":  {
+                          "existing_report":  "PASS: code 2; bytes unchanged",
+                          "holder_fixture_restriction":  "PASS: code 2"
+                      },
+    "user_confirmation":  {
+                              "text":  "tramite hotkey funziona",
+                              "context":  "After Alpha 20.27 delivery",
+                              "exact_version":  "not supplied",
+                              "editor":  "not supplied",
+                              "chord":  "not supplied"
+                          },
+    "full_gate":  "NOT_RUN",
+    "desktop_app_orchestration":  "NOT_RUN",
+    "fresh_extraction":  {
+                             "status":  "PASS",
+                             "manifest_hashes_verified":  510,
+                             "initial_bin_obj_count":  0,
+                             "source_sha256_matches":  true,
+                             "tested_candidate_archive_sha256":  "2056296f501eb2add39eb09887ce0e112930503c0c387791dd80fd01e71d7d89",
+                             "gate_ci":  {
+                                             "schema":  "ristretto/quality-gate/2",
+                                             "source_version":  "3.9.0-alpha.20.28",
+                                             "git_commit":  null,
+                                             "source_sha256":  "3f97520d6487c4516351a68e6c16a13b6908d9ad7255334a13066e0be60a062f",
+                                             "utc":  "2026-11-15T21:43:57.6939357+00:00",
+                                             "mode":  "ci",
+                                             "platform":  "Win32NT",
+                                             "steps":  [
+                                                           {
+                                                               "name":  "source_audit",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "csharp_regressions",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "static_checks",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "dotnet_restore",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "solution_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "xunit",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "windows_lab_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "benchmark_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "replacement_lab_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "ui_review_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "devtools_build",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "startup_cli",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "node_tests",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "export_contract",
+                                                               "status":  "PASS",
+                                                               "detail":  "Codice di uscita 0"
+                                                           },
+                                                           {
+                                                               "name":  "native_windows",
+                                                               "status":  "NOT_RUN",
+                                                               "detail":  "Escluso dal gate"
+                                                           }
+                                                       ],
+                                             "restore":  {
+                                                             "source":  "local-cache",
+                                                             "status":  "PASS"
+                                                         },
+                                             "nuget_vulnerability_audit":  {
+                                                                               "status":  "NOT_RUN",
+                                                                               "detail":  "Serve un audit online separato"
+                                                                           },
+                                             "vs_code_real_host":  "NOT_RUN",
+                                             "desktop_picker_real_io":  "NOT_RUN",
+                                             "result":  "PASS"
+                                         },
+                             "native_hotkeys":  {
+                                                    "Schema":  "ristretto/snippet-hotkey-registrations/1",
+                                                    "TimestampUtc":  "2026-11-15T21:43:57.9914507+00:00",
+                                                    "SourceVersion":  "3.9.0-alpha.20.28",
+                                                    "WindowsVersion":  "Microsoft Windows NT 10.0.19045.0",
+                                                    "UserInteractive":  true,
+                                                    "Result":  "PASS",
+                                                    "Detail":  "Registrazione, conflitto e rilascio; nessuna prova di digitazione o inserimento",
+                                                    "SelectedSyntheticHotkeys":  [
+                                                                                     "Ctrl+Alt+Shift+F6",
+                                                                                     "Ctrl+Alt+Shift+F7",
+                                                                                     "Ctrl+Alt+Shift+F8"
+                                                                                 ],
+                                                    "Cases":  [
+                                                                  {
+                                                                      "Id":  "register_two",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "collision_isolated",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "remove_releases_only_removed",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "disable_snippet",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "disable_group",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "reenable_group",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "change_hotkey",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "remove_assignment",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "delete_snippet",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "dispose_releases",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "cross_process_collision",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "process_exit_releases",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "picker_collision",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "picker_failed_change_preserves_previous",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "picker_cancel_releases_stage",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "picker_commit_releases_previous",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "picker_dispose_releases",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "capture_cancel_restores",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "capture_confirm_restores_saved",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "capture_failure_restores",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  },
+                                                                  {
+                                                                      "Id":  "immediate_dispose_20_cycles",
+                                                                      "Status":  "PASS",
+                                                                      "Detail":  "Ricevute native conformi"
+                                                                  }
+                                                              ],
+                                                    "CallbacksObserved":  0,
+                                                    "PhysicalKeyboard":  "NOT_RUN",
+                                                    "Clipboard":  "NOT_RUN",
+                                                    "ExternalEditorInsertion":  "NOT_RUN",
+                                                    "DesktopAppOrchestration":  "NOT_RUN"
+                                                },
+                             "note":  "Rapporti e documentazione completati dopo la prova; sorgenti compilati invariati."
+                         },
+    "cmd_launcher":  {
+                         "status":  "PASS",
+                         "native_cases":  21
+                     },
+    "final_documentation_gate":  {
+                                     "schema":  "ristretto/quality-gate/2",
+                                     "source_version":  "3.9.0-alpha.20.28",
+                                     "git_commit":  null,
+                                     "source_sha256":  "3f97520d6487c4516351a68e6c16a13b6908d9ad7255334a13066e0be60a062f",
+                                     "utc":  "2026-11-15T21:45:15.3650995+00:00",
+                                     "mode":  "source",
+                                     "platform":  "Win32NT",
+                                     "steps":  [
+                                                   {
+                                                       "name":  "source_audit",
+                                                       "status":  "PASS",
+                                                       "detail":  "Codice di uscita 0"
+                                                   },
+                                                   {
+                                                       "name":  "csharp_regressions",
+                                                       "status":  "PASS",
+                                                       "detail":  "Codice di uscita 0"
+                                                   },
+                                                   {
+                                                       "name":  "static_checks",
+                                                       "status":  "PASS",
+                                                       "detail":  "Codice di uscita 0"
+                                                   },
+                                                   {
+                                                       "name":  "dotnet_restore",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "solution_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "xunit",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "windows_lab_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "benchmark_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "replacement_lab_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "ui_review_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "devtools_build",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "startup_cli",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "node_tests",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "export_contract",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   },
+                                                   {
+                                                       "name":  "native_windows",
+                                                       "status":  "NOT_RUN",
+                                                       "detail":  "Escluso dal gate"
+                                                   }
+                                               ],
+                                     "restore":  {
+                                                     "source":  "unknown",
+                                                     "status":  "NOT_RUN"
+                                                 },
+                                     "nuget_vulnerability_audit":  {
+                                                                       "status":  "NOT_RUN",
+                                                                       "detail":  "Serve un audit online separato"
+                                                                   },
+                                     "vs_code_real_host":  "NOT_RUN",
+                                     "desktop_picker_real_io":  "NOT_RUN",
+                                     "result":  "PASS"
+                                 }
+}

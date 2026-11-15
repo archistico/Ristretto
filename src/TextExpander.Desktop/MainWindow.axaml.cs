@@ -107,16 +107,20 @@ public partial class MainWindow : Window
         finally { _waitingForDecision = false; }
     }
 
+    protected virtual Task<string?> ShowSnippetHotkeyCaptureAsync(UiStrings texts) =>
+        (Avalonia.Application.Current as App)?.CaptureSnippetHotkeyAsync(this, texts) ?? Task.FromResult<string?>(null);
+
     private async void CaptureSnippetHotkey_Click(object? sender, RoutedEventArgs e)
     {
-        if (_waitingForDecision || DataContext is not MainViewModel vm || Avalonia.Application.Current is not App app) return;
+        if (_waitingForDecision || DataContext is not MainViewModel vm) return;
+        var app = Avalonia.Application.Current as App;
         _waitingForDecision = true;
         CaptureSnippetHotkeyButton.IsEnabled = false;
         IsEnabled = false;
         try
         {
-            var result = await app.CaptureSnippetHotkeyAsync(this, vm.Texts);
-            if (result is not null && !app.IsExiting) vm.EditorHotkey = result;
+            var result = await ShowSnippetHotkeyCaptureAsync(vm.Texts);
+            if (result is not null && app?.IsExiting != true) vm.EditorHotkey = result;
         }
         catch (Exception)
         {
@@ -125,7 +129,7 @@ public partial class MainWindow : Window
         finally
         {
             IsEnabled = true;
-            CaptureSnippetHotkeyButton.IsEnabled = !app.IsExiting;
+            CaptureSnippetHotkeyButton.IsEnabled = app?.IsExiting != true;
             _waitingForDecision = false;
         }
     }

@@ -169,7 +169,7 @@ public static class QualityGate
                     {
                         if (!OperatingSystem.IsWindows() || !Environment.UserInteractive)
                             throw new InvalidOperationException("Le prove native richiedono Windows con desktop interattivo");
-                        foreach (var arg in new[] { "--replacement-test", "--cooperating-smoke", "--remote-owned-smoke" })
+                        foreach (var arg in new[] { "--replacement-test", "--cooperating-smoke", "--remote-owned-smoke", "--snippet-hotkey-test" })
                             if (Dotnet("run", "-c", "Release", "--no-build", "--project", Tools[0], "--", arg) != 0) return 1;
                         return 0;
                     })) return 1;

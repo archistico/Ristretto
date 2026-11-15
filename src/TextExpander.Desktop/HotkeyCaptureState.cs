@@ -11,13 +11,21 @@ public sealed class HotkeyCaptureState
     private KeyModifiers _modifiers;
     private bool _invalid;
     private bool _hasPrimary;
+    private (string Display, string Hotkey)? _lastComplete;
     public string DisplayText { get; private set; } = "";
     public string? Hotkey { get; private set; }
     public bool IsInvalid => _invalid;
     public bool KeysHeld => _held.Count > 0 || _modifiers != KeyModifiers.None;
     public bool CanConfirm => Hotkey is not null && !_invalid && !KeysHeld;
+    public bool PrimaryKeyHeld => _held.Any(k => Modifier(k) == KeyModifiers.None);
 
     public void Reset()
+    {
+        ClearGesture();
+        _lastComplete = null;
+    }
+
+    private void ClearGesture()
     {
         _held.Clear();
         _modifiers = KeyModifiers.None;
@@ -28,7 +36,7 @@ public sealed class HotkeyCaptureState
 
     public void KeyDown(Key key, KeyModifiers modifiers)
     {
-        if (!KeysHeld) Reset();
+        if (!KeysHeld) ClearGesture();
         var primaryWasHeld = _held.Any(k => Modifier(k) == KeyModifiers.None);
         if (!_held.Add(key)) return;
         _modifiers = Relevant(modifiers) | HeldModifiers();
@@ -43,6 +51,7 @@ public sealed class HotkeyCaptureState
             return;
         }
         if (Modifier(key) == KeyModifiers.None && !primaryWasHeld) _invalid = false;
+        if (Modifier(key) == KeyModifiers.None) _lastComplete = null;
         _hasPrimary = true;
         if (_invalid || primary.Length != 1 || !PickerHotkey.TryParse(DisplayText, out var parsed) ||
             !IsSupportedPrimary(primary[0]))
@@ -59,6 +68,19 @@ public sealed class HotkeyCaptureState
         _held.Remove(key);
         _modifiers = Relevant(modifiers) | HeldModifiers();
         if (!_hasPrimary) DisplayText = string.Join(" + ", ModifierNames(_modifiers));
+        if (CanConfirm) _lastComplete = (DisplayText, Hotkey!);
+    }
+
+    // Shift is delivered before Shift+Tab. Undo only that incomplete modifier gesture when
+    // the user navigates; an attempted new primary key or a focus reset invalidates the backup.
+    public void Navigate()
+    {
+        if (PrimaryKeyHeld || _lastComplete is not { } previous) return;
+        _held.Clear();
+        DisplayText = previous.Display;
+        Hotkey = previous.Hotkey;
+        _invalid = false;
+        _hasPrimary = true;
     }
 
     private static KeyModifiers Relevant(KeyModifiers value) =>

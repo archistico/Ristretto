@@ -1,6 +1,6 @@
 # Quadro funzionale F0–F6
 
-Questo documento è una mappa delle aree tecniche. Priorità, attività e criteri di chiusura sono soltanto nella [roadmap R1–R8](ROADMAP.md). Baseline: **3.9.0-alpha.20.26**; [stato effettivo](CURRENT_STATE.md).
+Questo documento è una mappa delle aree tecniche. Priorità, attività e criteri di chiusura sono soltanto nella [roadmap R1–R8](ROADMAP.md). Baseline: **3.9.0-alpha.20.28**; [stato effettivo](CURRENT_STATE.md).
 
 | Area | Contenuto | Stato e lavoro collegato |
 | --- | --- | --- |
@@ -12,4 +12,4 @@ Questo documento è una mappa delle aree tecniche. Priorità, attività e criter
 | F5 | Input/output e hotkey macOS/Linux | R8, con qualificazione distinta per sistema e sessione |
 | F6 | Stabilità, sicurezza, installazione e rilascio | R1 per strumenti/provenienza/licenze, R2 per flussi manuali, R4 per prodotto Windows, R8 per altri OS |
 
-La baseline automatica corrente è di **846 xUnit e 32 Node**, validata prima di questa revisione documentale. I singoli perimetri e le prove ancora aperte sono nei [rapporti](../reports/README.md).
+La baseline automatica corrente è di **870 xUnit e 32 Node**, con integrazione UI headless della form Registra…. La 20.28 aggiunge **21 casi nativi** di registrazione Windows, separati da CI e dal flusso completo Desktop.App. I singoli perimetri e le prove desktop ancora aperte sono nei [rapporti](../reports/README.md).

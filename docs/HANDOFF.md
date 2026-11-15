@@ -1,30 +1,39 @@
-# Handoff — Ristretto Alpha 20.26
+# Handoff — Ristretto Alpha 20.28
 
-**15 novembre 2026.** Questa revisione riguarda documentazione e pianificazione; il codice rimane 3.9.0-alpha.20.26.
+**15 novembre 2026.** Codice e documentazione aggiornati a 3.9.0-alpha.20.28.
 
 ## Obiettivo e punto di ripresa
 
-L'ultimo incremento funzionale aggiunge **Registra…** nella libreria: una form acquisisce i tasti, mostra per esempio `ALT + CTRL + SHIFT + B` e aggiorna la bozza dopo conferma. La persistenza usa ancora Salva. L'utente ha confermato che il richiamo via hotkey della 20.25 funziona in Blocco note Windows.
+**Registra…** nella libreria acquisisce i tasti e mostra per esempio `ALT + CTRL + SHIFT + B`. La 20.27 prova il flusso con i controlli Avalonia reali su backend headless e SQLite sintetico: la conferma cambia la bozza, soltanto Salva persiste. Corretti perdita della combinazione con Shift+Tab e pulsanti fuori dal bordo in francese/tedesco. L'utente ha confermato che il richiamo via hotkey della 20.25 funziona in Blocco note Windows.
 
-Il prossimo passo è **qualificare la form sul desktop**, insieme a conflitti e ripristino delle registrazioni: R2.01 → R2.08 → R2.09, poi eventuali correzioni R2.07. Preparare un profilo sintetico, risultati attesi e rapporto per caso. Non trasferire il PASS di Blocco note a tutti gli editor o al nuovo dialogo.
+La 20.28 aggiunge **21 casi nativi** con i worker/coordinatore del prodotto: collisioni fra processi, rilascio dopo Dispose/terminazione del figlio, catalogo e ripristino. L'utente ha nuovamente confermato «tramite hotkey funziona» dopo la 20.27, senza specificare editor/versione/combinazione. GUI e inserimento invariati.
+
+Il prossimo passo è **completare il flusso Desktop.App**: save/import o reload durante la cattura, notifiche in coda, conflitti mostrati nella UI, focus/tastiera fisica e DPI. R2.01 → R2.08 → R2.09 rimane aperto. Le ricevute dei worker non provano tutta l'orchestrazione dell'applicazione.
 
 La [roadmap](ROADMAP.md) è l'unico piano autorevole; include dipendenze e criteri di chiusura di R1–R8. [Stato corrente](CURRENT_STATE.md) e [rapporti](../reports/README.md) distinguono implementazione, esecuzione e conferme dell'utente.
 
 ## Baseline da conservare
 
-- Alpha 20.26: gate CI anche da ZIP nuovo; **846 xUnit**, **32 Node**, 23 regressioni dei tool, 10 CLI e contratto .NET→Node passati; build senza warning.
-- Restore NuGet locale; audit vulnerabilità online non eseguito.
+- Alpha 20.28: gate CI locale e da ZIP nuovo; **870 xUnit**, **32 Node**, 23 regressioni dei tool, 10 CLI e contratto .NET→Node passati; build senza warning. Verificati 510 hash del manifest e sorgenti compilati identici; 21/21 nativi anche dall'estrazione.
+- Restore NuGet da cache/feed locale; due pacchetti headless mancanti scaricati da NuGet con HTTPS verificato. Audit vulnerabilità online non eseguito.
 - Schema SQLite 2 dalla 20.25, migrazione da 1, backup legacy migrato solo nello staging, hotkey nel JSON v1 facoltativo.
-- Registra…: 26 nuove regressioni sullo stato e sul coordinatore. Nuova form, routing dei tasti e sospensione/ripristino nativi ancora da provare sul desktop.
+- Registra…: ai 26 casi della 20.26 si aggiungono 22 UI headless e due di stato della 20.27. Verificati navigazione/azioni, libreria e persistenza, cinque lingue/due temi/due larghezze. La 20.28 prova inoltre il coordinatore con worker Windows reali, separatamente da Desktop.App.
+- Native 20.28: 21/21 PASS, Windows 10 build 19045, zero callback osservate. Include 20 cicli di Dispose immediato. FULL non eseguito; soltanto il nuovo comando nativo è attestato.
 - R5: motore/bridge e diagnostica disponibili; provenienza esterna non qualificata. Nessun collegamento dall'anteprima all'espansione di prodotto.
 - R3: Node e contratto export validati; vero host non qualificato. Crash precedente `Code.exe / 0x80000003` senza causa confermata, nessun riavvio automatico.
 
-[Evidenze della baseline](../reports/ALPHA20_26_CHECKS.md) · [revisione documentale](../reports/DOCS_ROADMAP_REVIEW.md).
+[Evidenze della baseline](../reports/ALPHA20_28_CHECKS.md) · [ricevute native](ALPHA20_28_NATIVE_HOTKEY_REGISTRATIONS.md) · [perimetro dell'integrazione UI](ALPHA20_27_CAPTURE_INTEGRATION.md).
 
-## Dettagli utili della 20.26
+## Dettagli utili
 
+- `SnippetHotkeyRegistrationLab` è nel solo laboratorio: avvia un figlio dedicato come proprietario di una combinazione sintetica. Usa gli stessi worker del prodotto e timeout; nessun input, appunti o profilo personale. `validate-snippet-hotkeys.cmd` produce un rapporto nuovo e non sovrascrive evidenze precedenti.
+- La prova è inclusa in FULL e validate-native; CORE/CI mantengono le registrazioni native escluse. Non promuovere `native_windows` del CI a PASS sulla base di un solo comando eseguito separatamente.
 - `HotkeyCaptureState` gestisce display, ripetizioni, tasti non supportati, rilascio e correzione del gesto.
+- `Navigate()` conserva solo un gesto completo già rilasciato, per Tab/Shift+Tab; nuovo tasto principale e reset invalidano la memoria. Due regressioni di stato coprono il confine.
 - `HotkeyCaptureWindow` offre Usa combinazione, Annulla e Rimuovi hotkey; Esc/chiusura annullano.
+- Le azioni usano un WrapPanel. I test verificano che i pulsanti restino nell'area client a 440/540 DIP; non sono screenshot o prove DPI.
+- `HeadlessTestApp` carica stili/risorse del prodotto senza lifetime desktop. `MainWindow.ShowSnippetHotkeyCaptureAsync` è il punto di sostituzione del dialogo nei test; la produzione mantiene il percorso App/coordinatore esistente.
+- `Avalonia.Headless.XUnit` è solo nei test e deve restare alla stessa patch di Avalonia (11.3.22).
 - `HotkeyCaptureCoordinator` mantiene sospese le notifiche durante pausa, dialogo e ripristino.
 - `App.HotkeyCapture` ferma/ricrea i worker senza impostazioni temporanee nel database; usa il picker effettivamente attivo e lo snapshot più recente.
 - Le notifiche obsolete del picker e le richieste di inserimento pendenti sono invalidate. Il worker picker gestisce anche la disposizione prima del completamento dell'avvio.

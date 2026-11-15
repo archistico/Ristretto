@@ -44,6 +44,9 @@ public sealed class HotkeyCaptureWindow : Window
             Child = _display
         };
         _captureArea.Bind(Border.BorderBrushProperty, this.GetResourceObservable("RPrimary"));
+        AutomationProperties.SetAutomationId(_captureArea, "HotkeyCaptureArea");
+        AutomationProperties.SetAutomationId(_display, "HotkeyCaptureDisplay");
+        AutomationProperties.SetAutomationId(_feedback, "HotkeyCaptureFeedback");
         AutomationProperties.SetName(_captureArea, texts.HotkeyCaptureTitle);
         _captureArea.PointerPressed += (_, _) => _captureArea.Focus();
         var body = new StackPanel
@@ -56,22 +59,28 @@ public sealed class HotkeyCaptureWindow : Window
             }
         };
         var cancel = new Button { Content = texts.Cancel };
+        AutomationProperties.SetAutomationId(cancel, "HotkeyCaptureCancel");
         cancel.Classes.Add("ghost");
         cancel.Click += (_, _) => Close((string?)null);
         var clear = new Button { Content = texts.HotkeyCaptureClear };
+        AutomationProperties.SetAutomationId(clear, "HotkeyCaptureClear");
         clear.Classes.Add("ghost");
         clear.Click += (_, _) => Close("");
         _use = new Button { Content = texts.HotkeyCaptureUse, IsEnabled = false };
+        AutomationProperties.SetAutomationId(_use, "HotkeyCaptureConfirm");
         _use.Classes.Add("primary");
         _use.Click += (_, _) => { if (_state.CanConfirm) Close(_state.Hotkey); };
+        var actions = new WrapPanel
+        {
+            Orientation = Orientation.Horizontal,
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Children = { clear, cancel, _use }
+        };
+        foreach (var button in new[] { clear, cancel, _use }) button.Margin = new Thickness(4);
         var footer = new Border
         {
-            Padding = new Thickness(22, 13),
-            Child = new StackPanel
-            {
-                Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Spacing = 8,
-                Children = { clear, cancel, _use }
-            }
+            Padding = new Thickness(18, 9),
+            Child = actions
         };
         footer.Classes.Add("dialog-footer");
         var layout = new Grid { RowDefinitions = new RowDefinitions("Auto,Auto,Auto") };
@@ -97,7 +106,12 @@ public sealed class HotkeyCaptureWindow : Window
             return;
         }
         if (!_captureArea.IsFocused) return;
-        if (e.Key == Key.Tab && e.KeyModifiers is KeyModifiers.None or KeyModifiers.Shift) return;
+        if (e.Key == Key.Tab && e.KeyModifiers is KeyModifiers.None or KeyModifiers.Shift && !_state.PrimaryKeyHeld)
+        {
+            _state.Navigate();
+            Refresh();
+            return;
+        }
         e.Handled = true;
         _state.KeyDown(e.Key, e.KeyModifiers);
         Refresh();

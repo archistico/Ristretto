@@ -1,8 +1,8 @@
-# Compilazione e verifiche — Ristretto Alpha 20.26
+# Compilazione e verifiche — Ristretto Alpha 20.28
 
 Per installare, aggiornare e recuperare i dati partire dalla [guida utente](INSTALLATION_AND_UPDATE.md). Questo documento descrive i controlli per lo sviluppo.
 
-**Baseline già eseguita:** CI locale e da ZIP nuovo, 846 xUnit, 32 Node, 23 regressioni degli strumenti, 10 CLI e contratto .NET→Node passati. [Rapporto](../reports/ALPHA20_26_CHECKS.md). La revisione documentale successiva non ripete automaticamente queste prove.
+**Baseline già eseguita:** CI locale e da ZIP nuovo, 870 xUnit, 32 Node, 23 regressioni degli strumenti, 10 CLI e contratto .NET→Node passati. Inoltre 21 casi nativi sulle registrazioni, eseguiti separatamente da CI e ripetuti anche dall'estrazione. Consegna e rebuild nel [rapporto](../reports/ALPHA20_28_CHECKS.md).
 
 ## Requisiti
 
@@ -19,7 +19,7 @@ Eseguire i comandi dalla cartella contenente `Ristretto.sln`.
 | SOURCE | `.\scripts\validate-source.cmd` | Audit C#, regressioni degli strumenti, XML/XAML, lingue, link e DDL SQLite |
 | CORE | `.\scripts\validate.cmd` | SOURCE, restore/build solution, xUnit, quattro laboratori e DevTools, dieci CLI senza GUI |
 | CI | `.\scripts\validate-gate.cmd ci` | CORE, Node e contratto export .NET→Node |
-| FULL | `.\scripts\validate-gate.cmd full` | CI e laboratori nativi Windows controllati; richiede desktop interattivo |
+| FULL | `.\scripts\validate-gate.cmd full` | CI e laboratori nativi Windows controllati, incluse registrazioni hotkey; richiede desktop interattivo |
 
 Il risultato è `GATE <NOME>: PASS` oppure `FAIL`. Ogni passo registra anche `NOT_RUN`. Un tool compilato non è un tool eseguito.
 
@@ -34,17 +34,28 @@ Linux/macOS dispongono degli avviatori `validate-source.sh`, `validate.sh` e `va
 ~~~powershell
 .\scripts\validate-picker.cmd
 dotnet test tests/TextExpander.Tests/TextExpander.Tests.csproj -c Release --filter FullyQualifiedName~HotkeyCaptureTests
+dotnet test tests/TextExpander.Tests/TextExpander.Tests.csproj -c Release --filter FullyQualifiedName~HotkeyCaptureWindowTests
 ~~~
+
+Il secondo filtro apre i controlli reali su backend Avalonia headless: 22 casi, risorse del prodotto e database sintetico, senza finestre del sistema operativo, registrazioni native o profilo personale. Sono inclusi anche in CORE/CI. La dipendenza solo test `Avalonia.Headless.XUnit` deve restare alla stessa patch di Avalonia, attualmente 11.3.22. [Copertura e limiti](ALPHA20_27_CAPTURE_INTEGRATION.md).
 
 Per avviare una libreria isolata, senza usare quella personale:
 
 ~~~powershell
-dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-26"
+dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-28"
 ~~~
 
 Per riutilizzare il profilo nelle versioni successive conservare lo stesso percorso assoluto. Un secondo profilo separa i dati, ma può entrare in conflitto sulle combinazioni globali.
 
 ## 3. Form Registra… e hotkey reali
+
+Per provare soltanto i worker di registrazione e le collisioni fra processi, senza aprire finestre o inviare input:
+
+~~~powershell
+.\scripts\validate-snippet-hotkeys.cmd
+~~~
+
+Registra temporaneamente tre combinazioni disponibili fra Ctrl+Alt+Shift+F6…F11, produce un JSON nuovo per caso e rilascia le assegnazioni. Nessun uso di appunti o profili personali. La prova è inclusa anche in FULL/validate-native; CORE e CI non la eseguono. [Perimetro, prerequisiti ed esiti](ALPHA20_28_NATIVE_HOTKEY_REGISTRATIONS.md).
 
 Usare la [matrice di qualificazione Windows](WINDOWS_QUALIFICATION_PLAN.md). Prima sequenza:
 
@@ -54,7 +65,7 @@ Usare la [matrice di qualificazione Windows](WINDOWS_QUALIFICATION_PLAN.md). Pri
 4. Ripetere con annullamento, Esc, chiusura, rimozione e combinazione già assegnata.
 5. Controllare che picker e snippet tornino utilizzabili dopo ogni chiusura della form.
 
-Il richiamo base della 20.25 in Blocco note è confermato dall'utente. Questa conferma non chiude la prova del nuovo dialogo 20.26 o dei casi avanzati.
+Il richiamo base in Blocco note e quello dopo la 20.27 sono confermati dall'utente. I test headless verificano UI/SQLite e il laboratorio 20.28 verifica worker/coordinatore nativi; l'orchestrazione Desktop.App e i casi avanzati del desktop restano aperti.
 
 ## 4. Prova guidata del picker in Blocco note
 

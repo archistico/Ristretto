@@ -1,15 +1,19 @@
 # Piano di qualificazione Windows — picker e hotkey
 
-**Baseline iniziale:** Alpha 20.26 · **Roadmap:** R2.01, R2.08, R2.09 e completamento R2.
+**Baseline da provare:** Alpha 20.28 · **Roadmap:** R2.01, R2.08, R2.09 e completamento R2.
 
 Questa è la matrice da eseguire, non un rapporto di prove già effettuate. Il richiamo base in Blocco note della 20.25 è confermato dall'utente; non viene trasferito automaticamente ai casi sotto. Tutti i nuovi casi iniziano come `NOT_RUN`.
+
+Dopo la 20.27 l'utente ha nuovamente confermato «tramite hotkey funziona», senza i dettagli necessari per attribuire PASS alle righe. La [prova nativa 20.28](ALPHA20_28_NATIVE_HOTKEY_REGISTRATIONS.md) supera 21 casi su worker/coordinatore, con collisioni fra processi, rilascio e riacquisizione: copre parti dei prerequisiti di CAP-12 e REG-02/03/04/05. Non apre Desktop.App né prova gli interi passi UI della matrice; questi rimangono `NOT_RUN`.
+
+La [suite headless 20.27](ALPHA20_27_CAPTURE_INTEGRATION.md) copre parti di CAP-01/02/05/06/07/10/11 e UI-02, inclusi bozza/SQLite e Tab/Shift+Tab. Usa eventi sintetici e pausa/ripristino simulati: non cambia lo stato dei casi desktop sotto. Provare esplicitamente la combinazione acquisita seguita da Shift+Tab/Invio e la disposizione francese/tedesca, corretti in questa versione.
 
 ## Preparazione
 
 Annotare versione/hash di Ristretto, versione/build Windows, versione editor, layout tastiera, lingua, tema, DPI e data. Usare una cartella dati nuova e un documento di prova vuoto, con testo sintetico.
 
 ```powershell
-dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-26"
+dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-28"
 ```
 
 Preparare due gruppi e tre snippet con nomi distinti. Assegnare a uno un testo multilinea con accenti combinanti, emoji ZWJ, CJK e RTL. Scegliere combinazioni disponibili nella sessione; per i casi di collisione registrare chi le possiede. Prima delle prove desktop il gate CORE deve essere PASS.
@@ -60,6 +64,6 @@ Per ogni riga conservare: versione, passi effettivi, atteso, osservato, esito e 
 
 ## Come chiudere una sessione
 
-Registrare i difetti con una sequenza riproducibile e una priorità, correggere e rieseguire le righe coinvolte. Collegare ciascun risultato a R2 nella roadmap. Non chiudere R2.08/R2.09 sulla sola base dei test di stato senza GUI.
+Registrare i difetti con una sequenza riproducibile e una priorità, correggere e rieseguire le righe coinvolte. Collegare ciascun risultato a R2 nella roadmap. Non chiudere R2.08/R2.09 sulla sola base dei test di stato o di integrazione UI headless.
 
 Per una ricevuta del documento salvato in Blocco note è disponibile anche la [procedura guidata](BUILD_AND_TEST.md#4-prova-guidata-del-picker-in-blocco-note). Le prove su Edit posseduto appartengono a un perimetro distinto dagli editor esterni.

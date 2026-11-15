@@ -20,7 +20,7 @@ Ristretto è un'applicazione desktop per conservare e riutilizzare testi frequen
 
 Gli snippet sono organizzati in gruppi e salvati localmente. Su Windows puoi inserirli nell'applicazione in cui stai scrivendo tramite una combinazione di tasti o scegliendoli dal picker.
 
-**Versione attuale: 3.9.0-alpha.20.26.** Il progetto è in sviluppo, realizzato in C#/.NET 10, Avalonia e SQLite. La prima piattaforma di utilizzo è Windows; le funzioni native per Linux e macOS sono pianificate.
+**Versione attuale: 3.9.0-alpha.20.28.** Il progetto è in sviluppo, realizzato in C#/.NET 10, Avalonia e SQLite. La prima piattaforma di utilizzo è Windows; le funzioni native per Linux e macOS sono pianificate.
 
 **L'espansione automatica mentre digiti un trigger, per esempio `;firma`, è ancora in sviluppo.** Oggi il richiamo avviene con un comando esplicito.
 
@@ -102,7 +102,7 @@ dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Rel
 
 ## Stato e prossimi passi
 
-La baseline Alpha 20.26 ha superato **846 test xUnit**, **32 test Node** e il gate CI anche da ZIP estratto in una cartella nuova. Questi risultati precedono la presente revisione della documentazione.
+La Alpha 20.28 aggiunge **21 prove delle registrazioni Windows reali**: conflitti, rilascio e ripristino delle hotkey, anche fra due processi. Superati inoltre **870 xUnit, 32 Node e gate CI**, anche dallo ZIP estratto in cartella nuova. Il richiamo tramite hotkey è stato nuovamente confermato dall'utente. [Risultati e perimetro delle verifiche](reports/ALPHA20_28_CHECKS.md).
 
 I prossimi passi sono verificare sul desktop la form Registra…, completare i controlli di affidabilità del flusso manuale e qualificare la provenienza dell'input prima della prima espansione automatica.
 

@@ -1,6 +1,6 @@
-# Documentazione — Ristretto Alpha 20.26
+# Documentazione — Ristretto Alpha 20.28
 
-**Revisione documentale:** 15 novembre 2026. La versione dell'applicazione resta 3.9.0-alpha.20.26.
+**Aggiornamento:** 15 novembre 2026. Versione dell'applicazione 3.9.0-alpha.20.28.
 
 ## Da dove iniziare
 
@@ -15,10 +15,12 @@
 | Riprendere lo sviluppo | [Handoff](HANDOFF.md) |
 | Verificare le evidenze | [Rapporti](../reports/README.md) |
 
-La baseline funzionale comprende 846 xUnit e 32 Node passati, anche da una nuova estrazione dello ZIP. Il richiamo base tramite hotkey in Blocco note è confermato dall'utente; il nuovo dialogo Registra… e i casi avanzati desktop restano da qualificare. La [revisione documentale](../reports/DOCS_ROADMAP_REVIEW.md) distingue i controlli ripetuti dalla baseline conservata.
+La 20.28 aggiunge 21 casi con registrazioni native Windows e collisioni fra processi: [rapporto](../reports/ALPHA20_28_CHECKS.md). Il dialogo resta coperto da integrazione headless; l'orchestrazione completa sul desktop è ancora da qualificare. Il richiamo tramite hotkey è stato nuovamente confermato dall'utente.
 
 ## Uso, dati e interfaccia
 
+- [Registrazioni Windows e conflitti, Alpha 20.28](ALPHA20_28_NATIVE_HOTKEY_REGISTRATIONS.md)
+- [Prove UI e correzioni della cattura, Alpha 20.27](ALPHA20_27_CAPTURE_INTEGRATION.md)
 - [Registra hotkey, Alpha 20.26](ALPHA20_26_HOTKEY_CAPTURE.md)
 - [Hotkey per snippet, Alpha 20.25](ALPHA20_25_SNIPPET_HOTKEYS.md)
 - [Matrice di qualificazione Windows](WINDOWS_QUALIFICATION_PLAN.md)

@@ -1,8 +1,16 @@
+## Alpha 20.28 — ultimo rapporto funzionale
+
+[Verifiche](ALPHA20_28_CHECKS.md) · [JSON](ALPHA20_28_VALIDATION.json) · [ricevute native](alpha20-28-native-hotkeys.json) · [log](alpha20-28-validation.log). 21 casi con registrazioni Windows reali passati, compresi conflitti fra processi e rilascio dopo terminazione del figlio; nuova conferma utente del richiamo tramite hotkey. L'orchestrazione completa del desktop resta da qualificare.
+
+## Alpha 20.27 — rapporto precedente
+
+[Verifiche](ALPHA20_27_CHECKS.md) · [JSON](ALPHA20_27_VALIDATION.json) · [log](alpha20-27-validation.log). 870 xUnit e 32 Node passati; 24 nuovi casi, di cui 22 UI headless. Corretti Shift+Tab e disposizione delle azioni tradotte; registrazioni native e tastiera fisica restano da qualificare.
+
 ## Revisione documentale — 15 novembre 2026
 
 [README e roadmap](DOCS_ROADMAP_REVIEW.md): revisione dei soli documenti sulla baseline Alpha 20.26. I nuovi controlli documentali sono separati dai risultati funzionali già conservati qui sotto.
 
-## Alpha 20.26 — ultimo rapporto funzionale
+## Alpha 20.26 — rapporto precedente
 
 [Verifiche](ALPHA20_26_CHECKS.md) · [JSON](ALPHA20_26_VALIDATION.json) · [log](alpha20-26-validation.log). 846 xUnit passati, inclusi 26 nuovi casi. Conferma utente del richiamo in Blocco note della 20.25; nuova form ancora da qualificare sul desktop. Le sezioni successive conservano gli esiti storici.
 
