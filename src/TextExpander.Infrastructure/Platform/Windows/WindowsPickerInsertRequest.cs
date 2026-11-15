@@ -10,6 +10,7 @@ public sealed class WindowsPickerInsertRequest
 {
     private readonly WindowsPickerPasteService _service;
     private readonly WindowsPickerPasteTarget _target;
+    private readonly bool _restoreFocus;
     private int _started;
     private int _cancelled;
     // Atomic handoff between cancellation and the first native paste attempt.
@@ -17,10 +18,11 @@ public sealed class WindowsPickerInsertRequest
     // The reservation is one-way: even an unknown native result must never retry.
     private int _dispatchDecision;
 
-    public WindowsPickerInsertRequest(WindowsPickerPasteService service, WindowsPickerPasteTarget target)
+    public WindowsPickerInsertRequest(WindowsPickerPasteService service, WindowsPickerPasteTarget target, bool restoreFocus = true)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
         _target = target ?? throw new ArgumentNullException(nameof(target));
+        _restoreFocus = restoreFocus;
     }
 
     public void Cancel()
@@ -51,7 +53,7 @@ public sealed class WindowsPickerInsertRequest
         try
         {
             if (IsCancelled) return Cancelled();
-            if (!_service.TryActivate(_target)) return new(PickerPasteStatus.Rejected, "activation_failed");
+            if (_restoreFocus && !_service.TryActivate(_target)) return new(PickerPasteStatus.Rejected, "activation_failed");
             if (IsCancelled) return Cancelled();
             // Capture the clipboard version before any asynchronous focus wait.
             // Do not overwrite a concurrent third-party clipboard change.

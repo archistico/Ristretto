@@ -70,6 +70,14 @@ internal static class Program
             return await ExternalAdapterCapabilityCommand.Run(null);
         if (args.Length == 3 && args[0] == "--assess-external-adapter" && args[1] == "--report")
             return await ExternalAdapterCapabilityCommand.Run(args[2]);
+        if (args.Length == 1 && args[0] == "--observe-classic-edit-text")
+            return await ExternalClassicEditTextCommand.Run();
+        if (args.Length == 2 && args[0] == "--observe-classic-edit-live" &&
+            int.TryParse(args[1], out var liveSeconds))
+            return await ExternalClassicEditLiveCommand.RunAsync(liveSeconds);
+        if (args.Length == 2 && args[0] == "--observe-classic-edit-preview" &&
+            int.TryParse(args[1], out var previewSeconds))
+            return await ExternalClassicEditLiveCommand.RunAsync(previewSeconds, preview: true);
         if (args.Length == 1 && args[0] == "--inspect-classic-edit")
             return await ExternalClassicEditSelectionCommand.Run(null);
         if (args.Length == 3 && args[0] == "--inspect-classic-edit" && args[1] == "--report")
@@ -108,6 +116,9 @@ internal static class Program
         Console.WriteLine("--probe-external [--report nuovo-file.json]: ricognizione Win32 in SOLA LETTURA, senza input.");
         Console.WriteLine("--observe-focus 15: osserva per 15 secondi SOLO variazioni di finestra e focus, senza caratteri o modifiche.");
         Console.WriteLine("--inspect-classic-edit [--report nuovo-file.json]: EM_GETSEL read-only, senza testo/offset.");
+        Console.WriteLine("--observe-classic-edit-text: prova ESPLICITA su Edit classico esterno, legge temporaneamente testo in RAM (max 4096 UTF-16), senza log o scritture.");
+        Console.WriteLine("--observe-classic-edit-live 15: ascolta per 15 s notifiche WinEvent su Edit esterno, legge solo temporaneamente in RAM, senza output di testo o scritture.");
+        Console.WriteLine("--observe-classic-edit-preview 15: ANTEPRIMA con catalogo sintetico ;firma, mai modifica testo esterno.");
         Console.WriteLine("--assess-external-adapter [--report nuovo-file.json]: matrice delle garanzie mancanti; nessuna sostituzione.");
         Console.WriteLine("--replacement-test: prove automatiche su EDIT Win32 propri, senza SendInput.");
         Console.WriteLine("--cooperating-demo [--report file-nuovo.json]: prova umana in secondo processo EDIT cooperante.");

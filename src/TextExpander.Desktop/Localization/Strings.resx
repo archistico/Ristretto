@@ -157,7 +157,7 @@
     <value>Search name, trigger, description or text…</value>
   </data>
   <data name="PickerInstructions" xml:space="preserve">
-    <value>Enter: insert first result · Esc: close</value>
+    <value>↑↓ select · Enter insert · Esc close</value>
   </data>
   <data name="PickerOpenLibrary" xml:space="preserve">
     <value>Library</value>
@@ -372,4 +372,11 @@
   <data name="PickerOperationPending" xml:space="preserve">
     <value>Operation in progress…</value>
   </data>
+  <data name="SnippetHotkeyLabel" xml:space="preserve"><value>Snippet hotkey (optional)</value></data>
+  <data name="SnippetHotkeyHint" xml:space="preserve"><value>Windows: Ctrl/Alt + letter, digit, Space or F1–F11. Save, then release the keys to insert in the active app. Empty or None removes it.</value></data>
+  <data name="SnippetHotkeyPending" xml:space="preserve"><value>Save the snippet to apply this shortcut.</value></data>
+  <data name="SnippetHotkeyActive" xml:space="preserve"><value>Hotkey active: insert directly without opening the picker.</value></data>
+  <data name="SnippetHotkeyInactive" xml:space="preserve"><value>Hotkey inactive: the snippet or its group is disabled.</value></data>
+  <data name="SnippetHotkeyUnavailable" xml:space="preserve"><value>Hotkey saved but inactive: shortcut in use or Windows registration unavailable.</value></data>
+  <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Shortcut already assigned to another snippet or the picker. Choose another one.</value></data>
 </root>

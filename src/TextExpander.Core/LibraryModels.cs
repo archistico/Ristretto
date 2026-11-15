@@ -12,7 +12,8 @@ public sealed record Snippet(
     string Content,
     string Description,
     bool IsEnabled,
-    long Revision);
+    long Revision,
+    string Hotkey = "");
 
 public sealed record LibrarySnapshot(
     IReadOnlyList<SnippetGroup> Groups,
@@ -27,7 +28,8 @@ public sealed record SnippetDraft(
     string Content,
     string Description,
     bool IsEnabled,
-    long? ExpectedRevision);
+    long? ExpectedRevision,
+    string Hotkey = "");
 
 public static class LibraryRules
 {

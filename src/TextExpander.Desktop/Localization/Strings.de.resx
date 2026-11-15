@@ -157,7 +157,7 @@
     <value>Name, Kürzel, Beschreibung oder Text suchen…</value>
   </data>
   <data name="PickerInstructions" xml:space="preserve">
-    <value>Enter: ersten Treffer einfügen · Esc: schließen</value>
+    <value>↑↓ wählen · Enter einfügen · Esc schließen</value>
   </data>
   <data name="PickerOpenLibrary" xml:space="preserve">
     <value>Bibliothek</value>
@@ -372,4 +372,11 @@
   <data name="PickerOperationPending" xml:space="preserve">
     <value>Vorgang läuft…</value>
   </data>
+  <data name="SnippetHotkeyLabel" xml:space="preserve"><value>Snippet-Tastenkürzel (optional)</value></data>
+  <data name="SnippetHotkeyHint" xml:space="preserve"><value>Windows: Ctrl/Alt + Buchstabe, Ziffer, Space oder F1–F11. Speichern und die Tasten loslassen, um in der aktiven App einzufügen. Leer oder None entfernt das Kürzel.</value></data>
+  <data name="SnippetHotkeyPending" xml:space="preserve"><value>Snippet speichern, um dieses Tastenkürzel anzuwenden.</value></data>
+  <data name="SnippetHotkeyActive" xml:space="preserve"><value>Tastenkürzel aktiv: direktes Einfügen ohne Picker.</value></data>
+  <data name="SnippetHotkeyInactive" xml:space="preserve"><value>Tastenkürzel inaktiv: Snippet oder Gruppe ist deaktiviert.</value></data>
+  <data name="SnippetHotkeyUnavailable" xml:space="preserve"><value>Tastenkürzel gespeichert, aber inaktiv: Kombination belegt oder Windows-Registrierung nicht verfügbar.</value></data>
+  <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Kombination bereits einem anderen Snippet oder dem Picker zugewiesen. Bitte eine andere wählen.</value></data>
 </root>

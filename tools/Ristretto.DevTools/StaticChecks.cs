@@ -88,7 +88,7 @@ public static class StaticChecks
         var appCs = Read(root, "src/TextExpander.Desktop/App.axaml.cs");
         foreach (var marker in new[] { "Click=\"Insert_Click\"", "IsEnabled=\"{Binding CanInsert}\"", "IsEnabled=\"{Binding CanCopy}\"", "Name=\"SearchBox\"", "Name=\"ResultsList\"" })
             if (!pickerXaml.Contains(marker, StringComparison.Ordinal)) errors.Add("Picker XAML: contratto mancante " + marker);
-        foreach (var marker in new[] { "vm.InsertSelectedAsync(app.InsertFromPickerAsync)", "vm.InsertFirstAsync(app.InsertFromPickerAsync)", "AddHandler(KeyUpEvent, OnPickerEnterKeyUp" })
+        foreach (var marker in new[] { "vm.InsertSelectedAsync(app.InsertFromPickerAsync)", "vm.InsertForEnterAsync(app.InsertFromPickerAsync)", "AddHandler(KeyUpEvent, OnPickerEnterKeyUp" })
             if (!pickerCs.Contains(marker, StringComparison.Ordinal)) errors.Add("Picker: percorso Invio/Inserisci mancante " + marker);
         foreach (var marker in new[] { "CaptureExternalForeground()", "CancelPickerInsertion()" })
             if (!appCs.Contains(marker, StringComparison.Ordinal)) errors.Add("App: protezione inserimento mancante " + marker);
@@ -97,6 +97,15 @@ public static class StaticChecks
         if (!File.Exists(Path.Combine(root, "src/TextExpander.Desktop/Assets/app-icon.ico")))
             errors.Add("Icona tray mancante");
         var main = Read(root, "src/TextExpander.Desktop/MainWindow.axaml");
+        // La textarea deve crescere con la finestra; impedire il ritorno della vecchia misura fissa.
+        if (main.Contains("Height=\"225\"", StringComparison.Ordinal) ||
+            main.Contains("MaxWidth=\"830\"", StringComparison.Ordinal) ||
+            !main.Contains("Grid.Row=\"1\" Name=\"ContentEditor\"", StringComparison.Ordinal) ||
+            !main.Contains("VerticalAlignment=\"Stretch\"", StringComparison.Ordinal))
+            errors.Add("Editor: campo Testo da espandere deve adattarsi a larghezza e altezza della finestra");
+        if (!pickerCs.Contains("OnPickerNavigationKeyDown", StringComparison.Ordinal) ||
+            !pickerCs.Contains("vm.MoveSelection(", StringComparison.Ordinal))
+            errors.Add("Picker: navigazione da tastiera dei risultati mancante");
         foreach (var binding in new[] { "EditorTitle", "EditorTrigger", "EditorContent", "EditorDescription", "SaveCommand" })
             if (!main.Contains("{Binding " + binding, StringComparison.Ordinal)) errors.Add("Binding GUI mancante: " + binding);
         var app = Read(root, "src/TextExpander.Desktop/App.axaml");

@@ -1,6 +1,7 @@
 using TextExpander.Application.Abstractions;
 using TextExpander.Core;
 using TextExpander.Core.Matching;
+using TextExpander.Application.Features.Hotkeys;
 
 namespace TextExpander.Application.Features.Library;
 
@@ -25,7 +26,8 @@ public sealed class LibraryService(ILibraryStore store)
     public Task<Snippet> SaveAsync(SnippetDraft draft, CancellationToken ct = default)
     {
         LibraryRules.Validate(draft);
-        return store.SaveSnippetAsync(draft with { Title = draft.Title.Trim(), Trigger = LibraryRules.CanonicalTrigger(draft.Trigger) }, ct);
+        return store.SaveSnippetAsync(draft with { Title = draft.Title.Trim(), Trigger = LibraryRules.CanonicalTrigger(draft.Trigger),
+            Hotkey = SnippetHotkeyRules.Normalize(draft.Hotkey) }, ct);
     }
     public Task DeleteAsync(Snippet snippet, CancellationToken ct = default) => store.DeleteSnippetAsync(snippet.Id, snippet.Revision, ct);
     public TriggerMatch Preview(string committedText, LibrarySnapshot snapshot) => TriggerMatcher.MatchSuffix(committedText, snapshot);

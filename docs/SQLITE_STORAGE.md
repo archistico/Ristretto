@@ -1,5 +1,7 @@
 # SQLite — implementazione e specifica
 
+**Alpha 20.25, schema operativo 2:** aggiunta la colonna facoltativa `snippets.hotkey` (`TEXT NOT NULL DEFAULT ''`, massimo 64 caratteri) con indice univoco sulle assegnazioni non vuote. Migrazione transazionale e idempotente dallo schema 1; gli snippet esistenti restano senza hotkey. Salvataggio e import normalizzano la combinazione e rifiutano conflitti con altri snippet o con il picker. Il restore di un backup schema 1 migra soltanto la copia di staging, conservando il file sorgente e il recupero del database precedente. Migrazione, backup/ripristino e isolamento verificati con SQLite reale su dati sintetici; [rapporto 20.25](ALPHA20_25_SNIPPET_HOTKEYS.md). Le descrizioni seguenti sono storiche.
+
 > **Lettura corrente:** SQLite è l'archivio operativo e il formato di backup; JSON è implementato per import/export. L'ultima suite Windows comprende 180 test passati. Le sezioni sotto conservano differenze tra schema proposto e implementazione e gli stati alla loro data; non attestano l'esecuzione di ogni scenario documentale. [Stato corrente](CURRENT_STATE.md), [build e test](BUILD_AND_TEST.md), [rapporti](../reports/README.md).
 
 ## Decisione applicata nella v2.9 (storico)

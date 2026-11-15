@@ -4,6 +4,8 @@
 
 ## Schema v1
 
+Da Alpha 20.25 ogni snippet può includere il campo facoltativo `hotkey`, ad esempio `"hotkey": "Ctrl+Alt+F"`. L'assenza del campo, il valore vuoto o `None` non assegnano alcuna combinazione. Il formato resta v1: i vecchi export continuano a essere importabili; i nuovi export mantengono le associazioni. Un duplicato fra i dati importati, o un conflitto con lo snippet/picker già presente, annulla l'intera importazione. L'estensione VS Code ignora questo campo e non registra scorciatoie da esso. [Dettagli](ALPHA20_25_SNIPPET_HOTKEYS.md).
+
 ```json
 {
   "format": "text-expander-studio/snippets",

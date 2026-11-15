@@ -157,7 +157,7 @@
     <value>Buscar nombre, activador, descripción o texto…</value>
   </data>
   <data name="PickerInstructions" xml:space="preserve">
-    <value>Intro: insertar primer resultado · Esc: cerrar</value>
+    <value>↑↓ elegir · Intro insertar · Esc cerrar</value>
   </data>
   <data name="PickerOpenLibrary" xml:space="preserve">
     <value>Biblioteca</value>
@@ -372,4 +372,11 @@
   <data name="PickerOperationPending" xml:space="preserve">
     <value>Operación en curso…</value>
   </data>
+  <data name="SnippetHotkeyLabel" xml:space="preserve"><value>Atajo del snippet (opcional)</value></data>
+  <data name="SnippetHotkeyHint" xml:space="preserve"><value>Windows: Ctrl/Alt + letra, cifra, Space o F1–F11. Guarda y suelta las teclas para insertar en la app activa. Vacío o None para eliminar.</value></data>
+  <data name="SnippetHotkeyPending" xml:space="preserve"><value>Guarda el snippet para aplicar este atajo.</value></data>
+  <data name="SnippetHotkeyActive" xml:space="preserve"><value>Atajo activo: inserción directa sin abrir el selector.</value></data>
+  <data name="SnippetHotkeyInactive" xml:space="preserve"><value>Atajo inactivo: el snippet o su grupo está desactivado.</value></data>
+  <data name="SnippetHotkeyUnavailable" xml:space="preserve"><value>Atajo guardado pero inactivo: combinación ocupada o registro de Windows no disponible.</value></data>
+  <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Combinación ya asignada a otro snippet o al selector. Elige otra.</value></data>
 </root>

@@ -2,6 +2,7 @@ using Microsoft.Data.Sqlite;
 using TextExpander.Application.Abstractions;
 using TextExpander.Core;
 using TextExpander.Application.Features.Portability;
+using TextExpander.Application.Features.Hotkeys;
 
 namespace TextExpander.Infrastructure.Storage;
 
@@ -11,7 +12,7 @@ namespace TextExpander.Infrastructure.Storage;
 /// </summary>
 public sealed class SqliteLibraryStore(string databasePath) : ILibraryStore
 {
-    private const int SchemaVersion = 1;
+    private const int SchemaVersion = 2;
     private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly string _path = Path.GetFullPath(databasePath);
 
@@ -65,14 +66,24 @@ public sealed class SqliteLibraryStore(string databasePath) : ILibraryStore
                     throw new DataIntegrityException("SQLite non ha attivato WAL.");
             }
             using (var sync = Cmd(db, "PRAGMA synchronous=FULL;")) sync.ExecuteNonQuery();
-            using (var cmd = Cmd(db, "PRAGMA user_version;"))
-            {
-                int version = Convert.ToInt32(cmd.ExecuteScalar());
-                if (version > SchemaVersion)
-                    throw new DataIntegrityException("Archivio creato da una versione più recente.");
-                if (version != 0) return true;
-            }
-            using var tx = db.BeginTransaction();
+            EnsureSchema(db);
+            return true;
+        }, ct).ConfigureAwait(false);
+    }
+
+    private static void EnsureSchema(SqliteConnection db)
+    {
+        int version;
+        using (var cmd = Cmd(db, "PRAGMA user_version;"))
+        {
+            version = Convert.ToInt32(cmd.ExecuteScalar());
+            if (version is < 0 or > SchemaVersion)
+                throw new DataIntegrityException("Schema dell'archivio non supportato.");
+            if (version == SchemaVersion) return;
+        }
+        using var tx = db.BeginTransaction();
+        if (version == 0)
+        {
             using (var schema = Cmd(db, @"
 CREATE TABLE IF NOT EXISTS groups (
     id TEXT PRIMARY KEY NOT NULL,
@@ -87,16 +98,24 @@ CREATE TABLE IF NOT EXISTS snippets (
     content TEXT NOT NULL CHECK(length(content)>0),
     description TEXT NOT NULL DEFAULT '',
     enabled INTEGER NOT NULL DEFAULT 1 CHECK(enabled IN (0,1)),
-    revision INTEGER NOT NULL DEFAULT 1 CHECK(revision > 0)
+    revision INTEGER NOT NULL DEFAULT 1 CHECK(revision > 0),
+    hotkey TEXT NOT NULL DEFAULT '' CHECK(length(hotkey)<=64)
 );
 CREATE INDEX IF NOT EXISTS idx_snippets_group ON snippets(group_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_snippets_hotkey ON snippets(hotkey) WHERE hotkey<>'';
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY NOT NULL, value TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS app_meta (id INTEGER PRIMARY KEY CHECK(id=1), library_revision INTEGER NOT NULL DEFAULT 0);
 INSERT OR IGNORE INTO app_meta(id,library_revision) VALUES (1,0);
-PRAGMA user_version=1;", tx)) schema.ExecuteNonQuery();
-            tx.Commit();
-            return true;
-        }, ct).ConfigureAwait(false);
+PRAGMA user_version=2;", tx)) schema.ExecuteNonQuery();
+        }
+        if (version == 1)
+        {
+            using var migration = Cmd(db, @"ALTER TABLE snippets ADD COLUMN hotkey TEXT NOT NULL DEFAULT '' CHECK(length(hotkey)<=64);
+CREATE UNIQUE INDEX idx_snippets_hotkey ON snippets(hotkey) WHERE hotkey<>'';
+PRAGMA user_version=2;", tx);
+            migration.ExecuteNonQuery();
+        }
+        tx.Commit();
     }
 
     public Task<LibrarySnapshot> ReadAsync(CancellationToken ct = default) => Exclusive(() =>
@@ -108,12 +127,12 @@ PRAGMA user_version=1;", tx)) schema.ExecuteNonQuery();
         using (var reader = cmd.ExecuteReader())
             while (reader.Read())
                 groups.Add(new(Guid.Parse(reader.GetString(0)), reader.GetString(1), reader.GetInt64(2) != 0));
-        using (var cmd = Cmd(db, "SELECT id,group_id,title,trigger,content,description,enabled,revision FROM snippets ORDER BY title"))
+        using (var cmd = Cmd(db, "SELECT id,group_id,title,trigger,content,description,enabled,revision,hotkey FROM snippets ORDER BY title"))
         using (var reader = cmd.ExecuteReader())
             while (reader.Read())
                 snippets.Add(new(Guid.Parse(reader.GetString(0)), Guid.Parse(reader.GetString(1)),
                     reader.GetString(2), reader.GetString(3), reader.GetString(4),
-                    reader.GetString(5), reader.GetInt64(6) != 0, reader.GetInt64(7)));
+                    reader.GetString(5), reader.GetInt64(6) != 0, reader.GetInt64(7), reader.GetString(8)));
         using var revision = Cmd(db, "SELECT library_revision FROM app_meta WHERE id=1");
         return new LibrarySnapshot(groups, snippets, Convert.ToInt64(revision.ExecuteScalar()));
     }, ct);
@@ -216,15 +235,17 @@ WHERE id=$id AND name=$name AND enabled=$enabled", tx,
         }
         foreach (var snippet in document.Snippets)
         {
+            var hotkey = SnippetHotkeyRules.Normalize(snippet.Hotkey);
+            EnsureHotkeyAvailable(db, tx, hotkey, null);
             using var cmd = Cmd(db, @"INSERT INTO snippets
-(id,group_id,title,trigger,content,description,enabled,revision)
-VALUES ($id,$group,$title,$trigger,$content,$description,$enabled,1)", tx,
+(id,group_id,title,trigger,content,description,enabled,revision,hotkey)
+VALUES ($id,$group,$title,$trigger,$content,$description,$enabled,1,$hotkey)", tx,
                 ("$id", Guid.NewGuid().ToString()),
                 ("$group", newGroupIds[snippet.GroupId].ToString()),
                 ("$title", snippet.Title),
                 ("$trigger", LibraryRules.CanonicalTrigger(snippet.Trigger)),
                 ("$content", snippet.Content), ("$description", snippet.Description),
-                ("$enabled", snippet.IsEnabled ? 1 : 0));
+                ("$enabled", snippet.IsEnabled ? 1 : 0), ("$hotkey", hotkey));
             cmd.ExecuteNonQuery();
         }
         Touch(db, tx);
@@ -238,23 +259,37 @@ VALUES ($id,$group,$title,$trigger,$content,$description,$enabled,1)", tx,
         cmd.ExecuteNonQuery();
     }
 
+    private static void EnsureHotkeyAvailable(SqliteConnection db, SqliteTransaction? tx, string hotkey, Guid? exceptId)
+    {
+        if (hotkey.Length == 0) return;
+        using var picker = Cmd(db, "SELECT value FROM settings WHERE key='picker.hotkey'", tx);
+        var pickerValue = picker.ExecuteScalar() as string ?? PickerHotkey.Default;
+        if (PickerHotkey.TryParse(pickerValue, out var reserved) && !reserved.IsDisabled && reserved.Canonical == hotkey)
+            throw new SnippetHotkeyConflictException();
+        using var other = Cmd(db, "SELECT 1 FROM snippets WHERE hotkey=$hotkey AND id<>$except LIMIT 1", tx,
+            ("$hotkey", hotkey), ("$except", exceptId?.ToString() ?? ""));
+        if (other.ExecuteScalar() is not null) throw new SnippetHotkeyConflictException();
+    }
+
     public Task<Snippet> SaveSnippetAsync(SnippetDraft draft, CancellationToken ct = default) => Exclusive(() =>
     {
         LibraryRules.Validate(draft);
         string canonical = LibraryRules.CanonicalTrigger(draft.Trigger);
+        string hotkey = SnippetHotkeyRules.Normalize(draft.Hotkey);
         using var db = Open(SqliteOpenMode.ReadWrite);
         using var tx = db.BeginTransaction();
+        EnsureHotkeyAvailable(db, tx, hotkey, draft.Id);
         var id = draft.Id ?? Guid.NewGuid();
         var nextRevision = 1L;
         if (draft.Id is null)
         {
             using var cmd = Cmd(db, @"INSERT INTO snippets
-(id,group_id,title,trigger,content,description,enabled,revision)
-VALUES ($id,$group,$title,$trigger,$content,$description,$enabled,1)", tx,
+(id,group_id,title,trigger,content,description,enabled,revision,hotkey)
+VALUES ($id,$group,$title,$trigger,$content,$description,$enabled,1,$hotkey)", tx,
                 ("$id", id.ToString()), ("$group", draft.GroupId.ToString()),
                 ("$title", draft.Title), ("$trigger", canonical),
                 ("$content", draft.Content), ("$description", draft.Description),
-                ("$enabled", draft.IsEnabled ? 1 : 0));
+                ("$enabled", draft.IsEnabled ? 1 : 0), ("$hotkey", hotkey));
             cmd.ExecuteNonQuery();
         }
         else
@@ -264,19 +299,19 @@ VALUES ($id,$group,$title,$trigger,$content,$description,$enabled,1)", tx,
             nextRevision = draft.ExpectedRevision.Value + 1;
             using var cmd = Cmd(db, @"UPDATE snippets SET
  group_id=$group,title=$title,trigger=$trigger,content=$content,description=$description,
- enabled=$enabled,revision=revision+1
+ enabled=$enabled,hotkey=$hotkey,revision=revision+1
 WHERE id=$id AND revision=$expected", tx,
                 ("$id", id.ToString()), ("$group", draft.GroupId.ToString()),
                 ("$title", draft.Title), ("$trigger", canonical), ("$content", draft.Content),
                 ("$description", draft.Description), ("$enabled", draft.IsEnabled ? 1 : 0),
-                ("$expected", draft.ExpectedRevision.Value));
+                ("$expected", draft.ExpectedRevision.Value), ("$hotkey", hotkey));
             if (cmd.ExecuteNonQuery() != 1)
                 throw new ConcurrencyException("Lo snippet è cambiato: ricarica prima di salvare.");
         }
         Touch(db, tx);
         tx.Commit();
         return new Snippet(id, draft.GroupId, draft.Title, canonical,
-            draft.Content, draft.Description, draft.IsEnabled, nextRevision);
+            draft.Content, draft.Description, draft.IsEnabled, nextRevision, hotkey);
     }, ct);
 
     public async Task DeleteSnippetAsync(Guid id, long expectedRevision, CancellationToken ct = default)
@@ -308,10 +343,22 @@ WHERE id=$id AND revision=$expected", tx,
         _ = await Exclusive(() =>
         {
             using var db = Open(SqliteOpenMode.ReadWrite);
+            using var tx = db.BeginTransaction();
+            if (key == "picker.hotkey")
+            {
+                if (!PickerHotkey.TryParse(value, out var gesture)) throw new ArgumentException("Hotkey picker non valida.");
+                value = gesture.Canonical;
+                if (!gesture.IsDisabled)
+                {
+                    using var conflict = Cmd(db, "SELECT 1 FROM snippets WHERE hotkey=$key LIMIT 1", tx, ("$key", value));
+                    if (conflict.ExecuteScalar() is not null) throw new SnippetHotkeyConflictException();
+                }
+            }
             using var cmd = Cmd(db, @"INSERT INTO settings(key,value) VALUES($key,$value)
-ON CONFLICT(key) DO UPDATE SET value=excluded.value", null,
+ON CONFLICT(key) DO UPDATE SET value=excluded.value", tx,
                 ("$key", key), ("$value", value));
             cmd.ExecuteNonQuery();
+            tx.Commit();
             return true;
         }, ct).ConfigureAwait(false);
     }
@@ -337,7 +384,7 @@ ON CONFLICT(key) DO UPDATE SET value=excluded.value", null,
         using (var rows = fk.ExecuteReader())
             if (rows.Read()) throw new DataIntegrityException("Vincoli relazionali invalidi nel backup.");
         using (var ver = Cmd(db, "PRAGMA user_version;"))
-            if (Convert.ToInt32(ver.ExecuteScalar()) != SchemaVersion)
+            if (Convert.ToInt32(ver.ExecuteScalar()) is < 1 or > SchemaVersion)
                 throw new DataIntegrityException("Schema del backup non supportato.");
         using (var meta = Cmd(db, "SELECT library_revision FROM app_meta WHERE id=1"))
             if (meta.ExecuteScalar() is null) throw new DataIntegrityException("Metadati mancanti.");
@@ -383,6 +430,7 @@ ON CONFLICT(key) DO UPDATE SET value=excluded.value", null,
             {
                 // Copia consistente: non si lavora mai direttamente sul file scelto dall'utente.
                 BackupFrom(source, stage);
+                using (var staged = External(stage, SqliteOpenMode.ReadWrite)) EnsureSchema(staged);
                 ValidateDatabase(stage);
                 using (var live = Open(SqliteOpenMode.ReadWrite))
                 using (var checkpoint = Cmd(live, "PRAGMA wal_checkpoint(TRUNCATE);"))

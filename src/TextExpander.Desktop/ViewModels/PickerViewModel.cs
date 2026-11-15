@@ -126,14 +126,32 @@ public sealed class PickerViewModel(ILibraryStore store, UiStrings texts) : INot
         finally { FinishClipboardOperation(); }
     }
 
-    /// <summary>Enter accepts the first currently filtered result, independently of list selection.</summary>
-    public async Task InsertFirstAsync(Func<string, Task> insert)
+    /// <summary>
+    /// Navigazione dei risultati filtrati con le frecce. Nessuna operazione
+    /// muta la selezione mentre è in corso una copia o un inserimento.
+    /// </summary>
+    public void MoveSelection(int direction)
+    {
+        if (direction is not (-1 or 1)) throw new ArgumentOutOfRangeException(nameof(direction));
+        if (IsLoading || IsClipboardBusy || Results.Count == 0) return;
+
+        var current = Selected is { } selected ? Results.IndexOf(selected) : -1;
+        var next = current < 0
+            ? direction > 0 ? 0 : Results.Count - 1
+            : Math.Clamp(current + direction, 0, Results.Count - 1);
+        Selected = Results[next];
+    }
+
+    /// <summary>
+    /// Invio inserisce il risultato evidenziato con mouse/frecce; in mancanza
+    /// di selezione usa il primo risultato. Usa lo stesso percorso monouso
+    /// e le stesse protezioni del pulsante Inserisci.
+    /// </summary>
+    public async Task InsertForEnterAsync(Func<string, Task> insert)
     {
         ArgumentNullException.ThrowIfNull(insert);
         if (!_canInsert || IsLoading || IsClipboardBusy || Results.Count == 0) return;
-        var first = Results[0];
-        Selected = first;
-        if (!ReferenceEquals(Selected, first)) return;
+        if (!HasSelection) Selected = Results[0];
         await InsertSelectedAsync(insert);
     }
 

@@ -157,7 +157,7 @@
     <value>Cerca nome, trigger, descrizione o testo…</value>
   </data>
   <data name="PickerInstructions" xml:space="preserve">
-    <value>Invio: inserisci primo risultato · Esc: chiudi</value>
+    <value>↑↓ seleziona · Invio inserisce · Esc chiude</value>
   </data>
   <data name="PickerOpenLibrary" xml:space="preserve">
     <value>Libreria</value>
@@ -372,4 +372,11 @@
   <data name="PickerOperationPending" xml:space="preserve">
     <value>Operazione in corso…</value>
   </data>
+  <data name="SnippetHotkeyLabel" xml:space="preserve"><value>Hotkey dello snippet (facoltativa)</value></data>
+  <data name="SnippetHotkeyHint" xml:space="preserve"><value>Windows: Ctrl/Alt + lettera, cifra, Space o F1–F11. Salva e rilascia i tasti per inserire nell’app attiva. Vuoto o None per rimuovere.</value></data>
+  <data name="SnippetHotkeyPending" xml:space="preserve"><value>Salva lo snippet per applicare questa combinazione.</value></data>
+  <data name="SnippetHotkeyActive" xml:space="preserve"><value>Hotkey attiva: inserimento diretto senza aprire il picker.</value></data>
+  <data name="SnippetHotkeyInactive" xml:space="preserve"><value>Hotkey inattiva: lo snippet o il gruppo è disabilitato.</value></data>
+  <data name="SnippetHotkeyUnavailable" xml:space="preserve"><value>Hotkey salvata ma non attiva: combinazione occupata o registrazione Windows non disponibile.</value></data>
+  <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Combinazione già assegnata a un altro snippet o al picker. Scegline un’altra.</value></data>
 </root>

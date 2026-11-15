@@ -1,3 +1,11 @@
+## Alpha 20.25 — ultimo rapporto
+
+[Verifiche](ALPHA20_25_CHECKS.md) · [JSON](ALPHA20_25_VALIDATION.json) · [log](alpha20-25-validation.log). CS0246 riprodotti e corretti; 820 xUnit passati, inclusi 41 nuovi casi. Hotkey reali, clipboard e GUI desktop ancora da qualificare. Le sezioni successive sono storiche.
+
+## Alpha 20.23 — rapporto precedente
+
+[Verifiche Alpha 20.23](ALPHA20_23_CHECKS.md) — osservatore WinEvent, controlli disponibili e test Windows ancora aperti.
+
 **Hotfix Alpha 20.19.5:** [stato verifica](ALPHA20_19_5_VALIDATION_STATUS.json) · [correzione CS9174](../docs/ALPHA20_19_5_CS9174_FIX.md). Due errori di compilazione confermati dall’utente sulla 20.19.4; corretti nei sorgenti 20.19.5, build/tool C# della nuova versione ancora NOT_RUN.
 
 **Stato corrente Alpha 20.19.3:** [rapporto strutturato](ALPHA20_19_3_VALIDATION_STATUS.json) · [correzione startup CLI Windows](../docs/ALPHA20_19_3_STARTUP_CLI_ENCODING.md). I PASS della build/xUnit Alpha 20.19.2 sono confermati dall'utente; il test CLI della 20.19.2 era FAIL per la decodifica. Non trasferire questi esiti alla 20.19.3.

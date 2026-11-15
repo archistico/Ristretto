@@ -3,13 +3,14 @@ using System.Text.Json;
 using System.Text.Encodings.Web;
 using TextExpander.Application.Abstractions;
 using TextExpander.Core;
+using TextExpander.Application.Features.Hotkeys;
 
 namespace TextExpander.Application.Features.Portability;
 
 // Interoperabilità fra installazioni. Non è il formato di backup: il backup è SQLite.
 public sealed record PortableGroup(Guid Id, string Name, bool IsEnabled);
 public sealed record PortableSnippet(Guid Id, Guid GroupId, string Title, string Trigger,
-    string Content, string Description, bool IsEnabled);
+    string Content, string Description, bool IsEnabled, string Hotkey = "");
 public sealed record PortableLibraryDocument(string Format, int Version,
     IReadOnlyList<PortableGroup> Groups, IReadOnlyList<PortableSnippet> Snippets);
 public sealed record ImportSummary(int GroupsImported, int SnippetsImported);
@@ -26,7 +27,7 @@ public static class PortableLibraryFormat
         Identifier, Version,
         snapshot.Groups.Select(g => new PortableGroup(g.Id, g.Name, g.IsEnabled)).ToArray(),
         snapshot.Snippets.Select(s => new PortableSnippet(s.Id, s.GroupId, s.Title, s.Trigger,
-            s.Content, s.Description, s.IsEnabled)).ToArray());
+            s.Content, s.Description, s.IsEnabled, s.Hotkey)).ToArray());
 
     public static void Validate(PortableLibraryDocument? doc)
     {
@@ -43,6 +44,7 @@ public static class PortableLibraryFormat
             LibraryRules.ValidateGroupName(group.Name);
         }
         var snippetIds = new HashSet<Guid>();
+        var hotkeys = new HashSet<string>(StringComparer.Ordinal);
         foreach (var snippet in doc.Snippets)
         {
             if (snippet is null || snippet.Id == Guid.Empty || !snippetIds.Add(snippet.Id) ||
@@ -50,6 +52,8 @@ public static class PortableLibraryFormat
                 throw new DataIntegrityException("ID snippet duplicato o riferimento a un gruppo inesistente.");
             LibraryRules.Validate(new SnippetDraft(null, snippet.GroupId, snippet.Title,
                 snippet.Trigger, snippet.Content, snippet.Description, snippet.IsEnabled, null));
+            var hotkey = SnippetHotkeyRules.Normalize(snippet.Hotkey);
+            if (hotkey.Length > 0 && !hotkeys.Add(hotkey)) throw new SnippetHotkeyConflictException();
         }
     }
 }

@@ -36,8 +36,8 @@ public sealed class MainViewModel : INotifyPropertyChanged
     private readonly ExternalLibraryImportService _externalImport;
     private readonly string _dataDirectory;
     private LibrarySnapshot _snapshot = new([], [], 0);
-    private sealed record EditorValues(string Title, string Trigger, string Content, string Description, bool Enabled);
-    private EditorValues _baseline = new("", "", "", "", true);
+    private sealed record EditorValues(string Title, string Trigger, string Content, string Description, bool Enabled, string Hotkey);
+    private EditorValues _baseline = new("", "", "", "", true, "");
     private bool _loadingEditor;
     private bool _isSaving;
     public bool IsReloading { get; private set; }
@@ -45,7 +45,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
         (CurrentEditor() != _baseline ||
          GroupEditName != (SelectedGroup?.Name ?? ""));
     private EditorValues CurrentEditor() => new(EditorTitle, EditorTrigger, EditorContent,
-        EditorDescription, EditorEnabled);
+        EditorDescription, EditorEnabled, EditorHotkey);
     private void DirtyChanged()
     {
         if (!_loadingEditor) Changed(nameof(HasUnsavedChanges));
@@ -59,6 +59,32 @@ public sealed class MainViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
     public event EventHandler<string>? ThemeModeChanged;
+    public Func<LibrarySnapshot, Task>? RefreshSnippetHotkeysAsync { get; set; }
+    private IReadOnlyDictionary<Guid, bool> _snippetHotkeyStates = new Dictionary<Guid, bool>();
+
+    public void SetSnippetHotkeyStates(IReadOnlyDictionary<Guid, bool> states)
+    {
+        _snippetHotkeyStates = states;
+        Changed(nameof(SnippetHotkeyFeedback));
+    }
+
+    public void SetManualInsertStatus(string message) => StatusMessage = message;
+
+    public string SnippetHotkeyFeedback
+    {
+        get
+        {
+            string key;
+            try { key = SnippetHotkeyRules.Normalize(EditorHotkey); }
+            catch (ArgumentException) { return Texts.PickerHotkeyInvalid; }
+            if (key.Length == 0) return "";
+            if (SelectedSnippet?.Hotkey != key || SelectedSnippet.IsEnabled != EditorEnabled) return Texts.SnippetHotkeyPending;
+            if (!OperatingSystem.IsWindows()) return Texts.PickerHotkeyUnsupported;
+            if (!EditorEnabled || SelectedGroup?.IsEnabled != true) return Texts.SnippetHotkeyInactive;
+            return _snippetHotkeyStates.TryGetValue(SelectedSnippet.Id, out var active) && active
+                ? Texts.SnippetHotkeyActive : Texts.SnippetHotkeyUnavailable;
+        }
+    }
 
     public ObservableCollection<SnippetGroup> Groups { get; } = [];
     public ObservableCollection<Snippet> FilteredSnippets { get; } = [];
@@ -155,9 +181,11 @@ public sealed class MainViewModel : INotifyPropertyChanged
                 EditorContent = value?.Content ?? "";
                 EditorDescription = value?.Description ?? "";
                 EditorEnabled = value?.IsEnabled ?? true;
+                EditorHotkey = value?.Hotkey ?? "";
             }
             finally { _loadingEditor = false; }
             ResetBaseline();
+            Changed(nameof(SnippetHotkeyFeedback));
         }
     }
 
@@ -180,12 +208,18 @@ public sealed class MainViewModel : INotifyPropertyChanged
     public string EditorTitle { get => _editorTitle; set { if (Set(ref _editorTitle, value)) { DirtyChanged(); Changed(nameof(EditorDisplayTitle)); } } }
     private string _editorTrigger = "";
     public string EditorTrigger { get => _editorTrigger; set { if (Set(ref _editorTrigger, value)) DirtyChanged(); } }
+    private string _editorHotkey = "";
+    public string EditorHotkey
+    {
+        get => _editorHotkey;
+        set { if (Set(ref _editorHotkey, value)) { DirtyChanged(); Changed(nameof(SnippetHotkeyFeedback)); } }
+    }
     private string _editorContent = "";
     public string EditorContent { get => _editorContent; set { if (Set(ref _editorContent, value)) DirtyChanged(); } }
     private string _editorDescription = "";
     public string EditorDescription { get => _editorDescription; set { if (Set(ref _editorDescription, value)) DirtyChanged(); } }
     private bool _editorEnabled = true;
-    public bool EditorEnabled { get => _editorEnabled; set { if (Set(ref _editorEnabled, value)) DirtyChanged(); } }
+    public bool EditorEnabled { get => _editorEnabled; set { if (Set(ref _editorEnabled, value)) { DirtyChanged(); Changed(nameof(SnippetHotkeyFeedback)); } } }
     private string _previewInput = "";
     public string PreviewInput { get => _previewInput; set => Set(ref _previewInput, value); }
     private string _previewResult = "";
@@ -254,6 +288,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
             if (!Languages.Any(x => x.Code == code)) return;
             _languageCode = code;
             Texts = UiStrings.ForLanguage(code);
+            Changed(nameof(SnippetHotkeyFeedback));
             Changed(nameof(EditorHeading));
             Changed(nameof(EditorDisplayTitle));
             Changed(nameof(GroupToggleLabel));
@@ -306,6 +341,8 @@ public sealed class MainViewModel : INotifyPropertyChanged
                 Changed(nameof(GroupToggleLabel));
             }
             RefreshFiltered();
+            if (RefreshSnippetHotkeysAsync is not null) await RefreshSnippetHotkeysAsync(_snapshot);
+            Changed(nameof(SnippetHotkeyFeedback));
         }
         finally { IsReloading = false; }
     }
@@ -330,7 +367,7 @@ public sealed class MainViewModel : INotifyPropertyChanged
         _loadingEditor = true;
         try
         {
-            EditorTitle = EditorTrigger = EditorContent = EditorDescription = "";
+            EditorTitle = EditorTrigger = EditorContent = EditorDescription = EditorHotkey = "";
             EditorEnabled = true;
         }
         finally { _loadingEditor = false; }
@@ -359,9 +396,12 @@ public sealed class MainViewModel : INotifyPropertyChanged
         {
             if (SelectedGroup is null) throw new InvalidOperationException(Texts.SelectGroup);
             var groupNameDraft = GroupEditName;
+            string hotkey;
+            try { hotkey = SnippetHotkeyRules.Normalize(EditorHotkey); }
+            catch (ArgumentException) { throw new ArgumentException(Texts.PickerHotkeyInvalid); }
             var draft = new SnippetDraft(SelectedSnippet?.Id, SelectedGroup.Id,
                 EditorTitle, EditorTrigger, EditorContent, EditorDescription,
-                EditorEnabled, SelectedSnippet?.Revision);
+                EditorEnabled, SelectedSnippet?.Revision, hotkey);
             var saved = await _library.SaveAsync(draft);
             await ReloadAsync();
             SelectedSnippet = FilteredSnippets.FirstOrDefault(x => x.Id == saved.Id);
@@ -501,5 +541,6 @@ public sealed class MainViewModel : INotifyPropertyChanged
         catch (Exception ex) { Report(ex); }
     }
 
-    private void Report(Exception ex) => StatusMessage = string.Format(Texts.StatusError, ex.Message);
+    private void Report(Exception ex) => StatusMessage = string.Format(Texts.StatusError,
+        ex is SnippetHotkeyConflictException ? Texts.SnippetHotkeyConflict : ex.Message);
 }

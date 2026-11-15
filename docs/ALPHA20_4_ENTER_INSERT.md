@@ -1,3 +1,5 @@
+> **Documento storico (Alpha 20.4):** il comportamento di Invio descritto qui è stato sostituito nella **Alpha 20.22**, dove Invio usa la riga evidenziata con le frecce. [Descrizione corrente](ALPHA20_22_PICKER_EDITOR_AND_CARET.md).
+
 # Alpha 20.4 — Invio inserisce il primo risultato
 
 ## Uso

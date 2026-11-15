@@ -41,6 +41,7 @@ public partial class App : Avalonia.Application
             var profile = Program.Profile ?? throw new InvalidOperationException("Profilo di avvio non configurato.");
             var store = new SqliteLibraryStore(profile.DatabasePath);
             _vm = new MainViewModel(store, profile.DataDirectory);
+            _vm.RefreshSnippetHotkeysAsync = RefreshSnippetHotkeysAsync;
             _vm.ThemeModeChanged += (_, mode) => RequestedThemeVariant = mode switch
             {
                 "Light" => ThemeVariant.Light,
@@ -78,7 +79,14 @@ public partial class App : Avalonia.Application
             _pickerVm = new PickerViewModel(store, _vm.Texts);
             _picker = new PickerWindow(_pickerVm);
             CreateTray();
-            desktop.Exit += (_, _) => _pickerHotkey?.Dispose();
+            desktop.Exit += (_, _) =>
+            {
+                IsExiting = true;
+                CancelSnippetInsertion();
+                CancelPickerInsertion();
+                _snippetHotkeys?.Dispose();
+                _pickerHotkey?.Dispose();
+            };
             Program.Instance?.StartListening(() => Dispatcher.UIThread.Post(ShowMainWindow));
         }
         base.OnFrameworkInitializationCompleted();
@@ -124,6 +132,7 @@ public partial class App : Avalonia.Application
                 vm.SetPickerHotkeyState(_activePickerHotkey,
                     gesture.IsDisabled ? vm.Texts.PickerHotkeyDisabled :
                     string.Format(vm.Texts.PickerHotkeyRegistered, gesture.Canonical));
+                if (_snippetSnapshot is not null) await RefreshSnippetHotkeysAsync(_snippetSnapshot);
             }
             catch (Exception)
             {
@@ -181,6 +190,7 @@ public partial class App : Avalonia.Application
 
     internal void ShowMainWindow()
     {
+        CancelSnippetInsertion();
         CancelPickerInsertion();
         if (_main is null) return;
         if (!_main.IsVisible) _main.Show();
@@ -193,7 +203,7 @@ public partial class App : Avalonia.Application
         if (IsExiting || _picker is null || _pickerVm is null) return;
         // Ignore delayed/repeated hotkey notifications during an in-flight Insert.
         // They must not cancel the request between hiding the picker and SendInput.
-        if (_pickerSession.IsInsertionInProgress) return;
+        if (_pickerSession.IsInsertionInProgress || _directInsertRunning) return;
         // Repeated global hotkey while the picker itself owns focus must not
         // recapture Ristretto as the external recipient or erase the target.
         // Reinvoking from a different foreground app starts a fresh session.
@@ -236,6 +246,7 @@ public partial class App : Avalonia.Application
 
     internal async Task InsertFromPickerAsync(string content)
     {
+        if (_directInsertRunning) return;
         if (_picker is null || _pickerVm is null || _pickerPaste is null || _pickerSession.Request is null)
         {
             if (_pickerVm is not null) _pickerVm.Status = _pickerVm.Texts.PickerInsertNoTarget;
@@ -320,6 +331,7 @@ public partial class App : Avalonia.Application
     {
         if (_main is not null && !await _main.ConfirmPendingEditsAsync()) return;
         IsExiting = true;
+        CancelSnippetInsertion();
         CancelPickerInsertion();
         _desktop?.Shutdown();
     }

@@ -1,11 +1,12 @@
 # GUI corrente — Preview 9
 
-Interfaccia introdotta nella alpha.6 e conservata nella **3.9.0-alpha.20.4**, con comando Inserisci e Invio sul primo risultato nel picker. Tema chiaro caldo, scuro grafite, gerarchia centrata sul contenuto e dimensioni compatte. Restano le [verifiche manuali](GUI_VISUAL_ACCEPTANCE.md).
+Interfaccia introdotta nella alpha.6, aggiornata nella **3.9.0-alpha.20.22** con area testo reattiva e Invio sul risultato selezionato nel picker. Tema chiaro caldo, scuro grafite, gerarchia centrata sul contenuto e dimensioni compatte. Restano le [verifiche manuali](GUI_VISUAL_ACCEPTANCE.md).
 
 ## Superfici e comportamento
 
+- **Alpha 20.25:** campo facoltativo hotkey nell'editor, con stato di registrazione e istruzioni in cinque lingue. Il testo rimane nell'area flessibile. Picker invariato; rendering del nuovo campo ancora da qualificare. [Uso](ALPHA20_25_SNIPPET_HOTKEYS.md).
 - **Finestra principale:** gruppi, ricerca/elenco snippet ed editor. Titolo dello snippet in primo piano, trigger su chip sotto il nome, stato contenuto nella larghezza disponibile. Gestisce bozze non salvate, import/export, backup/ripristino, lingua e tema.
-- **Picker:** ricerca locale con [indice riutilizzabile e confini Unicode](ALPHA20_3_PICKER_SEARCH.md), selezione da tastiera, [Invio per inserire il primo risultato filtrato](ALPHA20_4_ENTER_INSERT.md) ed Esc per chiudere. Copia è sul relativo pulsante; Inserisci usa la selezione. Hotkey Windows configurabile; prova effettiva negli editor ancora aperta.
+- **Picker:** ricerca locale con [indice riutilizzabile e confini Unicode](ALPHA20_3_PICKER_SEARCH.md), selezione da tastiera, [Invio per inserire il risultato selezionato](ALPHA20_22_PICKER_EDITOR_AND_CARET.md) ed Esc per chiudere. Copia è sul relativo pulsante; Inserisci usa la selezione. Hotkey Windows configurabile; prova positiva dell’inserimento manuale in Notepad sintetico, altri editor ancora da qualificare.
 - **Caricamento picker:** messaggio localizzato durante l'attesa; Copia e Inserisci disabilitati fino ai risultati correnti. Indice costruito su worker e letture superate annullate; [verifiche del ViewModel](ALPHA20_3_PICKER_LOADING.md) senza avvio grafico.
 - **Comandi appunti picker:** una sola operazione Copia/Inserisci alla volta, con entrambi i pulsanti disabilitati durante l'attesa. Testo fissato al clic e messaggi associati alla sessione/selezione corretta; [verifiche](ALPHA20_3_PICKER_CLIPBOARD.md) senza appunti reali.
 - **Import review e dialoghi:** selezione dei singoli elementi, avvisi, conferme e gestione delle bozze. Mantengono metriche proprie e condividono i token cromatici.

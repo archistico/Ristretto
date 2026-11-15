@@ -1,8 +1,10 @@
-# Indice documentale — Ristretto Alpha 20.19.5
+# Indice documentale — Ristretto Alpha 20.25
 
-**Fonti correnti:** [Alpha 20.20 — Bridge Unicode](ALPHA20_20_OWNED_INPUT_BRIDGE.md) · [Verifiche 20.20](../reports/ALPHA20_20_CHECKS.md) · [Stato](CURRENT_STATE.md) · [Roadmap unica](ROADMAP.md) · [Compilazione e test in italiano](BUILD_AND_TEST.md) · [Handoff](HANDOFF.md) · [Hotfix CS9174](ALPHA20_19_5_CS9174_FIX.md) · [Strumenti C#](ALPHA20_19_4_CSHARP_TOOLS.md).
+**Ultimo incremento:** [hotkey per snippet e correzione CS0246](ALPHA20_25_SNIPPET_HOTKEYS.md) · [verifiche 20.25](../reports/ALPHA20_25_CHECKS.md). Suite a 820 xUnit passati; nuove hotkey sul desktop ancora da qualificare. I rapporti seguenti conservano gli esiti storici.
 
-La migrazione degli strumenti C# ha passato compilazione e test nella Alpha 20.19.5. La nuova milestone è il bridge di input Unicode R5 dell'Alpha 20.20, ancora da compilare. I rapporti delle Alpha precedenti rappresentano solo lo **storico**: possono menzionare script Python non più presenti nella versione attuale.
+**Fonti correnti:** [Anteprima trigger Alpha 20.24](ALPHA20_24_TRIGGER_PREVIEW.md) · [Verifiche 20.24](../reports/ALPHA20_24_CHECKS.md) · [Osservazione WinEvent 20.23](ALPHA20_23_LIVE_EDIT_OBSERVER.md) · [Verifiche 20.23](../reports/ALPHA20_23_CHECKS.md) ·  [Correzioni e interazione 20.22](ALPHA20_22_PICKER_EDITOR_AND_CARET.md) · [Verifiche 20.22](../reports/ALPHA20_22_CHECKS.md) · [Osservazione esterna 20.21](ALPHA20_21_EXTERNAL_EDIT_OBSERVATION.md) · [Verifiche 20.21](../reports/ALPHA20_21_CHECKS.md) · [Alpha 20.20 — Bridge Unicode](ALPHA20_20_OWNED_INPUT_BRIDGE.md) · [Verifiche 20.20](../reports/ALPHA20_20_CHECKS.md) · [Stato](CURRENT_STATE.md) · [Roadmap unica](ROADMAP.md) · [Compilazione e test in italiano](BUILD_AND_TEST.md) · [Handoff](HANDOFF.md) · [Hotfix CS9174](ALPHA20_19_5_CS9174_FIX.md) · [Strumenti C#](ALPHA20_19_4_CSHARP_TOOLS.md).
+
+La Alpha 20.20 ha superato compilazione e test sul PC dell'utente. Nella 20.21 è fallito un test per un offset UTF-16 sbagliato nella fixture. La 20.22 corregge il test e aggiorna il comportamento di Invio e del campo editor; la nuova build e il rendering Windows devono ancora essere verificati. I rapporti delle Alpha precedenti rappresentano solo lo **storico**: possono menzionare script Python non più presenti nella versione attuale.
 
 ## Punti di ingresso (fonti canoniche)
 

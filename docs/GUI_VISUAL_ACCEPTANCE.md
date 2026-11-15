@@ -24,7 +24,7 @@ Usare dati sintetici nell'app reale. Annotare OS, versione, tema, lingua, risolu
 | Geometria | Resize continuo e minimi; stato lungo senza sovrapposizioni | NOT_RUN |
 | DPI | 100/125/150%, anche cambiando monitor | NOT_RUN |
 | Lingue | IT/EN/FR/DE/ES, etichette lunghe e assenza di clipping | NOT_RUN |
-| Picker | Focus ricerca, frecce, Invio=copia esatta, Esc=chiudi, lista vuota | NOT_RUN |
+| Picker | Focus ricerca, frecce, Invio=inserisci selezionato, Esc=chiudi, lista vuota | NOT_RUN |
 | Editor | Salva/elimina, bozze, cambi selezione, chiusura/nascondimento in tray | NOT_RUN |
 | Dialoghi | Import review, avvisi, conferme, backup/ripristino e menu | NOT_RUN |
 | Unicode | Accenti combinanti, emoji ZWJ, CJK, RTL e testo multiriga | NOT_RUN |

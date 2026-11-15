@@ -17,6 +17,8 @@ public partial class PickerWindow : Window
         InitializeComponent();
         Opened += (_, _) => SearchBox.Focus();
         KeyDown += OnPickerKeyDown;
+        // Le frecce funzionano anche quando il focus è nel campo di ricerca.
+        AddHandler(KeyDownEvent, OnPickerNavigationKeyDown, RoutingStrategies.Tunnel);
         // Intercept Enter before a focused Copy button can invoke its default action.
         AddHandler(KeyDownEvent, OnPickerEnterKeyDown, RoutingStrategies.Tunnel);
         AddHandler(KeyUpEvent, OnPickerEnterKeyUp, RoutingStrategies.Tunnel);
@@ -54,13 +56,15 @@ public partial class PickerWindow : Window
             Hide();
             e.Handled = true;
         }
-        else if ((e.Key == Key.Down || e.Key == Key.Up) && _viewModel is { } vm && vm.Results.Count > 0)
-        {
-            var delta = e.Key == Key.Down ? 1 : -1;
-            var next = Math.Clamp(ResultsList.SelectedIndex + delta, 0, vm.Results.Count - 1);
-            ResultsList.SelectedIndex = next;
-            e.Handled = true;
-        }
+    }
+
+    private void OnPickerNavigationKeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.Key is not (Key.Down or Key.Up) || e.KeyModifiers != KeyModifiers.None ||
+            _viewModel is not { } vm || vm.IsLoading || vm.IsClipboardBusy || vm.Results.Count == 0)
+            return;
+        vm.MoveSelection(e.Key == Key.Down ? 1 : -1);
+        e.Handled = true; // evita che SearchBox o ListBox interpretino la freccia due volte
     }
 
     private void OnPickerEnterKeyDown(object? sender, KeyEventArgs e)
@@ -91,7 +95,7 @@ public partial class PickerWindow : Window
         // Keep focus in the picker until Enter is released, so key-repeat cannot
         // send Return characters into the external editor during focus restoration.
         if (vm.CanInsert && Avalonia.Application.Current is App app)
-            await vm.InsertFirstAsync(app.InsertFromPickerAsync);
+            await vm.InsertForEnterAsync(app.InsertFromPickerAsync);
     }
 
     internal async Task CompleteDeferredEnterAsync()
@@ -101,7 +105,7 @@ public partial class PickerWindow : Window
                 pickerActive: IsVisible && IsActive,
                 canInsert: vm.CanInsert && !vm.IsLoading)) return;
         if (Avalonia.Application.Current is App app)
-            await vm.InsertFirstAsync(app.InsertFromPickerAsync);
+            await vm.InsertForEnterAsync(app.InsertFromPickerAsync);
     }
 
     private void ResetEnterGesture() => _enterGesture.Reset();

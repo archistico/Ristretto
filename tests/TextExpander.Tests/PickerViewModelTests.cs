@@ -26,20 +26,70 @@ public sealed class PickerViewModelTests
     }
 
     [Fact]
-    public async Task EnterInsertsFirstFilteredResultEvenWhenSecondIsSelected()
+    public async Task EnterInsertsHighlightedResultWhenSecondIsSelected()
     {
         var vm = ViewModel(new ReadStore(Task.FromResult(EnterLibrary())));
         vm.SetInsertAvailable(true);
         await vm.ReloadAsync();
         vm.Query = "Match";
         Assert.Equal(2, vm.Results.Count);
-        var first = vm.Results[0];
-        vm.Selected = vm.Results[1];
+        var chosen = vm.Results[1];
+        vm.Selected = chosen;
         string? inserted = null;
-        await vm.InsertFirstAsync(text => { inserted = text; return Task.CompletedTask; });
-        Assert.Equal(first.Content, inserted);
-        Assert.Equal(first.SnippetId, vm.Selected?.SnippetId);
+        await vm.InsertForEnterAsync(text => { inserted = text; return Task.CompletedTask; });
+        Assert.Equal(chosen.Content, inserted);
+        Assert.Equal(chosen.SnippetId, vm.Selected?.SnippetId);
         Assert.False(vm.CanInsert);
+    }
+
+    [Fact]
+    public async Task ArrowDownThenEnterInsertsTheHighlightedResult()
+    {
+        var vm = ViewModel(new ReadStore(Task.FromResult(EnterLibrary())));
+        vm.SetInsertAvailable(true);
+        await vm.ReloadAsync();
+        vm.Query = "Match";
+        Assert.Equal(2, vm.Results.Count);
+        Assert.Same(vm.Results[0], vm.Selected);
+
+        vm.MoveSelection(1);
+        Assert.Same(vm.Results[1], vm.Selected);
+        string? inserted = null;
+        await vm.InsertForEnterAsync(text => { inserted = text; return Task.CompletedTask; });
+        Assert.Equal(vm.Results[1].Content, inserted);
+        Assert.False(vm.CanInsert); // una sola operazione per sessione
+    }
+
+    [Fact]
+    public async Task ArrowUpDownDoNotLeaveTheFilteredResults()
+    {
+        var vm = ViewModel(new ReadStore(Task.FromResult(EnterLibrary())));
+        await vm.ReloadAsync();
+        vm.Query = "Match";
+        vm.MoveSelection(-1); // primo risultato: non scendere sotto zero
+        Assert.Same(vm.Results[0], vm.Selected);
+        vm.MoveSelection(1);
+        vm.MoveSelection(1); // ultimo risultato: non andare oltre
+        Assert.Same(vm.Results[1], vm.Selected);
+        vm.MoveSelection(-1);
+        Assert.Same(vm.Results[0], vm.Selected);
+        vm.Selected = null;
+        vm.MoveSelection(-1); // senza selezione, freccia su porta all'ultimo
+        Assert.Same(vm.Results[1], vm.Selected);
+    }
+
+    [Fact]
+    public async Task NavigationDuringPendingClipboardOperationCannotChangeSelection()
+    {
+        var pending = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var vm = ViewModel(new ReadStore(Task.FromResult(EnterLibrary())));
+        await vm.ReloadAsync();
+        var before = vm.Selected;
+        var copy = vm.CopySelectedAsync(_ => pending.Task);
+        vm.MoveSelection(1);
+        Assert.Same(before, vm.Selected);
+        pending.SetResult();
+        await copy;
     }
 
     [Fact]
@@ -50,7 +100,7 @@ public sealed class PickerViewModelTests
         await vm.ReloadAsync();
         vm.Query = ";beta";
         string? inserted = null;
-        await vm.InsertFirstAsync(text => { inserted = text; return Task.CompletedTask; });
+        await vm.InsertForEnterAsync(text => { inserted = text; return Task.CompletedTask; });
         Assert.Equal("Second result", inserted);
     }
 
@@ -62,7 +112,7 @@ public sealed class PickerViewModelTests
         await vm.ReloadAsync();
         vm.Selected = null;
         string? inserted = null;
-        await vm.InsertFirstAsync(text => { inserted = text; return Task.CompletedTask; });
+        await vm.InsertForEnterAsync(text => { inserted = text; return Task.CompletedTask; });
         Assert.Equal(vm.Results[0].Content, inserted);
     }
 
@@ -74,7 +124,7 @@ public sealed class PickerViewModelTests
         await vm.ReloadAsync();
         vm.Query = "No such result";
         var calls = 0;
-        await vm.InsertFirstAsync(_ => { calls++; return Task.CompletedTask; });
+        await vm.InsertForEnterAsync(_ => { calls++; return Task.CompletedTask; });
         Assert.Equal(0, calls);
         vm.Query = "Match";
         Assert.True(vm.CanInsert);
@@ -88,7 +138,7 @@ public sealed class PickerViewModelTests
         vm.Selected = vm.Results[1];
         var selected = vm.Selected;
         var calls = 0;
-        await vm.InsertFirstAsync(_ => { calls++; return Task.CompletedTask; });
+        await vm.InsertForEnterAsync(_ => { calls++; return Task.CompletedTask; });
         Assert.Equal(0, calls);
         Assert.Same(selected, vm.Selected);
         Assert.True(vm.CanCopy);
@@ -102,7 +152,7 @@ public sealed class PickerViewModelTests
         vm.SetInsertAvailable(true);
         var loading = vm.ReloadAsync();
         var calls = 0;
-        await vm.InsertFirstAsync(_ => { calls++; return Task.CompletedTask; });
+        await vm.InsertForEnterAsync(_ => { calls++; return Task.CompletedTask; });
         pending.SetResult(EnterLibrary());
         Assert.True(await loading);
         Assert.Equal(0, calls);
@@ -120,7 +170,7 @@ public sealed class PickerViewModelTests
         var selected = vm.Selected;
         var copy = vm.CopySelectedAsync(_ => pending.Task);
         var calls = 0;
-        await vm.InsertFirstAsync(_ => { calls++; return Task.CompletedTask; });
+        await vm.InsertForEnterAsync(_ => { calls++; return Task.CompletedTask; });
         Assert.Same(selected, vm.Selected);
         Assert.Equal(0, calls);
         pending.SetResult();
@@ -138,11 +188,11 @@ public sealed class PickerViewModelTests
         var pending = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var calls = 0;
         Task Insert(string _) { calls++; return pending.Task; }
-        var first = vm.InsertFirstAsync(Insert);
-        await vm.InsertFirstAsync(Insert);
+        var first = vm.InsertForEnterAsync(Insert);
+        await vm.InsertForEnterAsync(Insert);
         pending.SetResult();
         await first;
-        await vm.InsertFirstAsync(Insert);
+        await vm.InsertForEnterAsync(Insert);
         Assert.Equal(1, calls);
 
         var buttonVm = ViewModel(new ReadStore(Task.FromResult(library)));

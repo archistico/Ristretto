@@ -37,6 +37,13 @@ public sealed class UiStrings
             EditSnippet = Get("EditSnippet"),
             TitleLabel = Get("TitleLabel"),
             TriggerLabel = Get("TriggerLabel"),
+            SnippetHotkeyLabel = Get("SnippetHotkeyLabel"),
+            SnippetHotkeyHint = Get("SnippetHotkeyHint"),
+            SnippetHotkeyPending = Get("SnippetHotkeyPending"),
+            SnippetHotkeyActive = Get("SnippetHotkeyActive"),
+            SnippetHotkeyInactive = Get("SnippetHotkeyInactive"),
+            SnippetHotkeyUnavailable = Get("SnippetHotkeyUnavailable"),
+            SnippetHotkeyConflict = Get("SnippetHotkeyConflict"),
             ContentLabel = Get("ContentLabel"),
             DescriptionLabel = Get("DescriptionLabel"),
             Save = Get("Save"),
@@ -162,6 +169,13 @@ public sealed class UiStrings
     public string EditSnippet { get; private init; } = "";
     public string TitleLabel { get; private init; } = "";
     public string TriggerLabel { get; private init; } = "";
+    public string SnippetHotkeyLabel { get; private init; } = "";
+    public string SnippetHotkeyHint { get; private init; } = "";
+    public string SnippetHotkeyPending { get; private init; } = "";
+    public string SnippetHotkeyActive { get; private init; } = "";
+    public string SnippetHotkeyInactive { get; private init; } = "";
+    public string SnippetHotkeyUnavailable { get; private init; } = "";
+    public string SnippetHotkeyConflict { get; private init; } = "";
     public string ContentLabel { get; private init; } = "";
     public string DescriptionLabel { get; private init; } = "";
     public string Save { get; private init; } = "";

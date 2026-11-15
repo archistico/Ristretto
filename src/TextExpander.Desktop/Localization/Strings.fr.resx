@@ -157,7 +157,7 @@
     <value>Rechercher nom, déclencheur, description ou texte…</value>
   </data>
   <data name="PickerInstructions" xml:space="preserve">
-    <value>Entrée : insérer le premier résultat · Échap : fermer</value>
+    <value>↑↓ choisir · Entrée insérer · Échap fermer</value>
   </data>
   <data name="PickerOpenLibrary" xml:space="preserve">
     <value>Bibliothèque</value>
@@ -372,4 +372,11 @@
   <data name="PickerOperationPending" xml:space="preserve">
     <value>Opération en cours…</value>
   </data>
+  <data name="SnippetHotkeyLabel" xml:space="preserve"><value>Raccourci du snippet (facultatif)</value></data>
+  <data name="SnippetHotkeyHint" xml:space="preserve"><value>Windows : Ctrl/Alt + lettre, chiffre, Space ou F1–F11. Enregistrez puis relâchez les touches pour insérer dans l’app active. Vide ou None pour supprimer.</value></data>
+  <data name="SnippetHotkeyPending" xml:space="preserve"><value>Enregistrez le snippet pour appliquer ce raccourci.</value></data>
+  <data name="SnippetHotkeyActive" xml:space="preserve"><value>Raccourci actif : insertion directe sans ouvrir le sélecteur.</value></data>
+  <data name="SnippetHotkeyInactive" xml:space="preserve"><value>Raccourci inactif : le snippet ou son groupe est désactivé.</value></data>
+  <data name="SnippetHotkeyUnavailable" xml:space="preserve"><value>Raccourci enregistré mais inactif : combinaison occupée ou enregistrement Windows indisponible.</value></data>
+  <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Combinaison déjà affectée à un autre snippet ou au sélecteur. Choisissez-en une autre.</value></data>
 </root>

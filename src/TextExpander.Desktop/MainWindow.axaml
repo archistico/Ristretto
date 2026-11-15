@@ -189,32 +189,43 @@
           </Grid>
         </Border>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-          <StackPanel Margin="17,13,17,20" Spacing="12" MaxWidth="830" HorizontalAlignment="Stretch">
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-              <StackPanel Grid.Column="0" Spacing="4">
-                <TextBlock Text="{Binding Texts.TitleLabel}" Classes="label muted" />
-                <TextBox Text="{Binding EditorTitle, Mode=TwoWay}" />
-              </StackPanel>
-              <StackPanel Grid.Column="1" Spacing="4">
-                <TextBlock Text="{Binding Texts.TriggerLabel}" Classes="label muted" />
-                <TextBox Text="{Binding EditorTrigger, Mode=TwoWay}" />
-              </StackPanel>
-            </Grid>
-
-            <StackPanel Spacing="4">
-              <TextBlock Text="{Binding Texts.ContentLabel}" Classes="label muted" />
-              <TextBox Name="ContentEditor" Classes="editor-field" Text="{Binding EditorContent, Mode=TwoWay}"
-                       AcceptsReturn="True" TextWrapping="Wrap" Height="225" />
+        <!-- Editor reattivo: l'area di testo usa la riga * e cresce in altezza
+             e larghezza con la finestra, senza MaxWidth e senza altezza fissa. -->
+        <Grid Grid.Row="1" Margin="17,13,17,14" RowDefinitions="Auto,Auto,*,Auto" RowSpacing="11">
+          <Grid Grid.Row="0" ColumnDefinitions="*,*" ColumnSpacing="12">
+            <StackPanel Grid.Column="0" Spacing="4">
+              <TextBlock Text="{Binding Texts.TitleLabel}" Classes="label muted" />
+              <TextBox Text="{Binding EditorTitle, Mode=TwoWay}" />
             </StackPanel>
-
-            <StackPanel Spacing="4">
-              <TextBlock Text="{Binding Texts.DescriptionLabel}" Classes="label muted" />
-              <TextBox Text="{Binding EditorDescription, Mode=TwoWay}"
-                       AcceptsReturn="True" TextWrapping="Wrap" Height="47" />
+            <StackPanel Grid.Column="1" Spacing="4">
+              <TextBlock Text="{Binding Texts.TriggerLabel}" Classes="label muted" />
+              <TextBox Text="{Binding EditorTrigger, Mode=TwoWay}" />
             </StackPanel>
+          </Grid>
+
+          <StackPanel Grid.Row="1" Spacing="4">
+            <TextBlock Text="{Binding Texts.SnippetHotkeyLabel}" Classes="label muted" />
+            <TextBox Text="{Binding EditorHotkey, Mode=TwoWay}" Watermark="Ctrl+Alt+F"
+                     AutomationProperties.Name="{Binding Texts.SnippetHotkeyLabel}"
+                     ToolTip.Tip="{Binding Texts.SnippetHotkeyHint}" />
+            <TextBlock Text="{Binding Texts.SnippetHotkeyHint}" Classes="faint" FontSize="11" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding SnippetHotkeyFeedback}" Classes="muted" FontSize="11" TextWrapping="Wrap" />
           </StackPanel>
-        </ScrollViewer>
+
+          <Grid Grid.Row="2" RowDefinitions="Auto,*" RowSpacing="4" MinHeight="100">
+            <TextBlock Grid.Row="0" Text="{Binding Texts.ContentLabel}" Classes="label muted" />
+            <TextBox Grid.Row="1" Name="ContentEditor" Classes="editor-field"
+                     Text="{Binding EditorContent, Mode=TwoWay}"
+                     AcceptsReturn="True" TextWrapping="Wrap"
+                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+          </Grid>
+
+          <Grid Grid.Row="3" RowDefinitions="Auto,Auto" RowSpacing="4">
+            <TextBlock Grid.Row="0" Text="{Binding Texts.DescriptionLabel}" Classes="label muted" />
+            <TextBox Grid.Row="1" Text="{Binding EditorDescription, Mode=TwoWay}"
+                     AcceptsReturn="True" TextWrapping="Wrap" Height="47" />
+          </Grid>
+        </Grid>
 
         <Border Grid.Row="2" BorderBrush="{DynamicResource RSoftBorder}" BorderThickness="0,1,0,0"
                 Padding="14,7">

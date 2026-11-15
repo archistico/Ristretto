@@ -202,7 +202,7 @@ public static class QualityGate
     {
         var folders = new[] { "src", "tests", "tools", "scripts", ".github" };
         var excluded = new HashSet<string> { ".git", "bin", "obj", "node_modules", ".local-cache", "TestResults", "__pycache__" };
-        var extensions = new HashSet<string> { ".cs", ".csproj", ".cmd", ".sh", ".ps1", ".js", ".json", ".yml", ".yaml" };
+        var extensions = new HashSet<string> { ".cs", ".csproj", ".axaml", ".resx", ".props", ".cmd", ".sh", ".ps1", ".js", ".json", ".yml", ".yaml" };
         var files = folders.SelectMany(x => Directory.EnumerateFiles(Path.Combine(root, x), "*", SearchOption.AllDirectories))
             .Where(x => !Path.GetRelativePath(root, x).Split(Path.DirectorySeparatorChar).Any(excluded.Contains) &&
                         extensions.Contains(Path.GetExtension(x)))

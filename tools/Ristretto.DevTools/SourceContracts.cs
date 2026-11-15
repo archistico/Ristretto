@@ -34,6 +34,24 @@ public static class SourceContracts
         Require("src/TextExpander.Application/Features/Output/CommittedEditMutationProvenance.cs", "");
         Require("src/TextExpander.Application/Features/Output/RemoteOwnedEditProtocol.cs", "RemoteOwnedEditOneShotGate", "Interlocked.Exchange");
         Require("src/TextExpander.Application/Features/Input/ExternalFocusBoundarySession.cs", "");
+        Require("src/TextExpander.Application/Features/Input/ExternalClassicEditTextDelta.cs", "CanAuthorizeExpansion => false", "CandidateInsertion");
+        Require("src/TextExpander.Infrastructure/Platform/Windows/WindowsExternalClassicEditTextReader.cs", "WmGetText", "StillQualified(target)");
+        Require("tools/Ristretto.WindowsOutputLab/ExternalClassicEditTextCommand.cs", "CandidateObserved", "NOT_RUN");
+        Require("tests/TextExpander.Tests/ExternalClassicEditTextDeltaTests.cs", "CandidateObserved", "CanAuthorizeExpansion");
+        Require("src/TextExpander.Infrastructure/Platform/Windows/ExternalClassicEditLiveSession.cs",
+            "CanAuthorizeExpansion => false", "TargetChanged", "Reset()");
+        Require("tools/Ristretto.WindowsOutputLab/ExternalClassicEditLiveCommand.cs",
+            "EventObjectValueChange", "CaptureForControl(window)", "_session.Reset()");
+        Require("tools/Ristretto.WindowsOutputLab/Program.cs", "--observe-classic-edit-live", "--observe-classic-edit-preview");
+        Require("src/TextExpander.Infrastructure/Platform/Windows/ExternalClassicEditTriggerPreviewSession.cs",
+            "CanAuthorizeExpansion => false", "PotentialTrigger", "_simulation.Reset()");
+        Require("tests/TextExpander.Tests/ExternalClassicEditTriggerPreviewSessionTests.cs",
+            "BulkPasteLooksLikeTriggerButIsNeverAuthorized", "SwitchOfControlPreventsCrossTargetMatch");
+        Require("tools/Ristretto.WindowsOutputLab/ExternalClassicEditLiveCommand.cs", "_preview?.Reset()", "SyntheticPreviewCatalog()");
+        Require("scripts/observe-classic-edit-preview.cmd", "--observe-classic-edit-preview");
+        Require("scripts/observe-classic-edit-live.cmd", "--observe-classic-edit-live");
+        Require("tests/TextExpander.Tests/ExternalClassicEditLiveSessionTests.cs", "ChangingTargetNeverCompletesPreviousSequence", "CandidateInsertion");
+        Require("scripts/observe-classic-edit-text.cmd", "--observe-classic-edit-text");
         Require("tests/TextExpander.Tests/ExternalFocusBoundarySessionTests.cs", "");
         Require("src/TextExpander.Infrastructure/Platform/Windows/WindowsPickerHotkeyService.cs", "RegisterHotKey");
         Require("src/TextExpander.Infrastructure/Platform/Windows/WindowsExternalAdapterCapability.cs", "ReplacementCapability.Unsupported", "EveryWriteProof");
@@ -42,7 +60,7 @@ public static class SourceContracts
         Require("src/TextExpander.Desktop/PickerSessionController.cs", "");
         Require("tests/TextExpander.Tests/PickerSessionControllerTests.cs", "");
         Require("src/TextExpander.Desktop/App.axaml.cs", "ConfigurePickerHotkeyAsync", "_pickerSession.Open(", "_pickerSession.IsCurrent(");
-        Require("src/TextExpander.Desktop/PickerWindow.axaml.cs", "vm.InsertSelectedAsync(app.InsertFromPickerAsync)", "vm.InsertFirstAsync(app.InsertFromPickerAsync)");
+        Require("src/TextExpander.Desktop/PickerWindow.axaml.cs", "vm.InsertSelectedAsync(app.InsertFromPickerAsync)", "vm.InsertForEnterAsync(app.InsertFromPickerAsync)");
         Require("tools/Ristretto.WindowsOutputLab/Program.cs", "--cooperating-smoke", "--remote-owned-smoke", "--assess-external-adapter");
         Require("tools/Ristretto.WindowsOutputLab/NativeReplacementLab.cs", "target.WaitForMessage()", "target.PumpPendingMessages(AfterOwnTurn)");
         Require("tools/Ristretto.WindowsOutputLab/OwnedEditTarget.cs", "WaitMessage()", "PostOwnedCharacterSequenceFixture");
