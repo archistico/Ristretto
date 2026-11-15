@@ -1,6 +1,8 @@
 # Accettazione visuale — GUI Preview 9
 
-Riferimenti: [guida GUI](GUI.md), [design system](DESIGN_SYSTEM.md), [32 render definitivi](../design/current/review.json). Gli audit di preview sono consolidati qui; una build o un render non promuovono una prova manuale a PASS.
+Riferimenti: [guida GUI](GUI.md), [design system](DESIGN_SYSTEM.md), [32 render storici della Alpha 7](../design/current/review.json). Gli audit di preview sono consolidati qui; una build o un render non promuovono una prova manuale a PASS.
+
+**Baseline attuale 20.26:** nuova form Registra… e hotkey per snippet. Il richiamo base in Blocco note è confermato dall'utente; la resa e il routing del nuovo dialogo restano aperti. Usare la [matrice Windows](WINDOWS_QUALIFICATION_PLAN.md) e aggiornare le immagini solo dopo la qualificazione prevista in R2.06.
 
 ## Evidenze disponibili
 

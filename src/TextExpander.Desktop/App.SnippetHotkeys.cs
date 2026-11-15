@@ -19,7 +19,9 @@ public partial class App
 
     private void CancelSnippetInsertion() => _directInsertRequest?.Cancel();
 
-    private async Task RefreshSnippetHotkeysAsync(LibrarySnapshot snapshot)
+    private Task RefreshSnippetHotkeysAsync(LibrarySnapshot snapshot) => RefreshSnippetHotkeysCoreAsync(snapshot);
+
+    private async Task RefreshSnippetHotkeysCoreAsync(LibrarySnapshot snapshot, bool restoringCapture = false)
     {
         _snippetSnapshot = snapshot;
         CancelSnippetInsertion();
@@ -30,11 +32,13 @@ public partial class App
         await _snippetHotkeyLock.WaitAsync();
         try
         {
-            if (!ReferenceEquals(catalog, _snippetCatalog) || IsExiting || !OperatingSystem.IsWindows()) return;
+            if (!ReferenceEquals(catalog, _snippetCatalog) || IsExiting || !OperatingSystem.IsWindows() ||
+                (_hotkeyCapture.IsActive && !restoringCapture)) return;
             _pickerPaste ??= new WindowsPickerPasteService();
             var paste = _pickerPaste;
             _snippetHotkeys ??= new WindowsSnippetHotkeyService(binding =>
             {
+                if (_hotkeyCapture.IsActive) return;
                 // Capture while handling WM_HOTKEY, before a delayed UI dispatch can change the recipient.
                 var target = paste.CaptureExternalForeground();
                 var sequence = paste.ClipboardSequence();
@@ -60,7 +64,7 @@ public partial class App
     private async void InsertSnippetFromHotkeyAsync(SnippetHotkeyBinding binding,
         WindowsPickerPasteTarget target, uint clipboardAtHotkey, long expiresAt)
     {
-        if (IsExiting || Environment.TickCount64 > expiresAt || _directInsertRunning || _pickerSession.IsInsertionInProgress ||
+        if (IsExiting || _hotkeyCapture.IsActive || Environment.TickCount64 > expiresAt || _directInsertRunning || _pickerSession.IsInsertionInProgress ||
             _picker?.IsVisible == true || _pickerVm?.IsClipboardBusy == true || _vm is null || _pickerPaste is null)
             return;
         var snippet = _snippetCatalog?.Resolve(binding);

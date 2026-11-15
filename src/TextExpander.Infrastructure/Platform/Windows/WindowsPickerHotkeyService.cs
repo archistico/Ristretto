@@ -66,6 +66,7 @@ public sealed class WindowsPickerHotkeyService : IDisposable
             PeekMessageW(out _, IntPtr.Zero, 0, 0, PmNoRemove);
             _threadId = GetCurrentThreadId();
             _ready.TrySetResult(_threadId);
+            if (_disposed) return;
             while (true)
             {
                 var result = GetMessageW(out var message, IntPtr.Zero, 0, 0);

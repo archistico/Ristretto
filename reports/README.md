@@ -1,4 +1,12 @@
-## Alpha 20.25 — ultimo rapporto
+## Revisione documentale — 15 novembre 2026
+
+[README e roadmap](DOCS_ROADMAP_REVIEW.md): revisione dei soli documenti sulla baseline Alpha 20.26. I nuovi controlli documentali sono separati dai risultati funzionali già conservati qui sotto.
+
+## Alpha 20.26 — ultimo rapporto funzionale
+
+[Verifiche](ALPHA20_26_CHECKS.md) · [JSON](ALPHA20_26_VALIDATION.json) · [log](alpha20-26-validation.log). 846 xUnit passati, inclusi 26 nuovi casi. Conferma utente del richiamo in Blocco note della 20.25; nuova form ancora da qualificare sul desktop. Le sezioni successive conservano gli esiti storici.
+
+## Alpha 20.25 — rapporto precedente
 
 [Verifiche](ALPHA20_25_CHECKS.md) · [JSON](ALPHA20_25_VALIDATION.json) · [log](alpha20-25-validation.log). CS0246 riprodotti e corretti; 820 xUnit passati, inclusi 41 nuovi casi. Hotkey reali, clipboard e GUI desktop ancora da qualificare. Le sezioni successive sono storiche.
 

@@ -1,3 +1,18 @@
+## 3.9.0-alpha.20.26 — Acquisizione visuale delle hotkey
+
+- Pulsante Registra… nell'editor dello snippet e form con visualizzazione dei tasti premuti, per esempio `ALT + CTRL + SHIFT + B`. Conferma dopo il rilascio, annullamento senza modifica e rimozione della bozza della hotkey.
+- Sospensione temporanea dei worker di Ristretto e ripristino delle registrazioni senza scrivere impostazioni temporanee. Notifiche obsolete invalidate; nessun inserimento o picker durante l'acquisizione.
+- 26 nuove regressioni: **846 xUnit passati**, inclusi i casi di coerenza fra display e combinazione confermata. Testi in cinque lingue, schema/JSON invariati.
+- Registrata la conferma utente del richiamo tramite hotkey in Blocco note della 20.25; nuova form ancora da qualificare sul desktop. [Dettagli](docs/ALPHA20_26_HOTKEY_CAPTURE.md).
+
+### Revisione documentale — 15 novembre 2026
+
+- README riorganizzato nell'ordine richiesto: titolo, screenshot, descrizione, funzionamento, installazione e aggiornamento. Lo storico delle Alpha resta nel changelog.
+- Immagini Preview 9 identificate come anteprime storiche; pianificate acquisizioni aggiornate dopo la qualificazione della GUI corrente.
+- Nuova guida a installazione, profili assoluti, backup, migrazione schema 2 e ritorno con backup compatibile. Consolidati stato, build/test, indice e handoff.
+- Roadmap R1–R8 dettagliata con task, priorità, dipendenze, decisioni e criteri di chiusura. Predisposta la matrice Windows per acquisizione hotkey, registrazioni e flussi manuali.
+- Versione del codice invariata: 3.9.0-alpha.20.26. Le verifiche della revisione sono separate dalla baseline di 846 xUnit/32 Node. [Rapporto](reports/DOCS_ROADMAP_REVIEW.md).
+
 ## 3.9.0-alpha.20.25 — Hotkey per snippet e correzione CS0246
 
 - Corretto l'import mancante nei test dell'anteprima R5: riprodotti e risolti i due errori CS0246 segnalati dall'utente. Baseline CORE poi superata con 779 xUnit.

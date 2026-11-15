@@ -100,6 +100,7 @@ public partial class App : Avalonia.Application
         await _pickerHotkeyLock.WaitAsync();
         try
         {
+            if (IsExiting || _hotkeyCapture.IsActive) return;
             if (!PickerHotkey.TryParse(vm.PickerHotkeyDraft, out var gesture))
             {
                 vm.SetPickerHotkeyState(_activePickerHotkey, vm.Texts.PickerHotkeyInvalid);
@@ -110,8 +111,7 @@ public partial class App : Avalonia.Application
                 vm.SetPickerHotkeyState(_activePickerHotkey, vm.Texts.PickerHotkeyUnsupported);
                 return;
             }
-            _pickerHotkey ??= new WindowsPickerHotkeyService(
-                () => Dispatcher.UIThread.Post(ShowPicker));
+            _pickerHotkey ??= CreatePickerHotkeyService();
             if (!await _pickerHotkey.PrepareAsync(gesture))
             {
                 vm.SetPickerHotkeyState(_activePickerHotkey, vm.Texts.PickerHotkeyConflict);
@@ -203,7 +203,7 @@ public partial class App : Avalonia.Application
         if (IsExiting || _picker is null || _pickerVm is null) return;
         // Ignore delayed/repeated hotkey notifications during an in-flight Insert.
         // They must not cancel the request between hiding the picker and SendInput.
-        if (_pickerSession.IsInsertionInProgress || _directInsertRunning) return;
+        if (_pickerSession.IsInsertionInProgress || _directInsertRunning || _hotkeyCapture.IsActive) return;
         // Repeated global hotkey while the picker itself owns focus must not
         // recapture Ristretto as the external recipient or erase the target.
         // Reinvoking from a different foreground app starts a fresh session.

@@ -379,4 +379,12 @@
   <data name="SnippetHotkeyInactive" xml:space="preserve"><value>Raccourci inactif : le snippet ou son groupe est désactivé.</value></data>
   <data name="SnippetHotkeyUnavailable" xml:space="preserve"><value>Raccourci enregistré mais inactif : combinaison occupée ou enregistrement Windows indisponible.</value></data>
   <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Combinaison déjà affectée à un autre snippet ou au sélecteur. Choisissez-en une autre.</value></data>
+  <data name="HotkeyCaptureButton" xml:space="preserve"><value>Enregistrer…</value></data>
+  <data name="HotkeyCaptureTitle" xml:space="preserve"><value>Enregistrer un raccourci</value></data>
+  <data name="HotkeyCaptureInstructions" xml:space="preserve"><value>Appuyez simultanément sur les touches du raccourci. La combinaison apparaît ci-dessous. Appuyez sur une autre combinaison pour la modifier.</value></data>
+  <data name="HotkeyCaptureWaiting" xml:space="preserve"><value>En attente des touches…</value></data>
+  <data name="HotkeyCaptureRelease" xml:space="preserve"><value>Relâchez toutes les touches avant de confirmer.</value></data>
+  <data name="HotkeyCaptureReady" xml:space="preserve"><value>Combinaison détectée. Confirmez ou appuyez sur une autre combinaison.</value></data>
+  <data name="HotkeyCaptureUse" xml:space="preserve"><value>Utiliser ce raccourci</value></data>
+  <data name="HotkeyCaptureClear" xml:space="preserve"><value>Supprimer le raccourci</value></data>
 </root>

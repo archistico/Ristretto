@@ -205,9 +205,13 @@
 
           <StackPanel Grid.Row="1" Spacing="4">
             <TextBlock Text="{Binding Texts.SnippetHotkeyLabel}" Classes="label muted" />
-            <TextBox Text="{Binding EditorHotkey, Mode=TwoWay}" Watermark="Ctrl+Alt+F"
-                     AutomationProperties.Name="{Binding Texts.SnippetHotkeyLabel}"
-                     ToolTip.Tip="{Binding Texts.SnippetHotkeyHint}" />
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+              <TextBox Grid.Column="0" Text="{Binding EditorHotkey, Mode=TwoWay}" Watermark="Ctrl+Alt+F"
+                       AutomationProperties.Name="{Binding Texts.SnippetHotkeyLabel}"
+                       ToolTip.Tip="{Binding Texts.SnippetHotkeyHint}" />
+              <Button Grid.Column="1" Name="CaptureSnippetHotkeyButton" Content="{Binding Texts.HotkeyCaptureButton}"
+                      IsEnabled="False" Click="CaptureSnippetHotkey_Click" />
+            </Grid>
             <TextBlock Text="{Binding Texts.SnippetHotkeyHint}" Classes="faint" FontSize="11" TextWrapping="Wrap" />
             <TextBlock Text="{Binding SnippetHotkeyFeedback}" Classes="muted" FontSize="11" TextWrapping="Wrap" />
           </StackPanel>

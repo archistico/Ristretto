@@ -379,4 +379,12 @@
   <data name="SnippetHotkeyInactive" xml:space="preserve"><value>Hotkey inactive: the snippet or its group is disabled.</value></data>
   <data name="SnippetHotkeyUnavailable" xml:space="preserve"><value>Hotkey saved but inactive: shortcut in use or Windows registration unavailable.</value></data>
   <data name="SnippetHotkeyConflict" xml:space="preserve"><value>Shortcut already assigned to another snippet or the picker. Choose another one.</value></data>
+  <data name="HotkeyCaptureButton" xml:space="preserve"><value>Record…</value></data>
+  <data name="HotkeyCaptureTitle" xml:space="preserve"><value>Record hotkey</value></data>
+  <data name="HotkeyCaptureInstructions" xml:space="preserve"><value>Press the shortcut keys together. The combination will appear below. Press another combination to change it.</value></data>
+  <data name="HotkeyCaptureWaiting" xml:space="preserve"><value>Waiting for keys…</value></data>
+  <data name="HotkeyCaptureRelease" xml:space="preserve"><value>Release all keys before confirming.</value></data>
+  <data name="HotkeyCaptureReady" xml:space="preserve"><value>Combination captured. Confirm or press another combination.</value></data>
+  <data name="HotkeyCaptureUse" xml:space="preserve"><value>Use shortcut</value></data>
+  <data name="HotkeyCaptureClear" xml:space="preserve"><value>Remove hotkey</value></data>
 </root>

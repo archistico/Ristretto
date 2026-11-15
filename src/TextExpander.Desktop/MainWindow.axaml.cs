@@ -38,6 +38,7 @@ public partial class MainWindow : Window
             await vm.InitializeAsync();
             if (Avalonia.Application.Current is App app)
                 await app.InitializePickerHotkeyAsync(vm);
+            CaptureSnippetHotkeyButton.IsEnabled = true;
             SynchronizeSelection();
         };
     }
@@ -104,6 +105,29 @@ public partial class MainWindow : Window
             SynchronizeSelection();
         }
         finally { _waitingForDecision = false; }
+    }
+
+    private async void CaptureSnippetHotkey_Click(object? sender, RoutedEventArgs e)
+    {
+        if (_waitingForDecision || DataContext is not MainViewModel vm || Avalonia.Application.Current is not App app) return;
+        _waitingForDecision = true;
+        CaptureSnippetHotkeyButton.IsEnabled = false;
+        IsEnabled = false;
+        try
+        {
+            var result = await app.CaptureSnippetHotkeyAsync(this, vm.Texts);
+            if (result is not null && !app.IsExiting) vm.EditorHotkey = result;
+        }
+        catch (Exception)
+        {
+            vm.SetManualInsertStatus(vm.Texts.PickerHotkeyUnavailable);
+        }
+        finally
+        {
+            IsEnabled = true;
+            CaptureSnippetHotkeyButton.IsEnabled = !app.IsExiting;
+            _waitingForDecision = false;
+        }
     }
 
     private async void NewSnippet_Click(object? sender, RoutedEventArgs e)

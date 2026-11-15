@@ -1,155 +1,120 @@
-# Compilazione, verifiche e procedure — Ristretto Alpha 20.25
+# Compilazione e verifiche — Ristretto Alpha 20.26
 
-**Baseline 20.25:** CS0246 della 20.24 riprodotti e corretti; **820 xUnit** passati, inclusi 41 nuovi casi. Registrazioni e inserimento delle nuove hotkey verificati con API simulate; prova desktop aperta. [Esiti](../reports/ALPHA20_25_CHECKS.md).
+Per installare, aggiornare e recuperare i dati partire dalla [guida utente](INSTALLATION_AND_UPDATE.md). Questo documento descrive i controlli per lo sviluppo.
 
-## Hotkey per snippet: prova manuale separata
+**Baseline già eseguita:** CI locale e da ZIP nuovo, 846 xUnit, 32 Node, 23 regressioni degli strumenti, 10 CLI e contratto .NET→Node passati. [Rapporto](../reports/ALPHA20_26_CHECKS.md). La revisione documentale successiva non ripete automaticamente queste prove.
 
-Dopo la build chiudi le istanze precedenti e avvia un profilo sintetico: `dotnet run --project src/TextExpander.Desktop -- --data-dir ".local-cache/hotkey-smoke"`. Crea uno snippet con testo Unicode di prova, trigger `;firma` e hotkey `Ctrl+Alt+F`. Salva e verifica il messaggio di hotkey attiva. In un documento esterno vuoto premi e rilascia la combinazione: attendi una sola copia del testo, senza picker. Disabilita il gruppo e controlla che non inserisca più nulla; riabilita e riprova. Prova una combinazione già assegnata e il cambio di focus durante il rilascio. Queste prove desktop non sono state eseguite automaticamente. [Uso e limiti](ALPHA20_25_SNIPPET_HOTKEYS.md).
+## Requisiti
 
-## Prerequisiti
+- .NET SDK 10 e dipendenze NuGet disponibili. Python non è richiesto.
+- Node.js 22 per CI/FULL e il contratto dell'estensione, non per SOURCE/CORE.
+- Sessione desktop Windows soltanto per i controlli nativi e manuali che la richiedono.
 
-Installa **.NET SDK 10**. Apri PowerShell nella cartella del progetto contenente `Ristretto.sln`. **Python non è più necessario**. Node.js serve solo per i test dell'estensione VS Code.
+Eseguire i comandi dalla cartella contenente `Ristretto.sln`.
 
-## 1. Controllare le sorgenti senza avviare l'interfaccia
+## 1. Scegliere il gate
 
-```powershell
-.\scripts\validate-source.cmd
-```
+| Gate | Comando PowerShell | Perimetro |
+| --- | --- | --- |
+| SOURCE | `.\scripts\validate-source.cmd` | Audit C#, regressioni degli strumenti, XML/XAML, lingue, link e DDL SQLite |
+| CORE | `.\scripts\validate.cmd` | SOURCE, restore/build solution, xUnit, quattro laboratori e DevTools, dieci CLI senza GUI |
+| CI | `.\scripts\validate-gate.cmd ci` | CORE, Node e contratto export .NET→Node |
+| FULL | `.\scripts\validate-gate.cmd full` | CI e laboratori nativi Windows controllati; richiede desktop interattivo |
 
-Questo script avvia il tool C# `Ristretto.DevTools` ed esegue audit dei namespace/riferimenti, test propri e controlli statici su XAML, traduzioni, documentazione e SQLite tramite `Microsoft.Data.Sqlite`. Anche questo passaggio richiede .NET 10 perché deve compilare il tool. Il risultato atteso è `GATE SOURCE: PASS`. La Alpha 20.20 ha superato compilazione e test sul PC dell'utente. Nella Alpha 20.22 correggiamo il test del cursore UTF-16 e aggiungiamo regressioni sul picker e sul dimensionamento: se compare un errore di compilazione, invia il **primo** errore completo; non considerare riuscita una validazione interrotta.
+Il risultato è `GATE <NOME>: PASS` oppure `FAIL`. Ogni passo registra anche `NOT_RUN`. Un tool compilato non è un tool eseguito.
 
-## 2. Compilare ed eseguire tutti i test ordinari
+**Nessuno di questi nomi certifica automaticamente** il picker e la form sul desktop, l'incolla in un editor esterno, il vero host VS Code o la provenienza dell'input WinEvent. Sono prove separate, con un rapporto proprio.
 
-```powershell
-.\scripts\validate.cmd
-```
+Per soli documenti usare SOURCE e controllare le immagini/link modificati. Per codice applicativo eseguire i gate pertinenti e ripetere la validazione del pacchetto da cartella nuova. I gate non eseguono un audit vulnerabilità online completo: va registrato separatamente.
 
-Il gate `CORE` comprende sorgenti, controlli statici, `dotnet restore`, compilazione della solution, xUnit, build dei quattro laboratori, build degli strumenti C# e dieci prove CLI del punto d'ingresso senza GUI. Il risultato atteso è `GATE CORE: PASS`. Le prove desktop native e VS Code non eseguite rimangono `NOT_RUN`, non sono considerate superate.
+Linux/macOS dispongono degli avviatori `validate-source.sh`, `validate.sh` e `validate-gate.sh`; la disponibilità degli script non attesta una qualificazione runtime di quei sistemi.
 
-Controlla inoltre che **non compaia il warning xUnit2000** in `WindowsExternalAdapterCapabilityTests.cs`, corretto con gli argomenti nell'ordine `expected, actual`.
+## 2. Test mirati e avvio di prova
 
-Per il solo gruppo di test del picker:
-
-```powershell
+~~~powershell
 .\scripts\validate-picker.cmd
-```
+dotnet test tests/TextExpander.Tests/TextExpander.Tests.csproj -c Release --filter FullyQualifiedName~HotkeyCaptureTests
+~~~
 
-## 3. Eseguire la prova Notepad sintetica (facoltativa)
+Per avviare una libreria isolata, senza usare quella personale:
 
-Questa procedura non apre documenti personali. I file vengono creati in `.local-cache/notepad-qualification` e non nella tua libreria di snippet.
+~~~powershell
+dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Qualifica-20-26"
+~~~
 
-1. **Prepara il documento di prova**:
+Per riutilizzare il profilo nelle versioni successive conservare lo stesso percorso assoluto. Un secondo profilo separa i dati, ma può entrare in conflitto sulle combinazioni globali.
 
-   ```powershell
-   .\scripts\validate-picker-notepad.cmd prepare --open
-   ```
+## 3. Form Registra… e hotkey reali
 
-   Annota il token di sessione generato e verifica che Notepad mostri il file sintetico.
+Usare la [matrice di qualificazione Windows](WINDOWS_QUALIFICATION_PLAN.md). Prima sequenza:
 
-2. **Crea il profilo SQLite isolato**:
+1. Aprire uno snippet sintetico e premere Registra….
+2. Premere `ALT + CTRL + SHIFT + B`, rilasciare e confrontare il display.
+3. Confermare e salvare; provare il richiamo in un documento vuoto.
+4. Ripetere con annullamento, Esc, chiusura, rimozione e combinazione già assegnata.
+5. Controllare che picker e snippet tornino utilizzabili dopo ogni chiusura della form.
 
-   ```powershell
-   .\scripts\seed-picker-notepad.cmd TOKEN
-   ```
+Il richiamo base della 20.25 in Blocco note è confermato dall'utente. Questa conferma non chiude la prova del nuovo dialogo 20.26 o dei casi avanzati.
 
-   Sostituisci `TOKEN` con il valore della sessione: lo script non usa il database personale.
+## 4. Prova guidata del picker in Blocco note
 
-3. **Chiudi le altre istanze di Ristretto e apri quella di test**:
+Gli script usano un documento e un profilo sintetici:
 
-   ```powershell
-   .\scripts\validate-picker-notepad.cmd launch --session TOKEN
-   ```
+~~~powershell
+.\scripts\validate-picker-notepad.cmd prepare --open
+.\scripts\seed-picker-notepad.cmd TOKEN
+.\scripts\validate-picker-notepad.cmd launch --session TOKEN
+~~~
 
-   Ristretto viene avviato con `--data-dir` riferito soltanto al profilo sintetico.
+Sostituire `TOKEN` con quello prodotto da prepare e seguire le istruzioni del runner. Nell'editor portare il cursore in fondo, richiamare il picker, scegliere lo snippet di prova, inserire e salvare il documento.
 
-4. **Inserisci manualmente lo snippet**. In Notepad porta il cursore alla fine con `Ctrl+End`, richiama il picker con la hotkey, seleziona `;ristretto-test`, premi **Invio** o **Inserisci**, quindi salva con `Ctrl+S`.
+~~~powershell
+.\scripts\validate-picker-notepad.cmd status --session TOKEN
+.\scripts\validate-picker-notepad.cmd verify --session TOKEN
+~~~
 
-5. **Controlla l'esito salvato**:
+Il PASS del verificatore riguarda i byte del documento salvato rispetto alla fixture Unicode. Non dimostra espansione automatica o provenienza umana. `NOT_RUN` indica una prova non conclusa, non un successo.
 
-   ```powershell
-   .\scripts\validate-picker-notepad.cmd status --session TOKEN
-   .\scripts\validate-picker-notepad.cmd verify --session TOKEN
-   ```
+## 5. Esperimenti R5, sempre separati
 
-   `PASS` indica la corrispondenza dei byte UTF-8 salvati alla fixture Unicode. `NOT_RUN` significa che il file non è stato salvato con l'inserimento. `FAIL` indica un contenuto differente. Non implica una prova di provenienza dei tasti né di espansione automatica.
+Prima compilare. Preparare un controllo Win32 Edit classico esterno, vuoto e contenente solo dati sintetici. I comandi possono leggere temporaneamente in RAM fino a 4096 unità UTF-16: non usarli su documenti personali o campi protetti.
 
-## 4. Eseguire il gate CI e produrre un archivio
+~~~powershell
+.\scripts\observe-classic-edit-text.cmd
+.\scripts\observe-classic-edit-live.cmd 15
+.\scripts\observe-classic-edit-preview.cmd 15
+~~~
 
-```powershell
-.\scripts\validate-gate.cmd ci
-```
+Scegliere **un comando per volta**, seguendone i tempi di preparazione e osservazione. Nella modalità preview digitare `;firma` seguito da spazio dopo l'avviso di attivazione.
 
-Il gate CI include anche Node per la verifica facoltativa del contratto dell'estensione VS Code, ma non esegue prove native interattive. Per creare un archivio completo con manifest SHA-256:
+Gli esiti sono osservazioni o trigger potenziali: paste, IME e modifiche programmatiche possono produrre lo stesso testo. Nessuno dei comandi autorizza la sostituzione. Notepad moderno, RichEdit e altri editor possono non appartenere al tipo di controllo supportato.
 
-```powershell
-dotnet run -c Release --project tools\Ristretto.DevTools\Ristretto.DevTools.csproj -- package --output .local-cache\Ristretto_COMPLETO.zip
-```
+[Snapshot esterni](ALPHA20_21_EXTERNAL_EDIT_OBSERVATION.md) · [WinEvent](ALPHA20_23_LIVE_EDIT_OBSERVER.md) · [anteprima](ALPHA20_24_TRIGGER_PREVIEW.md).
 
-Gli script `clean-build.cmd` e `clean-build.ps1` restano disponibili per pulire `bin` e `obj`; richiedono un'azione esplicita.
+## 6. VS Code e anteprime grafiche
 
-## 5. In caso di errore
+Il ramo host VS Code è sospeso. Prima di riprenderlo diagnosticare l'avvio normale; il precedente crash `0x80000003` non ha una causa confermata. Il runner supporta `-PrepareOnly` per preparare senza avviare l'editor; le istruzioni sono in [host VS Code](ALPHA20_3_VSCODE_HOST_TESTS.md).
 
-Condividi il primo `FAIL` e la relativa eccezione. I report vengono salvati in `.local-cache/gates/` senza testo degli snippet. Non usare `NOT_RUN` come prova di funzionamento. Un errore di compilazione dello strumento C# non dimostra un errore dell'applicazione: i due perimetri vanno distinti.
+Il tool UiReview apre finestre proprie: è compilato dai gate, ma non avviato automaticamente. Le immagini attuali sono render della Alpha 7. La rigenerazione del nuovo dialogo è pianificata in R2.06; un render non sostituisce tastiera, focus, DPI e registrazioni reali. [Anteprime](../design/README.md) · [accettazione visuale](GUI_VISUAL_ACCEPTANCE.md).
 
-## 6. Osservazione esterna R5 (facoltativa, Windows)
+## 7. Pacchetto e cartella nuova
 
-Questa prova **legge temporaneamente in RAM fino a 4096 unità UTF-16 da un campo esterno**: utilizzala soltanto con un documento sintetico senza dati personali. Non registra caratteri o tasti, non legge password, non scrive, non usa la clipboard e non installa hook. Supporta esclusivamente alcuni controlli Win32 `Edit` classici; Notepad moderno può essere escluso.
+~~~powershell
+dotnet run -c Release --project tools/Ristretto.DevTools/Ristretto.DevTools.csproj -- package --output .local-cache/Ristretto_COMPLETO.zip
+~~~
 
-1. Prepara un campo `Edit` classico di test in una seconda applicazione e lascialo vuoto.
-2. In PowerShell, dalla cartella `Ristretto`, avvia il comando seguente:
+Il tool include i file sorgenti e i documenti, esclude output/cache e produce `MANIFEST_SHA256.txt`, verificando gli hash dell'archivio. Questo comando crea il pacchetto: non esegue i test dell'applicazione.
 
-   ```powershell
-   .\scripts\observe-classic-edit-text.cmd
-   ```
+Estrarre in una cartella nuova, verificare il manifest e l'assenza iniziale di `bin`/`obj`, poi eseguire il gate dichiarato. Per una consegna funzionale ripetere build/test pertinenti; per una revisione documentale verificare SOURCE e che l'hash dei sorgenti funzionali corrisponda alla baseline.
 
-3. Durante i primi cinque secondi, attiva il campo e posiziona il cursore, **senza digitare**.
-4. Durante i cinque secondi successivi, digita per esempio `;firma` oppure `caffè ☕` mantenendo lo stesso controllo attivo.
-5. Leggi il risultato nel terminale. `CandidateInsertion` è una differenza plausibile, non prova la provenienza umana. `NOT_RUN` indica che la lettura non è riuscita o il campo non è qualificato. Nessuno dei risultati autorizza espansioni automatiche.
+Versione del codice, revisione dei documenti e risultato delle prove devono essere dichiarati separatamente. Non pubblicare un manifest riferito a file precedenti all'ultimo aggiornamento.
 
-Per dettagli, consultare [Alpha 20.21](ALPHA20_21_EXTERNAL_EDIT_OBSERVATION.md).
+## 8. Rapporti, restore ed errori
 
-## 7. Controllare le novità della Alpha 20.22
+I rapporti dei gate sono in `.local-cache/gates/` e contengono versione, hash e risultati per passo. Conservare nella consegna solo le evidenze scelte, con il loro perimetro.
 
-**Scopo:** verificare il bug xUnit corretto e le due modifiche dell'interfaccia, senza usare dati personali.
+Il tool C# accetta `--report <file>` e `--restore-source <etichetta>` quando invocato direttamente. L'etichetta descrive la sorgente: non configura NuGet. Registrare onestamente restore online/cache e audit non eseguito. Non disabilitare TLS o controlli delle firme.
 
-1. Apri PowerShell nella cartella `Ristretto` della nuova versione, con Ristretto chiuso.
-2. Esegui ` .\scripts\validate-source.cmd ` per verificare gli invarianti del sorgente. **Atteso:** `GATE SOURCE: PASS`.
-3. Esegui ` .\scripts\validate.cmd `: compila ed esegue anche i test modificati. **Atteso:** `GATE CORE: PASS` e nessuna segnalazione del test `InsertionInMiddleAtCaretIsOnlyCandidate`.
-4. Avvia Ristretto, apri la libreria e seleziona uno snippet lungo. Trascina il bordo destro della finestra e poi quello inferiore: il campo **Testo da espandere** deve occupare lo spazio orizzontale e verticale disponibile, senza sovrapporsi ai pulsanti.
-5. Apri un documento sintetico vuoto in Blocco note. Nel picker cerca due snippet, premi **Freccia Giù** una volta per scegliere il secondo risultato e poi **Invio**. **Atteso:** viene inserito il contenuto del secondo risultato, non quello del primo. Con freccia Su torna al precedente. Senza frecce Invio usa il risultato già selezionato automaticamente.
-6. Ripeti il quinto passo cliccando sul pulsante **Inserisci**: il risultato selezionato deve essere identico. Non è necessario ripetere tutte le prove del profilo SQLite per questo intervento.
+Se un comando fallisce, leggere il primo FAIL e la prima eccezione/errore di compilazione; i passi successivi restano NOT_RUN. Condividere versione e diagnostica senza contenuto degli snippet.
 
-La compilazione e il rendering della 20.22 **non sono stati verificati qui su .NET/Windows**: la verifica finale spetta ai test sul tuo computer.
-
-## 8. Osservare modifiche in tempo reale su un controllo Edit — Alpha 20.23 (facoltativo)
-
-**Scopo:** verificare se WinEvent notifica l'inserimento in un controllo classico `Edit` esterno. **Attenzione:** questa prova legge temporaneamente in RAM un massimo di 4096 unità UTF-16. Non usare password o documenti personali.
-
-1. Esegui prima ` .\scripts\validate.cmd `: il risultato atteso è `GATE CORE: PASS`. Questa validazione non apre l'osservatore.
-2. Prepara un'applicazione con un **Edit Win32 classico** di prova; Notepad moderno può essere escluso.
-3. Da PowerShell, nella cartella `Ristretto`, avvia:
-
-   ```powershell
-   .\scripts\observe-classic-edit-live.cmd 15
-   ```
-
-4. Entro cinque secondi porta il focus nel campo di prova senza digitare. Quando compare «Osservazione attiva», digita `;firma` o `caffè ☕`.
-5. Controlla i contatori finali. `PASS` conferma almeno un inserimento **plausibile**, non una digitazione certa; `NOT_RUN` indica assenza di dati utilizzabili o editor non compatibile. In nessun caso vengono modificati documenti.
-
-[Dettagli, limiti e obiettivo](ALPHA20_23_LIVE_EDIT_OBSERVER.md).
-
-## 8. Anteprima dei trigger Win32, nuova in Alpha 20.24 (facoltativa)
-
-Questa prova **non espande** gli snippet. Legge temporaneamente in RAM testo **sintetico** di un controllo Win32 `Edit` esterno, senza log del contenuto e senza accedere alla libreria SQLite personale. Non usarla con informazioni riservate.
-
-1. Apri un campo Win32 `Edit` classico in un programma esterno di prova; lascialo vuoto.
-2. Da PowerShell, nella cartella del progetto, esegui:
-
-   ```powershell
-   .\scripts\observe-classic-edit-preview.cmd 15
-   ```
-
-3. Nei primi cinque secondi attiva il campo e non digitare. Quando compare l'avviso di osservazione attiva, digita `;firma` seguito da uno spazio.
-4. Leggi il numero di **potenziali trigger**. `PASS` vale soltanto per la simulazione; `NOT_RUN` indica che il controllo non ha fornito evidenze sufficienti.
-
-La notifica può derivare anche da un incollamento: **nessun risultato autorizza una modifica**. Vedi [Alpha 20.24](ALPHA20_24_TRIGGER_PREVIEW.md).
+La pulizia di output è facoltativa: `scripts/clean-build.cmd -Preview` mostra i percorsi prima della cancellazione. [Regole di pulizia](CLEAN_BUILD.md).

@@ -1,0 +1,76 @@
+Ristretto 3.9.0-alpha.20.26 — GATE SOURCE (strumenti C#, senza Python)
+RUN source_audit
+AUDIT C#: PASS (0 problemi)
+PASS source_audit: Codice di uscita 0
+RUN csharp_regressions
+  PASS Notepad: documento invariato
+  PASS Notepad: file assente
+  PASS Notepad: Unicode LF
+  PASS Notepad: documento UTF-8 con BOM
+  PASS Notepad: BOM incompleto viene rifiutato
+  PASS Notepad: fixture UTF-8 con BOM, preparazione e riapertura
+  PASS Notepad: Unicode CRLF
+  PASS Notepad: CRCRLF alterato
+  PASS Notepad: inserimento doppio
+  PASS Notepad: intestazione modificata
+  PASS Notepad: testo incompleto
+  PASS Notepad: UTF-8 corrotto
+  PASS Notepad: conversione NFC/NFD non ammessa
+  PASS Versione: componenti numeriche consentite
+  PASS Gate source: soli controlli C#
+  PASS Gate core: non richiede Node
+  PASS Gate CI: non autorizza test nativi
+  PASS Gate full: include test nativi
+  PASS Uscita CLI CP1252 non UTF-8 accettata soltanto come diagnostica
+  PASS Uscita CLI Unicode UTF-8 conservata
+  PASS Schema documentazione: file di prova presente
+  PASS Nessuno script Python eseguibile
+  PASS Fixture C#: confronto differenza conclusiva
+TEST STRUMENTI C#: 23/23 PASS
+PASS csharp_regressions: Codice di uscita 0
+RUN static_checks
+Statici: 19 XML, 5 lingue, 769 link Markdown, DDL SQLite in memoria
+CONTROLLI STATICI: PASS (0 problemi)
+PASS static_checks: Codice di uscita 0
+Report: E:\siti\2026 Ristretto\Ristretto\.local-cache/docs-roadmap/source.json
+source_audit=PASS | csharp_regressions=PASS | static_checks=PASS | dotnet_restore=NOT_RUN | solution_build=NOT_RUN | xunit=NOT_RUN | windows_lab_build=NOT_RUN | benchmark_build=NOT_RUN | replacement_lab_build=NOT_RUN | ui_review_build=NOT_RUN | devtools_build=NOT_RUN | startup_cli=NOT_RUN | node_tests=NOT_RUN | export_contract=NOT_RUN | native_windows=NOT_RUN
+GATE SOURCE: PASS (NOT_RUN non equivale a PASS)
+
+FRESH DOCUMENTATION ZIP: 497 hashes verified, initially no bin/obj; functional source digest unchanged
+Ristretto 3.9.0-alpha.20.26 — GATE SOURCE (strumenti C#, senza Python)
+RUN source_audit
+AUDIT C#: PASS (0 problemi)
+PASS source_audit: Codice di uscita 0
+RUN csharp_regressions
+  PASS Notepad: documento invariato
+  PASS Notepad: file assente
+  PASS Notepad: Unicode LF
+  PASS Notepad: documento UTF-8 con BOM
+  PASS Notepad: BOM incompleto viene rifiutato
+  PASS Notepad: fixture UTF-8 con BOM, preparazione e riapertura
+  PASS Notepad: Unicode CRLF
+  PASS Notepad: CRCRLF alterato
+  PASS Notepad: inserimento doppio
+  PASS Notepad: intestazione modificata
+  PASS Notepad: testo incompleto
+  PASS Notepad: UTF-8 corrotto
+  PASS Notepad: conversione NFC/NFD non ammessa
+  PASS Versione: componenti numeriche consentite
+  PASS Gate source: soli controlli C#
+  PASS Gate core: non richiede Node
+  PASS Gate CI: non autorizza test nativi
+  PASS Gate full: include test nativi
+  PASS Uscita CLI CP1252 non UTF-8 accettata soltanto come diagnostica
+  PASS Uscita CLI Unicode UTF-8 conservata
+  PASS Schema documentazione: file di prova presente
+  PASS Nessuno script Python eseguibile
+  PASS Fixture C#: confronto differenza conclusiva
+TEST STRUMENTI C#: 23/23 PASS
+PASS csharp_regressions: Codice di uscita 0
+RUN static_checks
+Statici: 19 XML, 5 lingue, 771 link Markdown, DDL SQLite in memoria
+CONTROLLI STATICI: PASS (0 problemi)
+PASS static_checks: Codice di uscita 0
+Report: E:\siti\2026 Ristretto\Ristretto\.local-cache\alpha20-26-docs-clean\Ristretto\../fresh-source.json
+source_audit=PASS | csharp_regressions=PASS | static_checks=PASS | dotnet_restore=NOT_RUN | solution_build=NOT_RUN | xunit=NOT_RUN | windows_lab_build=NOT_RUN | benchmark_build=NOT_RUN | replacement_lab_build=NOT_RUN | ui_review_build=NOT_RUN | devtools_build=NOT_RUN | startup_cli=NOT_RUN | node_tests=NOT_RUN | export_contract=NOT_RUN | native_windows=NOT_RUN
+GATE SOURCE: PASS (NOT_RUN non equivale a PASS)

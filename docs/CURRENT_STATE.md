@@ -1,33 +1,56 @@
-# Stato corrente — Ristretto 3.9.0-alpha.20.25
+# Stato corrente — Ristretto 3.9.0-alpha.20.26
 
-## Cosa stiamo facendo
+**Aggiornamento documentale:** 15 novembre 2026. La versione del codice resta Alpha 20.26.
 
-**Alpha 20.25:** corretti i due CS0246 nei test della 20.24. Aggiunta la hotkey facoltativa per ogni snippet, con inserimento manuale diretto nell'applicazione Windows attiva. **820 xUnit passati**, inclusi 41 nuovi casi; nuove hotkey sul desktop ancora da qualificare. [Uso e verifiche](ALPHA20_25_SNIPPET_HOTKEYS.md).
+## Cosa si può usare
 
-**R5 — osservazione Unicode e anteprima trigger su editor esterno:** sperimentiamo gli eventi `EVENT_OBJECT_VALUECHANGE` per controlli Win32 `Edit`, con un comando esplicito e limitato nel tempo. Confrontiamo osservazioni temporanee, invalidando la sessione ai cambi di focus. In Alpha 20.24 viene anche simulato il riconoscimento di `;firma ` usando soltanto un catalogo sintetico. I risultati mostrano soltanto contatori; non intercettiamo la tastiera e **non abilitiamo l'espansione automatica**.
+| Funzione | Stato |
+| --- | --- |
+| Libreria, gruppi, ricerca, SQLite | Disponibili; dati locali |
+| Import/export e backup/ripristino | Disponibili; migrazione schema 1→2 e recupero coperti da test sintetici |
+| Picker | Ricerca, selezione con frecce, Invio/Inserisci e Copia; flusso base in Blocco note confermato dall'utente |
+| Hotkey per snippet Windows | Inserimento diretto senza picker; richiamo base in Blocco note confermato dall'utente dopo Alpha 20.25 |
+| Registra hotkey | Implementata in Alpha 20.26; form con display dei tasti, conferma, annullamento e rimozione |
+| Temi e lingue | Due temi e cinque lingue; nuove superfici ancora da controllare su DPI e layout reali |
+| Profili separati | `--data-dir` e controllo senza GUI disponibili |
+| Espansione automatica nelle altre app | **Da sviluppare e qualificare** |
+| Hotkey/inserimento nativi Linux e macOS | **Da sviluppare e qualificare** |
+| Installer e aggiornamento automatico | **Non disponibili**; la consegna attuale è lo ZIP sorgenti |
 
-## Stato verificato e ancora aperto
+L'inserimento manuale usa gli appunti, che rimangono contenenti lo snippet. Il destinatario deve essere identificabile e compatibile; un tentativo inviato non prova da solo che l'editor abbia applicato il testo.
 
-| Area | Stato |
-|---|---|
-| R1 — Fondamenta, strumenti C#, SQLite e xUnit | Baseline 20.24 corretta: CORE e 779 xUnit passati; suite 20.25 a 820 xUnit, schema 2 e migrazione provati su dati sintetici |
-| R2 — Picker, Invio, Inserisci e hotkey | Inserimento Unicode in Notepad confermato; novità GUI e frecce+Invio 20.22 ancora da validare |
-| R2 — Hotkey per snippet | Implementate in 20.25; catalogo, registrazione e inserimento testati con API simulate, prova desktop aperta |
-| R5 — Bridge Unicode nel controllo posseduto | Alpha 20.20 confermata |
-| R5 — Osservazione esterna in due snapshot | Compilazione e xUnit inclusi nella suite passata; prova esterna aperta |
-| R5 — Osservazione WinEvent e anteprima trigger | Compilazione e xUnit passati dopo fix CS0246; prova nativa **NOT_RUN**, provenienza non qualificata |
-| R6 — Espansione automatica editor esterni | Da sviluppare |
-| R3 VS Code e R7–R8 | Facoltativo sospeso; nuove funzionalità e Linux/macOS successivamente |
+## Evidenze della baseline Alpha 20.26
 
-## Obiettivo finale
+- Gate CI locale e da ZIP estratto in cartella nuova: solution, quattro laboratori e DevTools compilati senza warning.
+- **846 xUnit**, **32 Node**, **23 regressioni degli strumenti C#**, **10 controlli CLI** e contratto export .NET→Node passati.
+- Restore dalla cache NuGet locale. Audit vulnerabilità online non eseguito.
+- Conferma dell'utente: richiamo tramite hotkey funzionante in Blocco note Windows. Versione esatta dell'editor e matrice completa dei casi non fornite.
+- Nuova form Registra…: **26 nuovi casi** sullo stato di acquisizione e sul coordinatore, senza aprire il backend grafico o registrare hotkey reali.
 
-Digitare un trigger Unicode come `;firma` in un editor compatibile e ottenere automaticamente lo snippet, senza aprire il picker.
+[Risultati Alpha 20.26](../reports/ALPHA20_26_CHECKS.md) · [rapporto strutturato](../reports/ALPHA20_26_VALIDATION.json).
 
-## Cosa resta da fare
+La presente revisione modifica i documenti: non attribuisce nuove esecuzioni a questi test. [Verifica documentale](../reports/DOCS_ROADMAP_REVIEW.md).
 
-1. **P0:** qualificare le hotkey per snippet sul desktop con un profilo isolato, insieme a editor ridimensionabile e frecce+Invio della 20.22. Compilazione e xUnit sono passati.
-2. **P0:** eseguire, solo se utile, la prova WinEvent e l'anteprima del trigger sintetico in un controllo `Edit` classico, senza dati personali.
-3. **P1:** qualificare provenienza e sequenza dell'input committato: digitazione, IME, clipboard e modifiche sintetiche.
-4. **P1:** sviluppare un adapter esterno con sostituzione condizionale e verifica dell'esito, opt-in e con fallback al picker.
+## Verifiche ancora aperte
 
-[Roadmap](ROADMAP.md) · [Test](BUILD_AND_TEST.md) · [Alpha 20.24](ALPHA20_24_TRIGGER_PREVIEW.md) · [Handoff](HANDOFF.md).
+1. Nuova form sul desktop: focus, tasti mostrati, conferma/rimozione, annullamento e sospensione/ripristino delle registrazioni.
+2. Conflitti fra snippet, picker, altre app e profili; disabilitazione, uscita, sessioni prolungate e appunti/focus concorrenti.
+3. Novità UI della 20.22: area testo ridimensionabile e scelta del risultato tramite frecce+Invio su una matrice desktop ripetibile.
+4. Aggiornamento completo, recupero dopo interruzioni, accessibilità e nuove immagini del prodotto.
+5. Audit delle dipendenze, licenza, pacchetto binario e pubblicazione qualificata.
+
+Le anteprime in `design/current` sono della **GUI Preview 9, Alpha 7**. Non documentano i pulsanti e le scorciatoie introdotti successivamente.
+
+## R5 e obiettivo automatico
+
+Sono implementati confronti Unicode, lettura di un controllo Edit esterno, osservazione WinEvent e anteprima di trigger sintetici. La suite compila e i test passano. Le prove live dei nuovi osservatori restano separate e non eseguite in questa baseline.
+
+Un `PotentialTrigger` non dimostra digitazione: lo stesso testo può provenire da paste, IME o codice. L'anteprima non autorizza scritture. R5 deve decidere quali garanzie offre un target; R6 potrà introdurre una sostituzione automatica soltanto dopo un esito positivo.
+
+L'adapter VS Code resta un esperimento manuale da export JSON. I test Node e del contratto sono passati; il vero host rimane non qualificato e il ramo R3 è sospeso.
+
+## Prossimo lavoro
+
+**Prima priorità: R2.01, R2.08 e R2.09**, con correzioni R2.07 se emergono difetti: qualificare la form e le hotkey attuali. In parallelo possono avanzare dati/distribuzione R4 e gli esperimenti di provenienza R5.
+
+[Roadmap dettagliata](ROADMAP.md) · [Installazione e aggiornamento](INSTALLATION_AND_UPDATE.md) · [Build e test](BUILD_AND_TEST.md) · [Handoff](HANDOFF.md).

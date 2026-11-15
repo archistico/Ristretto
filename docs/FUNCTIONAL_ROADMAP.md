@@ -1,15 +1,15 @@
 # Quadro funzionale F0–F6
 
-**Questo è un indice delle fasi, non una roadmap separata.** Priorità, responsabilità e gate di uscita sono definiti esclusivamente in [ROADMAP.md](ROADMAP.md). Stato reale ed evidenze in [CURRENT_STATE.md](CURRENT_STATE.md).
+Questo documento è una mappa delle aree tecniche. Priorità, attività e criteri di chiusura sono soltanto nella [roadmap R1–R8](ROADMAP.md). Baseline: **3.9.0-alpha.20.26**; [stato effettivo](CURRENT_STATE.md).
 
-| Fase | Ambito | Stato e prossime milestone |
+| Area | Contenuto | Stato e lavoro collegato |
 | --- | --- | --- |
-| F0 | Libreria snippet, gruppi, SQLite, import/export, backup, picker e tray | Implementati; baseline complessiva 588 xUnit, profili separati in Alpha 20.5. UI/clipboard e hotkey reali da qualificare in R2; alpha Windows in R4 |
-| F1 | Riconoscimento e attivazione Unicode | Disponibile, evidenze storiche |
-| F2 | Preparazione e sostituzione condizionale su controlli posseduti | Precedente baseline Alpha 20.3: 31 scenari nativi, smoke cooperante/remoto passati; non qualificano editor esterni |
-| F3 | Orchestrazione e adapter di editor esterni | VS Code manuale: 32 Node precedenti, host da qualificare in R3. Studio automatismo R5, implementazione condizionata R6 |
-| F4 | Variabili, form e template avanzati | R7, dopo una baseline manuale qualificata; supporto cursore condizionato all'adapter |
-| F5 | Input/output e hotkey macOS/Linux | R8, con qualificazione distinta per OS/sessione/capacità |
-| F6 | Stabilizzazione, sicurezza, installazione e rilascio | Trasversale: profili/versioni/gate in R1, prodotto Windows in R4, pacchetti per altri OS in R8 |
+| F0 | Libreria, SQLite, import/export, backup, picker, tray e hotkey per snippet | Disponibili; base manuale in Blocco note confermata. Nuova form Registra… e matrice desktop in R2; dati e distribuzione in R4 |
+| F1 | Riconoscimento e attivazione Unicode | Motore e contratti coperti da test; non equivalgono a un adapter automatico esterno |
+| F2 | Preparazione e sostituzione condizionale nei controlli posseduti | Laboratori separati dal prodotto; evidenze storiche native, non supporto generale agli editor |
+| F3 | Adapter e orchestrazione esterna | Diagnostica Windows e anteprima senza scrittura; provenienza in R5, prima espansione condizionata in R6. VS Code sospeso in R3 |
+| F4 | Variabili, template e form degli snippet | R7; gli snippet esistenti restano letterali. La form di acquisizione della hotkey è già un'altra funzione |
+| F5 | Input/output e hotkey macOS/Linux | R8, con qualificazione distinta per sistema e sessione |
+| F6 | Stabilità, sicurezza, installazione e rilascio | R1 per strumenti/provenienza/licenze, R2 per flussi manuali, R4 per prodotto Windows, R8 per altri OS |
 
-La presenza di una funzionalità sperimentale non implica che sia validata in produzione o disponibile su tutti i sistemi operativi.
+La baseline automatica corrente è di **846 xUnit e 32 Node**, validata prima di questa revisione documentale. I singoli perimetri e le prove ancora aperte sono nei [rapporti](../reports/README.md).

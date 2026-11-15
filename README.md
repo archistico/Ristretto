@@ -1,106 +1,117 @@
-# Ristretto — text expander multipiattaforma
+# Ristretto
 
-**Versione di lavoro: 3.9.0-alpha.20.25.** Stack: C# / .NET 10, Avalonia, SQLite e test xUnit.
+## Screenshot
 
-Ristretto gestisce gruppi e snippet Unicode, consente la ricerca tramite picker e offre su Windows una hotkey globale configurabile per aprirlo. **Invio** e **Inserisci** nel picker hanno avuto una prova positiva su Notepad con documento sintetico Unicode; questo non dimostra ancora l'espansione automatica durante la digitazione.
+Anteprime della **GUI Preview 9, Alpha 7**, precedenti a Inserisci, alle hotkey per snippet e al pulsante Registra….
 
-## Alpha 20.25 — Hotkey per snippet e correzione della build
+**Libreria degli snippet**
 
-- Corretti i due `CS0246` nei test dell'anteprima R5: mancava il namespace Application del tipo già esistente.
-- Nuovo campo **Hotkey dello snippet (facoltativa)**: assegna per esempio `Ctrl+Alt+F`, salva e usa la combinazione nell'applicazione Windows attiva per inserire lo snippet senza aprire il picker. Vuoto o `None` rimuove l'associazione.
-- Combinazioni duplicate segnalate; snippet/gruppi disabilitati non attivano hotkey. SQLite, backup e JSON conservano le associazioni; migrazione dal database precedente verificata con dati sintetici.
-- **GATE CI: PASS**, anche da ZIP estratto in cartella nuova: 820 xUnit, inclusi 41 nuovi casi, 32 Node e contratto export .NET→Node. Prova delle nuove hotkey sul desktop ancora aperta; l'inserimento usa gli appunti e richiede un destinatario compatibile, come il picker.
+![Libreria Ristretto, anteprima Preview 9 in italiano](design/current/main-light-it.png)
 
-[Uso, compatibilità e verifiche](docs/ALPHA20_25_SNIPPET_HOTKEYS.md).
+**Picker di ricerca**
 
-## Alpha 20.24 — anteprima dei trigger nell'Edit esterno (R5)
+![Picker Ristretto, anteprima Preview 9 in italiano](design/current/picker-light-it.png)
 
-- Nuovo comando facoltativo: `.\scripts\observe-classic-edit-preview.cmd 15`. Dopo 5 secondi di preparazione osserva un campo Win32 `Edit` sintetico e conta i **potenziali** riconoscimenti di `;firma` seguito da spazio.
-- La simulazione riutilizza le politiche Unicode e i delimitatori del motore, ma **non attribuisce l'input alla digitazione** e **non può autorizzare alcuna sostituzione**. Testo letto solo temporaneamente in RAM; nessun contenuto salvato.
-- Nuovi test xUnit e controlli statici. Gli errori di compilazione sono corretti nella 20.25 e la suite passa; la prova WinEvent sul desktop resta da eseguire. In questo incremento 20.24 picker, hotkey, GUI e SQLite erano invariati.
+La scritta «Invio: copia» nell'immagine è storica: oggi Invio inserisce il risultato selezionato. [Altre anteprime e provenienza delle immagini](design/README.md).
 
-[Guida in italiano e limiti](docs/ALPHA20_24_TRIGGER_PREVIEW.md).
+## Cos'è Ristretto
 
-## Alpha 20.23 — osservazione WinEvent temporanea su Edit classici (R5)
+Ristretto è un'applicazione desktop per conservare e riutilizzare testi frequenti: firme, risposte, indirizzi, comandi e modelli di messaggio.
 
-- **Nuovo osservatore esplicito di eventi:** il laboratorio può ascoltare per 5–30 secondi le notifiche di modifica e di focus di un `Edit` Win32 esterno, senza leggere tasti né scrivere nell'editor.
-- La sessione di osservazione invalida il contesto dopo cambi di finestra, controllo o letture non affidabili. I risultati sono **solo candidati**: non possono autorizzare l'espansione automatica.
-- Nuovi xUnit e contratti `Ristretto.DevTools`; compilazione e prove native Windows della **20.23 da eseguire**. GUI, picker, hotkey, servizio Inserisci e SQLite invariati.
+Gli snippet sono organizzati in gruppi e salvati localmente. Su Windows puoi inserirli nell'applicazione in cui stai scrivendo tramite una combinazione di tasti o scegliendoli dal picker.
 
-Per una prova facoltativa **esclusivamente su testo sintetico**, dalla cartella Ristretto:
+**Versione attuale: 3.9.0-alpha.20.26.** Il progetto è in sviluppo, realizzato in C#/.NET 10, Avalonia e SQLite. La prima piattaforma di utilizzo è Windows; le funzioni native per Linux e macOS sono pianificate.
 
-```powershell
-.\scripts\observe-classic-edit-live.cmd 15
-```
+**L'espansione automatica mentre digiti un trigger, per esempio `;firma`, è ancora in sviluppo.** Oggi il richiamo avviene con un comando esplicito.
 
-L'osservatore può leggere temporaneamente in RAM fino a 4096 unità UTF-16 del campo di prova. [Guida completa e limiti](docs/ALPHA20_23_LIVE_EDIT_OBSERVER.md).
+## Come funziona
 
-## Alpha 20.22 — correzione test e miglioramenti all'interazione
+### 1. Crea uno snippet
 
-- **Corretto il test Unicode in mezzo al testo:** nella fixture `a☕b`, il cursore dopo l'inserimento è all'indice UTF-16 2 (non 3). Il motore continua correttamente a rifiutare cursori spostati.
-- **Campo «Testo da espandere» reattivo:** cresce verticalmente e orizzontalmente con la finestra, senza altezza fissa o limite artificiale di larghezza.
-- **Picker da tastiera:** frecce Su/Giù selezionano il risultato anche dal campo di ricerca; **Invio inserisce quello selezionato**, usando le stesse protezioni monouso del pulsante Inserisci.
-- Nuovi xUnit e contratti DevTools aggiornati; **compilazione e test della 20.22 da confermare su Windows**. Non cambia il database, la hotkey o l'espansione globale.
+Crea un gruppo, premi **Nuovo snippet**, compila nome, trigger e testo, poi premi **Salva**. Il trigger identifica lo snippet e consente di cercarlo; al momento digitarlo in un'altra applicazione non produce un'espansione automatica.
 
-[Dettagli tecnici e prova manuale](docs/ALPHA20_22_PICKER_EDITOR_AND_CARET.md).
+### 2. Richiamalo con una hotkey
 
-## Alpha 20.21 — osservazione Unicode esplicita su un `Edit` esterno
+Nel campo hotkey dello snippet premi **Registra…**, poi premi la combinazione desiderata. La form mostra i tasti rilevati, per esempio **ALT + CTRL + SHIFT + B**. Rilasciali, scegli **Usa combinazione** e salva lo snippet.
 
-Hai confermato **compilazione e test PASS della Alpha 20.20**: questa è la nuova baseline Windows. La 20.21 aggiunge un esperimento su un controllo Win32 `Edit` classico esterno. Con un comando manuale si confrontano due stati di un piccolo documento sintetico, senza salvare il testo letto o modificarlo. **Non abilita l'espansione automatica.**
+Con Ristretto in esecuzione, porta il cursore nell'applicazione di destinazione e premi la combinazione. Il contenuto viene incollato senza aprire il picker.
 
-```powershell
-.\scripts\observe-classic-edit-text.cmd
-```
+Una combinazione può appartenere a un solo snippet e non può coincidere con quella del picker. Un campo vuoto o `None` rimuove l'associazione dopo il salvataggio. Snippet e gruppi disabilitati non attivano hotkey.
 
-**Attenzione:** la prova legge temporaneamente in RAM fino a 4096 unità UTF-16 del campo attivo, quindi va usata soltanto con un documento di prova senza dati personali. Notepad moderno, browser, Word e RichEdit possono essere esclusi. Compilazione e xUnit della nuova versione attendono ancora verifica su Windows. GUI, picker, hotkey, SQLite e servizio Inserisci sono invariati. [Dettagli](docs/ALPHA20_21_EXTERNAL_EDIT_OBSERVATION.md).
+### 3. Oppure usa il picker
 
-## Cosa era cambiato nella Alpha 20.19.4
+Aprilo con **Ctrl+Shift+Space**, cerca uno snippet e usa le frecce per selezionarlo. **Invio** o **Inserisci** inseriscono il risultato selezionato; **Copia testo** lo mette soltanto negli appunti. **Esc** chiude il picker.
 
-- **Nessuna dipendenza da Python:** rimossi gli script `.py` e sostituiti con `tools/Ristretto.DevTools`, un programma console C# .NET 10.
-- Audit namespace e riferimenti, controlli XAML/SQLite/localizzazioni, test dei tool, verifiche CLI, qualificazione Notepad, packaging ZIP e quality gate ora utilizzano C#.
-- `scripts/validate.cmd`, `scripts/validate-source.cmd`, `scripts/validate-picker-notepad.cmd` e gli script equivalenti Linux sono semplici avviatori di .NET.
-- Eliminato il validatore storico `verify-release.ps1`; gli invarianti di versione e i controlli strutturali principali sono trasferiti agli strumenti C# e gli xUnit continuano a verificare il comportamento.
-- Risolto il warning **xUnit2000** invertendo gli argomenti dell'assert nel test dell'adapter Windows.
+Per inserire in un'altra applicazione, richiamalo mentre il cursore è già nel campo di destinazione. La combinazione del picker si cambia nelle impostazioni.
 
-Il codice applicativo del picker, la hotkey e il database non sono stati modificati. L'adapter VS Code resta un esperimento facoltativo JavaScript, necessario per l'API di quell'editor e non incluso nel percorso principale.
+L'inserimento usa gli appunti, che rimangono contenenti lo snippet. Il richiamo di base in **Blocco note Windows è stato confermato dall'utente**; altri editor e i casi avanzati sono ancora da qualificare. L'acquisizione tramite la nuova form Registra… deve ancora essere provata sul desktop. [Funzioni disponibili e verifiche](docs/CURRENT_STATE.md).
 
-## Requisiti
+## Installazione
 
-- **SDK .NET 10** per compilazione, test, controlli sorgenti e strumenti diagnostici. Python non è richiesto.
-- **Windows 10/11** per la versione desktop Windows e le prove Notepad. I controlli strutturali C# sono portabili.
-- **Node.js 22** soltanto per i controlli dell'estensione VS Code (`gate ci`/`gate full`), non per `gate core`.
+La consegna attuale è uno **ZIP completo dei sorgenti**, da compilare. Installer e pacchetto eseguibile pronto all'uso sono pianificati.
 
-## Comandi fondamentali
+1. Installa l'[SDK .NET 10 dalla pagina ufficiale Microsoft](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
+2. Estrai lo ZIP in una cartella nuova.
+3. Apri PowerShell nella cartella che contiene `Ristretto.sln` ed esegui:
 
-Dalla cartella contenente `Ristretto.sln`, in PowerShell:
-
-```powershell
+~~~powershell
 .\scripts\validate.cmd
-.\scripts\validate-source.cmd
-.\scripts\validate-picker.cmd
-```
+~~~
 
-Il primo comando verifica sorgenti, compila, esegue xUnit e le prove CLI. Il secondo esegue audit, controlli strutturali e regressioni degli strumenti C#; **richiede anch'esso .NET 10**. Il terzo esegue i test mirati al picker. `PASS` indica soltanto il perimetro eseguito: un test grafico non avviato resta `NOT_RUN`.
+Il risultato atteso è **GATE CORE: PASS**. Il primo ripristino delle dipendenze richiede accesso a NuGet, oppure una cache locale già disponibile.
 
-Per Notepad, gli script continuano a usare una directory di test isolata:
+Avvia quindi Ristretto:
 
-```powershell
-.\scripts\validate-picker-notepad.cmd prepare --open
-.\scripts\seed-picker-notepad.cmd TOKEN
-.\scripts\validate-picker-notepad.cmd launch --session TOKEN
-.\scripts\validate-picker-notepad.cmd verify --session TOKEN
-```
+~~~powershell
+dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release
+~~~
 
-Sostituire `TOKEN` con l'identificativo mostrato da `prepare`. Per i passaggi descritti dettagliatamente, consultare [BUILD_AND_TEST](docs/BUILD_AND_TEST.md).
+Per l'uso Windows e il gate CORE basta .NET: **Python e Node.js non sono richiesti**. Node.js serve soltanto alle verifiche dell'estensione VS Code facoltativa.
 
-## Documentazione
+## Aggiornamento
 
+1. Nell'applicazione apri il menu **⋯ → Backup** e conserva il backup indicato nella barra di stato.
+2. Esci da Ristretto tramite **Esci** nella tray. Chiudere la finestra su Windows può lasciarlo in esecuzione.
+3. Estrai il nuovo ZIP in una **cartella nuova**, senza unirlo alla versione precedente.
+4. Esegui `.\scripts\validate.cmd` e avvia la nuova versione con il comando indicato sopra.
+5. Controlla libreria, impostazioni e una hotkey su un documento di prova.
+
+La cartella dei dati è separata dai sorgenti: con l'avvio normale la nuova versione riutilizza il profilo esistente.
+
+Se usi `--data-dir`, riutilizza **lo stesso percorso assoluto** anche dopo l'aggiornamento. Un percorso relativo a una nuova cartella dei sorgenti può aprire una libreria diversa.
+
+Dalla Alpha 20.25 il database usa lo **schema 2**. Per tornare a una versione che supporta solo lo schema 1 serve un backup compatibile precedente alla migrazione. [Dati, backup e ripristino](docs/INSTALLATION_AND_UPDATE.md).
+
+## Dati e backup
+
+Su Windows il profilo normale si trova in:
+
+~~~text
+%LOCALAPPDATA%\TextExpanderStudio
+~~~
+
+Contiene `library.db` e la cartella `Backups`. Usa **Backup** e **Ripristina** dal menu dell'applicazione; l'export JSON serve a scambiare snippet, mentre il backup SQLite conserva libreria e impostazioni.
+
+Per provare Ristretto con una libreria separata:
+
+~~~powershell
+dotnet run --project src/TextExpander.Desktop/TextExpander.Desktop.csproj -c Release -- --data-dir "$env:LOCALAPPDATA\Ristretto-Prova"
+~~~
+
+[Guida ai profili e all'aggiornamento](docs/INSTALLATION_AND_UPDATE.md).
+
+## Stato e prossimi passi
+
+La baseline Alpha 20.26 ha superato **846 test xUnit**, **32 test Node** e il gate CI anche da ZIP estratto in una cartella nuova. Questi risultati precedono la presente revisione della documentazione.
+
+I prossimi passi sono verificare sul desktop la form Registra…, completare i controlli di affidabilità del flusso manuale e qualificare la provenienza dell'input prima della prima espansione automatica.
+
+- [Roadmap dettagliata](docs/ROADMAP.md)
 - [Stato corrente](docs/CURRENT_STATE.md)
-- [Roadmap unica](docs/ROADMAP.md)
-- [Compilazione e verifiche in italiano](docs/BUILD_AND_TEST.md)
-- [Handoff](docs/HANDOFF.md)
-- [Indice dei documenti](docs/INDEX.md)
-- [Osservazione esterna 20.21](docs/ALPHA20_21_EXTERNAL_EDIT_OBSERVATION.md) · [Bridge input Unicode 20.20](docs/ALPHA20_20_OWNED_INPUT_BRIDGE.md) · [Hotfix CS9174](docs/ALPHA20_19_5_CS9174_FIX.md)
-- [Migrazione strumenti C#](docs/ALPHA20_19_4_CSHARP_TOOLS.md)
+- [Changelog](CHANGELOG.md)
+- [Compilazione e test](docs/BUILD_AND_TEST.md)
+- [Indice della documentazione](docs/INDEX.md)
 
-Gli archivi e i report delle Alpha precedenti restano storici: alcuni descrivono la vecchia pipeline Python, non più disponibile in questa release.
+## Licenza
+
+La licenza del progetto deve ancora essere scelta e aggiunta al repository. [Decisione aperta e dipendenze](docs/OPEN_SOURCE_LICENSE_DECISION.md).

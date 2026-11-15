@@ -1,4 +1,4 @@
-**Changelog corrente:** [Alpha 20.25 e incrementi recenti](../CHANGELOG.md). Questa pagina conserva lo storico precedente.
+**Changelog corrente:** [versioni attuali e revisioni documentali](../CHANGELOG.md). Questa pagina conserva lo storico precedente.
 
 ## 3.9.0-alpha.20.19.3 — 15 novembre 2026
 
