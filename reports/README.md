@@ -1,3 +1,5 @@
+**Hotfix Alpha 20.19.5:** [stato verifica](ALPHA20_19_5_VALIDATION_STATUS.json) · [correzione CS9174](../docs/ALPHA20_19_5_CS9174_FIX.md). Due errori di compilazione confermati dall’utente sulla 20.19.4; corretti nei sorgenti 20.19.5, build/tool C# della nuova versione ancora NOT_RUN.
+
 **Stato corrente Alpha 20.19.3:** [rapporto strutturato](ALPHA20_19_3_VALIDATION_STATUS.json) · [correzione startup CLI Windows](../docs/ALPHA20_19_3_STARTUP_CLI_ENCODING.md). I PASS della build/xUnit Alpha 20.19.2 sono confermati dall'utente; il test CLI della 20.19.2 era FAIL per la decodifica. Non trasferire questi esiti alla 20.19.3.
 
 **Stato corrente Alpha 20.19.2:** [rapporto strutturato](ALPHA20_19_2_VALIDATION_STATUS.json) · [correzione gate PowerShell](../docs/ALPHA20_19_2_VERSION_GATE_FIX.md). I controlli Python/Node/statici risultano PASS; PowerShell Windows, build .NET, xUnit e prove native restano NOT_RUN in questa consegna.

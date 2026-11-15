@@ -15,5 +15,6 @@
     <ProjectReference Include="../../src/TextExpander.Application/TextExpander.Application.csproj" />
     <ProjectReference Include="../../src/TextExpander.Infrastructure/TextExpander.Infrastructure.csproj" />
     <ProjectReference Include="../../src/TextExpander.Desktop/TextExpander.Desktop.csproj" />
+    <ProjectReference Include="../../tools/Ristretto.DevTools/Ristretto.DevTools.csproj" />
   </ItemGroup>
 </Project>

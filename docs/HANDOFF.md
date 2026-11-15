@@ -1,36 +1,23 @@
-# Handoff — Ristretto 3.9.0-alpha.20.19.3
+# Handoff — Alpha 20.19.5
 
-**Sorgenti canonici:** nuovo ZIP completo con radice `Ristretto/`. Non sovrapporre due Alpha. **Stato:** [CURRENT_STATE.md](CURRENT_STATE.md). **Unica roadmap:** [ROADMAP.md](ROADMAP.md).
+## Hotfix corrente
 
-## Cosa è cambiato nella Alpha 20.19.3
+Nella Alpha 20.19.4 l’utente ha eseguito `validate-source.cmd` e `validate.cmd`: la compilazione del nuovo `Ristretto.DevTools` è fallita con CS9174 nelle righe 173 e 198 di `NotepadQualification.cs`. Nella Alpha 20.19.5 è stata sostituita l’ambigua chiamata `Span<byte>.StartsWith([0xEF, 0xBB, 0xBF])` con `WithoutUtf8Bom(ReadOnlySpan<byte>)` basata su confronto diretto dei byte. Aggiunti tre test C# e una guardia in `SourceAudit`. I due gate devono ancora essere eseguiti su Windows. Nessun cambiamento ai sorgenti dell'app o alla UI.
 
-- Corretto `scripts/check_startup_profile.py`: in Windows la lettura `encoding='utf-8'` causava `UnicodeDecodeError` nel reader thread quando un comando CLI con uscita 2 emetteva un messaggio di errore in codifica locale. Il conseguente `stderr=None` causava `AttributeError`. Ora si acquisiscono i byte in modo binario con timeout e codice di uscita invariati; solo stdout di successo viene decodificato rigorosamente come UTF-8.
-- Nove test Python in `scripts/test_check_startup_profile.py` riproducono messaggi CP1252/CP850 di processi veri, Unicode UTF-8 valido, output non UTF-8 sul canale di successo e errori di contratto.
-- Evidenza utente Alpha 20.19.2: gate `source_audit`, Python, statici, restore, solution, xUnit e quattro tool **PASS**; `startup_cli` **FAIL** per la decodifica; step seguenti `NOT_RUN`. Non scambiare questa evidenza con una validazione Alpha 20.19.3.
-- Nessuna modifica a sorgenti C#, GUI, picker, hotkey, SQLite e logica R5. [Rapporto](ALPHA20_19_3_STARTUP_CLI_ENCODING.md).
+## Attività precedente
 
-## Funzionalità già presenti dalla Alpha 20.19
+L'utente ha confermato `GATE CORE: PASS` su Alpha 20.19.3 e ha richiesto di eliminare Python dall'architettura degli strumenti, oltre a correggere `xUnit2000`.
 
-- `ExternalFocusBoundarySession` in Application azzera i suffissi sia di `TriggerActivationSession` sia di `CommittedInputSession` quando arriva un segnale di cambio finestra/focus o quando l'osservazione non è affidabile.
-- Il laboratorio Windows offre **solo** `--observe-focus 15`: `SetWinEventHook` out-of-context riceve eventi di finestra/focus, senza tastiera, testo o clipboard. È disattivato per impostazione predefinita e termina dopo 3–30 secondi.
-- Nuovi xUnit per reset, evento duplicato, segnale sconosciuto e divieto di trattare eventi non qualificati come testo committato.
-- Nessun file GUI/XAML, gestione picker/Invio, hotkey, SQLite o output Windows di produzione modificato.
+Nella Alpha 20.19.4 tutti gli script Python eseguibili sono stati rimossi e le responsabilità sono trasferite a `tools/Ristretto.DevTools` (C#/.NET 10): audit, statici, regressioni, gate, startup CLI, Notepad e packaging. Gli avviatori `.cmd`/`.sh` richiamano `.NET`; Node rimane soltanto per l'adapter VS Code facoltativo. Il warning xUnit2000 è stato corretto in `WindowsExternalAdapterCapabilityTests.cs`.
 
-## Evidenze
+## Verifiche
 
-- **Conferma utente precedente:** Alpha 20.15 compilata/testata, Inserisci/Invio ripristinato. Alpha 20.18 ha ottenuto `PASS` su documento sintetico Notepad Unicode con uso del picker confermato.
-- **Questa Alpha:** [report verifiche](../reports/ALPHA20_19_3_VALIDATION_STATUS.json); Python, Node e controlli statici eseguibili qui. **Build .NET, nuovi xUnit e WinEvent reali = NOT_RUN**.
-- Nessuna implementazione di text expander automatico per editor esterni: WinEvent segnala solo perdita di continuità; non certifica caratteri, revisione o caret.
+Non dichiarare verificati su Windows i nuovi tool C# prima di aver eseguito compilazione e test. La baseline utente precedente è valida per la 20.19.3, non per questa migrazione/hotfix. La 20.19.4 fallisce con CS9174 prima dei test. La GUI, il picker, la hotkey e il database non sono cambiati.
 
-## Istruzioni per riprendere
+## Prossimi passi
 
-1. Estrarre il nuovo ZIP in una directory nuova. Chiudere Ristretto prima dei test che utilizzano la hotkey.
-2. Dalla cartella con `Ristretto.sln` eseguire ` .\scripts\validate.cmd `: prima verificare che compaia **SORGENTI RISTRETTO 3.9.0-alpha.20.19.3 VERIFICATI**, poi controllare `python_regressions=PASS`, compilazione e xUnit. I nuovi xUnit si chiamano `ExternalFocusBoundarySessionTests`.
-3. Solo **facoltativamente**, su Windows con desktop interattivo, avviare ` .\scripts\observe-focus.cmd 15 `, passare tra finestre/campi sintetici e leggere i conteggi. La procedura non chiede di digitare testo e **non** va usata per provare l'espansione automatica.
-4. Se una verifica fallisce, riportare il messaggio e la versione stampata. Non modificare i sorgenti del picker per indagare sulla sonda focus.
+1. Eseguire `scripts\validate-source.cmd`, poi `scripts\validate.cmd` in una estrazione nuova; verificare CS9174 e correggere eventuali altri errori della migrazione.
+2. Verificare il gate C# CI e la prova Notepad con file sintetici, senza usare dati personali.
+3. Solo dopo riprendere l'espansione automatica Windows, distinguendo gli eventi tastiera dal testo committato.
 
-## Obiettivo e lavoro successivo
-
-**Ora:** qualificare il confine di focus R5. **Obiettivo:** espansione automatica Unicode in un target controllabile. **Da fare:** prove WinEvent e scelta di un canale affidabile di testo committato; focus/IME, target, revisioni e sostituzione verificabile; attivazione opt-in solo dopo evidenze. VS Code resta facoltativo, R2/R4 proseguono in parallelo.
-
-Ogni consegna richiede ZIP completo, documenti correnti in italiano e risultati `PASS`/`FAIL`/`NOT_RUN` separati. Conservare `clean-build.cmd` e `clean-build.ps1`.
+[Guida operativa](BUILD_AND_TEST.md) · [Stato](CURRENT_STATE.md) · [Roadmap](ROADMAP.md) · [Report hotfix](ALPHA20_19_5_CS9174_FIX.md) · [Report migrazione](ALPHA20_19_4_CSHARP_TOOLS.md)

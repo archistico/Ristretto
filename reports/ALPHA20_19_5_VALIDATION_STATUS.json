@@ -1,0 +1,24 @@
+{
+  "schema": "ristretto/validation-status/1",
+  "version": "3.9.0-alpha.20.19.5",
+  "source": "Nuova Alpha 20.19.5, verifiche locali statiche e segnalazione compilatore utente per la 20.19.4",
+  "failure_prior_version": {
+    "version": "3.9.0-alpha.20.19.4",
+    "code": "CS9174",
+    "occurrences": 2,
+    "file": "tools/Ristretto.DevTools/NotepadQualification.cs",
+    "reported_by": "utente"
+  },
+  "checks": {
+    "source_cs9174_patch": "APPLIED",
+    "csharp_compilation": "NOT_RUN",
+    "csharp_tool_selftests": "NOT_RUN",
+    "xunit": "NOT_RUN",
+    "windows_native": "NOT_RUN",
+    "xml_project_and_xaml_structure": "PASS (19 parsed)",
+    "markdown_links": "PASS (718 local links)",
+    "optional_vscode_node_tests": "PASS (32/32)",
+    "csharp_tool_selftest_count_planned": 23
+  },
+  "note": "Non confondere ispezione del codice con compilazione .NET. L'ambiente di preparazione non dispone del SDK."
+}

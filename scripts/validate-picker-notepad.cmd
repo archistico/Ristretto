@@ -2,9 +2,9 @@
 setlocal
 cd /d "%~dp0.."
 echo ======================================================
-echo Ristretto R2.05 - Notepad con file sintetico isolato
- echo NON esegue SendInput, non apre documenti personali.
+echo Ristretto - prova Notepad con documento sintetico isolato
+echo Non legge tasti e non modifica documenti personali.
 echo ======================================================
-where python >nul 2>nul || (echo ERRORE: Python 3.10+ richiesto & exit /b 2)
-python "%~dp0qualify_notepad.py" %*
+where dotnet >nul 2>nul || (echo ERRORE: SDK .NET 10 richiesto. & exit /b 2)
+dotnet run -c Release --project "tools\Ristretto.DevTools\Ristretto.DevTools.csproj" -- notepad %*
 exit /b %ERRORLEVEL%

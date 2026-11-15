@@ -1,0 +1,24 @@
+{
+  "schema": "ristretto/manual-release-report/1",
+  "version": "3.9.0-alpha.20.19.4",
+  "scope": "Migrazione strumenti di sviluppo e validazione da Python a C#/.NET 10",
+  "confirmed_by_user_previous_release": {
+    "version": "3.9.0-alpha.20.19.3",
+    "gate_core": "PASS",
+    "application_build": "PASS",
+    "xunit": "PASS"
+  },
+  "new_release_checks": {
+    "python_scripts_removed": "PASS",
+    "csharp_source_lexical_scan": "PASS_WITH_LIMITATIONS",
+    "project_xml_check": "PASS",
+    "vscode_node_tests": "PASS",
+    "dotnet_10_build": "NOT_RUN",
+    "new_csharp_selftest": "NOT_RUN",
+    "new_xunit_tests": "NOT_RUN",
+    "native_windows": "NOT_RUN",
+    "notepad_qualification_with_new_tool": "NOT_RUN",
+    "github_actions": "NOT_RUN"
+  },
+  "note": "Build e runtime C# non possono essere attestati senza SDK .NET 10 disponibile; Node e controlli strutturali sono stati eseguiti indipendentemente. Il PASS della versione precedente non si trasferisce alla nuova."
+}

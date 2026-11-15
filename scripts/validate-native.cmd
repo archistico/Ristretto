@@ -7,9 +7,9 @@ echo ======================================================
 echo Ristretto - test nativi EDIT posseduto
 echo Eseguire solo in sessione Windows desktop interattiva.
 echo ======================================================
-where powershell >nul 2>nul || (echo ERRORE: PowerShell non disponibile & exit /b 3)
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0verify-release.ps1" || exit /b 3
 where dotnet >nul 2>nul || (echo ERRORE: .NET 10 SDK non disponibile & exit /b 2)
+dotnet run -c Release --project tools\Ristretto.DevTools\Ristretto.DevTools.csproj -- audit
+if errorlevel 1 exit /b 1
 dotnet run -c Release --project tools\Ristretto.WindowsOutputLab\Ristretto.WindowsOutputLab.csproj -- --replacement-test
 if errorlevel 1 exit /b 1
 echo Test nativo automatico in processo figlio cooperante (senza input umano)...

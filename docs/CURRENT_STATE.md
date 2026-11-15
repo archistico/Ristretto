@@ -1,40 +1,28 @@
-# Stato corrente — Ristretto 3.9.0-alpha.20.19.3
+# Stato corrente — Ristretto 3.9.0-alpha.20.19.5
 
-**Data:** 15 novembre 2026 · **Hotfix corrente:** [Alpha 20.19.3](ALPHA20_19_3_STARTUP_CLI_ENCODING.md) · **Piano unico:** [ROADMAP.md](ROADMAP.md) · **Storico:** [Alpha 20.19.1](ALPHA20_19_1_CRLF_REGRESSION_FIX.md).
+## Dove siamo
 
-## Cosa stiamo facendo
+- **R1:** C#/.NET 10, Avalonia, SQLite, import/export e quality gate. Strumenti di validazione migrati da Python a un tool C# (`tools/Ristretto.DevTools`) nella 20.19.4; hotfix CS9174 applicato nella 20.19.5.
+- **R2:** picker, ricerca Unicode e hotkey configurabile; il test manuale Notepad ha dato `PASS` sul documento sintetico, con inserimento confermato dall'utente. Resta da qualificare il comportamento in altri editor.
+- **R3:** adapter VS Code facoltativo; per ora non è prioritario.
+- **R5:** motore di trigger Unicode e laboratorio Win32 per ricerca e confini di focus. Non esiste ancora un'espansione automatica globale qualificata.
 
-**Alpha 20.19.3 — correzione portabile del gate `startup_cli`.** L'utente ha confermato nella Alpha 20.19.2: audit sorgenti, regressioni Python, controlli statici, restore .NET, build solution, xUnit e build dei quattro tool **PASS**. Il gate si è fermato nel controllo CLI senza GUI, perché uno dei messaggi di errore su `stderr` conteneva un byte della codepage Windows non decodificabile come UTF-8. Il reader thread Python ha generato `UnicodeDecodeError` e in seguito `.strip()` su `None` ha causato `AttributeError`. Non è un errore di compilazione né del picker.
+## Evidenze e stato dei test
 
-Lo script `check_startup_profile.py` cattura ora **byte grezzi**: per gli errori attesi controlla codice di uscita, assenza di stdout e presenza di stderr senza decodificare; per i successi richiede UTF-8 valido ed esatto in stdout, preservando l'identità dei percorsi giapponesi/emoji e dell'output JSON. Nove test di regressione su veri subprocess sintetici coprono CP1252, CP850, UTF-8 Unicode e violazioni del contratto. [Report](ALPHA20_19_3_STARTUP_CLI_ENCODING.md).
+- **Alpha 20.19.3:** `GATE CORE: PASS` confermato dall'utente, con compilazione e xUnit superati.
+- **Alpha 20.19.4:** `validate-source.cmd` e `validate.cmd` si arrestano durante la compilazione di `Ristretto.DevTools` con **due errori CS9174** in `NotepadQualification.cs`, come confermato dall'utente. Non implicano un errore del picker.
+- **Alpha 20.19.5:** due chiamate corrette e regressioni C# aggiunte. L'ambiente di preparazione non dispone dell'SDK .NET 10: **build C#, regressioni C# e gate Windows NON ESEGUITI**. Non segnare `PASS` fino alla verifica effettiva.
 
-**Sorgenti C#, GUI, hotkey, SQLite, picker e motore R5 invariati.** La compilazione .NET, gli xUnit e il `startup_cli` della **nuova** Alpha 20.19.3 restano `NOT_RUN` nell'ambiente di preparazione; i passaggi .NET su Windows della Alpha 20.19.2 sono evidenza dell'utente e non vengono trasferiti come test della 20.19.3.
+Sono rimasti invariati il codice dell'applicazione, il picker, la hotkey e SQLite.
 
-**R5 — prima preparazione dell'espansione automatica Windows.** Il nuovo `ExternalFocusBoundarySession` (Application) invalida la memoria temporanea di riconoscimento quando cambia finestra, controllo attivo o la qualità dell'osservazione. Il nuovo esperimento `--observe-focus N` (laboratorio Windows) sottoscrive eventi WinEvent foreground/focus **soltanto su richiesta**, per massimo 30 secondi, senza osservare caratteri o modificare applicazioni. Non è collegato al picker né abilita l'automatismo.
+## Obiettivo
 
-## Funzionalità ed evidenze
+Espandere automaticamente un trigger come `;firma` nelle applicazioni compatibili, rispettando Unicode, IME, focus e sicurezza dei dati. Il picker rimane la modalità manuale di riserva.
 
-| Area | Stato | Evidenza |
-| --- | --- | --- |
-| Snippet, gruppi, SQLite, import/export e backup | Implementati | Test storici, non rieseguiti in questa Alpha |
-| Picker, ricerca Unicode, Copia, Inserisci, Invio | Implementati | Alpha 20.15 build/test e Invio confermati dall'utente |
-| Hotkey globale configurabile Windows | Implementata | Matrice tray/conflitti ancora aperta |
-| Inserimento Unicode in Notepad | Prima prova positiva | Alpha 20.18: file sintetico `MATCHES_EXPECTED` e `PASS`; uso del picker confermato dall'utente |
-| Barriera cambio focus R5 | Implementata in Core/Application | Nuovi xUnit scritti, esecuzione .NET **NOT_RUN** |
-| Osservatore WinEvent R5 | Esperimento opt-in, non in produzione | Windows desktop **NOT_RUN** |
-| Testo committato in editor esterni | Non qualificato | Eventi focus/keycode non provano il testo inserito |
-| Espansione automatica Windows | Non implementata globalmente | Nessuna autorizzazione alla sostituzione in editor arbitrari |
-| VS Code | Adapter manuale sperimentale | 32 test Node eseguiti; host reale aperto |
-| Linux/macOS | GUI/Core predisposti | Adapter di input/output nativi da sviluppare |
+## Prossimi passi
 
-## Stato verifiche della versione corrente
+1. Confermare su Windows il nuovo gate C# (`.\scripts\validate-source.cmd`, poi `.\scripts\validate.cmd`) e l’assenza degli errori CS9174 e del warning xUnit2000.
+2. Correggere ogni regressione emersa dalla migrazione degli strumenti, senza modificare il picker funzionante.
+3. Riprendere R5: provenienza del testo Unicode committato e supporto degli editor esterni qualificati.
 
-I controlli Python, Node e statici di questa consegna sono riportati in [ALPHA20_19_2_VALIDATION_STATUS.json](../reports/ALPHA20_19_2_VALIDATION_STATUS.json). L’utente ha confermato 64 test Python superati con la 20.19.1; il gate PowerShell rifiutava erroneamente il formato versione prima di avviare .NET. La correzione è stata testata staticamente, non eseguita in PowerShell in questa sessione. Compilazione .NET, nuovi xUnit, prova WinEvent Windows e nuovo desktop picker sono **NOT_RUN** in questo ambiente. Non trasferire automaticamente i PASS delle versioni precedenti.
-
-## Obiettivo e prossimi passi
-
-**Obiettivo:** digitare un trigger Unicode in un'applicazione compatibile e ottenere lo snippet automaticamente, con verifica del destinatario, gestione IME e possibilità di disattivazione. Il picker rimane alternativa manuale.
-
-**Prossimo lavoro:** R5.02–R5.04, identificare una **sorgente di testo effettivamente committato** con evidenze affidabili, non tradurre arbitrariamente eventi tastiera in caratteri; documentare le capacità che mancano e testare i cambi di focus. Successivamente R6 (adapter esplicito), R2 (ulteriori editor), R4 (packaging), R7–R8 (funzioni/OS).
-
-Le decisioni e i task di dettaglio si trovano soltanto in [ROADMAP.md](ROADMAP.md); i rapporti delle vecchie Alpha rimangono storici in [INDEX.md](INDEX.md).
+Per istruzioni complete vedere [BUILD_AND_TEST](BUILD_AND_TEST.md) e per la sequenza dei lavori [ROADMAP](ROADMAP.md).

@@ -1,74 +1,56 @@
-# CI is deliberately non-interactive: it never runs native Win32 tests or real-editor actions.
-# Connect the repository in GitHub to enable this workflow; no repository is assumed here.
-name: Ristretto - source and headless tests
-
+# Verifiche C#/.NET 10. Nessun Python necessario.
+# CI non qualifica mai l'inserimento reale o il desktop Windows.
+name: Ristretto - audit C# e test headless
 on:
   push:
   pull_request:
   workflow_dispatch:
-
 permissions:
   contents: read
-
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   source:
-    name: Source validation (Linux)
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Python 3.12
-        uses: actions/setup-python@v5
+      - uses: actions/setup-dotnet@v4
         with:
-          python-version: '3.12'
-      - name: Source gate
-        run: python scripts/quality_gate.py --mode source --report .local-cache/gates/source.json
-      - name: Save non-sensitive gate report
-        if: always()
+          dotnet-version: '10.0.x'
+      - name: Audit e test strumenti C#
+        run: dotnet run -c Release --project tools/Ristretto.DevTools/Ristretto.DevTools.csproj -- gate source
+      - if: always()
         uses: actions/upload-artifact@v4
         with:
           name: source-gate-${{ github.run_id }}
           path: .local-cache/gates/source.json
           if-no-files-found: warn
           retention-days: 14
-
   headless-windows:
-    name: Build, xUnit, Node and JSON contract (Windows)
     needs: source
     runs-on: windows-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: '1'
       AVALONIA_TELEMETRY_OPTOUT: '1'
       DOTNET_NOLOGO: '1'
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: .NET SDK 10
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
-      - name: Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Node.js 22
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: CI gate (native/editor tests intentionally NOT_RUN)
-        run: python scripts/quality_gate.py --mode ci --report .local-cache/gates/ci.json --restore-source online
-      - name: Save non-sensitive gate reports
-        if: always()
+      - name: CI C# + xUnit + Node opzionale; prove desktop non eseguite
+        run: dotnet run -c Release --project tools/Ristretto.DevTools/Ristretto.DevTools.csproj -- gate ci --restore-source online
+      - if: always()
         uses: actions/upload-artifact@v4
         with:
           name: windows-headless-gate-${{ github.run_id }}

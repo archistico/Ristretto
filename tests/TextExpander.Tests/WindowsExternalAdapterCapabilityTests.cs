@@ -115,7 +115,7 @@ public sealed class WindowsExternalAdapterCapabilityTests
         var requirements = Enum.GetValues<ExternalAdapterMissingProof>()
             .Where(value => value != ExternalAdapterMissingProof.None)
             .Aggregate(ExternalAdapterMissingProof.None, (a, b) => a | b);
-        Assert.Equal(requirements, WindowsExternalAdapterCapabilityPolicy.EveryWriteProof);
+        Assert.Equal(WindowsExternalAdapterCapabilityPolicy.EveryWriteProof, requirements);
         Assert.Equal(8, Enum.GetValues<ExternalAdapterMissingProof>().Length - 1);
     }
 
