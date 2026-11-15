@@ -1,0 +1,19 @@
+{
+  "version": "3.9.0-alpha.20.15",
+  "baseline_user_report": {
+    "version": "3.9.0-alpha.20.14",
+    "build": "PASS_REPORTED_BY_USER",
+    "tests": "PASS_REPORTED_BY_USER",
+    "notepad_enter": "FAIL_REPORTED_BY_USER"
+  },
+  "current_validation": {
+    "python_tests": "PASS (38/38)",
+    "node_tests": "PASS (32/32)",
+    "static_checks": "PASS (audit, XML/XAML, SQLite, 5 localizations, 765 links)",
+    "dotnet_build": "NOT_RUN (SDK unavailable)",
+    "xunit": "NOT_RUN (SDK unavailable)",
+    "windows_notepad_enter": "NOT_RUN (Windows desktop unavailable)",
+    "native_windows": "NOT_RUN (Windows desktop unavailable)"
+  },
+  "note": "Do not classify current Windows behavior as PASS until observed on Windows; no private text in diagnostics."
+}

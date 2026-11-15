@@ -1,0 +1,50 @@
+{
+  "version": "3.9.0-alpha.20.11",
+  "source": "current-generation local environment (Linux, .NET SDK unavailable)",
+  "checks": {
+    "python_unittest": {
+      "status": "PASS",
+      "passed": 27,
+      "failed": 0
+    },
+    "node_vscode_unit": {
+      "status": "PASS",
+      "passed": 32,
+      "failed": 0
+    },
+    "source_audit": {
+      "status": "PASS"
+    },
+    "static_xml_sqlite_localizations_links": {
+      "status": "PASS",
+      "languages": 5,
+      "local_markdown_links": 742
+    },
+    "dotnet_build": {
+      "status": "NOT_RUN",
+      "reason": ".NET SDK not available here"
+    },
+    "xunit_new_protocol": {
+      "status": "NOT_RUN",
+      "reason": ".NET SDK not available here"
+    },
+    "windows_owned_edit_manual": {
+      "status": "NOT_RUN",
+      "reason": "Windows interactive desktop required"
+    },
+    "notepad_external": {
+      "status": "NOT_RUN",
+      "reason": "Editor interoperability has not been qualified"
+    },
+    "vs_code_host": {
+      "status": "NOT_RUN",
+      "reason": "VS Code Extension Development Host not tested here"
+    }
+  },
+  "historical_reference": {
+    "alpha_20_5_xunit": 588,
+    "alpha_20_3_native": 31,
+    "note": "Historical results only, not rerun for 20.11"
+  },
+  "privacy": "No clipboard contents or typed text recorded"
+}

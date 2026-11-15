@@ -1,0 +1,28 @@
+{
+  "schema": "ristretto/validation-status/1",
+  "version": "3.9.0-alpha.20.18",
+  "date": "2026-11-14",
+  "validated_baseline": {
+    "version": "3.9.0-alpha.20.15",
+    "source": "user_confirmation",
+    "compile": "PASS_REPORTED",
+    "xunit": "PASS_REPORTED",
+    "picker_enter_notepad": "PASS_REPORTED"
+  },
+  "this_version": {
+    "scope": "Qualificatore Notepad Python, nuovi test e documentazione. Codice C# applicativo non modificato.",
+    "source_audit": "PASS",
+    "python_tests": {"status": "PASS", "count": 59, "new_since_alpha20_17": 12},
+    "node_tests": {"status": "PASS", "count": 32},
+    "xaml_localizations_sqlite_static": "PASS",
+    "documentation_links": "PASS",
+    "dotnet_build": "NOT_RUN",
+    "dotnet_xunit": "NOT_RUN",
+    "windows_native": "NOT_RUN",
+    "windows_notepad_unicode": "NOT_RUN",
+    "vscode_extension_real_host": "NOT_RUN",
+    "gui_picker_hotkey_changed": false,
+    "sqlite_schema_changed": false,
+    "warnings": "PASS_NOTEPAD qualifica soltanto il contenuto del documento sintetico salvato, non la provenienza dell'inserimento"
+  }
+}

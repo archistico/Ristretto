@@ -46,12 +46,39 @@ class SourceAuditTests(unittest.TestCase):
         self.assertTrue(any('chiamata cross-assembly a membro internal Value.IsValidText' in issue
                             for issue in audit(self.root)))
 
+    def test_explicit_linked_compile_is_not_a_cross_assembly_internal_call(self):
+        core = self.root / 'src/Core/Core.cs'
+        app = self.root / 'src/App/App.cs'
+        core.write_text('namespace TextExpander.Core;\ninternal class Value { internal static bool IsValidText(string x) => true; }')
+        app.write_text('namespace TextExpander.App;\npublic class App { public bool Go() => Value.IsValidText("a"); }')
+        p = self.root / 'src/App/App.csproj'
+        p.write_text('<Project><ItemGroup><ProjectReference Include="../Core/Core.csproj"/>'
+                     '<Compile Include="../Core/Core.cs" Link="Core/Value.cs"/>'
+                     '</ItemGroup><PropertyGroup><Version>3.9.0-alpha.20.2</Version></PropertyGroup></Project>')
+        self.assertEqual([], audit(self.root))
+        p.write_text(p.read_text().replace('<Compile Include="../Core/Core.cs" Link="Core/Value.cs"/>', ''))
+        self.assertTrue(any('cross-assembly' in issue for issue in audit(self.root)))
+
     def test_public_static_member_is_accessible_across_projects(self):
         core = self.root / 'src/Core/Core.cs'
         app = self.root / 'src/App/App.cs'
         core.write_text('namespace TextExpander.Core;\npublic class Value { public static bool IsValidText(string value) => true; }')
         app.write_text('using TextExpander.Core;\nnamespace TextExpander.App;\npublic class App { public bool Go() => Value.IsValidText("a"); }')
         self.assertEqual([], audit(self.root))
+
+    def test_canonical_msbuild_version_matches_mirror(self):
+        (self.root / 'Directory.Build.props').write_text(
+            '<Project><PropertyGroup><Version>3.9.0-alpha.20.2</Version></PropertyGroup></Project>')
+        (self.root / 'src/App/App.csproj').write_text(
+            '<Project><ItemGroup><ProjectReference Include="../Core/Core.csproj"/></ItemGroup></Project>')
+        self.assertEqual([], audit(self.root))
+        (self.root / 'VERSION.txt').write_text('Ristretto 3.9.0-alpha.20.3\n')
+        self.assertTrue(any('Directory.Build.props' in issue for issue in audit(self.root)))
+
+    def test_duplicate_version_is_rejected_when_canonical_exists(self):
+        (self.root / 'Directory.Build.props').write_text(
+            '<Project><PropertyGroup><Version>3.9.0-alpha.20.2</Version></PropertyGroup></Project>')
+        self.assertTrue(any('versione duplicata' in issue for issue in audit(self.root)))
 
     def test_xunit_import_required(self):
         tests = self.root / 'tests/TextExpander.Tests'

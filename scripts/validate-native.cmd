@@ -4,7 +4,7 @@ set "DOTNET_CLI_TELEMETRY_OPTOUT=1"
 set "AVALONIA_TELEMETRY_OPTOUT=1"
 cd /d "%~dp0.."
 echo ======================================================
-echo Ristretto alpha.20.5 - test nativi EDIT posseduto
+echo Ristretto - test nativi EDIT posseduto
 echo Eseguire solo in sessione Windows desktop interattiva.
 echo ======================================================
 where powershell >nul 2>nul || (echo ERRORE: PowerShell non disponibile & exit /b 3)

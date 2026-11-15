@@ -1,0 +1,22 @@
+{
+  "version": "3.9.0-alpha.20.12",
+  "date": "2026-11-14",
+  "source": "current-generation Linux container, .NET SDK not installed",
+  "checks": {
+    "python_unittest": { "status": "PASS", "passed": 38, "failed": 0, "new_notepad_tests": 11 },
+    "node_vscode_unit": { "status": "PASS", "passed": 32, "failed": 0 },
+    "source_audit": { "status": "PASS" },
+    "static_xml_sqlite_localizations_links": { "status": "PASS", "languages": 5 },
+    "dotnet_build": { "status": "NOT_RUN", "reason": ".NET SDK unavailable" },
+    "xunit": { "status": "NOT_RUN", "reason": ".NET SDK unavailable" },
+    "windows_owned_edit_manual": { "status": "NOT_RUN", "reason": "Windows desktop required" },
+    "notepad_saved_file_qualification": { "status": "NOT_RUN", "reason": "Requires explicit Notepad action and Ctrl+S on Windows" },
+    "vs_code_host": { "status": "NOT_RUN", "reason": "VS Code host unavailable" }
+  },
+  "historical_reference": {
+    "alpha_20_5_xunit": 588,
+    "alpha_20_3_native": 31,
+    "note": "Historical results only, not rerun for Alpha 20.12"
+  },
+  "privacy": "No user document, clipboard contents or typed text observed by the test helper"
+}

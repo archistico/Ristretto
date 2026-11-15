@@ -1,4 +1,16 @@
-# Evidenze conservate
+**Alpha 20.12:** [rapporto corrente](ALPHA20_12_VALIDATION_STATUS.json) — controlli Python/Node/statici, .NET e Notepad reale `NOT_RUN`. Risultati storici delle Alpha precedenti rimangono documentati ma non vengono trasferiti.
+
+# Evidenze di verifica — Ristretto
+
+**Versione corrente Alpha 20.15:** [rapporto strutturato](ALPHA20_15_VALIDATION_STATUS.json) · [metodo](../docs/ALPHA20_15_ENTER_REGRESSION_FIX.md). Controlli Python, Node e statici eseguiti nella preparazione; **compilazione .NET, nuovi xUnit e prove desktop Windows NON ESEGUITI**. I risultati delle Alpha precedenti, riportati qui sotto, restano evidenze storiche e non sono stati rieseguiti sulla versione corrente.
+
+## Archivio storico
+
+**Alpha 20.7:** gate `ci` predisposto, non ancora eseguito su GitHub/Windows. Esiti locali: 26 Python, 32 Node e audit strutturale passati; nessuna nuova prova .NET o desktop. [Rapporto](../docs/ALPHA20_7_CI.md). I report generati dai gate rimangono in `.local-cache/gates` e non sono spediti nello ZIP.
+
+
+
+**Nuova verifica Alpha 20.6:** i rapporti runtime del gate finiscono in `.local-cache/gates` e non sono inclusi nel pacchetto; consulta [la specifica dei gate](../docs/ALPHA20_6_QUALITY_GATES.md). I rapporti storici della 20.5 non sono prove della 20.6.
 
 ## Alpha 20.5 — Profili dati
 

@@ -1,0 +1,61 @@
+{
+  "version": "3.9.0-alpha.20.14",
+  "date": "2026-11-14",
+  "source": "Linux container; no .NET SDK or interactive Windows session",
+  "changes": {
+    "area": "R2.02/R2.03 picker Insert cancellation vs final dispatch",
+    "new_xunit_execution_cases": 6,
+    "scope": "One-shot request + Windows paste service + simulated regression tests",
+    "ui_hotkey_sqlite_changed": false,
+    "automatic_expansion_enabled": false
+  },
+  "checks": {
+    "python_unittest": {
+      "status": "PASS",
+      "passed": 38,
+      "failed": 0
+    },
+    "node_vscode_unit": {
+      "status": "PASS",
+      "passed": 32,
+      "failed": 0
+    },
+    "source_audit": {
+      "status": "PASS"
+    },
+    "static_xml_sqlite_localizations_links": {
+      "status": "PASS",
+      "languages": 5
+    },
+    "dotnet_build": {
+      "status": "NOT_RUN",
+      "reason": ".NET 10 SDK unavailable"
+    },
+    "xunit": {
+      "status": "NOT_RUN",
+      "reason": ".NET 10 SDK unavailable; six new simulated cases added"
+    },
+    "windows_native_lab": {
+      "status": "NOT_RUN",
+      "reason": "Windows interactive desktop required"
+    },
+    "windows_picker_desktop": {
+      "status": "NOT_RUN",
+      "reason": "Windows interactive desktop required"
+    },
+    "notepad_saved_file_qualification": {
+      "status": "NOT_RUN",
+      "reason": "Explicit manual Notepad action required"
+    },
+    "vscode_host": {
+      "status": "NOT_RUN",
+      "reason": "VS Code extension host unavailable"
+    }
+  },
+  "historical_reference": {
+    "alpha_20_5_xunit": 588,
+    "alpha_20_3_native": 31,
+    "note": "Not rerun for 20.14"
+  },
+  "privacy": "No real clipboard, documents or keyboard hooks used for tests"
+}

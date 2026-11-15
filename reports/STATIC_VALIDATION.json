@@ -14,7 +14,7 @@
     {
       "name": "Chiavi di traduzione allineate",
       "passed": true,
-      "details": "5 lingue, 117 chiavi"
+      "details": "5 lingue, 120 chiavi"
     },
     {
       "name": "Binding testi GUI presenti",
@@ -29,7 +29,7 @@
     {
       "name": "Link Markdown interni",
       "passed": true,
-      "details": "610 link; 0 errori, esempi=[]"
+      "details": "771 link; 0 errori, esempi=[]"
     },
     {
       "name": "Adapter VS Code opt-in, export v1 e comando esplicito",

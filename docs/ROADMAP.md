@@ -1,10 +1,18 @@
 # Roadmap unica — Ristretto
 
-**Ripianificazione:** 13 novembre 2026 · **Baseline sorgenti:** 3.9.0-alpha.20.3.
+**Versione sorgente corrente:** `3.9.0-alpha.20.17` (14 novembre 2026). Questo è l’unico piano operativo R1–R8; gli ID di milestone non coincidono con il numero Alpha. Lo [stato corrente](CURRENT_STATE.md) distingue implementazione, prove registrate e test ancora aperti.
 
-**Incremento richiesto successivamente:** Alpha 20.4 aggiunge [Invio sul primo risultato filtrato](ALPHA20_4_ENTER_INSERT.md), con 558 xUnit e 50 ViewModel passati. Questo incremento non chiude le prove desktop R2 né il profilo isolato R1.
+**Incremento R2.02/R2.03 — Alpha 20.14:** dopo il preflight finale di focus e clipboard, la richiesta Inserisci deve vincere una prenotazione atomica contro l’annullamento prima di `SendInput`. Non è revocabile un invio già iniziato; gli esiti rimangono non verificati senza retry. Casi simulati aggiunti e desktop ancora non provato. [Dettagli](ALPHA20_14_INSERT_LIFECYCLE.md).
 
-**Avanzamento del 14 novembre 2026:** [Alpha 20.5](ALPHA20_5_STARTUP_PROFILES.md) completa R1.01 e verifica dati/istanze separati senza GUI: 588 xUnit e dieci controlli CLI passati. R1.02 resta parziale per hotkey reali e alias; le altre milestone restano aperte.
+**Incremento R2.03/R2.04 — Alpha 20.13:** prima della scrittura negli appunti ora vengono attesi e controllati focus, identità target e versione della clipboard; se non validi, non si avvia `SetTextAsync`. Dopo la scrittura i controlli vengono ripetuti prima dell'input. Test xUnit simulati aggiunti e verifica desktop ancora aperta. [Dettagli](ALPHA20_13_PRE_CLIPBOARD_GUARD.md).
+
+**Incremento R2.05 — Alpha 20.12:** introdotta prova Notepad con documento sintetico isolato e verifica del contenuto **salvato** via fixture Unicode, senza leggere testi personali, automatizzare input o usare appunti. Genera ricevuta `PASS/FAIL/NOT_RUN` priva di testo; 11 nuovi test Python. L'accettazione desktop resta aperta: il test è uno strumento di misura e non prova l'origine dell'azione. [Procedura](ALPHA20_12_NOTEPAD_QUALIFICATION.md).
+
+**Incremento R2.04 — Alpha 20.11:** rafforzata la verifica manuale nel controllo Win32 posseduto. La comparazione UTF-16 avviene *nel processo figlio*, che comunica soltanto l’esito legato alla sessione. Aggiunti test del protocollo e rifiuti per risposta/controllo non validi. Non è un adapter per editor arbitrari e non trasforma `SendInput` in un esito verificato in Notepad. [Rapporto](ALPHA20_11_PICKER_RECEIPTS.md).
+
+**Diagnostica R2.05 — Alpha 20.17:** dopo `prepare` + `seed` l’utente ha ottenuto `NOT_RUN` perché il file sintetico era invariato. Aggiunti `status` (lettura del solo profilo sintetico) e `launch` (avvio con data-dir vincolato al profilo della sessione), senza toccare il flusso picker già validato. [Guida](ALPHA20_17_NOTEPAD_GUIDED_SESSION.md).
+
+**Lavoro immediatamente successivo:** Alpha 20.15 compilata, testata e Invio da picker verificato dall’utente in Notepad. Compilare Alpha 20.17 e verificarne il seeding SQLite in una sessione sintetica; poi eseguire la prova Unicode file-backed. Poi qualificare su Windows il picker con focus/clipboard, laboratorio posseduto e file Notepad sintetico usando la [matrice di accettazione](R2_PICKER_WINDOWS_ACCEPTANCE.md). Le prove desktop non eseguite restano NOT_RUN; il prossimo incremento implementativo può rafforzare diagnosi/gestione dei fallimenti nel laboratorio, senza ancora abilitare l’espansione globale. CI GitHub e vero host VS Code restano da provare; R6 dipende dalla qualifica R5.
 
 Questo è il piano canonico dei prossimi incrementi. Gli ID R1–R8 identificano milestone future, non versioni già rilasciate né lavoro già completato. Le caselle rappresentano attività da eseguire. Stato ed evidenze attuali sono in [CURRENT_STATE.md](CURRENT_STATE.md); [FUNCTIONAL_ROADMAP.md](FUNCTIONAL_ROADMAP.md) mantiene soltanto la mappa F0–F6.
 
@@ -12,14 +20,14 @@ Questo è il piano canonico dei prossimi incrementi. Gli ID R1–R8 identificano
 
 | Area | Evidenza disponibile | Verifica ancora aperta |
 | --- | --- | --- |
-| Solution e quattro strumenti | Build Release e **550 xUnit**, inclusi **42 ViewModel**, passati anche da ZIP estratto in cartella nuova | Nuove verifiche per ogni modifica funzionale |
+| Solution e quattro strumenti | Build Release e **588 xUnit**, inclusi **50 ViewModel**, passati anche da ZIP estratto in cartella nuova | Nuove verifiche per ogni modifica funzionale |
 | Ricerca e picker | Indice Unicode, caricamento annullabile, richieste Inserisci monouso e comandi appunti coordinati implementati | Dispatcher/finestre, hotkey, clipboard e incolla effettivo sul desktop |
 | Laboratori Win32 | Precedente esecuzione di **31 scenari**, smoke cooperante e remoto superati | Sono controlli posseduti; non attestano editor esterni |
 | Adapter VS Code manuale | Precedenti **32 test Node** e contratto .NET→Node passati; suite host di 14 scenari scritta | Nessuno scenario host eseguito; renderer non avviato e crash `Code.exe` segnalato |
 | Espansione automatica in altre app | Motore di riconoscimento e contratti di ammissione disponibili | Adapter di prodotto **non implementato e non qualificato** |
 | Prestazioni, distribuzione e altri OS | Specifiche e proposte conservate | Misure GUI, pacchetti eseguibili qualificati e capacità native per OS |
 
-Riferimenti: [ultima validazione](ALPHA20_3_PICKER_CLIPBOARD.md), [baseline nativa precedente](ALPHA20_3_VALIDATION.md), [host VS Code e crash](ALPHA20_3_VSCODE_HOST_TESTS.md).
+Riferimenti: [ultima validazione](ALPHA20_5_STARTUP_PROFILES.md), [baseline nativa precedente](ALPHA20_3_VALIDATION.md), [host VS Code e crash](ALPHA20_3_VSCODE_HOST_TESTS.md).
 
 ## 2. Direzione e dipendenze
 
@@ -45,10 +53,10 @@ R1 e le verifiche senza GUI possono avanzare senza riaprire VS Code. Un blocco d
 - [x] **R1.01 — Profilo di avvio unico.** Risoluzione centralizzata in `ApplicationProfile`, percorso precedente conservato, `--data-dir` e diagnostica `--check-profile`; opzioni/profili indisponibili rifiutati senza fallback. [Implementazione e test Alpha 20.5](ALPHA20_5_STARTUP_PROFILES.md).
 - [ ] **R1.02 — Isolamento completo.** Usare lo stesso profilo per database, impostazioni e `SingleInstanceHost`; verificare mutex/pipe per directory distinte, doppio avvio e conflitti hotkey, senza cambiare la configurazione dell'istanza personale. Fixture sintetiche e cartella nuova per ogni prova.
   **Parziale Alpha 20.5:** storage, backup, mutex/pipe e doppio avvio verificati con fixture sintetiche; salvataggio hotkey corretto e persistente. Restano conflitti globali sul desktop e prova con alias symlink/junction. Nessun dato personale usato.
-- [ ] **R1.03 — Versione e provenienza.** Identificare il repository sorgente di questa estrazione e collegare revisioni/tag alle consegne. Centralizzare la versione usata da progetti, tool e script; assegnare una nuova versione a ogni prossima consegna funzionale e conservare la baseline attuale.
-- [ ] **R1.04 — Rilevamento tool.** Correggere il rilevamento di Python/Node/npm: nella sessione precedente gli script li saltavano pur essendo eseguibili direttamente. Verificare avvio e versione del binario, includendo percorsi con spazi e installazioni Scoop.
-- [ ] **R1.05 — Gate espliciti.** Distinguere validazione core e completa. Produrre un riepilogo `PASS`/`FAIL`/`NOT_RUN` per build, xUnit, audit Python, Node, contratto export e native; un requisito mancante fa fallire il relativo gate completo. Separare restore online, restore locale e audit vulnerabilità non eseguito.
-- [ ] **R1.06 — Automazione.** Portare i controlli riproducibili nella CI del repository scelto; mantenere desktop/native come gate separati. Legare rapporti a versione, ambiente e hash dei sorgenti; non inserire payload personali nei log.
+- [ ] **R1.03 — Versione e provenienza.** Identificare il repository sorgente di questa estrazione e collegare revisioni/tag alle consegne. Centralizzare la versione usata da progetti, tool e script; assegnare una nuova versione a ogni prossima consegna funzionale e conservare la baseline attuale. **Parziale Alpha 20.6:** versione canonica in `Directory.Build.props` e fingerprint SHA-256; collegamento al repository e tag ancora aperto.
+- [x] **R1.04 — Rilevamento tool (implementato, prova Windows aperta).** Correggere il rilevamento di Python/Node/npm: nella sessione precedente gli script li saltavano pur essendo eseguibili direttamente. Verificare avvio e versione del binario, includendo percorsi con spazi e installazioni Scoop.
+- [x] **R1.05 — Gate espliciti (implementati, prova Windows aperta).** Distinguere validazione core e completa. Produrre un riepilogo `PASS`/`FAIL`/`NOT_RUN` per build, xUnit, audit Python, Node, contratto export e native; un requisito mancante fa fallire il relativo gate completo. Separare restore online, restore locale e audit vulnerabilità non eseguito.
+- [ ] **R1.06 — Automazione (workflow implementato, integrazione aperta).** `.github/workflows/ci.yml` include Linux source e Windows headless `ci` con Node/contratto; desktop/native restano esclusi. I rapporti contengono versione, hash sorgenti e commit *solo se disponibile*. Mancano il collegamento al repository reale e la prima esecuzione verificata su GitHub Actions. [Dettagli](ALPHA20_7_CI.md).
 - [ ] **R1.07 — Preparazione al rilascio.** Inventariare dipendenze, asset e licenze; raccogliere la decisione sulla licenza del progetto e predisporre notices/SBOM. La scelta della licenza è necessaria prima della pubblicazione pubblica.
 
 **Consegna:** profilo di prova isolato, script affidabili, rapporto strutturato e pacchetto sorgenti versionato.
@@ -59,11 +67,13 @@ R1 e le verifiche senza GUI possono avanzare senza riaprire VS Code. Un blocco d
 
 **Obiettivo:** dimostrare i flussi di utilizzo sul desktop, oltre ai test con callback simulati.
 
-- [ ] **R2.01 — Matrice e ambiente.** Definire fixture, risultati attesi e ambiente Windows/app/DPI/layout; usare il profilo isolato di R1. Predisporre rapporti per caso con esito, metodo ed eventuale limite.
-- [ ] **R2.02 — UI e ciclo di vita.** Provare avvio, tray, hotkey configurabile/disattivata/in conflitto, secondo avvio, apertura/chiusura, tastiera, ricerca, selezione e ricaricamenti concorrenti. Aggiungere integrazione sul dispatcher dove rende ripetibile una regressione concreta.
-- [ ] **R2.03 — Clipboard effettiva.** Provare Copia con Unicode, NFD, emoji ZWJ, RTL e multilinea; clipboard occupata, scrittura lenta, doppio comando, selezione diversa, chiusura/riapertura ed errori. Verificare che non parta un comando accodato dopo il rilascio dell'attesa.
+- [x] **R2.01 — Matrice e ambiente (specifica pronta, esecuzione aperta).** Fixture, risultati attesi e ambiente Windows/app/DPI/layout in [matrice dedicata](R2_PICKER_WINDOWS_ACCEPTANCE.md); da popolare con esiti della prima sessione desktop usando profili isolati. Non equivale all'accettazione R2.
+- [x] **P0 Alpha 20.15 — regressione Invio:** fix confermato dall’utente: compilazione e test passati, Invio dal picker nuovamente funzionante in Notepad. Conservare la regressione in suite e matrice R2.
+- [ ] **R2.02 — UI e ciclo di vita (regressione hotkey ripetuta Alpha 20.8 e annullamento pre-dispatch Alpha 20.14; prove desktop aperte).** Provare avvio, tray, hotkey configurabile/disattivata/in conflitto, secondo avvio, apertura/chiusura, tastiera, ricerca, selezione e ricaricamenti concorrenti. Aggiungere integrazione sul dispatcher dove rende ripetibile una regressione concreta.
+- [ ] **R2.03 — Clipboard effettiva (verifiche contenuto/seq. Alpha 20.10, preflight Alpha 20.13 e annullamento atomico pre-dispatch Alpha 20.14; runtime aperto).** Provare Copia con Unicode, NFD, emoji ZWJ, RTL e multilinea; clipboard occupata, scrittura lenta, doppio comando, selezione diversa, chiusura/riapertura ed errori. Verificare che non parta un comando accodato dopo il rilascio dell'attesa.
 - [ ] **R2.04 — Destinatario controllato.** Collegare il percorso reale Inserisci a un target sintetico in processo figlio posseduto dal laboratorio e verificare testo/range risultanti. Tenere distinto questo esito dal supporto a Notepad o altri editor.
-- [ ] **R2.05 — Editor esterno.** Provare Notepad tramite hotkey: caret, selezione, testo prima/dopo, Unicode e multilinea; cambio finestra/campo, controllo chiuso, modificatori e clipboard cambiata. Provare sola lettura/password soltanto su campi sintetici; registrare eventuali rifiuti verso app elevate.
+- [ ] **R2.05 — Editor esterno (diagnostica Alpha 20.18 pronta, verifica desktop aperta).**
+  `prepare`, `seed`, `status`, `launch`, `verify` guidano una prova isolata del picker verso Notepad. Il profilo SQLite viene creato con `SqliteLibraryStore`; una sola classificazione read-only distingue documento invariato, esito corretto, doppio inserimento, posizione errata, differenza Unicode NFC/NFD e altre anomalie. La guida e il terminale usano l'italiano; fallire l'apertura di Notepad non fa perdere il token di sessione. **Non chiudere R2.05 in base ai soli 32 test Python**: servono una prova manuale salvata su Windows, Unicode multilinea e casi negativi focus, clipboard e destinatario. [Guida attuale](ALPHA20_18_NOTEPAD_DIAGNOSTICS.md).
 - [ ] **R2.06 — Temi e lingue.** Verificare chiaro/scuro, cinque lingue, tastiera e fattori DPI rappresentativi; rigenerare le anteprime necessarie dopo l'integrazione e controllare azioni, focus e testi tagliati.
 - [ ] **R2.07 — Correzione e riconferma.** Correggere le regressioni emerse, rieseguire i casi coinvolti e i gate pertinenti. Conservare la matrice distinguendo accettazione di `SendInput` e testo effettivamente osservato nell'editor.
 
@@ -162,7 +172,7 @@ R1 e le verifiche senza GUI possono avanzare senza riaprire VS Code. Un blocco d
 
 ## 11. Sequenza immediata e decisioni
 
-R1.01 è completata in Alpha 20.5; R1.02 conserva le prove rimaste di hotkey globali e alias. Il prossimo incremento senza GUI affronta **R1.03–R1.05: versione e gate**, poi la preparazione di R2. Le prove grafiche si svolgono in una sessione desktop dedicata; nessuna applicazione grafica è stata avviata per questo incremento.
+R1.01 è completata in Alpha 20.5; R1.02 conserva le prove rimaste di hotkey globali e alias. L’incremento Alpha 20.6 implementa R1.03–R1.05 (provenienza Git e prove Windows ancora aperte). I prossimi incrementi completano R1.02 su desktop, poi R1.06–R1.07 e la qualificazione R2 del picker. Le prove grafiche si svolgono in una sessione desktop dedicata; nessuna applicazione grafica è stata avviata per questo incremento.
 
 Decisioni da chiudere al relativo punto: repository/CI di riferimento e politica versioni (R1), licenza e tipo di pacchetto prima della pubblicazione (R1/R4), primo editor automatico e garanzie ottenibili (R5), ordine degli altri OS e configurazioni realmente supportate (R8).
 

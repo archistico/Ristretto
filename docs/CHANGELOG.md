@@ -1,3 +1,125 @@
+## 3.9.0-alpha.20.18 — 14 novembre 2026
+
+- R2.05: unificata la classificazione `status/verify` del file sintetico Notepad, con codici più precisi per doppio inserimento, posizione errata, intestazione alterata, modifica NFC/NFD e riga finale.
+- Tradotte in italiano le istruzioni operative e i messaggi diagnostici del qualificatore, preservando i codici tecnici e i sottocomandi esistenti.
+- La preparazione `prepare --open` non perde più il token se Blocco note non è disponibile o non si avvia.
+- Dodici nuovi test Python; nessun cambiamento a GUI, servizio di Inserisci/Invio, hotkey, SQLite o API di output.
+- Aggiornati README, stato corrente, roadmap, handoff, guida di compilazione, indice e matrice R2. Build/xUnit .NET e prove desktop Alpha 20.18 restano **NOT_RUN** finché non eseguiti su Windows.
+- [Rapporto della consegna](ALPHA20_18_NOTEPAD_DIAGNOSTICS.md).
+
+---
+
+## 3.9.0-alpha.20.17 — 14 novembre 2026
+
+- R2.05: analizzato `NOT_RUN | file_unchanged_no_saved_insertion` ottenuto su Windows dopo `prepare` + `seed` + `verify`: documento sintetico rimasto invariato, quindi prova interattiva non completata, non bug dimostrato nel picker.
+- Nuovo `status --session TOKEN`: controllo senza effetti della disponibilità del profilo sintetico (SQLite read-only) e del file salvato. Non legge dati personali, non crea ricevute e non deduce la provenienza dell'input.
+- Nuovo `launch --session TOKEN`: avvio opt-in della GUI con `--data-dir` vincolato al profilo sintetico già preparato; rifiuto di profili non pronti e piattaforme non Windows. Nessun SendInput/clipboard da parte del tool.
+- Nuove regressioni Python di diagnostica/launcher; guida, roadmap e handoff allineati. Nessun cambiamento a codice desktop, picker, hotkey o schema SQLite. Build/xUnit e test interattivi Alpha 20.17 `NOT_RUN`.
+
+---
+
+## 3.9.0-alpha.20.16 — 14 novembre 2026
+
+- Baseline Alpha 20.15 **validata dall'utente**: compilazione, xUnit e Invio dal picker in Notepad funzionanti.
+- R2.05: comando `--seed-picker-profile TOKEN` e script `scripts/seed-picker-notepad.cmd` per predisporre un profilo SQLite sintetico usando il servizio di persistenza effettivo; nessun dato personale o sovrascrittura di profili esistenti.
+- Sei regressioni xUnit su Unicode/readback, sessioni/token non validi, fixture/baseline alterate e divieto di overwrite. Nuovo report e documentazione R2 aggiornati.
+- GUI, hotkey, SQLite schema e flusso del picker invariati. Compilazione e nuovi xUnit della 20.16 **NOT_RUN** in questo ambiente.
+
+---
+
+## 3.9.0-alpha.20.15 — 14 novembre 2026
+
+- Hotfix R2.02: gestione Enter indipendente dall'esito della ricerca al KeyDown; rilascio singolo, niente doppio invio, gesto differito finché i risultati sono pronti, sempre subordinato a focus/query/destinatario invariati.
+- R2.03: riserva la sessione di Inserisci prima di nascondere il picker; un evento hotkey tardivo non può annullare la richiesta in corso. Annullamento esplicito e decisione atomica prima di `SendInput` mantenuti.
+- Rifiuti nativi: aggiunto codice diagnostico non sensibile allo stato del picker, senza loggare snippet o clipboard.
+- Nuovi test C# su gesto e lifecycle; report regressione e documenti correnti aggiornati. Alpha 20.14 compilata e testata con successo dall'utente ma regressione Notepad segnalata. Build/test della nuova 20.15 da verificare su Windows.
+
+---
+
+## 3.9.0-alpha.20.14 — 14 novembre 2026
+
+- R2.02/R2.03: eliminata la finestra fra ultimo `IsCancelled` e avvio dell'invio `Ctrl+V`. Annullamento e prenotazione del primo dispatch usano una decisione atomica monouso.
+- Il servizio di paste autorizza l'invio solo **dopo** l'ultimo preflight focus/clipboard. Se annullato prima dell'autorizzazione, non chiama `SendInput`; dopo l'avvio, non promette revoca e non ritenta.
+- Aggiunte regressioni C# per annullamento sul preflight finale, controllo clipboard, cambio di sessione e annullamento durante il dispatch. GUI/hotkey/SQLite e API pubblica preesistente invariati.
+- Documentazione e report aggiornati. Build .NET, xUnit e Windows nativo della 20.14 **NOT_RUN** qui; controlli statici/Python/Node documentati separatamente.
+
+---
+
+## 3.9.0-alpha.20.13 — 14 novembre 2026
+
+- R2.03/R2.04: correzione del flusso Inserisci. Il focus deve stabilizzarsi e passare un preflight (finestra, controllo, PID, protezione, modificatori) **prima** che lo snippet sovrascriva gli appunti.
+- Salvataggio della sequenza clipboard prima dell'attesa e rifiuto se un'app esterna la modifica durante la transizione; recheck del contenuto e del destinatario prima di `Ctrl+V` come nelle alpha precedenti.
+- Regressioni negative C# su cambio focus/child/PID, controllo protetto, modifiers, clipboard concorrente e cambi durante `SetTextAsync`; nessuna modifica GUI/SQLite/hotkey o attivazione dell'automatismo.
+- Consolidati stato, roadmap, handoff, README e matrice R2; build .NET/xUnit/native desktop di questa Alpha rimangono **NOT_RUN**.
+
+---
+
+## 3.9.0-alpha.20.12 — 14 novembre 2026
+
+- R2.05: aggiunto il qualificatore Notepad file-based, con preparazione di un documento sintetico isolato, confronto dopo salvataggio e ricevute senza contenuto. Nessun hook, lettura clipboard, input sintetico o lettura documenti personali.
+- 11 regressioni Python per stati PASS/FAIL/NOT_RUN, Unicode NFD/NFC, emoji, multilinea, versioni/fixture discordanti, sessioni e ricevute non sovrascritte.
+- Script Windows `validate-picker-notepad.cmd`, documentazione, roadmap, handoff e matrice di accettazione aggiornati. Conservati anche `clean-build.cmd` e `clean-build.ps1` dalla consegna precedente.
+- Nessuna modifica al codice .NET, alla GUI, al database o all'hotkey. Compilazione e prove desktop della Alpha 20.12 **NOT_RUN**; controlli statici/Python/Node registrati separatamente.
+
+---
+
+## 3.9.0-alpha.20.11 — 14 novembre 2026
+
+- R2.04: il campo `Edit` sintetico ora esegue localmente il confronto Unicode esatto e comunica soltanto un esito correlato alla sessione, senza trasferire il testo ricevuto.
+- Rafforzata la validazione di PID, handle e ricevute: risultati assenti, di altra sessione o malformati sono `NOT_RUN`; una seconda verifica nello stesso processo figlio produce `UNAVAILABLE`; differenza UTF-16 = `FAIL`; nessun retry.
+- Aggiunti test xUnit del protocollo; inclusi in `validate-picker.cmd`. Audit sorgenti corretto per riconoscere il sorgente puro compilato tramite `Compile Include` in due progetti, mantenendo il divieto di chiamate `internal` cross-assembly.
+- Consolidati README, `CURRENT_STATE`, `ROADMAP`, `HANDOFF`, `INDEX`, `BUILD_AND_TEST` e matrice R2. GUI, hotkey, SQLite e percorso di produzione Inserisci invariati.
+- Test statici/Python/Node eseguiti nella preparazione; .NET/xUnit e prove Windows Alpha 20.11 **NOT_RUN**. [Rapporto](ALPHA20_11_PICKER_RECEIPTS.md).
+
+---
+
+## 3.9.0-alpha.20.10 — 14 novembre 2026
+
+- Picker Inserisci: readback Unicode della clipboard con confronto contenuto, stabilità della sequenza e conversione CRLF/LF consentita; contenuto differente blocca il paste.
+- Identità dell'editor: verifica disponibilità del child HWND e corrispondenza PID in cattura e preflight finale.
+- Test xUnit per clipboard concorrente, Unicode, finestra chiusa e processo diverso; validazione Python/Node effettuata, .NET/native `NOT_RUN`.
+- Documentazione R2, handoff e checklist aggiornati; GUI, hotkey, SQLite invariati. [Rapporto](ALPHA20_10_CLIPBOARD_IDENTITY.md).
+
+# Ristretto 3.9.0-alpha.20.9 — 14 novembre 2026
+
+- Corretto il preflight di Inserisci: `SetTextAsync` deve produrre un cambio osservabile della sequenza degli appunti; altrimenti niente incolla di dati potenzialmente obsoleti.
+- Test xUnit per cambio clipboard e rifiuto senza input.
+- Banco prova interattivo `--picker-insert-demo` su un vero Win32 Edit multilinea in processo figlio e verifica del risultato esatto UTF-16; **non** viene eseguito automaticamente e non legge documenti dell'utente.
+- Documentazione/roadmap/handoff, versioni e pacchetto aggiornati. GUI Preview 9, hotkey e SQLite invariati. Build e native Windows **NOT_RUN** nella sessione di preparazione. [Report](ALPHA20_9_PICKER_OWNED_EDIT.md).
+
+---
+
+# Ristretto 3.9.0-alpha.20.8 — 14 novembre 2026
+
+- Corretto il riutilizzo della hotkey con picker già attivo: non disabilita più Inserisci tentando di ricatturare la stessa finestra di Ristretto.
+- `PickerSessionController` coordina destinatario, generazione, annullamento e ripresa da un altro editor. Le continuazioni async precedenti non aggiornano una nuova sessione.
+- 13 test C# di regressione su controller e richiesta monouso, più script mirato `scripts/validate-picker.cmd`.
+- Python 26/26, Node 32/32 e audit statici superati; build/xUnit .NET e prove desktop non eseguiti. Nessun automatismo globale, GUI/SQLite invariati.
+- [Report](ALPHA20_8_PICKER_LIFECYCLE.md)
+
+---
+
+## 3.9.0-alpha.20.7 — CI headless e preparazione prove picker (14/11/2026)
+
+- Workflow GitHub Actions predisposto con permessi di sola lettura, due job e report non sensibili; non collegato a un repository né eseguito da GitHub.
+- Nuovo gate `ci`: build, xUnit, strumenti, CLI sintetica, Node e contratto .NET→Node; `native_windows` e prove reali del picker restano `NOT_RUN`.
+- Fingerprint include workflow; `git_commit` solo per `GITHUB_SHA` formalmente valido. Restore fallito marcato `FAIL` anche nel sommario dedicato.
+- Sei regressioni Python aggiuntive (26 totali) e matrice R2.01 per hotkey, clipboard e inserimento Windows.
+- Verificati statici/Python e Node (32/32). Build e xUnit Alpha 20.7 non eseguiti; nessuna modifica all'applicazione desktop.
+
+# Ristretto 3.9.0-alpha.20.6 — 14 novembre 2026
+
+## R1.03–R1.05: versione e gate riproducibili
+
+- Versione MSBuild canonica in `Directory.Build.props`, `VERSION.txt` controllato come specchio e versioni duplicate rimosse dai cinque `.csproj`.
+- Aggiunto orchestratore `scripts/quality_gate.py` per gate SOURCE / CORE / FULL con rapporti `PASS` / `FAIL` / `NOT_RUN` e hash SHA-256 dei sorgenti; nessuna attribuzione inventata di commit Git o audit NuGet online.
+- Rilevamento eseguibili per Python, .NET, Node e npm tramite verifica effettiva di `--version` e possibilità di override con percorsi contenenti spazi.
+- Corretto un verificatore GUI datato: controlla i binding reali `CanCopy` e `CanInsert`, senza modifica a picker, ViewModel o XAML.
+- **20 test Python e 32 test Node superati**, audit/statico e contratto grafico statico positivi. Compilazione, xUnit e nativi Alpha 20.6 **non eseguiti** in questa sessione per assenza .NET 10.
+- Documentazione, ROADMAP, handoff e istruzioni dei gate aggiornati. [Rapporto](ALPHA20_6_QUALITY_GATES.md).
+
+---
+
 # Ristretto 3.9.0-alpha.20.5 — 14 novembre 2026
 
 ## Profilo unico e directory separate

@@ -1,0 +1,49 @@
+{
+  "schema": "ristretto/alpha-20.8/validation-status/1",
+  "version": "3.9.0-alpha.20.8",
+  "evidence_date": "2026-11-14",
+  "tests": {
+    "python_audit": {
+      "status": "PASS",
+      "passed": 9,
+      "failed": 0
+    },
+    "python_quality_gate": {
+      "status": "PASS",
+      "passed": 17,
+      "failed": 0
+    },
+    "node_vscode": {
+      "status": "PASS",
+      "passed": 32,
+      "failed": 0
+    },
+    "static_xml_xaml_sqlite_namespace_docs": {
+      "status": "PASS",
+      "detail": "Source/static only, not C# build or desktop launch"
+    },
+    "dotnet_build": {
+      "status": "NOT_RUN",
+      "detail": "No dotnet SDK available in packaging environment"
+    },
+    "new_xunit_picker_session": {
+      "status": "NOT_RUN",
+      "planned_cases": 13
+    },
+    "windows_native": {
+      "status": "NOT_RUN"
+    },
+    "windows_picker_hotkey_focus_clipboard": {
+      "status": "NOT_RUN"
+    },
+    "github_actions": {
+      "status": "NOT_RUN"
+    }
+  },
+  "historical_baseline": {
+    "source": "3.9.0-alpha.20.5",
+    "xunit_passed": 588,
+    "not_transferred_to_current_version": true
+  },
+  "privacy": "No real typed text, target window title, or clipboard contents captured"
+}

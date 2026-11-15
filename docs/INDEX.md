@@ -1,4 +1,10 @@
-# Indice della documentazione — Ristretto 3.9.0-alpha.20.5
+# Indice documentale — Ristretto Alpha 20.18
+
+**Documenti autorevoli:** [stato corrente](CURRENT_STATE.md), [roadmap unica](ROADMAP.md), [istruzioni di build](BUILD_AND_TEST.md), [handoff](HANDOFF.md). I rapporti Alpha sono storici, salvo la [consegna corrente](ALPHA20_18_NOTEPAD_DIAGNOSTICS.md). Non usare i risultati di una vecchia Alpha come test della versione nuova.
+
+**Esito controlli corrente:** [report strutturato](../reports/ALPHA20_18_VALIDATION_STATUS.json) (vedere gli esiti effettivi e i NOT_RUN).
+
+**Incrementi recenti:** [Alpha 20.18 — diagnosi e procedura in italiano](ALPHA20_18_NOTEPAD_DIAGNOSTICS.md) · [Alpha 20.17 — guida Notepad e stato sessione](ALPHA20_17_NOTEPAD_GUIDED_SESSION.md) ·  [Alpha 20.16 — profilo SQLite sintetico](ALPHA20_16_SYNTHETIC_PROFILE.md) · [Alpha 20.15 — regressione Invio](ALPHA20_15_ENTER_REGRESSION_FIX.md) ·  [Alpha 20.14 — cancellation/dispatch](ALPHA20_14_INSERT_LIFECYCLE.md) · [Alpha 20.13 — preflight prima degli appunti](ALPHA20_13_PRE_CLIPBOARD_GUARD.md) · [Alpha 20.12 — qualifica Notepad sintetico](ALPHA20_12_NOTEPAD_QUALIFICATION.md) · [Alpha 20.11 — ricevute di verifica nel controllo posseduto](ALPHA20_11_PICKER_RECEIPTS.md) · [20.10 — clipboard/identità](ALPHA20_10_CLIPBOARD_IDENTITY.md) · [20.9 — laboratorio multilinea](ALPHA20_9_PICKER_OWNED_EDIT.md) · [20.8 — lifecycle](ALPHA20_8_PICKER_LIFECYCLE.md) · [20.7 — CI](ALPHA20_7_CI.md) · [20.6 — gate](ALPHA20_6_QUALITY_GATES.md).
 
 ## Punti di ingresso (fonti canoniche)
 
@@ -39,3 +45,4 @@
 [Test strategy](TEST_STRATEGY.md) · [Benchmark Core](CORE_BENCHMARK.md) · [Scenari nativi](NATIVE_INPUT_OUTPUT.md) · [Matrice test manuali](ALPHA8_MANUAL_TEST_MATRIX.md) · [Decisioni](DECISIONS.md) · [ADR](adr/ADR-0001-VERTICAL-SLICE-BOUNDARIES.md) · [Matrici di dati](../data/README.md) · [Ricerca concorrenti](../research/COMPETITOR_INDEX.md).
 
 Le specifiche delle singole Alpha, i test plan e le ADR sono conservati per tracciabilità; non vanno interpretati come stato attuale o come attestazione che le prove successive siano state eseguite.
+

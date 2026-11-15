@@ -1,0 +1,65 @@
+{
+  "version": "3.9.0-alpha.20.13",
+  "date": "2026-11-14",
+  "source": "Linux container, no .NET SDK or Windows GUI",
+  "checks": {
+    "python_unittest": {
+      "status": "PASS",
+      "passed": 38,
+      "failed": 0
+    },
+    "node_vscode_unit": {
+      "status": "PASS",
+      "passed": 32,
+      "failed": 0
+    },
+    "source_audit": {
+      "status": "PASS"
+    },
+    "static_xml_sqlite_localizations_links": {
+      "status": "PASS",
+      "languages": 5,
+      "local_links": 754
+    },
+    "dotnet_build": {
+      "status": "NOT_RUN",
+      "reason": ".NET 10 SDK not available"
+    },
+    "xunit": {
+      "status": "NOT_RUN",
+      "reason": ".NET 10 SDK not available"
+    },
+    "windows_picker_desktop": {
+      "status": "NOT_RUN",
+      "reason": "Interactive Windows desktop required"
+    },
+    "windows_native_lab": {
+      "status": "NOT_RUN",
+      "reason": "Interactive Windows desktop required"
+    },
+    "notepad_saved_file_qualification": {
+      "status": "NOT_RUN",
+      "reason": "Manual Notepad action and Ctrl+S required"
+    },
+    "vs_code_host": {
+      "status": "NOT_RUN",
+      "reason": "VS Code extension host unavailable"
+    },
+    "source_quality_gate": {
+      "status": "PASS",
+      "source_only": true,
+      "note": "Does not compile C#"
+    },
+    "new_xunit_simulated_cases": {
+      "status": "NOT_RUN",
+      "added_cases": 11,
+      "reason": ".NET 10 SDK not available; cases inspect pre-clipboard focus, target and clipboard transitions"
+    }
+  },
+  "historical_reference": {
+    "alpha_20_5_xunit": 588,
+    "alpha_20_3_native": 31,
+    "note": "Historical results, not rerun on Alpha 20.13"
+  },
+  "privacy": "Simulated Win32 adapter only for C# regression tests; no user clipboard or text read"
+}

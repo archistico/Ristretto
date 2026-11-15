@@ -1,0 +1,35 @@
+{
+  "schema": "ristretto/validation-status/1",
+  "version": "3.9.0-alpha.20.16",
+  "date": "2026-11-14",
+  "validated_baseline": {
+    "version": "3.9.0-alpha.20.15",
+    "source": "user_confirmation",
+    "compile": "PASS_REPORTED",
+    "xunit": "PASS_REPORTED",
+    "picker_enter_notepad": "PASS_REPORTED"
+  },
+  "this_version": {
+    "source_audit": "PASS",
+    "python_tests": {
+      "status": "PASS",
+      "count": 38
+    },
+    "node_tests": {
+      "status": "PASS",
+      "count": 32
+    },
+    "xaml_localizations_sqlite_static": "PASS",
+    "dotnet_build": "NOT_RUN",
+    "dotnet_xunit": "NOT_RUN",
+    "windows_notepad_unicode": "NOT_RUN",
+    "production_gui_changed": false,
+    "production_picker_changed": false,
+    "notes": "Evidenze .NET/desktop limitate alla baseline Alpha 20.15; il nuovo seeder non e stato compilato qui.",
+    "documentation_links": {
+      "status": "PASS",
+      "count": 771
+    },
+    "clean_archive_integrity": "PASS"
+  }
+}

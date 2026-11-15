@@ -58,7 +58,10 @@ internal static class Program
             var report = new
             {
                 SchemaVersion = 1,
-                Version = "3.9.0-alpha.11",
+                Version = System.Reflection.Assembly.GetExecutingAssembly()
+                    .GetCustomAttributes(typeof(System.Reflection.AssemblyInformationalVersionAttribute), false)
+                    .OfType<System.Reflection.AssemblyInformationalVersionAttribute>()
+                    .FirstOrDefault()?.InformationalVersion.Split('+')[0] ?? "unknown",
                 Status = runs.All(r => r.Correct) ? "CORRECTNESS_PASS" : "CORRECTNESS_FAIL",
                 Scope = "SYNTHETIC_CORE_ONLY_NOT_NATIVE_OR_GUI",
                 CreatedUtc = DateTimeOffset.UtcNow,

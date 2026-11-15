@@ -6,6 +6,11 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
   </ItemGroup>
   <ItemGroup>
+    <!-- Lab-only pure protocol: linked source avoids referencing a Windows executable from xUnit. -->
+    <Compile Include="../../tools/Ristretto.WindowsOutputLab/PickerOwnedEditReceipt.cs" Link="Lab/PickerOwnedEditReceipt.cs" />
+    <Compile Include="../../tools/Ristretto.WindowsOutputLab/PickerNotepadProfileSeeder.cs" Link="Lab/PickerNotepadProfileSeeder.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="../../src/TextExpander.Core/TextExpander.Core.csproj" />
     <ProjectReference Include="../../src/TextExpander.Application/TextExpander.Application.csproj" />
     <ProjectReference Include="../../src/TextExpander.Infrastructure/TextExpander.Infrastructure.csproj" />

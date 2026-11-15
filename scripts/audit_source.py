@@ -35,12 +35,22 @@ def audit(root: Path) -> list[str]:
     if not raw_version.startswith('Ristretto '):
         issues.append('VERSION.txt: formato versione non riconosciuto')
     version = raw_version.removeprefix('Ristretto ')
+    # R1.03: versione MSBuild canonica; VERSION.txt e' uno specchio verificabile.
+    props = root / 'Directory.Build.props'
+    if props.is_file():
+        try:
+            versions = [el.text.strip() for el in ET.parse(props).findall('.//Version') if el.text]
+            if versions != [version]:
+                issues.append('Directory.Build.props: versione assente o differente da VERSION.txt')
+        except ET.ParseError as exc:
+            issues.append(f'Directory.Build.props: XML non valido: {exc}')
     projects = sorted(root.glob('src/**/*.csproj')) + sorted(root.glob('tests/**/*.csproj')) + sorted(root.glob('tools/**/*.csproj'))
     project_files: dict[Path, list[Path]] = {}
     references: dict[Path, set[Path]] = {}
     all_namespaces: dict[str, set[Path]] = defaultdict(set)
     each_usings: dict[Path, list[tuple[Path, str]]] = defaultdict(list)
-    internal_static_members: list[tuple[Path, str, str]] = []
+    internal_static_members: list[tuple[Path, Path, str, str]] = []
+    linked_compiles: dict[Path, set[Path]] = defaultdict(set)
     for project in projects:
         project = project.resolve()
         try:
@@ -57,8 +67,21 @@ def audit(root: Path) -> list[str]:
             else:
                 refs.add(target)
         references[project] = refs
+        # SDK-style explicit Compile Include can link the same source into more
+        # than one assembly. An internal method is then local to each assembly,
+        # not an illegal cross-assembly call. Do not exempt unlinked source files.
+        for element in tree.findall('.//Compile'):
+            include = element.attrib.get('Include', '')
+            if include and '*' not in include:
+                linked = (project.parent / include.replace('\\', '/')).resolve()
+                if not linked.is_file():
+                    issues.append(f'{project.relative_to(root)}: Compile Include mancante {include}')
+                elif linked.parent != project.parent and project.parent not in linked.parents:
+                    linked_compiles[project].add(linked)
         for element in tree.findall('.//Version'):
-            if element.text and element.text.strip() != version:
+            if props.is_file():
+                issues.append(f'{project.relative_to(root)}: versione duplicata; usare Directory.Build.props')
+            elif element.text and element.text.strip() != version:
                 issues.append(f'{project.relative_to(root)}: versione {element.text.strip()} diversa da {version}')
         sources = sorted(f for f in project.parent.rglob('*.cs') if not any(part in ('bin', 'obj') for part in f.relative_to(project.parent).parts))
         project_files[project] = sources
@@ -74,7 +97,7 @@ def audit(root: Path) -> list[str]:
             declared_class = CLASS_DECL.search(text)
             if declared_class:
                 for member in INTERNAL_STATIC_METHOD.findall(text):
-                    internal_static_members.append((project, declared_class.group(1), member))
+                    internal_static_members.append((project, source, declared_class.group(1), member))
             for name in USING.findall(text):
                 if name.startswith(('TextExpander.', 'Ristretto.')):
                     each_usings[project].append((source, name))
@@ -103,8 +126,8 @@ def audit(root: Path) -> list[str]:
     for caller_project, sources in project_files.items():
         for source in sources:
             contents = source.read_text(encoding='utf-8-sig')
-            for declaring_project, type_name, member in internal_static_members:
-                if caller_project != declaring_project and re.search(
+            for declaring_project, declaring_source, type_name, member in internal_static_members:
+                if caller_project != declaring_project and declaring_source not in linked_compiles[caller_project] and re.search(
                     rf'\b{re.escape(type_name)}\s*\.\s*{re.escape(member)}\s*\(', contents
                 ):
                     issues.append(

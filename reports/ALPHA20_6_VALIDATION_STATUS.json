@@ -1,0 +1,41 @@
+{
+  "schema": "ristretto/alpha20.6-validation/1",
+  "date": "2026-11-14",
+  "source_version": "3.9.0-alpha.20.6",
+  "source_sha256": "dc33071b38091c8ef2b02b68258e31a35a914d8dddbaf4224dff74f24ffce567",
+  "source_baseline": "user-supplied Ristretto 3.9.0-alpha.20.5.zip",
+  "environment": "Linux, Python 3.13, Node 22.16, npm 10.9; dotnet SDK unavailable",
+  "checks": {
+    "source_audit": "PASS",
+    "python_unit": {
+      "status": "PASS",
+      "passed": 20,
+      "failed": 0
+    },
+    "structural_static": "PASS",
+    "gui_contract_static": "PASS",
+    "node_extension_tests": {
+      "status": "PASS",
+      "passed": 32,
+      "failed": 0
+    },
+    "dotnet_build": "NOT_RUN",
+    "xunit": "NOT_RUN",
+    "startup_cli": "NOT_RUN",
+    "windows_native": "NOT_RUN",
+    "real_picker_io": "NOT_RUN",
+    "vscode_real_host": "NOT_RUN",
+    "nuget_vulnerability_audit": "NOT_RUN",
+    "core_gate": {
+      "status": "FAIL",
+      "reason": "Required .NET 10 SDK not installed in this environment",
+      "subsequent_phases": "NOT_RUN"
+    }
+  },
+  "previous_release_evidence": {
+    "alpha20.5_xunit": 588,
+    "alpha20.5_cli": 10,
+    "note": "Historical evidence inside original archive, not re-executed on Alpha 20.6"
+  },
+  "scope": "Source scripts, version metadata, documentation; GUI, SQLite, hotkey and library domain sources unchanged."
+}

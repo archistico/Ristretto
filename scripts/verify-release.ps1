@@ -4,14 +4,19 @@ $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $versionFile = Join-Path $root 'VERSION.txt'
 $testsPath = Join-Path $root 'tests\TextExpander.Tests\WindowsOutputContractTests.cs'
 $projectFile = Join-Path $root 'src\TextExpander.Desktop\TextExpander.Desktop.csproj'
+$canonicalProps = Join-Path $root 'Directory.Build.props'
 
 function Stop-Validation([string]$why) {
     Write-Host "ERRORE VALIDAZIONE RISTRETTO: $why" -ForegroundColor Red
-    Write-Host "Usa un'estrazione nuova di Ristretto_v3.9_ALPHA20_5_STARTUP_PROFILES_COMPLETO.zip, non un'unione con la cartella precedente." -ForegroundColor Yellow
+    Write-Host "Estrai lo ZIP integrale della versione corrente in una cartella nuova; non unire le cartelle di versioni differenti." -ForegroundColor Yellow
     exit 3
 }
 if (!(Test-Path -LiteralPath $versionFile)) { Stop-Validation 'VERSION.txt non trovato: possibile vecchia versione.' }
-if (([System.IO.File]::ReadAllText($versionFile)).Trim() -ne 'Ristretto 3.9.0-alpha.20.5') { Stop-Validation 'Versione inattesa.' }
+if (!(Test-Path -LiteralPath $canonicalProps)) { Stop-Validation 'Directory.Build.props mancante.' }
+[xml]$canonicalXml = Get-Content -LiteralPath $canonicalProps -Raw
+$expectedVersion = [string]$canonicalXml.Project.PropertyGroup.Version
+if ($expectedVersion -notmatch '^[0-9]+\.[0-9]+\.[0-9]+-alpha\.[0-9]+\.[0-9]+$') { Stop-Validation 'Versione MSBuild non valida.' }
+if (([System.IO.File]::ReadAllText($versionFile)).Trim() -ne "Ristretto $expectedVersion") { Stop-Validation 'VERSION.txt non corrisponde a Directory.Build.props.' }
 if (!(Test-Path -LiteralPath $testsPath)) { Stop-Validation 'File test Windows non trovato.' }
 $tests = [System.IO.File]::ReadAllText($testsPath)
 if ($tests.Contains('[InlineData("\uD83D")]') -or $tests.Contains('[InlineData("\uDC4D")]')) {
@@ -48,7 +53,7 @@ foreach ($source in @(
 )) {
     if (!(Test-Path -LiteralPath $source)) { Stop-Validation "F2a incompleta, manca: $source" }
 }
-if (!$csproj.Contains('<Version>3.9.0-alpha.20.5</Version>')) { Stop-Validation 'Assembly desktop non aggiornato alla v3.9-alpha.20.5.' }
+if ($csproj.Contains('<Version>')) { Stop-Validation 'Versione desktop duplicata: deve ereditare Directory.Build.props.' }
 foreach ($source in @(
     (Join-Path $root 'tools\Ristretto.WindowsOutputLab\OwnedEditTarget.cs'),
     (Join-Path $root 'tools\Ristretto.WindowsOutputLab\OwnedEditRecognitionSession.cs'),
@@ -261,17 +266,27 @@ if (!$pickerXaml.Contains('Click="Insert_Click"') -or
     !(Test-Path (Join-Path $root 'tests\TextExpander.Tests\WindowsPickerPasteTests.cs'))) {
     Stop-Validation 'Alpha 20.3: comando Inserisci o test del picker mancanti.'
 }
-$expectedVersion = '3.9.0-alpha.20.5'
 foreach ($project in @(Get-ChildItem -LiteralPath (Join-Path $root 'src') -Filter '*.csproj' -Recurse) +
                     @(Get-ChildItem -LiteralPath (Join-Path $root 'tests') -Filter '*.csproj' -Recurse) +
                     @(Get-ChildItem -LiteralPath (Join-Path $root 'tools') -Filter '*.csproj' -Recurse)) {
     [xml]$projectXml = Get-Content -LiteralPath $project.FullName -Raw
     $declaredVersion = $projectXml.Project.PropertyGroup.Version | Where-Object { $_ }
-    foreach ($v in @($declaredVersion)) {
-        if ([string]$v -ne $expectedVersion) {
-            Stop-Validation "Versione progetto incoerente: $($project.FullName) = $v; attesa $expectedVersion"
-        }
+    if (@($declaredVersion).Count -gt 0) {
+        Stop-Validation "Versione duplicata in $($project.FullName): usare Directory.Build.props."
     }
 }
-Write-Host "SORGENTI RISTRETTO 3.9.0-alpha.20.5 VERIFICATI: $root" -ForegroundColor Green
+
+# Alpha 20.8: the desktop picker must preserve its original external target
+# on a repeated hotkey, and invalidate stale async completions after reopen.
+$pickerSessionSource = Join-Path $root 'src\TextExpander.Desktop\PickerSessionController.cs'
+$pickerSessionTests = Join-Path $root 'tests\TextExpander.Tests\PickerSessionControllerTests.cs'
+if (!(Test-Path -LiteralPath $pickerSessionSource) -or !(Test-Path -LiteralPath $pickerSessionTests)) {
+    Stop-Validation 'Alpha 20.8: controller o regressioni picker mancanti.'
+}
+$pickerAppSource = [System.IO.File]::ReadAllText((Join-Path $root 'src\TextExpander.Desktop\App.axaml.cs'))
+if (!$pickerAppSource.Contains('_pickerSession.Open(') -or !$pickerAppSource.Contains('_pickerSession.IsCurrent(')) {
+    Stop-Validation 'Alpha 20.8: App non usa il controllo delle sessioni picker.'
+}
+
+Write-Host "SORGENTI RISTRETTO $expectedVersion VERIFICATI: $root" -ForegroundColor Green
 exit 0

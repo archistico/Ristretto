@@ -58,6 +58,8 @@ public sealed class WindowsPickerPasteService
             if (pid == 0 || pid == _ourProcessId) return null;
             var focused = _api.FocusedControl(hwnd);
             if (focused == 0 || !_api.IsSameOrChild(hwnd, focused) ||
+                !_api.IsWindowAvailable(focused) ||
+                _api.WindowProcessId(focused) != pid ||
                 _api.IsProtectedEditor(focused)) return null;
             return new WindowsPickerPasteTarget(hwnd, pid, focused);
         }
@@ -74,17 +76,32 @@ public sealed class WindowsPickerPasteService
         { return false; }
     }
 
+    /// <summary>
+    /// The clipboard update must be independently visible before the existing
+    /// sequence-preservation check can authorize a paste. An unchanged sequence
+    /// after SetTextAsync is not evidence that the selected snippet was copied.
+    /// This does not prove the clipboard contains a particular text, and a
+    /// concurrent third-party update remains possible.
+    /// </summary>
+    public static bool HasClipboardAdvanced(uint before, uint after) =>
+        before != 0 && after != 0 && before != after;
+
     /// <summary>Take AFTER Avalonia has written the snippet to the clipboard.</summary>
     public uint ClipboardSequence() => _isWindows() ? _api.ClipboardSequence() : 0;
 
-    public PickerPasteResult Paste(WindowsPickerPasteTarget? target, uint expectedClipboardSequence)
+    /// <summary>
+    /// Read-only preflight to run after restoring focus and BEFORE changing the
+    /// user's clipboard. A positive result is transient: Paste rechecks it
+    /// immediately before SendInput, because focus may change asynchronously.
+    /// A null result means the target is currently eligible, not that it will
+    /// accept or apply a paste.
+    /// </summary>
+    public PickerPasteResult? Preflight(WindowsPickerPasteTarget? target)
     {
-        var dispatchAttempted = false;
         try
         {
-            if (!ValidTarget(target)) return new(PickerPasteStatus.Rejected, "target_unavailable");
-            if (expectedClipboardSequence == 0) return new(PickerPasteStatus.Rejected, "clipboard_unverified");
-            // All checks happen immediately before SendInput. No input if focus or clipboard changed.
+            if (!ValidTarget(target))
+                return new(PickerPasteStatus.Rejected, "target_unavailable");
             if (_api.ForegroundWindow() != target!.Window ||
                 _api.FocusedControl(target.Window) != target.FocusedControl ||
                 !_api.IsSameOrChild(target.Window, target.FocusedControl))
@@ -93,8 +110,50 @@ public sealed class WindowsPickerPasteService
                 return new(PickerPasteStatus.Rejected, "protected_editor");
             if (_api.IsAnyModifierPressed())
                 return new(PickerPasteStatus.Rejected, "modifier_pressed");
+            return null;
+        }
+        catch (Exception ex) when (ex is System.ComponentModel.Win32Exception or InvalidOperationException)
+        {
+            return new(PickerPasteStatus.Rejected, "native_preflight_failed");
+        }
+    }
+
+    /// <summary>
+    /// A clipboard change while waiting for focus must not be overwritten by
+    /// the picker. This is a best-effort concurrent-write guard, not clipboard
+    /// ownership or a lock against changes after the check.
+    /// </summary>
+    public bool ClipboardStillAt(uint observedSequence) =>
+        observedSequence != 0 && _isWindows() && _api.ClipboardSequence() == observedSequence;
+
+    public PickerPasteResult Paste(WindowsPickerPasteTarget? target, uint expectedClipboardSequence) =>
+        Paste(target, expectedClipboardSequence, null);
+
+    /// <summary>
+    /// A one-shot request may provide an atomic dispatch reservation. It is invoked
+    /// only after focus, target, modifiers and clipboard have passed the final check,
+    /// immediately before SendInput. A cancelled reservation NEVER sends keys.
+    /// Direct callers without a reservation retain the existing explicit API.
+    /// </summary>
+    internal PickerPasteResult Paste(WindowsPickerPasteTarget? target,
+        uint expectedClipboardSequence, Func<bool>? reserveDispatch)
+    {
+        var dispatchAttempted = false;
+        try
+        {
+            // Revalidate immediately before SendInput even if the same target
+            // passed an earlier check before writing the clipboard.
+            var preflight = Preflight(target);
+            if (preflight is not null) return preflight;
+            if (expectedClipboardSequence == 0)
+                return new(PickerPasteStatus.Rejected, "clipboard_unverified");
             if (_api.ClipboardSequence() != expectedClipboardSequence)
                 return new(PickerPasteStatus.Rejected, "clipboard_changed");
+            // Cross-thread Cancel vs SendInput must have a single winner. If
+            // an observation callback reenters Cancel during the final preflight,
+            // the reservation fails and the clipboard is left as already written.
+            if (reserveDispatch is not null && !reserveDispatch())
+                return new(PickerPasteStatus.Rejected, "request_cancelled");
             dispatchAttempted = true;
             var sent = _api.SendPasteShortcut();
             return sent == 4
@@ -114,7 +173,9 @@ public sealed class WindowsPickerPasteService
         target.ProcessId != 0 && target.ProcessId != _ourProcessId &&
         _api.IsWindowAvailable(target.Window) &&
         _api.WindowProcessId(target.Window) == target.ProcessId &&
-        _api.IsSameOrChild(target.Window, target.FocusedControl);
+        _api.IsSameOrChild(target.Window, target.FocusedControl) &&
+        _api.IsWindowAvailable(target.FocusedControl) &&
+        _api.WindowProcessId(target.FocusedControl) == target.ProcessId;
 }
 
 internal sealed class Win32PickerPasteApi : IWindowsPickerPasteApi

@@ -28,6 +28,8 @@ public sealed class WindowsPickerPasteTests
         public nint CurrentForeground { get; set; } = 0x100;
         public uint Process { get; set; } = 123;
         public bool Visible { get; set; } = true;
+        public bool FocusAvailable { get; set; } = true;
+        public uint? FocusProcessId { get; set; }
         public bool IsChild { get; set; } = true;
         public HashSet<nint> Children { get; } = [0x200, 0x333];
         public bool Protected { get; set; }
@@ -35,6 +37,9 @@ public sealed class WindowsPickerPasteTests
         public bool ModifiersPressed { get; set; }
         public uint Sequence { get; set; } = 17;
         public int Accepted { get; set; } = 4;
+        public Action? BeforeFinalClipboardRead { get; set; }
+        public Action? BeforeModifierCheck { get; set; }
+        public Action? DuringSend { get; set; }
         public int Sent { get; private set; }
         public int Activations { get; private set; }
         public string? ThrowAt { get; set; }
@@ -46,9 +51,14 @@ public sealed class WindowsPickerPasteTests
         }
 
         public nint ForegroundWindow() => CurrentForeground;
-        public uint WindowProcessId(nint hwnd) => hwnd == Root ? Process : 0;
+        public uint WindowProcessId(nint hwnd) => hwnd == Root ? Process :
+            Children.Contains(hwnd) ? (FocusProcessId ?? Process) : 0;
         public nint FocusedControl(nint hwnd) => hwnd == Root ? Focus : 0;
-        public bool IsWindowAvailable(nint hwnd) { MaybeFail("validate"); return hwnd == Root && Visible; }
+        public bool IsWindowAvailable(nint hwnd)
+        {
+            MaybeFail("validate");
+            return Visible && (hwnd == Root || (FocusAvailable && Children.Contains(hwnd)));
+        }
         public bool IsSameOrChild(nint root, nint candidate) =>
             root == Root && (candidate == root || (Children.Contains(candidate) && IsChild));
         public bool IsProtectedEditor(nint focused) => Protected;
@@ -59,9 +69,48 @@ public sealed class WindowsPickerPasteTests
             if (ActivateWorks) CurrentForeground = hwnd;
             return ActivateWorks;
         }
-        public bool IsAnyModifierPressed() => ModifiersPressed;
-        public uint ClipboardSequence() => Sequence;
-        public int SendPasteShortcut() { Sent++; MaybeFail("send"); return Accepted; }
+        public bool IsAnyModifierPressed()
+        {
+            BeforeModifierCheck?.Invoke();
+            return ModifiersPressed;
+        }
+        public uint ClipboardSequence()
+        {
+            BeforeFinalClipboardRead?.Invoke();
+            return Sequence;
+        }
+        public int SendPasteShortcut()
+        {
+            Sent++;
+            DuringSend?.Invoke();
+            MaybeFail("send");
+            return Accepted;
+        }
+    }
+
+    [Theory]
+    [InlineData(12u, 13u, true)]
+    [InlineData(12u, 12u, false)]
+    [InlineData(0u, 15u, false)]
+    [InlineData(15u, 0u, false)]
+    [InlineData(0u, 0u, false)]
+    [InlineData(4294967295u, 1u, true)]
+    public void ClipboardMustActuallyAdvanceBeforeAPasteIsPrepared(uint before, uint after, bool expected)
+    {
+        Assert.Equal(expected, WindowsPickerPasteService.HasClipboardAdvanced(before, after));
+    }
+
+    [Fact]
+    public async Task ClipboardNotUpdatedNeverDispatchesPaste()
+    {
+        var fake = new FakeApi();
+        var request = Request(fake);
+        var result = await request.ExecuteAsync(() => Task.FromResult(
+            WindowsPickerPasteService.HasClipboardAdvanced(fake.Sequence, fake.Sequence)
+                ? fake.Sequence : 0u), () => Task.CompletedTask);
+        Assert.Equal(PickerPasteStatus.Rejected, result.Status);
+        Assert.Equal("clipboard_unverified", result.Reason);
+        Assert.Equal(0, fake.Sent);
     }
 
     private static WindowsPickerPasteService Service(FakeApi api) => new(api, () => true, 99);
@@ -73,7 +122,7 @@ public sealed class WindowsPickerPasteTests
     }
 
     [Fact]
-    public async Task RequestActivatesThenPreparesClipboardThenSubmitsOnce()
+    public async Task RequestSettlesAndChecksFocusBeforePreparingClipboardThenSubmitsOnce()
     {
         var fake = new FakeApi();
         var request = Request(fake);
@@ -90,7 +139,7 @@ public sealed class WindowsPickerPasteTests
             Assert.Equal(0, fake.Sent);
             return Task.CompletedTask;
         });
-        Assert.Equal(new[] { "clipboard", "focus" }, steps);
+        Assert.Equal(new[] { "focus", "clipboard" }, steps);
         Assert.Equal(PickerPasteStatus.SubmittedUnverified, result.Status);
         Assert.Equal(1, fake.Sent);
     }
@@ -141,7 +190,7 @@ public sealed class WindowsPickerPasteTests
     }
 
     [Fact]
-    public async Task DismissalDuringClipboardPreparationPreventsFocusWaitAndInput()
+    public async Task DismissalDuringClipboardPreparationPreventsInput()
     {
         var fake = new FakeApi();
         var request = Request(fake);
@@ -151,7 +200,7 @@ public sealed class WindowsPickerPasteTests
         request.Cancel();
         clipboard.SetResult(17);
         Assert.Equal("request_cancelled", (await pending).Reason);
-        Assert.Equal(0, waits);
+        Assert.Equal(1, waits);
         Assert.Equal(0, fake.Sent);
     }
 
@@ -161,10 +210,12 @@ public sealed class WindowsPickerPasteTests
         var fake = new FakeApi();
         var request = Request(fake);
         var focus = new TaskCompletionSource();
-        var pending = request.ExecuteAsync(() => Task.FromResult(17u), () => focus.Task);
+        var writes = 0;
+        var pending = request.ExecuteAsync(() => { writes++; return Task.FromResult(17u); }, () => focus.Task);
         request.Cancel();
         focus.SetResult();
         Assert.Equal("request_cancelled", (await pending).Reason);
+        Assert.Equal(0, writes);
         Assert.Equal(0, fake.Sent);
     }
 
@@ -194,21 +245,95 @@ public sealed class WindowsPickerPasteTests
         var request = Request(fake);
         var result = await request.ExecuteAsync(
             () => failInFocusWait ? Task.FromResult(17u) : Task.FromException<uint>(new IOException()),
-            () => Task.FromException(new IOException()));
+            () => failInFocusWait ? Task.FromException(new IOException()) : Task.CompletedTask);
         Assert.Equal(PickerPasteStatus.Rejected, result.Status);
         Assert.Equal("preparation_failed", result.Reason);
         Assert.Equal(0, fake.Sent);
     }
 
     [Fact]
-    public async Task UnknownClipboardSequenceDoesNotEnterFocusWait()
+    public async Task CancellationDuringFinalFocusPreflightWinsBeforeNativeDispatch()
+    {
+        var fake = new FakeApi();
+        var request = Request(fake);
+        // The request has passed all async boundaries. A native callback
+        // cancels just BEFORE the last clipboard comparison and SendInput.
+        var checks = 0;
+        fake.BeforeModifierCheck = () =>
+        {
+            if (++checks == 2) request.Cancel(); // first: pre-clipboard, second: final Paste
+        };
+        var result = await request.ExecuteAsync(() => Task.FromResult(fake.Sequence),
+            () => Task.CompletedTask);
+        Assert.Equal(PickerPasteStatus.Rejected, result.Status);
+        Assert.Equal("request_cancelled", result.Reason);
+        Assert.Equal(0, fake.Sent);
+        Assert.Equal("request_already_used", (await request.ExecuteAsync(
+            () => Task.FromResult(fake.Sequence), () => Task.CompletedTask)).Reason);
+    }
+
+    [Fact]
+    public async Task CancellationDuringFinalClipboardReadCannotDispatch()
+    {
+        var fake = new FakeApi();
+        var request = Request(fake);
+        var reads = 0;
+        fake.BeforeFinalClipboardRead = () =>
+        {
+            // before-focus, still-at-before-focus, final Paste clipboard check
+            if (++reads == 3) request.Cancel();
+        };
+        var result = await request.ExecuteAsync(() => Task.FromResult(fake.Sequence),
+            () => Task.CompletedTask);
+        Assert.Equal("request_cancelled", result.Reason);
+        Assert.Equal(PickerPasteStatus.Rejected, result.Status);
+        Assert.Equal(0, fake.Sent);
+    }
+
+    [Theory]
+    [InlineData(4, PickerPasteStatus.SubmittedUnverified)]
+    [InlineData(2, PickerPasteStatus.PartialOrUnknown)]
+    public async Task CancellationAfterDispatchReservationNeverRetriesOrClaimsRevocation(
+        int accepted, PickerPasteStatus expected)
+    {
+        var fake = new FakeApi { Accepted = accepted };
+        var request = Request(fake);
+        fake.DuringSend = request.Cancel; // SendInput has already been entered.
+        var result = await request.ExecuteAsync(() => Task.FromResult(fake.Sequence),
+            () => Task.CompletedTask);
+        Assert.Equal(expected, result.Status);
+        Assert.Equal(1, fake.Sent);
+        Assert.Equal("request_already_used", (await request.ExecuteAsync(
+            () => Task.FromResult(fake.Sequence), () => Task.CompletedTask)).Reason);
+        Assert.Equal(1, fake.Sent);
+    }
+
+    [Fact]
+    public async Task CancellationDuringPreflightDoesNotGetReportedAsAnUnknownPaste()
+    {
+        var fake = new FakeApi();
+        var request = Request(fake);
+        var checks = 0;
+        fake.BeforeModifierCheck = () =>
+        {
+            if (++checks == 2) request.Cancel();
+        };
+        var result = await request.ExecuteAsync(() => Task.FromResult(fake.Sequence),
+            () => Task.CompletedTask);
+        Assert.Equal(PickerPasteStatus.Rejected, result.Status);
+        Assert.NotEqual("native_error_unknown_effect", result.Reason);
+        Assert.Equal(0, fake.Sent);
+    }
+
+    [Fact]
+    public async Task UnverifiedClipboardWriteRejectsWithoutDispatch()
     {
         var fake = new FakeApi();
         var request = Request(fake);
         var waits = 0;
         var result = await request.ExecuteAsync(() => Task.FromResult(0u), () => { waits++; return Task.CompletedTask; });
         Assert.Equal("clipboard_unverified", result.Reason);
-        Assert.Equal(0, waits);
+        Assert.Equal(1, waits);
         Assert.Equal(0, fake.Sent);
     }
 
@@ -222,8 +347,149 @@ public sealed class WindowsPickerPasteTests
             fake.Sequence++;
             return Task.CompletedTask;
         });
-        Assert.Equal("clipboard_changed", result.Reason);
+        Assert.Equal("clipboard_changed_before_preparation", result.Reason);
         Assert.Equal(0, fake.Sent);
+    }
+
+    [Fact]
+    public async Task UnavailableInitialClipboardSequenceNeverTouchesClipboardOrWaits()
+    {
+        var native = new FakeApi { Sequence = 0 };
+        var request = Request(native);
+        var writes = 0;
+        var waits = 0;
+        var result = await request.ExecuteAsync(() => { writes++; return Task.FromResult(1u); }, () =>
+        {
+            waits++;
+            return Task.CompletedTask;
+        });
+        Assert.Equal("clipboard_unverified", result.Reason);
+        Assert.Equal(0, writes);
+        Assert.Equal(0, waits);
+        Assert.Equal(0, native.Sent);
+    }
+
+    [Fact]
+    public async Task NativeFailureAtPreClipboardPreflightRejectsWithoutClipboardWrite()
+    {
+        var native = new FakeApi();
+        var request = Request(native);
+        var writes = 0;
+        var result = await request.ExecuteAsync(() => { writes++; return Task.FromResult(18u); }, () =>
+        {
+            native.ThrowAt = "validate";
+            return Task.CompletedTask;
+        });
+        Assert.Equal("native_preflight_failed", result.Reason);
+        Assert.Equal(0, writes);
+        Assert.Equal(0, native.Sent);
+    }
+
+    [Fact]
+    public async Task FocusMovedToAnotherAppDuringRestoreDoesNotReplaceClipboard()
+    {
+        var native = new FakeApi();
+        var request = Request(native);
+        var writes = 0;
+        var result = await request.ExecuteAsync(() => { writes++; return Task.FromResult(19u); }, () =>
+        {
+            native.CurrentForeground = 0x999;
+            return Task.CompletedTask;
+        });
+        Assert.Equal("focus_changed", result.Reason);
+        Assert.Equal(0, writes);
+        Assert.Equal(0, native.Sent);
+    }
+
+    [Fact]
+    public async Task FocusChangedWithinSameEditorBeforeClipboardDoesNotReplaceClipboard()
+    {
+        var native = new FakeApi();
+        var request = Request(native);
+        var writes = 0;
+        var result = await request.ExecuteAsync(() => { writes++; return Task.FromResult(19u); }, () =>
+        {
+            native.Focus = 0x333;
+            return Task.CompletedTask;
+        });
+        Assert.Equal("focus_changed", result.Reason);
+        Assert.Equal(0, writes);
+        Assert.Equal(0, native.Sent);
+    }
+
+    [Theory]
+    [InlineData("closed")]
+    [InlineData("different_process")]
+    [InlineData("protected")]
+    [InlineData("modifier")]
+    public async Task InvalidTargetAfterFocusTransitionNeverTouchesClipboard(string caseName)
+    {
+        var native = new FakeApi();
+        var request = Request(native);
+        var writes = 0;
+        var result = await request.ExecuteAsync(() => { writes++; return Task.FromResult(18u); }, () =>
+        {
+            switch (caseName)
+            {
+                case "closed": native.FocusAvailable = false; break;
+                case "different_process": native.FocusProcessId = 555; break;
+                case "protected": native.Protected = true; break;
+                case "modifier": native.ModifiersPressed = true; break;
+            }
+            return Task.CompletedTask;
+        });
+        Assert.Equal(caseName switch
+        {
+            "closed" or "different_process" => "target_unavailable",
+            "protected" => "protected_editor",
+            _ => "modifier_pressed"
+        }, result.Reason);
+        Assert.Equal(0, writes);
+        Assert.Equal(0, native.Sent);
+    }
+
+    [Fact]
+    public async Task ConcurrentClipboardUpdateDuringFocusTransitionIsNotOverwritten()
+    {
+        var native = new FakeApi { Sequence = 100 };
+        var request = Request(native);
+        var writes = 0;
+        var result = await request.ExecuteAsync(() => { writes++; return Task.FromResult(102u); }, () =>
+        {
+            native.Sequence = 101;
+            return Task.CompletedTask;
+        });
+        Assert.Equal("clipboard_changed_before_preparation", result.Reason);
+        Assert.Equal(0, writes);
+        Assert.Equal(0, native.Sent);
+    }
+
+    [Fact]
+    public async Task FocusLostWhileClipboardIsWritingNeverDispatches()
+    {
+        var native = new FakeApi();
+        var request = Request(native);
+        var writing = new TaskCompletionSource<uint>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var pending = request.ExecuteAsync(() => writing.Task, () => Task.CompletedTask);
+        native.CurrentForeground = 0x999;
+        writing.SetResult(17);
+        var result = await pending;
+        Assert.Equal("focus_changed", result.Reason);
+        Assert.Equal(0, native.Sent);
+    }
+
+    [Fact]
+    public async Task ClipboardLostWhileWritingNeverDispatches()
+    {
+        var native = new FakeApi();
+        var request = Request(native);
+        var writing = new TaskCompletionSource<uint>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var pending = request.ExecuteAsync(() => writing.Task, () => Task.CompletedTask);
+        native.Sequence = 44;
+        writing.SetResult(17);
+        var result = await pending;
+        Assert.Equal("clipboard_changed", result.Reason);
+        Assert.Equal(0, native.Sent);
     }
 
     [Fact]
@@ -315,6 +581,74 @@ public sealed class WindowsPickerPasteTests
             Protected = protectedControl
         };
         Assert.Null(Service(fake).CaptureExternalForeground());
+    }
+
+    [Fact]
+    public void CaptureRejectsFocusedControlFromDifferentProcess()
+    {
+        var fake = new FakeApi { FocusProcessId = 444 };
+        Assert.Null(Service(fake).CaptureExternalForeground());
+        Assert.Equal(0, fake.Sent);
+    }
+
+    [Fact]
+    public void CaptureRejectsUnavailableFocusedControl()
+    {
+        var fake = new FakeApi { FocusAvailable = false };
+        Assert.Null(Service(fake).CaptureExternalForeground());
+        Assert.Equal(0, fake.Sent);
+    }
+
+    [Fact]
+    public void FocusedControlDestroyedAfterCapturePreventsActivationAndPaste()
+    {
+        var fake = new FakeApi();
+        var service = Service(fake);
+        var target = service.CaptureExternalForeground();
+        fake.FocusAvailable = false;
+        Assert.False(service.TryActivate(target));
+        Assert.Equal("target_unavailable", service.Paste(target, 17).Reason);
+        Assert.Equal(0, fake.Activations);
+        Assert.Equal(0, fake.Sent);
+    }
+
+    [Fact]
+    public void FocusedControlMovedToAnotherProcessAfterCapturePreventsInput()
+    {
+        var fake = new FakeApi();
+        var service = Service(fake);
+        var target = service.CaptureExternalForeground();
+        fake.FocusProcessId = 555;
+        Assert.False(service.TryActivate(target));
+        Assert.Equal("target_unavailable", service.Paste(target, 17).Reason);
+        Assert.Equal(0, fake.Sent);
+    }
+
+    [Fact]
+    public async Task TargetClosedWhileClipboardWriteIsPendingCannotDispatch()
+    {
+        var fake = new FakeApi();
+        var request = Request(fake);
+        var clipboardWrite = new TaskCompletionSource<uint>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var pending = request.ExecuteAsync(() => clipboardWrite.Task, () => Task.CompletedTask);
+        fake.FocusAvailable = false;
+        clipboardWrite.SetResult(18);
+        var result = await pending;
+        Assert.Equal("target_unavailable", result.Reason);
+        Assert.Equal(0, fake.Sent);
+    }
+
+    [Fact]
+    public async Task ClipboardReplacedByOtherAppDuringAsyncTransitionCannotDispatch()
+    {
+        var fake = new FakeApi { Sequence = 51 };
+        var request = Request(fake);
+        var wait = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var pending = request.ExecuteAsync(() => Task.FromResult(51u), () => wait.Task);
+        fake.Sequence = 52;
+        wait.SetResult();
+        Assert.Equal("clipboard_changed_before_preparation", (await pending).Reason);
+        Assert.Equal(0, fake.Sent);
     }
 
     [Fact]

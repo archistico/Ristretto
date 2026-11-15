@@ -1,0 +1,31 @@
+{
+  "schema": "ristretto/validation-status/1",
+  "version": "3.9.0-alpha.20.17",
+  "date": "2026-11-14",
+  "validated_baseline": {
+    "version": "3.9.0-alpha.20.15",
+    "source": "user_confirmation",
+    "compile": "PASS_REPORTED",
+    "xunit": "PASS_REPORTED",
+    "picker_enter_notepad": "PASS_REPORTED"
+  },
+  "observed_alpha20_16_notepad_session": {
+    "prepare": "PASS_REPORTED",
+    "synthetic_profile_seed": "PASS_REPORTED",
+    "saved_file_verification": "NOT_RUN",
+    "reason": "file_unchanged_no_saved_insertion",
+    "note": "No completed interactive insertion/save is evidenced by the supplied command transcript."
+  },
+  "this_version": {
+    "source_audit": "PASS",
+    "python_tests": {"status": "PASS", "count": 47},
+    "node_tests": {"status": "PASS", "count": 32},
+    "xaml_localizations_sqlite_static": "PASS",
+    "dotnet_build": "NOT_RUN",
+    "dotnet_xunit": "NOT_RUN",
+    "windows_notepad_unicode": "NOT_RUN",
+    "gui_picker_hotkey_changed": false,
+    "sqlite_schema_changed": false,
+    "notes": "Alpha20.17 improves only the synthetic Notepad qualification tool and documentation; tests do not launch Notepad or Ristretto."
+  }
+}

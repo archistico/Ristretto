@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
     <AssemblyName>Ristretto.WindowsOutputLab</AssemblyName>
-    <Version>3.9.0-alpha.20.5</Version>
+
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/TextExpander.Infrastructure/TextExpander.Infrastructure.csproj" />

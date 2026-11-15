@@ -17,6 +17,7 @@ namespace Ristretto.WindowsOutputLab;
 internal static class Program
 {
     private const string Fixture = "Caffè ☕ cafe\u0301 漢字 مرحبا 🧑🏽‍💻";
+    private const string PickerFixture = "Caffè ☕ cafe\u0301 漢字 مرحبا 🧑🏽‍💻\r\nSeconda riga: Ω 🚀";
     private const uint Visible = 0x10000000;
     private const uint Child = 0x40000000;
     private const uint Border = 0x00800000;
@@ -26,9 +27,31 @@ internal static class Program
     private const int GwlStyle = -16;
     private const uint EditPassword = 0x0020;
     private const uint EditReadOnly = 0x0800;
+    private const uint EditMultiline = 0x0004;
+    private const uint EditAutoVScroll = 0x0040;
+    private const uint EditWantReturn = 0x1000;
 
     public static async Task<int> Main(string[] args)
     {
+        // The synthetic fixture seeder never uses Win32 APIs or user profiles.
+        if (args.Length == 2 && args[0] == "--seed-picker-profile")
+        {
+            try
+            {
+                var profile = await PickerNotepadProfileSeeder.SeedAsync(Directory.GetCurrentDirectory(), args[1]);
+                Console.WriteLine("Synthetic SQLite profile: " + profile);
+                Console.WriteLine("Trigger: " + PickerNotepadProfileSeeder.Trigger);
+                Console.WriteLine("Run Ristretto with --data-dir \"" + profile + "\"");
+                return 0;
+            }
+            catch (Exception ex) when (ex is ArgumentException or IOException or UnauthorizedAccessException
+                                      or InvalidOperationException or System.Text.Json.JsonException
+                                      or KeyNotFoundException)
+            {
+                Console.Error.WriteLine("Synthetic profile NOT created: " + ex.GetType().Name);
+                return 2;
+            }
+        }
         if (!OperatingSystem.IsWindows())
         {
             Console.Error.WriteLine("F2a: laboratorio nativo disponibile solo su Windows.");
@@ -52,6 +75,11 @@ internal static class Program
             return await ExternalEditorProbeCommand.Run(null);
         if (args.Length == 3 && args[0] == "--probe-external" && args[1] == "--report")
             return await ExternalEditorProbeCommand.Run(args[2]);
+        if (args.Length == 1 && args[0] == "--picker-insert-demo")
+            return await RunPickerInsertDemo();
+        if (args.Length == 2 && args[0] == "--picker-target" &&
+            args[1].Length == 32 && args[1].All(Uri.IsHexDigit))
+            return RunChildTarget(args[1], multiline: true);
         if (args.Length == 1 && args[0] == "--self-test") return await RunSelfTest();
         if (args.Length == 1 && args[0] == "--replacement-test") return NativeReplacementLab.RunSelfTests();
         if (args.Length == 3 && args[0] == "--replacement-test" && args[1] == "--report")
@@ -82,6 +110,8 @@ internal static class Program
         Console.WriteLine("--cooperating-smoke: prova nativa sintetica automatica in secondo processo.");
         Console.WriteLine("--remote-owned-smoke [--report file-nuovo.json]: controller chiede sostituzione sintetica in secondo processo, verifica esito e stale.");
         Console.WriteLine("--replacement-demo [--report file-nuovo.json]: digita ;firma + spazio nel proprio EDIT Win32.");
+        Console.WriteLine("--picker-insert-demo: prova MANUALE Inserisci in un EDIT isolato, senza cancellare gli appunti dell'utente dal laboratorio.");
+        Console.WriteLine("--seed-picker-profile TOKEN: profilo SQLite isolato per sessione Notepad preparata.");
         return 2;
     }
 
@@ -188,6 +218,123 @@ internal static class Program
         }
     }
 
+    /// <summary>
+    /// Manually exercises the real Ristretto picker, its clipboard route and
+    /// the Windows focus handoff against a dedicated synthetic multiline EDIT.
+    /// This lab never changes the system clipboard itself, never sends keys,
+    /// and cannot accidentally substitute the user's existing document.
+    /// The user explicitly initiates the insertion through the running app.
+    /// </summary>
+    private static async Task<int> RunPickerInsertDemo()
+    {
+        if (Console.IsInputRedirected)
+        {
+            Console.WriteLine("NOT_RUN: la prova richiede una console interattiva e consenso esplicito.");
+            return 3;
+        }
+
+        var path = Environment.ProcessPath;
+        if (string.IsNullOrWhiteSpace(path)) return 2;
+        var start = new ProcessStartInfo(path)
+        {
+            UseShellExecute = false,
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true,
+            CreateNoWindow = true,
+            StandardOutputEncoding = Encoding.UTF8
+        };
+        if (string.Equals(Path.GetFileNameWithoutExtension(path), "dotnet", StringComparison.OrdinalIgnoreCase))
+            start.ArgumentList.Add(Assembly.GetExecutingAssembly().Location);
+        var sessionToken = Guid.NewGuid().ToString("N");
+        start.ArgumentList.Add("--picker-target");
+        start.ArgumentList.Add(sessionToken);
+        using var child = Process.Start(start);
+        if (child is null) return 2;
+
+        try
+        {
+            var ready = await child.StandardOutput.ReadLineAsync().WaitAsync(TimeSpan.FromSeconds(10));
+            if (!PickerOwnedEditReceipt.TryReadReady(ready, sessionToken, out var window, out var edit))
+            {
+                Console.WriteLine("NOT_RUN: il controllo sintetico non e' pronto o la sessione non corrisponde.");
+                return 3;
+            }
+            _ = GetWindowThreadProcessId(window, out var pid);
+            _ = GetWindowThreadProcessId(edit, out var editPid);
+            if (pid != checked((uint)child.Id) || editPid != pid || !IsWindow(window) || !IsWindow(edit))
+            {
+                Console.WriteLine("NOT_RUN: identita' del destinatario non verificata.");
+                return 3;
+            }
+            Console.WriteLine("R2 laboratorio picker - nessuna modifica automatica agli appunti o ad altre finestre.");
+            Console.WriteLine("1) Crea in un profilo sintetico uno snippet con questo contenuto ESATTO:");
+            Console.WriteLine(PickerFixture);
+            Console.WriteLine("2) Clicca nel campo del laboratorio e apri il picker con la hotkey.");
+            Console.WriteLine("3) Seleziona lo snippet e premi Inserisci. NON usare Copia o un incolla manuale.");
+            Console.WriteLine("4) Torna a questa console e premi Invio per verificare. Ctrl+C annulla.");
+            if (Console.ReadLine() is null)
+            {
+                Console.WriteLine("NOT_RUN: conferma mancante.");
+                return 3;
+            }
+            // The user has returned to the console, so focus cannot be asserted at
+            // verification time. Only confirm the original child/control still exists.
+            if (child.HasExited || !IsWindow(window) || !IsWindow(edit) ||
+                GetWindowThreadProcessId(window, out var currentPid) == 0 ||
+                currentPid != checked((uint)child.Id) ||
+                GetWindowThreadProcessId(edit, out var currentEditPid) == 0 ||
+                currentEditPid != currentPid)
+            {
+                Console.WriteLine("NOT_RUN: il controllo destinatario non e' piu' disponibile.");
+                return 3;
+            }
+            child.StandardInput.WriteLine("VERIFY");
+            await child.StandardInput.FlushAsync();
+            var receipt = await child.StandardOutput.ReadLineAsync().WaitAsync(TimeSpan.FromSeconds(5));
+            if (!PickerOwnedEditReceipt.TryReadResult(receipt, sessionToken, out var outcome))
+            {
+                Console.WriteLine("NOT_RUN: risposta assente, malformata o appartenente a un'altra sessione.");
+                return 3;
+            }
+            switch (outcome)
+            {
+                case PickerOwnedEditReceipt.Outcome.Match:
+                    Console.WriteLine("PASS: il processo proprietario ha confrontato esattamente il testo UTF-16 del controllo sintetico.");
+                    return 0;
+                case PickerOwnedEditReceipt.Outcome.Mismatch:
+                    Console.WriteLine("FAIL: testo del controllo diverso dalla fixture; nessun retry automatico.");
+                    return 1;
+                default:
+                    Console.WriteLine("NOT_RUN: il processo proprietario non ha potuto verificare il controllo.");
+                    return 3;
+            }
+        }
+        catch (TimeoutException)
+        {
+            Console.WriteLine("NOT_RUN: timeout; nessun nuovo invio automatico.");
+            return 3;
+        }
+        catch (IOException)
+        {
+            Console.WriteLine("NOT_RUN: comunicazione con il laboratorio interrotta.");
+            return 3;
+        }
+        finally
+        {
+            try
+            {
+                if (!child.HasExited)
+                {
+                    child.StandardInput.WriteLine("STOP");
+                    await child.StandardInput.FlushAsync();
+                    if (!child.WaitForExit(2000)) child.Kill(entireProcessTree: true);
+                }
+            }
+            catch (InvalidOperationException) { }
+            catch (IOException) { }
+        }
+    }
+
     private static bool TryReadReady(string? text, out nint window, out nint edit)
     {
         window = 0;
@@ -226,19 +373,23 @@ internal static class Program
         public volatile bool Verify;
     }
 
-    private static int RunChildTarget(string token)
+    private static int RunChildTarget(string token, bool multiline = false)
     {
         // Un controllo classico EDIT, creato nel processo figlio. No dati utente,
         // nessun gancio e nessuna persistenza. La finestra serve soltanto al test.
-        var window = CreateWindowExW(0, "STATIC", "Ristretto F2a Test Target " + token[..6],
-            OverlappedWindow | Visible, 200, 170, 680, 180, 0, 0, 0, 0);
+        var window = CreateWindowExW(0, "STATIC",
+            (multiline ? "Ristretto Picker Test Target " : "Ristretto F2a Test Target ") + token[..6],
+            OverlappedWindow | Visible, 200, 170,
+            multiline ? 840 : 680, multiline ? 350 : 180, 0, 0, 0, 0);
         if (window == 0)
         {
             Console.WriteLine("ERROR|window");
             return 2;
         }
-        var edit = CreateWindowExW(0, "EDIT", "", Child | Visible | Border | TabStop | EditAutoHScroll,
-            22, 40, 625, 33, window, 0, 0, 0);
+        var editStyle = Child | Visible | Border | TabStop |
+            (multiline ? EditMultiline | EditWantReturn | EditAutoVScroll : EditAutoHScroll);
+        var edit = CreateWindowExW(0, "EDIT", "", editStyle,
+            22, 40, multiline ? 785 : 625, multiline ? 240 : 33, window, 0, 0, 0);
         if (edit == 0)
         {
             DestroyWindow(window);
@@ -249,9 +400,12 @@ internal static class Program
         UpdateWindow(window);
         SetForegroundWindow(window);
         SetFocus(edit);
-        Console.WriteLine($"READY|{window.ToInt64()}|{edit.ToInt64()}");
+        Console.WriteLine(multiline
+            ? PickerOwnedEditReceipt.Ready(token, window, edit)
+            : $"READY|{window.ToInt64()}|{edit.ToInt64()}");
         Console.Out.Flush();
         var commands = new ChildCommands();
+        var pickerAlreadyVerified = false;
         _ = Task.Run(() =>
         {
             while (!commands.Stop)
@@ -272,11 +426,38 @@ internal static class Program
             if (commands.Verify)
             {
                 commands.Verify = false;
-                var length = GetWindowTextLengthW(edit);
-                var sb = new StringBuilder(Math.Max(1, length + 1));
-                _ = GetWindowTextW(edit, sb, sb.Capacity);
-                var data = Convert.ToBase64String(Encoding.Unicode.GetBytes(sb.ToString()));
-                Console.WriteLine("RESULT|" + data);
+                if (multiline && pickerAlreadyVerified)
+                {
+                    // A second VERIFY must never reissue a successful receipt.
+                    Console.WriteLine(PickerOwnedEditReceipt.Result(token, PickerOwnedEditReceipt.Outcome.Unavailable));
+                    Console.Out.Flush();
+                    continue;
+                }
+                if (multiline) pickerAlreadyVerified = true;
+                if (multiline)
+                {
+                    // Only the owner accesses the EDIT text. No contents, offsets,
+                    // clipboard data or typed characters leave this process.
+                    var available = IsWindow(window) && IsWindow(edit);
+                    string? text = null;
+                    if (available)
+                    {
+                        var length = GetWindowTextLengthW(edit);
+                        var sb = new StringBuilder(Math.Max(1, length + 1));
+                        var copied = GetWindowTextW(edit, sb, sb.Capacity);
+                        if (copied == length) text = sb.ToString();
+                    }
+                    var outcome = PickerOwnedEditReceipt.Compare(text, PickerFixture, available);
+                    Console.WriteLine(PickerOwnedEditReceipt.Result(token, outcome));
+                }
+                else
+                {
+                    // Legacy F2a smoke test remains unchanged.
+                    var length = GetWindowTextLengthW(edit);
+                    var sb = new StringBuilder(Math.Max(1, length + 1));
+                    _ = GetWindowTextW(edit, sb, sb.Capacity);
+                    Console.WriteLine("RESULT|" + Convert.ToBase64String(Encoding.Unicode.GetBytes(sb.ToString())));
+                }
                 Console.Out.Flush();
             }
             Thread.Sleep(10);
@@ -332,6 +513,7 @@ internal static class Program
     private static extern int GetClassNameW(nint hwnd, StringBuilder className, int maxCount);
     [DllImport("user32.dll", CharSet = CharSet.Unicode, EntryPoint = "GetWindowLongW")]
     private static extern int GetWindowLongW(nint hwnd, int index);
+    [DllImport("user32.dll")] private static extern bool IsWindow(nint hwnd);
     [DllImport("user32.dll")] private static extern bool IsWindowVisible(nint hwnd);
     [DllImport("user32.dll")] private static extern bool IsWindowEnabled(nint hwnd);
     [DllImport("user32.dll", CharSet = CharSet.Unicode, EntryPoint = "GetWindowTextLengthW")]

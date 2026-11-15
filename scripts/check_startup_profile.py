@@ -9,14 +9,14 @@ import tempfile
 from pathlib import Path
 
 
-def check(assembly: Path, version: str) -> dict:
+def check(assembly: Path, version: str, dotnet: str = 'dotnet') -> dict:
     assembly = assembly.resolve(strict=True)
     results = []
     with tempfile.TemporaryDirectory(prefix='ristretto-startup-') as temporary:
         root = Path(temporary).resolve()
 
         def invoke(name: str, args: list[str], code: int) -> subprocess.CompletedProcess:
-            result = subprocess.run(['dotnet', str(assembly), *args], cwd=root,
+            result = subprocess.run([dotnet, str(assembly), *args], cwd=root,
                                     stdin=subprocess.DEVNULL, capture_output=True,
                                     encoding='utf-8', timeout=15, check=False)
             assert result.returncode == code, (name, result.returncode, result.stderr)
@@ -74,9 +74,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--assembly', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--dotnet-executable', default='dotnet', help='Exact dotnet executable path, spaces allowed')
     arguments = parser.parse_args()
     source_version = (Path(__file__).resolve().parent.parent / 'VERSION.txt').read_text(encoding='utf-8').strip()
-    report = check(arguments.assembly, source_version.removeprefix('Ristretto '))
+    report = check(arguments.assembly, source_version.removeprefix('Ristretto '),
+                   arguments.dotnet_executable)
     arguments.output.parent.mkdir(parents=True, exist_ok=True)
     arguments.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     print(f"Startup CLI: {report['passed']}/{report['passed']} PASS; no GUI or database opened")

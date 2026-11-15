@@ -97,7 +97,7 @@ for binding in ('EditorTitle', 'EditorTrigger', 'EditorContent', 'EditorDescript
     if '{Binding ' + binding not in main:
         errors.append(f'Editor: binding preservato mancante: {binding}')
 for binding in ('Results', 'Selected.Title', 'Selected.Trigger', 'Selected.Content',
-                'HasSelection', 'Texts.PickerInstructions'):
+                'CanCopy', 'CanInsert', 'Texts.PickerInstructions'):
     if '{Binding ' + binding not in picker:
         errors.append(f'Picker: binding preservato mancante: {binding}')
 if 'SelectedItem="{Binding Selected, Mode=TwoWay}"' not in picker:

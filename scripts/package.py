@@ -47,7 +47,7 @@ def build(out: Path) -> tuple[int, str]:
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description='Create a ZIP with one versionless Ristretto/ folder')
-    p.add_argument('--output', type=Path, default=PROJECT / '.local-cache' / 'Ristretto_v3.9_ALPHA20_5_STARTUP_PROFILES_COMPLETO.zip')
+    p.add_argument('--output', type=Path, default=PROJECT / '.local-cache' / ('Ristretto_' + (PROJECT / 'VERSION.txt').read_text(encoding='utf-8').strip().removeprefix('Ristretto ').replace('.', '_') + '_COMPLETO.zip'))
     args = p.parse_args()
     count, digest = build(args.output.resolve())
     print(f'{args.output.resolve()} | {count} files | SHA-256 {digest}')

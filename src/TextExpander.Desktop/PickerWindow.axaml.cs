@@ -8,8 +8,7 @@ namespace TextExpander.Desktop;
 public partial class PickerWindow : Window
 {
     private PickerViewModel? _viewModel;
-    private bool _enterArmed;
-    private bool _enterDown;
+    private readonly PickerEnterGesture _enterGesture = new();
 
     // Necessario per il loader XAML Avalonia; la normale creazione da App
     // usa sempre il costruttore con ViewModel.
@@ -66,31 +65,46 @@ public partial class PickerWindow : Window
 
     private void OnPickerEnterKeyDown(object? sender, KeyEventArgs e)
     {
-        if (e.Key != Key.Enter || e.KeyModifiers != KeyModifiers.None) return;
+        if (e.Key != Key.Enter) return;
+        if (e.KeyModifiers != KeyModifiers.None && !_enterGesture.IsDown) return;
         e.Handled = true;
-        if (_enterDown) return;
-        _enterDown = true;
-        _enterArmed = _viewModel is { IsLoading: false, IsClipboardBusy: false } vm && vm.Results.Count > 0;
+        // Readiness is intentionally checked at KeyUp: a quick Enter while
+        // the picker finishes loading must not permanently disarm the gesture.
+        _enterGesture.Press(e.KeyModifiers == KeyModifiers.None);
     }
 
     private async void OnPickerEnterKeyUp(object? sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
-        var armed = _enterArmed;
-        ResetEnterGesture();
-        if (armed || e.KeyModifiers == KeyModifiers.None) e.Handled = true;
-        if (!armed || e.KeyModifiers != KeyModifiers.None) return;
+        var observedPress = _enterGesture.IsDown;
+        var submit = _enterGesture.Release(e.KeyModifiers == KeyModifiers.None);
+        if (observedPress) e.Handled = true;
+        if (!submit || _viewModel is not { } vm) return;
+        // A quick Enter can arrive before the async search index is published.
+        // Defer only within this same focused picker/query; never send after
+        // deactivation, dismissal, a new session or a changed search query.
+        if (vm.IsLoading)
+        {
+            _enterGesture.DeferUntilLoaded(vm.Query);
+            return;
+        }
         // Keep focus in the picker until Enter is released, so key-repeat cannot
         // send Return characters into the external editor during focus restoration.
-        if (_viewModel is { } vm && Avalonia.Application.Current is App app)
+        if (vm.CanInsert && Avalonia.Application.Current is App app)
             await vm.InsertFirstAsync(app.InsertFromPickerAsync);
     }
 
-    private void ResetEnterGesture()
+    internal async Task CompleteDeferredEnterAsync()
     {
-        _enterArmed = false;
-        _enterDown = false;
+        if (_viewModel is not { } vm) return;
+        if (!_enterGesture.ConsumeDeferred(vm.Query,
+                pickerActive: IsVisible && IsActive,
+                canInsert: vm.CanInsert && !vm.IsLoading)) return;
+        if (Avalonia.Application.Current is App app)
+            await vm.InsertFirstAsync(app.InsertFromPickerAsync);
     }
+
+    private void ResetEnterGesture() => _enterGesture.Reset();
 
     private async Task CopySelectedAsync()
     {

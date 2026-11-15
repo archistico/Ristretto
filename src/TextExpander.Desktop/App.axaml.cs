@@ -23,7 +23,7 @@ public partial class App : Avalonia.Application
     private TrayIcon? _tray;
     private WindowsPickerHotkeyService? _pickerHotkey;
     private WindowsPickerPasteService? _pickerPaste;
-    private WindowsPickerInsertRequest? _pickerRequest;
+    private readonly PickerSessionController _pickerSession = new();
     private readonly SemaphoreSlim _pickerHotkeyLock = new(1, 1);
     private string _activePickerHotkey = "";
     private bool _keepRunningInTray;
@@ -190,62 +190,94 @@ public partial class App : Avalonia.Application
     internal async void ShowPicker()
     {
         if (IsExiting || _picker is null || _pickerVm is null) return;
-        CancelPickerInsertion();
-        // Capture before the picker activates: afterwards foreground would be Ristretto itself.
-        if (OperatingSystem.IsWindows())
+        // Ignore delayed/repeated hotkey notifications during an in-flight Insert.
+        // They must not cancel the request between hiding the picker and SendInput.
+        if (_pickerSession.IsInsertionInProgress) return;
+        // Repeated global hotkey while the picker itself owns focus must not
+        // recapture Ristretto as the external recipient or erase the target.
+        // Reinvoking from a different foreground app starts a fresh session.
+        var opening = _pickerSession.Open(_picker.IsVisible, _picker.IsActive, () =>
         {
+            if (!OperatingSystem.IsWindows()) return null;
             _pickerPaste ??= new WindowsPickerPasteService();
             var target = _pickerPaste.CaptureExternalForeground();
-            _pickerRequest = target is null ? null : new WindowsPickerInsertRequest(_pickerPaste, target);
+            return target is null ? null : new WindowsPickerInsertRequest(_pickerPaste, target);
+        });
+        if (opening == PickerSessionOpenResult.InsertionInProgress) return;
+        if (opening == PickerSessionOpenResult.Reused)
+        {
+            _picker.Activate();
+            _picker.FocusSearch();
+            return;
         }
-        _pickerVm.SetInsertAvailable(_pickerRequest is not null);
-        var request = _pickerRequest;
+
+        _pickerVm.CancelReload();
+        _pickerVm.SetInsertAvailable(_pickerSession.Request is not null);
+        var generation = _pickerSession.Generation;
         if (!_picker.IsVisible) _picker.Show();
         if (_picker.WindowState == WindowState.Minimized)
             _picker.WindowState = WindowState.Normal;
         _picker.Activate();
         _picker.FocusSearch();
         if (!await _pickerVm.ReloadAsync()) return;
-        if (!ReferenceEquals(request, _pickerRequest) || IsExiting) return;
-        if (OperatingSystem.IsWindows() && request is null)
+        if (!_pickerSession.IsCurrent(generation) || IsExiting) return;
+        if (OperatingSystem.IsWindows() && _pickerSession.Request is null)
             _pickerVm.Status = _pickerVm.Texts.PickerInsertNoTarget;
+        await _picker.CompleteDeferredEnterAsync();
     }
 
     internal void CancelPickerInsertion()
     {
-        _pickerRequest?.Cancel();
-        _pickerRequest = null;
+        _pickerSession.Cancel();
         _pickerVm?.CancelReload();
         _pickerVm?.SetInsertAvailable(false);
     }
 
     internal async Task InsertFromPickerAsync(string content)
     {
-        if (_picker is null || _pickerVm is null || _pickerPaste is null || _pickerRequest is null)
+        if (_picker is null || _pickerVm is null || _pickerPaste is null || _pickerSession.Request is null)
         {
             if (_pickerVm is not null) _pickerVm.Status = _pickerVm.Texts.PickerInsertNoTarget;
             return;
         }
-        var request = _pickerRequest;
+        var request = _pickerSession.Request!;
+        var generation = _pickerSession.Generation;
         var clipboard = _picker.Clipboard;
         if (clipboard is null)
         {
             _pickerVm.Status = _pickerVm.Texts.PickerClipboardUnavailable;
             return;
         }
+        // Reserve the current session before hiding the picker. A queued hotkey
+        // cannot recapture/cancel the destination during this transition.
+        if (!_pickerSession.TryBeginInsertion(generation, request)) return;
         _pickerVm.SetInsertAvailable(false);
         try
         {
             _picker.Hide();
             // Explicit insertion uses clipboard paste to retain multiline text and Unicode.
-            // This operation changes the clipboard, as documented in the picker help.
+            // The request waits for the external focus, revalidates the target and
+            // clipboard sequence, and ONLY THEN calls SetTextAsync. It revalidates
+            // everything again just before Ctrl+V. Clipboard is not restored.
             var result = await request.ExecuteAsync(async () =>
             {
+                // Do not send Ctrl+V when SetTextAsync returned without an
+                // observable clipboard change: that could paste stale data.
+                var before = _pickerPaste.ClipboardSequence();
                 await clipboard.SetTextAsync(content);
-                return _pickerPaste.ClipboardSequence();
+                var afterWrite = _pickerPaste.ClipboardSequence();
+                // Read back exactly what the OS clipboard exposes. A changed
+                // sequence is not evidence that our selected snippet was copied.
+                // Do not record clipboard contents in diagnostics.
+                if (!WindowsPickerPasteService.HasClipboardAdvanced(before, afterWrite))
+                    return 0u;
+                var observed = await clipboard.GetTextAsync();
+                var afterRead = _pickerPaste.ClipboardSequence();
+                return PickerClipboardReadbackVerifier.VerifiedSequence(
+                    content, observed, before, afterWrite, afterRead);
             }, () => Task.Delay(60));
             // An old continuation must not reopen or change a newer picker session.
-            if (!ReferenceEquals(request, _pickerRequest) || IsExiting) return;
+            if (!_pickerSession.IsCurrent(generation, request) || IsExiting) return;
             switch (result.Status)
             {
                 case PickerPasteStatus.SubmittedUnverified:
@@ -256,15 +288,21 @@ public partial class App : Avalonia.Application
                     RestorePickerAfterInsertError(_pickerVm.Texts.PickerInsertUncertain);
                     return;
                 default:
-                    RestorePickerAfterInsertError(_pickerVm.Texts.PickerInsertFocusChanged);
+                    // Native reason codes are fixed, privacy-safe diagnostics.
+                    RestorePickerAfterInsertError(
+                        $"{_pickerVm.Texts.PickerInsertFocusChanged} [{result.Reason}]");
                     return;
             }
         }
         catch (Exception)
         {
             // Clipboard or native failure. Never retry: an earlier paste may have succeeded.
-            if (ReferenceEquals(request, _pickerRequest) && !IsExiting)
+            if (_pickerSession.IsCurrent(generation, request) && !IsExiting)
                 RestorePickerAfterInsertError(_pickerVm.Texts.PickerInsertUncertain);
+        }
+        finally
+        {
+            _pickerSession.CompleteInsertion(generation, request);
         }
     }
 
